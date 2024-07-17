@@ -1,0 +1,10 @@
+.home {
+  .header {
+    background-color: var(--primary);
+    border: none;
+  }
+
+  .navbar {
+    background-color: var(--primary);
+  }
+}

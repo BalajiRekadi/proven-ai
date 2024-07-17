@@ -1,4 +1,5 @@
 import React from "react";
+import "@mantine/core/styles/global.css";
 import "./App.css";
 import "@mantine/core/styles.css";
 import { Route, Routes } from "react-router-dom";
@@ -11,7 +12,7 @@ function App() {
   const theme = createTheme({});
 
   return (
-    <MantineProvider theme={theme} forceColorScheme={"dark"}>
+    <MantineProvider theme={theme}>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
