@@ -7,6 +7,7 @@ import { Login } from "./components";
 import Home from "./components/home/home";
 import Create from "./components/master-data/create/Create";
 import { MantineProvider, createTheme } from "@mantine/core";
+import User from "./components/user/User";
 
 function App() {
   const theme = createTheme({});
@@ -15,8 +16,10 @@ function App() {
     <MantineProvider theme={theme}>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/create" element={<Create />} />
+        <Route path="/user" element={<User />}>
+          <Route path="home" element={<Home />} />
+          <Route path="create" element={<Create />} />
+        </Route>
       </Routes>
     </MantineProvider>
   );
