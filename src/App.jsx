@@ -1,6 +1,4 @@
 import React from "react";
-// import { useState } from 'react'
-// import logo from "./assets/logo.jpeg";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { Login } from "./components";
