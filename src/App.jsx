@@ -8,6 +8,7 @@ import Home from "./components/home/home";
 import Create from "./components/master-data/create/Create";
 import { MantineProvider, createTheme } from "@mantine/core";
 import User from "./components/user/User";
+import "@mantine/dates/styles.css";
 
 function App() {
   const theme = createTheme({});
