@@ -10,7 +10,7 @@ const Routes = () => {
     {
       icon: "☰",
       value: "Master Data",
-      options: ["Spec details"],
+      options: ["Create", "Spec details"],
     },
   ];
 
@@ -23,15 +23,9 @@ const Routes = () => {
       <Accordion.Control icon={item.icon}>{item.value}</Accordion.Control>
       <Accordion.Panel>
         <ul>
-          <Button
-            key={"Create"}
-            variant="filled"
-            onClick={() => handleMenuItemClick("create")}
-          >
-            {"Create"}
-          </Button>
           {item.options.map((route) => (
             <Button
+              className={route == "Create" ? "highlight" : ""}
               key={route}
               variant="subtle"
               onClick={() => handleMenuItemClick(route)}

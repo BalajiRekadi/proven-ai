@@ -13,13 +13,17 @@
   .mantine-Button-root {
     width: 100%;
     margin-bottom: 0.5rem;
-color: white;
-background-color: var(--primary);
+    color: white;
+    background-color: var(--primary);
     span {
       justify-content: start;
     }
   }
-}
-.mantine-Accordion-panel{
-  background-color: var(--primary);
+  .mantine-Accordion-panel {
+    background-color: var(--primary);
+  }
+  .highlight {
+    background-color: var(--secondary);
+    color: black;
+  }
 }
