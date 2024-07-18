@@ -49,7 +49,7 @@ const CreateFlow = () => {
           <Button variant="default" onClick={prevStep}>
             Back
           </Button>
-          <Button onClick={nextStep}>Generate Worksheets</Button>
+          <Button onClick={nextStep}>Generate Tests</Button>
         </Group>
       </Flex>
     </div>
