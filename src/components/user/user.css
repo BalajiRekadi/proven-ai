@@ -8,3 +8,16 @@
     background-color: var(--primary);
   }
 }
+.logo{
+  margin-right: 9%;
+}
+.header-caliber{
+  background-color: white;
+  
+span{
+  position: absolute;
+  right: 0%;
+  top:0%
+}
+}
+
