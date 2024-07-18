@@ -1,18 +1,28 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import "./home.css";
+import { Select, TextInput } from "@mantine/core";
+import { DateInput, DatePickerInput } from "@mantine/dates";
 
 const Home = () => {
   return (
-    <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/create">Create</Link>
-          </li>
-        </ul>
-      </nav>
-      <div>Home</div>
-    </>
+    <div className="home">
+      <div className="search-container">
+        <TextInput placeholder="search" style={{ width: "20%" }} />
+        <div className="date-range">
+          <Select
+            placeholder="Category"
+            variant="filled"
+            data={["One", "Two", "Three"]}
+          />
+          <Select
+            placeholder="Filter By"
+            variant="filled"
+            data={["One", "Two", "Three"]}
+          />
+          <DatePickerInput value={null} placeholder="Date Range" />
+        </div>
+      </div>
+    </div>
   );
 };
 
