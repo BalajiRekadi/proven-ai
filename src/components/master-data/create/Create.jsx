@@ -6,7 +6,7 @@ import Worksheets from "./worksheets/Worksheets";
 import Export from "./export/Export";
 
 const CreateFlow = () => {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const nextStep = () =>
     setActive((current) => (current < 5 ? current + 1 : current));
   const prevStep = () =>
