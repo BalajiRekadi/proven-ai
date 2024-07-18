@@ -1,5 +1,5 @@
 import React from "react";
-import { UploadCard } from "../../../shared/components";
+import { UploadCard } from "../../../../shared/components";
 import { Button, Flex } from "@mantine/core";
 import TaskCard from "./TaskCard";
 

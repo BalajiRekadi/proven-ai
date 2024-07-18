@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import ImportDocs from "../import-docs/ImportDocs";
 import { Button, Flex, Group, Stepper, Title, Image } from "@mantine/core";
 import dataLogo from "../../../assets/database.png";
+import ImportDocs from "./import-docs/ImportDocs";
+import Worksheets from "./worksheets/Worksheets";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(1);
@@ -27,7 +28,7 @@ const CreateFlow = () => {
           <ImportDocs />
         </Stepper.Step>
         <Stepper.Step label="Worksheets">
-          Step 2 content: Verify email
+          <Worksheets />
         </Stepper.Step>
         <Stepper.Step label="Tests">
           Step 3 content: Get full access

@@ -1,5 +1,5 @@
 import React from "react";
-import { InfoCard, TextCard } from "../../../shared/components";
+import { InfoCard, TextCard } from "../../../../shared/components";
 import { Card, Flex, Text } from "@mantine/core";
 
 const TaskCard = () => {
