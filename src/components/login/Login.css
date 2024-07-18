@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     margin: 2%;
-
+color: white;
   }
   .login-form{
     height: 100vh;
