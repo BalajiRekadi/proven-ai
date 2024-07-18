@@ -57,6 +57,7 @@ const Home = () => {
       actions: ["edit", "download"],
     },
   ];
+
   const columns = useMemo(
     () => [
       {
@@ -136,10 +137,10 @@ const Home = () => {
 
   const table = useMantineReactTable({
     columns,
-    data, //must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
-    enableRowSelection: false, //enable some features
-    enableColumnOrdering: false, //enable a feature for all columns
-    enableGlobalFilter: false, //turn off a feature
+    data,
+    enableRowSelection: false,
+    enableColumnOrdering: false,
+    enableGlobalFilter: false,
     enableColumnActions: false,
     enableColumnFilters: false,
     enablePagination: true,
@@ -149,19 +150,23 @@ const Home = () => {
   return (
     <div className="home">
       <div className="search-container">
-        <TextInput placeholder="search" style={{ width: "25%" }} />
+        <TextInput
+          placeholder="search"
+          color="black"
+          style={{ width: "25%" }}
+        />
         <div className="date-range">
           <Select
             placeholder="Category"
-            variant="unstyled"
+            variant="default"
             data={["One", "Two", "Three"]}
           />
           <Select
             placeholder="Filter By"
-            variant="unstyled"
+            variant="default"
             data={["One", "Two", "Three"]}
           />
-          <DatePickerInput value={null} placeholder="Date Range" />
+          <DatePickerInput placeholder="Date Range" style={{ width: "33%" }} />
         </div>
       </div>
       <MantineReactTable table={table} />

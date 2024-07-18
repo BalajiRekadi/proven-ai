@@ -2,4 +2,18 @@
   width: 100%;
   margin: 0;
   padding: 0;
+
+  .mantine-Input-input:not(:focus) {
+    border-color: var(--gray);
+
+    &::placeholder {
+      color: var(--gray);
+    }
+  }
+
+  .mantine-DatePickerInput-input {
+    span {
+      color: var(--gray);
+    }
+  }
 }
