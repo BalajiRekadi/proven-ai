@@ -154,6 +154,7 @@ const Home = () => {
           placeholder="search"
           color="black"
           style={{ width: "25%" }}
+          rightSection={<span><i class="fi fi-br-search"></i></span>}
         />
         <div className="date-range">
           <Select
@@ -166,7 +167,8 @@ const Home = () => {
             variant="default"
             data={["One", "Two", "Three"]}
           />
-          <DatePickerInput placeholder="Date Range" style={{ width: "33%" }} />
+          <DatePickerInput placeholder="Date Range" style={{ width: "33%" }}
+           rightSection={<span>📅</span>} />
         </div>
       </div>
       <MantineReactTable table={table} />

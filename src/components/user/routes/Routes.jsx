@@ -8,7 +8,7 @@ const Routes = () => {
 
   const routes = [
     {
-      icon: "🍎",
+      icon: "☰",
       value: "Master Data",
       options: ["Spec details"],
     },
