@@ -1,0 +1,59 @@
+
+  .forgot-links {
+    display: flex;
+    justify-content: space-between;
+    margin: 2%;
+
+  }
+  .login-form{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: transparent linear-gradient(180deg, #23295A 0%, #232959 1%, #070812 100%) 0% 0% no-repeat padding-box;
+box-shadow: 0px 3px 6px #00000029;
+opacity: 0.9;
+  }
+  .login{
+    width: 75%;
+  }
+  .login-button {
+    width: 100%;
+    background-color: #67A246;
+   
+  }
+  a{
+    color:#FFFFFF;
+  }
+  footer{
+    position: absolute;
+    bottom: 0% ;
+   left: 10%;
+   color: #000000;
+  }
+  .loginBtn-select{
+    display :flex;
+    justify-content: space-between;
+  }
+  .bg-image{
+    display: flex;
+    justify-content: center;
+  }
+  .headerLogo{
+    position: absolute;
+  }
+  .login-container{
+    flex: 1;
+   width: 100%;
+  
+  }
+ .main{
+  width: 100vw;
+ 
+ }
+ .loginBtn-select{
+  display: flex;
+ 
+  justify-content: space-between;
+ }
