@@ -38,7 +38,7 @@ function Login() {
         <div className="bg-light" style={{ flex: 7 }} >
           <form className="login-form">
             <div className="login">
-              <TextInput
+              <TextInput classNames="textInput"
                 placeholder="Enter username"
                 className="input"
               />
