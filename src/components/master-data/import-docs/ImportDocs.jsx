@@ -19,14 +19,6 @@ const ImportDocs = () => {
         </Button>
       </Flex>
       <TaskCard />
-      <Flex justify={"space-between"}>
-        <Button mt="md" radius="md" variant="filled">
-          {"Save"}
-        </Button>
-        <Button mt="md" radius="md" variant="filled">
-          {"Generate Worksheets"}
-        </Button>
-      </Flex>
     </div>
   );
 };
