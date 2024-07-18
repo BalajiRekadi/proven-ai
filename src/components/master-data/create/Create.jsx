@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ImportDocs from "../import-docs/ImportDocs";
-import { Button, Flex, Group, Stepper } from "@mantine/core";
+import { Button, Flex, Group, Stepper, Title, Image } from "@mantine/core";
+import dataLogo from "../../../assets/database.png";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(1);
@@ -10,7 +11,11 @@ const CreateFlow = () => {
     setActive((current) => (current > 0 ? current - 1 : current));
 
   return (
-    <>
+    <div>
+      <Group>
+        <Image src={dataLogo} w={16} />
+        <Title order={2}>Create Master Data</Title>
+      </Group>
       <Stepper
         active={active}
         onStepClick={setActive}
@@ -46,7 +51,7 @@ const CreateFlow = () => {
           <Button onClick={nextStep}>Generate Worksheets</Button>
         </Group>
       </Flex>
-    </>
+    </div>
   );
 };
 export default CreateFlow;
