@@ -3,6 +3,7 @@ import { Button, Flex, Group, Stepper, Title, Image } from "@mantine/core";
 import dataLogo from "../../../assets/database.png";
 import ImportDocs from "./import-docs/ImportDocs";
 import Worksheets from "./worksheets/Worksheets";
+import Export from "./export/Export";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(1);
@@ -37,7 +38,7 @@ const CreateFlow = () => {
           Step 4 content: Get full access
         </Stepper.Step>
         <Stepper.Step label="Export">
-          Step 5 content: Get full access
+          <Export />
         </Stepper.Step>
       </Stepper>
 
