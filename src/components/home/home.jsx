@@ -1,12 +1,18 @@
-import React, { useMemo } from "react";
+
+
+import React, { useMemo, useState } from "react";
 import "./home.css";
-import { Box, Select, TextInput } from "@mantine/core";
+import { Box, Button, Select, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import editLogo from "./../../assets/edit.png";
 import downloadLogo from "./../../assets/download.png";
 
+import DescriptionModal from "./DescriptionModal";
+
 const Home = () => {
+  const [modalOpened, setModalOpened] = useState(false);
+
   const data = [
     {
       taskId: "10001234",
@@ -100,11 +106,11 @@ const Home = () => {
           <Box
             style={(theme) => ({
               backgroundColor:
-                cell.getValue() == "Active"
+                cell.getValue() === "Active"
                   ? theme.colors.yellow[9]
-                  : cell.getValue() == "InActive"
+                  : cell.getValue() === "InActive"
                   ? theme.colors.red[9]
-                  : cell.getValue() == "InProgress"
+                  : cell.getValue() === "InProgress"
                   ? theme.colors.green[9]
                   : theme.colors.indigo[9],
               borderRadius: "4px",
@@ -183,6 +189,8 @@ const Home = () => {
         </div>
       </div>
       <MantineReactTable table={table} />
+      
+      <DescriptionModal opened={modalOpened} onClose={() => setModalOpened(false)} />
     </div>
   );
 };
