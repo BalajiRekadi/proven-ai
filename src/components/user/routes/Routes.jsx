@@ -1,8 +1,11 @@
 import React from "react";
 import { Accordion, Button } from "@mantine/core";
 import "./routes.css";
+import { useNavigate } from "react-router-dom";
 
 const Routes = () => {
+  const navigate = useNavigate();
+
   const routes = [
     {
       icon: "🍎",
@@ -10,16 +13,29 @@ const Routes = () => {
       options: ["Spec details"],
     },
   ];
+
+  const handleMenuItemClick = (menuItem) => {
+    navigate(`/user/${menuItem}`);
+  };
+
   const items = routes.map((item) => (
     <Accordion.Item key={item.value} value={item.value}>
       <Accordion.Control icon={item.icon}>{item.value}</Accordion.Control>
       <Accordion.Panel>
         <ul>
-          <Button key={"Create"} variant="filled">
+          <Button
+            key={"Create"}
+            variant="filled"
+            onClick={() => handleMenuItemClick("create")}
+          >
             {"Create"}
           </Button>
           {item.options.map((route) => (
-            <Button key={route} variant="subtle">
+            <Button
+              key={route}
+              variant="subtle"
+              onClick={() => handleMenuItemClick(route)}
+            >
               {route}
             </Button>
           ))}
@@ -36,13 +52,3 @@ const Routes = () => {
 };
 
 export default Routes;
-
-{
-  /* <nav>
-            <ul>
-              <li>
-                <Link to="create">Create</Link>
-              </li>
-            </ul>
-          </nav> */
-}
