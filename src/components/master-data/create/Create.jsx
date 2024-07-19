@@ -237,10 +237,10 @@ const CreateFlow = () => {
           </Button>
           {/* <Button variant="default" onClick={prevStep}>
             Back
-          </Button>
+          </Button> */}
           {active <= 3 && (
             <Button onClick={nextStep}>{getNextBtnLabel()}</Button>
-          )} */}
+          )}
         </Group>
         <DescriptionModal
           opened={modalOpened}
