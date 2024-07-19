@@ -4,8 +4,10 @@ import dataLogo from "../../../assets/database.png";
 import ImportDocs from "./import-docs/ImportDocs";
 import Worksheets from "./worksheets/Worksheets";
 import { IconAlertCircle } from '@tabler/icons-react';
+import Export from "./export/Export";
+
 const CreateFlow = () => {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const nextStep = () =>
     setActive((current) => (current < 5 ? current + 1 : current));
   const prevStep = () =>
@@ -58,7 +60,7 @@ const CreateFlow = () => {
           Step 4 content: Get full access
         </Stepper.Step>
         <Stepper.Step label="Export">
-          Step 5 content: Get full access
+          <Export />
         </Stepper.Step>
       </Stepper>
 
