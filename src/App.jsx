@@ -10,26 +10,12 @@ import { MantineProvider, createTheme } from "@mantine/core";
 import User from "./components/user/User";
 import "@mantine/dates/styles.css";
 import "mantine-react-table/styles.css";
+import { THEME } from "./shared/constants";
 
 function App() {
-  const theme = createTheme({
-    primaryColor: "proven",
-    colors: {
-      proven: [
-        "#f0f1f9",
-        "#dedfed",
-        "#b9bcdb",
-        "#9398cc",
-        "#7279be",
-        "#5e65b5",
-        "#525bb2",
-        "#444b9d",
-        "#3b428d",
-        "#31397d",
-      ],
-    },
-  });
+  const theme = createTheme(THEME);
 
+  // TODO: add fallback routing
   return (
     <MantineProvider theme={theme}>
       <Routes>
