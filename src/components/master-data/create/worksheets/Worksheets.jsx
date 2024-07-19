@@ -53,7 +53,7 @@ const Worksheets = () => {
             <Accordion.Item value="assay">
               <Accordion.Control>3 Assay</Accordion.Control>
               <Accordion.Panel>
-                Content for Assay
+              <AccordianTableData></AccordianTableData>
               </Accordion.Panel>
             </Accordion.Item>
             <Accordion.Item value="impurities">

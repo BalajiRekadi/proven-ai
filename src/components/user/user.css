@@ -9,7 +9,7 @@
   }
 }
 .logo {
-  margin-right: 9%;
+  margin-right: 7%;
 }
 .header-caliber {
   span {
@@ -18,3 +18,12 @@
     top: 0%;
   }
 }
+.menu-icon{
+  display: flex;
+}
+.fi-br-menu-burger{
+  color: white;
+
+
+}
+

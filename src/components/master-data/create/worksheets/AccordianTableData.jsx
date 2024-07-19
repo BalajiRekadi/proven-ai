@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from "react";
 import { Table, Button, Group, Text, Box, Select } from '@mantine/core';
 import { IconFile, IconRun, IconEdit, IconCopy, IconShare } from '@tabler/icons-react';
-
+import DescriptionModal from "../../../home/DescriptionModal"
 const AccordianTableData = () => {
+
+   
+
     const handleCopy = (content) => {
         navigator.clipboard.writeText(content)
             .then(() => {
@@ -31,8 +34,8 @@ const AccordianTableData = () => {
                     data={['Worksheet', 'Section Worksheet']}
                 />
             </td>
-            <td>{item.name}</td>
-            <td>{item.content} <IconCopy size={24} style={{ cursor: 'pointer' }} onClick={() => handleCopy(item.content)} /></td>
+            <td  >{item.name} </td>
+            <td style={{ cursor: 'pointer' }}  >{item.content} <IconCopy size={24} style={{ cursor: 'pointer' }} onClick={() => handleCopy(item.content)} /></td>
             <td>
                 <Group spacing="xs">
                     <IconEdit size={24} style={{ cursor: 'pointer' }} />
@@ -73,6 +76,7 @@ const AccordianTableData = () => {
                         backgroundColor: '#fff',
                         borderRadius: '8px',
                         boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+                        
                     }}>{rows}</tbody>
             </Table>
             <Group position="right" mt="md">
@@ -84,4 +88,6 @@ const AccordianTableData = () => {
 }
 
 export default AccordianTableData;
+
+
 
