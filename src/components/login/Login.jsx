@@ -34,7 +34,7 @@ function Login() {
           <div className="bg-image" style={{ flex: 10 }}>
             <div className="logo-image">
               <Grid span={1}>
-                <Image src={logo} alt="Proven.AI" className="logo" />
+              <Image src={logo} alt="Proven.AI" className="logo" width={500} height={500} />
               </Grid>
             </div>
           </div>
