@@ -19,6 +19,7 @@ const User = () => {
     >
       <AppShell.Header className="header">
         <Group h="100%" px="md">
+        <div><i class="fi fi-br-menu-burger"></i></div>
           <img src={headerLogo} className="logo" />
           <Flex justify={"space-between"} w={"80%"}>
             <div className="header-caliber">
@@ -27,9 +28,10 @@ const User = () => {
                   placeholder="select"
                   value="caliber"
                   data={[
-                    { value: "caliber", label: "Caliber" },
-                    { value: "labware", label: "Labware" },
-                  ]}
+                        { value: "caliber", label: "Caliber" },
+                        { value: "labware", label: "Labware" },
+                        { value: "labVantage", label: "LabVantage" },
+                      ]}
                 ></Select>
               </div>
             </div>

@@ -40,6 +40,9 @@ function Login() {
           </div>
           <div className="bg-light" style={{ flex: 7 }}>
             <form className="login-form">
+              <div className="login-form-logo">
+                <Image src="https://static.vecteezy.com/system/resources/previews/021/217/811/original/ai-brain-icon-ai-symbol-ai-concept-and-artificial-intelligence-head-icon-ai-icon-design-free-vector.jpg"></Image>
+              </div>
               <div className="login">
                 <TextInput
                   classNames="textInput"
@@ -53,7 +56,11 @@ function Login() {
                   <div style={{ flex: 2 }}>
                     <Select
                       placeholder="Modules"
-                      data={[]} // Add your data options here
+                      data={[
+                        { value: "caliber", label: "Caliber" },
+                        { value: "labware", label: "Labware" },
+                        { value: "labVantage", label: "LabVantage" },
+                      ]}
                     />
                   </div>
 

@@ -18,10 +18,12 @@ opacity: 0.9;
   }
   .login{
     width: 75%;
+    margin: 10%;
   }
   .login-button {
     width: 100%;
     background-color: #67A246;
+    height: 2.5rem;
    
   }
   a{
@@ -29,8 +31,8 @@ opacity: 0.9;
   }
   footer{
     position: absolute;
-    bottom: 0% ;
-   left: 10%;
+    bottom: 3% ;
+   left: 15%;
    color: #000000;
   }
   .loginBtn-select{
@@ -40,6 +42,16 @@ opacity: 0.9;
   .bg-image{
     display: flex;
     justify-content: center;
+  }
+  .bg-light{
+    margin: 0%;
+    padding: 0%;
+    background-image: url("../../assets/logo.jpeg");
+    object-fit: contain;
+    opacity: 1;
+    background-repeat: no-repeat;
+    background-position: 50% 40%;
+  
   }
   .headerLogo{
     position: absolute;
@@ -53,3 +65,17 @@ opacity: 0.9;
  
   justify-content: space-between;
  }
+ .m_6c018570{
+  --input-height: 2.5rem;
+
+ }
+.login-form-logo{
+  display: flex;
+
+  justify-content: center;
+  .m_9e117634{
+    width: 20%;
+    margin: 5%;
+  }
+
+}
