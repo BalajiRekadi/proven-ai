@@ -1,8 +1,10 @@
 import React from 'react';
 import { Accordion, Button, TextInput, Group, Box, Title, Text } from '@mantine/core';
-import { IconEdit, IconDeviceFloppy, IconRun } from '@tabler/icons-react';
+import { IconRun } from '@tabler/icons-react';
+import AccordianTableData from './AccordianTableData';
 import WorkSheetDetails from './WorkSheetDetails';
 const Worksheets = () => {
+
   return (
     <>
       <WorkSheetDetails />
@@ -39,7 +41,7 @@ const Worksheets = () => {
             <Accordion.Item value="description">
               <Accordion.Control>1 Description</Accordion.Control>
               <Accordion.Panel>
-                Content for Description
+                <AccordianTableData />
               </Accordion.Panel>
             </Accordion.Item>
             <Accordion.Item value="water">

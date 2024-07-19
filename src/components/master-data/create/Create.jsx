@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Button, Flex, Group, Stepper, Title, Image } from "@mantine/core";
+import { Button, Flex, Group, Stepper, Title, Image, Card, Text } from "@mantine/core";
 import dataLogo from "../../../assets/database.png";
 import ImportDocs from "./import-docs/ImportDocs";
 import Worksheets from "./worksheets/Worksheets";
-
+import { IconAlertCircle } from '@tabler/icons-react';
 const CreateFlow = () => {
   const [active, setActive] = useState(1);
   const nextStep = () =>
@@ -13,9 +13,30 @@ const CreateFlow = () => {
 
   return (
     <div>
-      <Group>
-        <Image src={dataLogo} w={16} />
+
+      <Group align="center">
+        <Image src={dataLogo} alt="Logo" w={16} />
         <Title order={2}>Create Master Data</Title>
+        <Card
+          shadow="sm"
+          style={{
+            marginBottom: '16px',
+            padding: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            marginLeft: '16px', // Adjust spacing as needed
+            width: '15%',
+            border: '0.5px solid orange'
+          }}
+        >
+          <div style={{ display: 'flex' }}>
+            <Text size="sm" color="gray">
+              File is in progress
+            </Text>
+            <IconAlertCircle size={20} style={{ marginRight: '8px', color: '#FF9800' }} />
+
+          </div>
+        </Card>
       </Group>
       <Stepper
         active={active}
