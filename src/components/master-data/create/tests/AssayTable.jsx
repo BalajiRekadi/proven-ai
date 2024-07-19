@@ -1,9 +1,11 @@
 import { ActionIcon, Box } from "@mantine/core";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import csvLogo from "../../../../assets/csv.png";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
+import AssayModal from "./AssayModal";
 
 const AssayTable = () => {
+  const [showAssayModal, setShowAssayModal] = useState(false);
   const data = [
     {
       testCode: "Mobile Phase",
@@ -11,6 +13,10 @@ const AssayTable = () => {
       actions: ["run"],
     },
   ];
+
+  const toggleAssayModal = () => {
+    setShowAssayModal(!showAssayModal);
+  };
 
   const columns = useMemo(
     () => [
@@ -25,7 +31,12 @@ const AssayTable = () => {
         accessorKey: "output",
         Cell: ({ cell }) => (
           <ActionIcon variant="subtle" aria-label="Settings">
-            <img src={csvLogo} className="logo" style={{ width: "16px" }} />
+            <img
+              src={csvLogo}
+              className="logo"
+              style={{ width: "16px" }}
+              onClick={toggleAssayModal}
+            />
           </ActionIcon>
         ),
       },
@@ -62,6 +73,7 @@ const AssayTable = () => {
   return (
     <Box w={"20rem"}>
       <MantineReactTable table={table} />
+      <AssayModal open={showAssayModal} onClose={toggleAssayModal} />
     </Box>
   );
 };

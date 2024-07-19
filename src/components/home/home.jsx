@@ -1,5 +1,3 @@
-
-
 import React, { useMemo, useState } from "react";
 import "./home.css";
 import { Box, Button, Select, TextInput } from "@mantine/core";
@@ -144,6 +142,7 @@ const Home = () => {
   const table = useMantineReactTable({
     columns,
     data,
+    initialState: { density: "xs" },
     enableRowSelection: false,
     enableColumnOrdering: false,
     enableGlobalFilter: false,
@@ -189,8 +188,11 @@ const Home = () => {
         </div>
       </div>
       <MantineReactTable table={table} />
-      
-      <DescriptionModal opened={modalOpened} onClose={() => setModalOpened(false)} />
+
+      <DescriptionModal
+        opened={modalOpened}
+        onClose={() => setModalOpened(false)}
+      />
     </div>
   );
 };
