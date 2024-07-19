@@ -25,7 +25,10 @@ const Worksheets = () => {
   return (
     <>
       <DetailsBox />
-      <AccordionGroup accordions={accordions} />
+      <AccordionGroup
+        accordions={accordions}
+        groupTitle={"Work Sheet Details"}
+      />
     </>
   );
 };

@@ -1,8 +1,34 @@
 import React from "react";
-import { DetailsBox } from "../../../../shared/components";
+import { AccordionGroup, DetailsBox } from "../../../../shared/components";
 
 const TestPlan = () => {
-  return <DetailsBox />;
+  const accordions = [
+    {
+      label: "Description",
+      content: <div>Hello</div>,
+    },
+    {
+      label: "Water",
+      content: "Todo",
+    },
+    {
+      label: "Assay",
+      content: "Todo",
+    },
+    {
+      label: "Impurities",
+      content: "Todo",
+    },
+  ];
+  return (
+    <>
+      <DetailsBox />
+      <AccordionGroup
+        accordions={accordions}
+        groupTitle={"Work Sheet Details"}
+      />
+    </>
+  );
 };
 
 export default TestPlan;

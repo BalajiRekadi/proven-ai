@@ -2,7 +2,7 @@ import { Accordion, Box, Group, Title } from "@mantine/core";
 import { IconRun } from "@tabler/icons-react";
 import React from "react";
 
-const AccordionGroup = ({ accordions }) => {
+const AccordionGroup = ({ accordions, groupTitle }) => {
   return (
     <div>
       <Group
@@ -11,30 +11,15 @@ const AccordionGroup = ({ accordions }) => {
         style={{ marginTop: "16px", marginBottom: "16px" }}
       >
         <Title order={4} style={{ display: "flex", alignItems: "center" }}>
-          Work Sheet Details <IconRun size={24} style={{ marginLeft: "8px" }} />
+          {groupTitle} <IconRun size={24} style={{ marginLeft: "8px" }} />
         </Title>
       </Group>
-      <Box
-        style={{
-          padding: "16px",
-          backgroundColor: "#f9f9f9",
-          borderRadius: "8px",
-          boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-        }}
-      >
+      <Box>
         <Accordion
+          variant="separated"
           styles={{
             item: {
-              backgroundColor: "#fff",
-              borderRadius: "8px",
-              marginBottom: "8px",
-              boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-            },
-            control: {
-              padding: "8px 16px",
-            },
-            panel: {
-              padding: "16px",
+              boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
             },
           }}
         >

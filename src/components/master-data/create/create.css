@@ -1,0 +1,15 @@
+.master-data-create-stepper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .mantine-Stepper-steps {
+    margin-bottom: 2rem;
+    width: 70%;
+  }
+
+  .mantine-Stepper-content {
+    width: 100%;
+  }
+}

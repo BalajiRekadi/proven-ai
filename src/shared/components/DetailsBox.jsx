@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Accordion,
-  Button,
-  TextInput,
-  Group,
-  Box,
-  Title,
-  Text,
-} from "@mantine/core";
+import { TextInput, Group, Box } from "@mantine/core";
 import { IconEdit, IconDeviceFloppy, IconRun } from "@tabler/icons-react";
 
 const DetailsBox = () => {

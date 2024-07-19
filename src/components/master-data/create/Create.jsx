@@ -16,6 +16,7 @@ import { IconAlertCircle } from "@tabler/icons-react";
 import Export from "./export/Export";
 import Tests from "./tests/Tests";
 import TestPlan from "./test-plan/TestPlan";
+import "./create.css";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
@@ -25,7 +26,7 @@ const CreateFlow = () => {
     setActive((current) => (current > 0 ? current - 1 : current));
 
   return (
-    <div>
+    <>
       <Group align="center">
         <Image src={dataLogo} alt="Logo" w={16} />
         <Title order={2}>Create Master Data</Title>
@@ -52,12 +53,13 @@ const CreateFlow = () => {
           </div>
         </Card>
       </Group>
+
       <Stepper
         active={active}
         onStepClick={setActive}
         size="sm"
-        w={"70%"}
         p={32}
+        className="master-data-create-stepper"
       >
         <Stepper.Step label="Input Docs">
           <ImportDocs />
@@ -87,7 +89,7 @@ const CreateFlow = () => {
           <Button onClick={nextStep}>Generate Tests</Button>
         </Group>
       </Flex>
-    </div>
+    </>
   );
 };
 export default CreateFlow;
