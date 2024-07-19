@@ -14,7 +14,7 @@ const Worksheets = () => {
     },
     {
       label: "Assay",
-      content: "Todo",
+      content: <AccordianTableData />,
     },
     {
       label: "Impurities",
