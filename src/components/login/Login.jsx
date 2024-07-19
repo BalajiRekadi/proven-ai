@@ -13,7 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import headerLogo from "../../assets/headerLogo.jpeg";
-import logo from "../../assets/logo.jpeg";
+import logo from "../../assets/logo.jpg";
 
 function Login() {
   const navigate = useNavigate();
@@ -73,16 +73,17 @@ function Login() {
                     >
                       Login
                     </Button>
+                    <div className="forgot-links">
+                      <Text component="a" href="/forgot-username">
+                        Forgot username?
+                      </Text>
+                      <Text component="a" href="/forgot-password">
+                        Forgot password?
+                      </Text>
+                    </div>
                   </div>
                 </Flex>
-                <div className="forgot-links">
-                  <Text component="a" href="/forgot-username">
-                    Forgot username?
-                  </Text>
-                  <Text component="a" href="/forgot-password">
-                    Forgot password?
-                  </Text>
-                </div>
+
               </div>
             </form>
           </div>
