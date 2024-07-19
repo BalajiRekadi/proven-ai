@@ -1,10 +1,21 @@
 import React, { useState } from "react";
-import { Button, Flex, Group, Stepper, Title, Image, Card, Text } from "@mantine/core";
+import {
+  Button,
+  Flex,
+  Group,
+  Stepper,
+  Title,
+  Image,
+  Card,
+  Text,
+} from "@mantine/core";
 import dataLogo from "../../../assets/database.png";
 import ImportDocs from "./import-docs/ImportDocs";
 import Worksheets from "./worksheets/Worksheets";
-import { IconAlertCircle } from '@tabler/icons-react';
+import { IconAlertCircle } from "@tabler/icons-react";
 import Export from "./export/Export";
+import Tests from "./tests/Tests";
+import TestPlan from "./test-plan/TestPlan";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
@@ -15,28 +26,29 @@ const CreateFlow = () => {
 
   return (
     <div>
-
       <Group align="center">
         <Image src={dataLogo} alt="Logo" w={16} />
         <Title order={2}>Create Master Data</Title>
         <Card
           shadow="sm"
           style={{
-            marginBottom: '16px',
-            padding: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            marginLeft: '16px', // Adjust spacing as needed
-            width: '15%',
-            border: '0.5px solid orange'
+            marginBottom: "16px",
+            padding: "8px",
+            display: "flex",
+            alignItems: "center",
+            marginLeft: "16px", // Adjust spacing as needed
+            width: "15%",
+            border: "0.5px solid orange",
           }}
         >
-          <div style={{ display: 'flex' }}>
+          <div style={{ display: "flex" }}>
             <Text size="sm" color="gray">
               File is in progress
             </Text>
-            <IconAlertCircle size={20} style={{ marginRight: '8px', color: '#FF9800' }} />
-
+            <IconAlertCircle
+              size={20}
+              style={{ marginRight: "8px", color: "#FF9800" }}
+            />
           </div>
         </Card>
       </Group>
@@ -54,10 +66,10 @@ const CreateFlow = () => {
           <Worksheets />
         </Stepper.Step>
         <Stepper.Step label="Tests">
-          Step 3 content: Get full access
+          <Tests />
         </Stepper.Step>
         <Stepper.Step label="Test Plan">
-          Step 4 content: Get full access
+          <TestPlan />
         </Stepper.Step>
         <Stepper.Step label="Export">
           <Export />
