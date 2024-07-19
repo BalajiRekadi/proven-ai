@@ -1,4 +1,5 @@
-import React from "react";
+
+import React, { useState } from "react";
 import { Table, Button, Group, Text, Box, Select } from "@mantine/core";
 import {
   IconFile,
@@ -7,8 +8,12 @@ import {
   IconCopy,
   IconShare,
 } from "@tabler/icons-react";
+import DescriptionModal from "../../../home/DescriptionModal"; 
 
 const AccordianTableData = () => {
+  const [modalOpened, setModalOpened] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
   const handleCopy = (content) => {
     navigator.clipboard
       .writeText(content)
@@ -21,6 +26,12 @@ const AccordianTableData = () => {
         // Handle errors if copy fails
       });
   };
+
+  const handleContentClick = (content) => {
+    setModalContent(content);
+    setModalOpened(true);
+  };
+
   const data = [
     {
       id: "3.1",
@@ -56,7 +67,7 @@ const AccordianTableData = () => {
         <Select value={item.type} data={["Worksheet", "Section Worksheet"]} />
       </td>
       <td>{item.name}</td>
-      <td>
+      <td style={{ cursor: "pointer" }} onClick={() => handleContentClick(item.content)}>
         {item.content}{" "}
         <IconCopy
           size={24}
@@ -114,6 +125,8 @@ const AccordianTableData = () => {
         <Button>Merge</Button>
         <Button variant="outline">Cancel</Button>
       </Group>
+
+      <DescriptionModal opened={modalOpened} onClose={() => setModalOpened(false)} content={modalContent} />
     </Box>
   );
 };
