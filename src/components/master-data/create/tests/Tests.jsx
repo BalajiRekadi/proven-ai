@@ -1,12 +1,12 @@
 import React from "react";
 import { AccordionGroup, DetailsBox } from "../../../../shared/components";
-import AccordianTableData from "./AccordianTableData";
+import AssayTable from "./AssayTable";
 
-const Worksheets = () => {
+const Tests = () => {
   const accordions = [
     {
       label: "Description",
-      content: <AccordianTableData />,
+      content: <div>Hello</div>,
     },
     {
       label: "Water",
@@ -14,23 +14,19 @@ const Worksheets = () => {
     },
     {
       label: "Assay",
-      content: "Todo",
+      content: <AssayTable />,
     },
     {
       label: "Impurities",
       content: "Todo",
     },
   ];
-
   return (
     <>
       <DetailsBox />
-      <AccordionGroup
-        accordions={accordions}
-        groupTitle={"Work Sheet Details"}
-      />
+      <AccordionGroup accordions={accordions} groupTitle={"Test Details"} />
     </>
   );
 };
 
-export default Worksheets;
+export default Tests;

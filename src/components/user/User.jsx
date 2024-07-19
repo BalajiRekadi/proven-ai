@@ -15,6 +15,7 @@ const User = () => {
         breakpoint: "sm",
       }}
       padding="md"
+      h={"100%"}
     >
       <AppShell.Header className="header">
         <Group h="100%" px="md">

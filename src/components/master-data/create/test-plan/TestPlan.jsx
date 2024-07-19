@@ -1,12 +1,11 @@
 import React from "react";
 import { AccordionGroup, DetailsBox } from "../../../../shared/components";
-import AccordianTableData from "./AccordianTableData";
 
-const Worksheets = () => {
+const TestPlan = () => {
   const accordions = [
     {
       label: "Description",
-      content: <AccordianTableData />,
+      content: <div>Hello</div>,
     },
     {
       label: "Water",
@@ -21,7 +20,6 @@ const Worksheets = () => {
       content: "Todo",
     },
   ];
-
   return (
     <>
       <DetailsBox />
@@ -33,4 +31,4 @@ const Worksheets = () => {
   );
 };
 
-export default Worksheets;
+export default TestPlan;

@@ -19,11 +19,17 @@
       justify-content: start;
     }
   }
+
   .mantine-Accordion-panel {
     background-color: var(--primary);
   }
+
   .highlight {
     background-color: var(--secondary);
     color: black;
+  }
+
+  .is-active {
+    color: red;
   }
 }
