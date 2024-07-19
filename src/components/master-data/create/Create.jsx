@@ -25,6 +25,21 @@ const CreateFlow = () => {
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
 
+  const getNextBtnLabel = () => {
+    switch (active) {
+      case 0:
+        return "Generate Worksheets";
+      case 1:
+        return "Generate Tests";
+      case 2:
+        return "Generate Test Plan";
+      case 3:
+        return "Export";
+      default:
+        return "Next";
+    }
+  };
+
   return (
     <>
       <Group align="center">
@@ -86,7 +101,9 @@ const CreateFlow = () => {
           <Button variant="default" onClick={prevStep}>
             Back
           </Button>
-          <Button onClick={nextStep}>Generate Tests</Button>
+          {active <= 3 && (
+            <Button onClick={nextStep}>{getNextBtnLabel()}</Button>
+          )}
         </Group>
       </Flex>
     </>
