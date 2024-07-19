@@ -7,6 +7,7 @@ import editLogo from "./../../assets/edit.png";
 import downloadLogo from "./../../assets/download.png";
 
 import DescriptionModal from "./DescriptionModal";
+import { DEFAULT_TABLE_CONFIG } from "../../shared/constants";
 
 const Home = () => {
   const [modalOpened, setModalOpened] = useState(false);
@@ -139,18 +140,14 @@ const Home = () => {
     []
   );
 
-  const table = useMantineReactTable({
+  const tableConfig = {
     columns,
     data,
-    initialState: { density: "xs" },
-    enableRowSelection: false,
-    enableColumnOrdering: false,
-    enableGlobalFilter: false,
-    enableColumnActions: false,
-    enableColumnFilters: false,
+    ...DEFAULT_TABLE_CONFIG,
     enablePagination: true,
-    enableSorting: false,
-  });
+    enableBottomToolbar: true,
+  };
+  const table = useMantineReactTable(tableConfig);
 
   return (
     <div className="home">

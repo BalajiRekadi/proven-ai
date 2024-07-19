@@ -39,4 +39,17 @@ const THEME = {
       
 };
 
-export {ROUTES, THEME}
+const DEFAULT_TABLE_CONFIG = {
+    initialState: { density: "xs" },
+    enableTopToolbar: false,
+    enableBottomToolbar: false,
+    enableRowSelection: false,
+    enableColumnOrdering: false,
+    enableGlobalFilter: false,
+    enableColumnActions: false,
+    enableColumnFilters: false,
+    enablePagination: false,
+    enableSorting: false,
+  }
+
+export {ROUTES, THEME, DEFAULT_TABLE_CONFIG}

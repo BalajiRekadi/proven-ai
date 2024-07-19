@@ -3,6 +3,7 @@ import React, { useMemo, useState } from "react";
 import csvLogo from "../../../../assets/csv.png";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import AssayModal from "./AssayModal";
+import { DEFAULT_TABLE_CONFIG } from "../../../../shared/constants";
 
 const AssayTable = () => {
   const [showAssayModal, setShowAssayModal] = useState(false);
@@ -54,21 +55,8 @@ const AssayTable = () => {
     []
   );
 
-  const table = useMantineReactTable({
-    columns,
-    data,
-    initialState: { density: "xs" },
-    enableRowNumbers: true,
-    enableTopToolbar: false,
-    enableBottomToolbar: false,
-    enableRowSelection: false,
-    enableColumnOrdering: false,
-    enableGlobalFilter: false,
-    enableColumnActions: false,
-    enableColumnFilters: false,
-    enablePagination: false,
-    enableSorting: false,
-  });
+  const tableConfig = { columns, data, ...DEFAULT_TABLE_CONFIG };
+  const table = useMantineReactTable(tableConfig);
 
   return (
     <Box w={"20rem"}>

@@ -3,6 +3,7 @@ import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import React, { useMemo } from "react";
 import editLogo from "../../../../assets/edit.png";
 import saveLogo from "../../../../assets/save.png";
+import { DEFAULT_TABLE_CONFIG } from "../../../../shared/constants";
 
 const AssayModal = ({ open, onClose }) => {
   const data = [
@@ -62,20 +63,9 @@ const AssayModal = ({ open, onClose }) => {
     []
   );
 
-  const table = useMantineReactTable({
-    columns,
-    data,
-    initialState: { density: "xs" },
-    enableTopToolbar: false,
-    enableBottomToolbar: false,
-    enableRowSelection: false,
-    enableColumnOrdering: false,
-    enableGlobalFilter: false,
-    enableColumnActions: false,
-    enableColumnFilters: false,
-    enablePagination: false,
-    enableSorting: false,
-  });
+  const tableConfig = { columns, data, ...DEFAULT_TABLE_CONFIG };
+  const table = useMantineReactTable(tableConfig);
+
   return (
     <Modal opened={open} onClose={onClose} title="Assay">
       <Box pt={24}>

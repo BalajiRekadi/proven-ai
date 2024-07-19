@@ -1,7 +1,10 @@
-import { Box, Select, TextInput } from "@mantine/core";
+import { ActionIcon, Box, Select, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import React, { useMemo } from "react";
+import { DEFAULT_TABLE_CONFIG } from "../../../../shared/constants";
+import documentLogo from "../../../../assets/document.png";
+import { IconAlertCircle } from "@tabler/icons-react";
 
 const Export = () => {
   const data = [
@@ -60,46 +63,33 @@ const Export = () => {
       {
         header: "Content",
         accessorKey: "content",
+        Cell: ({ cell }) => (
+          <ActionIcon variant="subtle" aria-label="Settings">
+            <img
+              src={documentLogo}
+              className="logo"
+              style={{ width: "16px" }}
+            />
+          </ActionIcon>
+        ),
       },
       {
         header: "Exception Report",
         accessorKey: "exceptionReport",
         Cell: ({ cell }) => (
-          <Box
-            style={(theme) => ({
-              backgroundColor:
-                cell.getValue() === "Active"
-                  ? theme.colors.yellow[9]
-                  : cell.getValue() === "InActive"
-                  ? theme.colors.red[9]
-                  : cell.getValue() === "InProgress"
-                  ? theme.colors.green[9]
-                  : theme.colors.indigo[9],
-              borderRadius: "4px",
-              color: "#fff",
-              maxWidth: "9ch",
-              padding: "4px",
-            })}
-          >
-            {cell.getValue()}
-          </Box>
+          <IconAlertCircle
+            size={20}
+            style={{ marginRight: "8px", color: "var(--secondary)" }}
+          />
         ),
       },
     ],
     []
   );
 
-  const table = useMantineReactTable({
-    columns,
-    data,
-    enableRowSelection: false,
-    enableColumnOrdering: false,
-    enableGlobalFilter: false,
-    enableColumnActions: false,
-    enableColumnFilters: false,
-    enablePagination: true,
-    enableSorting: false,
-  });
+  const tableConfig = { columns, data, ...DEFAULT_TABLE_CONFIG };
+  const table = useMantineReactTable(tableConfig);
+
   return (
     <div className="home">
       <div className="search-container">
