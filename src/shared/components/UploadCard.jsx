@@ -1,21 +1,34 @@
-import { Button, Card, Text } from "@mantine/core";
+import {
+  Button,
+  Card,
+  FileButton,
+  Text,
+  Image,
+  FileInput,
+} from "@mantine/core";
 import React from "react";
+import { IconCloudUp } from "@tabler/icons-react";
 
 const UploadCard = ({ label, title, withBorder = true, shadow = "md" }) => {
+  const setFile = () => {};
   return (
-    <Card
-      shadow={shadow}
-      padding="lg"
-      radius="md"
-      w={"20rem"}
-      withBorder={withBorder}
-    >
+    <Card padding="lg" radius="md" w={"20rem"} withBorder={withBorder}>
       <Card.Section p={16}>
         <Text fw={500}>{title}</Text>
       </Card.Section>
-      <Button fullWidth mt="md" radius="md" variant="outline">
-        {label}
-      </Button>
+      <FileButton onChange={setFile} accept="image/png,image/jpeg">
+        {(props) => (
+          <>
+            <FileInput
+              mt="md"
+              label={""}
+              placeholder={label}
+              rightSection={<IconCloudUp />}
+              rightSectionPointerEvents="none"
+            />
+          </>
+        )}
+      </FileButton>
     </Card>
   );
 };
