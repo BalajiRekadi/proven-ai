@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Flex, Text, Title } from "@mantine/core";
+import { ActionIcon, Card, Flex, Text, Title } from "@mantine/core";
 import { IconCircleArrowDownFilled, IconEyeFilled } from "@tabler/icons-react";
 
 const InfoCard = () => {
@@ -7,8 +7,12 @@ const InfoCard = () => {
     <Card shadow="sm" padding="lg" radius="md" w={"30rem"} withBorder>
       <Card.Section p={16}>
         <Flex justify={"right"} gap={8} pb={36}>
-          <IconEyeFilled color="var(--gray)" />
-          <IconCircleArrowDownFilled color="var(--gray)" />
+          <ActionIcon variant="subtle">
+            <IconEyeFilled color="var(--gray)" />
+          </ActionIcon>
+          <ActionIcon variant="subtle">
+            <IconCircleArrowDownFilled color="var(--gray)" />
+          </ActionIcon>
         </Flex>
         <Flex justify={"space-between"}>
           <Flex direction={"column"}>

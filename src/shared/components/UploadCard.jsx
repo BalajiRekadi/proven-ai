@@ -1,11 +1,4 @@
-import {
-  Button,
-  Card,
-  FileButton,
-  Text,
-  Image,
-  FileInput,
-} from "@mantine/core";
+import { Card, FileButton, Text, FileInput } from "@mantine/core";
 import React from "react";
 import { IconCloudUp } from "@tabler/icons-react";
 
