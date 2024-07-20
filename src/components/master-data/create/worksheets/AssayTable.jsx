@@ -18,7 +18,7 @@ import DescriptionModal from "../../../home/DescriptionModal";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { DEFAULT_TABLE_CONFIG } from "../../../../shared/constants";
 
-const AccordianTableData = () => {
+const AssayTable = () => {
   const [modalOpened, setModalOpened] = useState(false);
   const [modalContent, setModalContent] = useState("");
 
@@ -128,7 +128,7 @@ const AccordianTableData = () => {
               <IconCheckbox />
             </ActionIcon>
             <ActionIcon variant="subtle">
-              <IconRun />
+              <IconRun color="green" />
             </ActionIcon>
             <ActionIcon variant="subtle">
               <IconShare />
@@ -164,4 +164,4 @@ const AccordianTableData = () => {
   );
 };
 
-export default AccordianTableData;
+export default AssayTable;

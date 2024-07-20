@@ -1,6 +1,6 @@
 import React from "react";
 import { AccordionGroup, DetailsBox } from "../../../../shared/components";
-import AccordianTableData from "./AccordianTableData";
+import AssayTable from "./AssayTable";
 
 const Worksheets = () => {
   const accordions = [
@@ -14,7 +14,7 @@ const Worksheets = () => {
     },
     {
       label: "Assay",
-      content: <AccordianTableData />,
+      content: <AssayTable />,
     },
     {
       label: "Impurities",
