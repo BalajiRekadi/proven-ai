@@ -3,17 +3,9 @@
   margin: 0;
   padding: 0;
 
-  /* .mantine-Input-input:not(:focus) {
-    border-color: var(--gray);
-
-    &::placeholder {
-      color: var(--gray);
-    }
+  .mantine-Notification-root {
+    position: fixed;
+    top: 4.5rem;
+    left: 50%;
   }
-
-  .mantine-DatePickerInput-input {
-    span {
-      color: var(--gray);
-    }
-  } */
 }
