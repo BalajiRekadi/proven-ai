@@ -41,7 +41,7 @@ function Login() {
           <div className="bg-light" style={{ flex: 7 }}>
             <form className="login-form">
               <div className="login-form-logo">
-                <Image src="https://static.vecteezy.com/system/resources/previews/021/217/811/original/ai-brain-icon-ai-symbol-ai-concept-and-artificial-intelligence-head-icon-ai-icon-design-free-vector.jpg"></Image>
+                {/* <Image src="https://static.vecteezy.com/system/resources/previews/021/217/811/original/ai-brain-icon-ai-symbol-ai-concept-and-artificial-intelligence-head-icon-ai-icon-design-free-vector.jpg"></Image> */}
               </div>
               <div className="login">
                 <TextInput
