@@ -1,16 +1,12 @@
-
-.mantine-Modal-header{
-    background-color: #E9EDEE;
-    
+.mantine-Modal-header {
+  background-color: #e9edee;
 }
 
-
-.modal-body{
- 
+.modal-body {
   padding: 2%;
 }
 
-.m_60c222c7{
+.m_60c222c7 {
   align-self: center;
 }
 .m_1f958f16 {
@@ -19,17 +15,17 @@
   margin-left: 15%;
 }
 .custom-Modal-content {
-    width: 80vw; 
-  }
+  width: 80vw;
+}
 
 .dotted-line {
-    border-top: 1px dashed black;
-    margin: 2% 0%;
-  }
-  
-  .modal-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    margin-top: 16px;
-  }
+  border-top: 1px dashed black;
+  margin: 2% 0%;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}

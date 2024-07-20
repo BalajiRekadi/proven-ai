@@ -18,7 +18,7 @@ const Routes = () => {
     <Accordion.Item key={parent.label} value={parent.label}>
       <Accordion.Control>
         <Group>
-          <Image src={parent.logo} w={16} />
+          <parent.logo />
           <Text>{parent.label}</Text>
         </Group>
       </Accordion.Control>

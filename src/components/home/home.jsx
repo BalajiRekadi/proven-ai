@@ -1,13 +1,11 @@
 import React, { useMemo, useState } from "react";
-import "./home.css";
-import { Box, Button, Select, TextInput } from "@mantine/core";
+import { ActionIcon, Box, Select, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import editLogo from "./../../assets/edit.png";
-import downloadLogo from "./../../assets/download.png";
-
 import DescriptionModal from "./DescriptionModal";
 import { DEFAULT_TABLE_CONFIG } from "../../shared/constants";
+import "./home.css";
+import { IconDownload, IconEdit } from "@tabler/icons-react";
 
 const Home = () => {
   const [modalOpened, setModalOpened] = useState(false);
@@ -72,7 +70,6 @@ const Home = () => {
       {
         header: "Company",
         accessorKey: "company",
-        // accessorFn: (dataRow) => parseInt(dataRow.company), //alternate way to access data if processing logic is needed
       },
       {
         header: "Facility",
@@ -127,12 +124,12 @@ const Home = () => {
         accessorKey: "actions",
         Cell: ({ cell }) => (
           <Box>
-            <img src={editLogo} className="logo" style={{ width: "16px" }} />{" "}
-            <img
-              src={downloadLogo}
-              className="logo"
-              style={{ width: "16px" }}
-            />
+            <ActionIcon variant="subtle">
+              <IconEdit />
+            </ActionIcon>
+            <ActionIcon variant="subtle">
+              <IconDownload />
+            </ActionIcon>
           </Box>
         ),
       },

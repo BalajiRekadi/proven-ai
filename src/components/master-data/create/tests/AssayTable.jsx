@@ -1,9 +1,9 @@
 import { ActionIcon, Box } from "@mantine/core";
 import React, { useMemo, useState } from "react";
-import csvLogo from "../../../../assets/csv.png";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import AssayModal from "./AssayModal";
 import { DEFAULT_TABLE_CONFIG } from "../../../../shared/constants";
+import { IconFileTypeCsv } from "@tabler/icons-react";
 
 const AssayTable = () => {
   const [showAssayModal, setShowAssayModal] = useState(false);
@@ -31,13 +31,8 @@ const AssayTable = () => {
         size: 50,
         accessorKey: "output",
         Cell: ({ cell }) => (
-          <ActionIcon variant="subtle" aria-label="Settings">
-            <img
-              src={csvLogo}
-              className="logo"
-              style={{ width: "16px" }}
-              onClick={toggleAssayModal}
-            />
+          <ActionIcon variant="subtle">
+            <IconFileTypeCsv onClick={toggleAssayModal} />
           </ActionIcon>
         ),
       },
@@ -46,8 +41,8 @@ const AssayTable = () => {
         size: 50,
         accessorKey: "actions",
         Cell: ({ cell }) => (
-          <ActionIcon variant="subtle" aria-label="Settings">
-            <img src={csvLogo} className="logo" style={{ width: "16px" }} />
+          <ActionIcon variant="subtle">
+            <IconFileTypeCsv />
           </ActionIcon>
         ),
       },

@@ -1,9 +1,8 @@
 import { ActionIcon, Box, Flex, Modal, Image } from "@mantine/core";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import React, { useMemo } from "react";
-import editLogo from "../../../../assets/edit.png";
-import saveLogo from "../../../../assets/save.png";
 import { DEFAULT_TABLE_CONFIG } from "../../../../shared/constants";
+import { IconDeviceFloppy, IconEdit } from "@tabler/icons-react";
 
 const AssayModal = ({ open, onClose }) => {
   const data = [
@@ -72,11 +71,11 @@ const AssayModal = ({ open, onClose }) => {
         <MantineReactTable table={table} />
       </Box>
       <Flex justify={"end"} p={16} gap={10}>
-        <ActionIcon variant="subtle" aria-label="Settings">
-          <Image src={editLogo} w={24} />
+        <ActionIcon variant="subtle">
+          <IconEdit />
         </ActionIcon>
-        <ActionIcon variant="subtle" aria-label="Settings">
-          <Image src={saveLogo} w={24} />
+        <ActionIcon variant="subtle">
+          <IconDeviceFloppy />
         </ActionIcon>
       </Flex>
     </Modal>

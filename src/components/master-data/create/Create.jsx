@@ -122,7 +122,6 @@
 // };
 // export default CreateFlow;
 
-
 import React, { useState } from "react";
 import {
   Button,
@@ -134,10 +133,9 @@ import {
   Card,
   Text,
 } from "@mantine/core";
-import dataLogo from "../../../assets/database.png";
 import ImportDocs from "./import-docs/ImportDocs";
 import Worksheets from "./worksheets/Worksheets";
-import { IconAlertCircle } from "@tabler/icons-react";
+import { IconAlertCircle, IconDatabase } from "@tabler/icons-react";
 import Export from "./export/Export";
 import Tests from "./tests/Tests";
 import TestPlan from "./test-plan/TestPlan";
@@ -147,7 +145,7 @@ import DescriptionModal from "../../home/DescriptionModal";
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
   const [modalOpened, setModalOpened] = useState(false);
-  const [modalContent, setModalContent] = useState('');
+  const [modalContent, setModalContent] = useState("");
 
   const nextStep = () =>
     setActive((current) => (current < 5 ? current + 1 : current));
@@ -177,7 +175,7 @@ const CreateFlow = () => {
   return (
     <>
       <Group align="center">
-        <Image src={dataLogo} alt="Logo" w={16} />
+        <IconDatabase stroke={3} size={32} />
         <Title order={2}>Create Master Data</Title>
         <Card
           shadow="sm"
@@ -232,7 +230,7 @@ const CreateFlow = () => {
           Save
         </Button>
         <Group>
-          <Button variant="filled" onClick={() => handleContentClick('export')}>
+          <Button variant="filled" onClick={() => handleContentClick("export")}>
             Export
           </Button>
           {/* <Button variant="default" onClick={prevStep}>

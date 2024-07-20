@@ -1,9 +1,9 @@
-import databaseLogo from '../assets/database.png';
+import { IconDatabase } from "@tabler/icons-react";
 
 const ROUTES = [
     {
         label: 'Master Data',
-        logo: databaseLogo,
+        logo: IconDatabase,
         children: [{
             label: 'Create',
             name: 'create'

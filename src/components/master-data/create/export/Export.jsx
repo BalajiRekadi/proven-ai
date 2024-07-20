@@ -3,8 +3,7 @@ import { DatePickerInput } from "@mantine/dates";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import React, { useMemo } from "react";
 import { DEFAULT_TABLE_CONFIG } from "../../../../shared/constants";
-import documentLogo from "../../../../assets/document.png";
-import { IconAlertCircle } from "@tabler/icons-react";
+import { IconAlertCircle, IconClipboardText } from "@tabler/icons-react";
 
 const Export = () => {
   const data = [
@@ -64,12 +63,8 @@ const Export = () => {
         header: "Content",
         accessorKey: "content",
         Cell: ({ cell }) => (
-          <ActionIcon variant="subtle" aria-label="Settings">
-            <img
-              src={documentLogo}
-              className="logo"
-              style={{ width: "16px" }}
-            />
+          <ActionIcon variant="subtle">
+            <IconClipboardText />
           </ActionIcon>
         ),
       },

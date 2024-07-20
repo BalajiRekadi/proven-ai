@@ -11,21 +11,25 @@ import User from "./components/user/User";
 import "@mantine/dates/styles.css";
 import "mantine-react-table/styles.css";
 import { THEME } from "./shared/constants";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
   const theme = createTheme(THEME);
+  const queryClient = new QueryClient();
 
   // TODO: add fallback routing
   return (
     <MantineProvider theme={theme}>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/user" element={<User />}>
-          <Route element={<Home />} index={true} />
-          <Route path="home" element={<Home />} />
-          <Route path="create" element={<Create />} />
-        </Route>
-      </Routes>
+      <QueryClientProvider client={queryClient}>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/user" element={<User />}>
+            <Route element={<Home />} index={true} />
+            <Route path="home" element={<Home />} />
+            <Route path="create" element={<Create />} />
+          </Route>
+        </Routes>
+      </QueryClientProvider>
     </MantineProvider>
   );
 }
