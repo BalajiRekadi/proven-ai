@@ -1,3 +1,4 @@
-import uploadFiles from './uploadFiles';
+import uploadFiles from "./uploadFiles";
+import processFiles from "./processFiles";
 
-export {uploadFiles}
+export { uploadFiles, processFiles };

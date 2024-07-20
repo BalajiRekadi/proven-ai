@@ -19,7 +19,7 @@ const Toast = ({
         clearTimeout(timeout);
       };
     }
-  }, []);
+  }, [isPersistant]);
 
   if (show) {
     return (
