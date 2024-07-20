@@ -12,7 +12,7 @@ const DetailsBox = () => {
         boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
       }}
     >
-      <Group position="apart" grow>
+      <Group justify="apart" grow>
         <TextInput
           style={{
             backgroundColor: "#fff", // White background
