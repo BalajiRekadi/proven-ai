@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
 
-  .mantine-Input-input:not(:focus) {
+  /* .mantine-Input-input:not(:focus) {
     border-color: var(--gray);
 
     &::placeholder {
@@ -15,5 +15,5 @@
     span {
       color: var(--gray);
     }
-  }
+  } */
 }

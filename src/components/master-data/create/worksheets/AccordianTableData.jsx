@@ -1,14 +1,22 @@
-
-import React, { useState } from "react";
-import { Table, Button, Group, Text, Box, Select } from "@mantine/core";
+import React, { useMemo, useState } from "react";
 import {
-  IconFile,
+  Button,
+  Group,
+  Box,
+  Select,
+  ActionIcon,
+  TextInput,
+} from "@mantine/core";
+import {
   IconRun,
-  IconEdit,
   IconCopy,
   IconShare,
+  IconFileFilled,
+  IconCheckbox,
 } from "@tabler/icons-react";
-import DescriptionModal from "../../../home/DescriptionModal"; 
+import DescriptionModal from "../../../home/DescriptionModal";
+import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
+import { DEFAULT_TABLE_CONFIG } from "../../../../shared/constants";
 
 const AccordianTableData = () => {
   const [modalOpened, setModalOpened] = useState(false);
@@ -34,21 +42,18 @@ const AccordianTableData = () => {
 
   const data = [
     {
-      id: "3.1",
       solution: "Mobile Phase",
       type: "Worksheet",
       name: "PARA_DISS_MP_01",
       content: "Worksheet Content",
     },
     {
-      id: "3.2",
       solution: "Standard Preparation",
       type: "Section Worksheet",
       name: "PARA_DISS_MP_01",
       content: "Worksheet Content",
     },
     {
-      id: "3.3",
       solution: "Mobile Phase",
       type: "Section Worksheet",
       name: "PARA_DISS_MP_01",
@@ -56,77 +61,105 @@ const AccordianTableData = () => {
     },
   ];
 
-  const rows = data.map((item) => (
-    <tr key={item.id}>
-      <td>{item.id}</td>
-      <td>{item.solution}</td>
-      <td>
-        <IconFile size={24} />
-      </td>
-      <td>
-        <Select value={item.type} data={["Worksheet", "Section Worksheet"]} />
-      </td>
-      <td>{item.name}</td>
-      <td style={{ cursor: "pointer" }} onClick={() => handleContentClick(item.content)}>
-        {item.content}{" "}
-        <IconCopy
-          size={24}
-          style={{ cursor: "pointer" }}
-          onClick={() => handleCopy(item.content)}
-        />
-      </td>
-      <td>
-        <Group spacing="xs">
-          <IconEdit size={24} style={{ cursor: "pointer" }} />
-          <IconRun size={24} style={{ cursor: "pointer" }} />
-          <IconShare size={24} style={{ cursor: "pointer" }} />
-        </Group>
-      </td>
-    </tr>
-  ));
+  const columns = useMemo(
+    () => [
+      {
+        header: "Solution",
+        accessorKey: "solution",
+      },
+      {
+        header: "Input",
+        size: 20,
+        accessorKey: "input",
+        Cell: ({ cell }) => (
+          <ActionIcon variant="subtle">
+            <IconFileFilled />
+          </ActionIcon>
+        ),
+      },
+      {
+        header: "Type",
+        accessorKey: "type",
+        Cell: ({ cell }) => (
+          <Select
+            placeholder="Select"
+            variant="default"
+            data={["Worksheet", "Section Worksheet"]}
+          />
+        ),
+      },
+      {
+        header: "Name",
+        accessorKey: "name",
+        Cell: ({ cell }) => (
+          <TextInput
+            placeholder="Enter"
+            variant="unstyled"
+            value={cell.getValue()}
+          />
+        ),
+      },
+      {
+        header: "Content",
+        accessorKey: "content",
+        Cell: ({ cell }) => (
+          <>
+            <Button
+              variant="transparent"
+              justify="space-between"
+              pb={10}
+              onClick={handleContentClick}
+            >
+              Worksheet Content
+            </Button>
+            <ActionIcon variant="subtle">
+              <IconCopy onClick={handleCopy} />
+            </ActionIcon>
+          </>
+        ),
+      },
+      {
+        header: "Merge",
+        size: 50,
+        accessorKey: "merge",
+        Cell: ({ cell }) => (
+          <>
+            <ActionIcon variant="subtle">
+              <IconCheckbox />
+            </ActionIcon>
+            <ActionIcon variant="subtle">
+              <IconRun />
+            </ActionIcon>
+            <ActionIcon variant="subtle">
+              <IconShare />
+            </ActionIcon>
+          </>
+        ),
+      },
+    ],
+    []
+  );
+
+  const tableConfig = {
+    columns,
+    data,
+    ...DEFAULT_TABLE_CONFIG,
+    enableRowNumbers: true,
+  };
+  const table = useMantineReactTable(tableConfig);
 
   return (
-    <Box
-      style={{
-        padding: "16px",
-        backgroundColor: "#f9f9f9",
-        borderRadius: "8px",
-        boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-      }}
-    >
-      <Table
-        style={{
-          borderCollapse: "separate",
-          borderSpacing: "0 8px",
-        }}
-      >
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Solution</th>
-            <th>Input</th>
-            <th>Type</th>
-            <th>Name</th>
-            <th>Content</th>
-            <th>Merge</th>
-          </tr>
-        </thead>
-        <tbody
-          style={{
-            backgroundColor: "#fff",
-            borderRadius: "8px",
-            boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          {rows}
-        </tbody>
-      </Table>
-      <Group position="right" mt="md">
+    <Box>
+      <MantineReactTable table={table} />
+      <Group justify="right" mt="md">
         <Button>Merge</Button>
         <Button variant="outline">Cancel</Button>
       </Group>
-
-      <DescriptionModal opened={modalOpened} onClose={() => setModalOpened(false)} content={modalContent} />
+      <DescriptionModal
+        opened={modalOpened}
+        onClose={() => setModalOpened(false)}
+        content={modalContent}
+      />
     </Box>
   );
 };

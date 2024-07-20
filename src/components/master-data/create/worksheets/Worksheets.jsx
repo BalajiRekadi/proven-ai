@@ -6,7 +6,7 @@ const Worksheets = () => {
   const accordions = [
     {
       label: "Description",
-      content: <AccordianTableData />,
+      content: "Todo",
     },
     {
       label: "Water",
