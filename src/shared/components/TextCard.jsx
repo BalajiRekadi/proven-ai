@@ -2,7 +2,7 @@ import { TextInput } from "@mantine/core";
 import React from "react";
 import { IconEdit } from "@tabler/icons-react";
 
-const TextCard = ({ title, text }) => {
+const TextCard = ({ title, text, onChange }) => {
   return (
     <TextInput
       mt="md"
@@ -11,6 +11,7 @@ const TextCard = ({ title, text }) => {
       label={title}
       value={text}
       placeholder="Enter"
+      onChange={onChange}
     />
   );
 };

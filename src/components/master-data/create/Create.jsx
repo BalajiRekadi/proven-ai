@@ -8,11 +8,19 @@ import Tests from "./tests/Tests";
 import TestPlan from "./test-plan/TestPlan";
 import "./create.css";
 import DescriptionModal from "../../home/DescriptionModal";
+import { saveImportDocsData } from "../../../api/helpers";
+import { Toast } from "../../../shared/components";
+import { appendDocxExtension } from "../../../shared/utilities";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
+  const [showToast, setShowToast] = useState(false);
   const [modalOpened, setModalOpened] = useState(false);
   const [modalContent, setModalContent] = useState("");
+  const [specFile, setSpecFile] = useState(null);
+  const [methodFile, setMethodFile] = useState(null);
+  const [showTaskCard, setShowTaskCard] = useState(false);
+  const [taskData, setTaskData] = useState({});
 
   const nextStep = () =>
     setActive((current) => (current < 5 ? current + 1 : current));
@@ -37,6 +45,28 @@ const CreateFlow = () => {
     setModalOpened(true);
   };
 
+  const handleSave = () => {
+    if (active == 0) {
+      const payload = {
+        ...taskData,
+        filename1: appendDocxExtension(specFile?.name),
+        filename2: appendDocxExtension(methodFile?.name),
+        Product: taskData.product,
+        MARKET: taskData.market,
+        company: taskData.company,
+        facility: taskData.facility,
+      };
+      saveImportDocsData(payload).then((data) => {
+        setShowToast(true);
+        console.log(data);
+      });
+    }
+  };
+
+  const handleToastHide = () => {
+    setShowToast(false);
+  };
+
   return (
     <>
       <Group align="center">
@@ -52,7 +82,16 @@ const CreateFlow = () => {
         className="master-data-create-stepper"
       >
         <Stepper.Step label="Input Docs">
-          <ImportDocs />
+          <ImportDocs
+            taskData={taskData}
+            setTaskData={setTaskData}
+            showTaskCard={showTaskCard}
+            setShowTaskCard={setShowTaskCard}
+            specFile={specFile}
+            methodFile={methodFile}
+            setSpecFile={setSpecFile}
+            setMethodFile={setMethodFile}
+          />
         </Stepper.Step>
         <Stepper.Step label="Worksheets">
           <Worksheets />
@@ -69,7 +108,9 @@ const CreateFlow = () => {
       </Stepper>
 
       <Flex justify="space-between" mt="xl" mx="32">
-        <Button variant="filled">Save</Button>
+        <Button variant="filled" onClick={handleSave}>
+          Save
+        </Button>
         <Group>
           {active > 0 && active < 3 && (
             <Button
@@ -89,6 +130,16 @@ const CreateFlow = () => {
           content={modalContent}
         />
       </Flex>
+      {showToast && (
+        <Toast
+          show={showToast}
+          message={"Saved successfully"}
+          color={"green"}
+          isLoading={false}
+          onHide={handleToastHide}
+          isPersistant={false}
+        />
+      )}
     </>
   );
 };

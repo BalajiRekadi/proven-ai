@@ -5,10 +5,16 @@ import { IconUpload } from "@tabler/icons-react";
 import TaskCard from "./TaskCard";
 import { processFiles, uploadFiles } from "../../../../api/helpers";
 
-const ImportDocs = () => {
-  const [specFile, setSpecFile] = useState(null);
-  const [methodFile, setMethodFile] = useState(null);
-  const [taskData, setTaskData] = useState(null);
+const ImportDocs = ({
+  taskData,
+  setTaskData,
+  specFile,
+  setSpecFile,
+  methodFile,
+  setMethodFile,
+  showTaskCard,
+  setShowTaskCard,
+}) => {
   const [showToast, setShowToast] = useState(false);
   const [loadingToast, setLoadingToast] = useState(true);
   const [isPersistant, setIsPersistant] = useState(true);
@@ -18,13 +24,14 @@ const ImportDocs = () => {
 
   const handleUploadFiles = () => {
     setShowToast(true);
-    setTimeout(() => {
-      uploadFiles([specFile, methodFile]).then((res) => {
-        setLoadingToast(false);
-        setIsPersistant(false);
-        setToastMessage("Files uploaded successfully");
-      });
-    }, 2000);
+    setLoadingToast(true);
+    setIsPersistant(true);
+    uploadFiles([specFile, methodFile]).then((res) => {
+      setShowTaskCard(false);
+      setLoadingToast(false);
+      setIsPersistant(false);
+      setToastMessage("Files uploaded successfully");
+    });
   };
 
   const handleToastHide = () => {
@@ -33,17 +40,22 @@ const ImportDocs = () => {
 
   const handleProcess = () => {
     setShowToast(true);
-    setLoadingToast(false);
+    setLoadingToast(true);
     setIsPersistant(true);
     setToastMessage("Files processing is in progress..");
-    setTimeout(() => {
-      processFiles().then((res) => {
+    if (specFile?.name && methodFile?.name) {
+      processFiles(specFile.name).then((data) => {
         setLoadingToast(false);
         setIsPersistant(false);
         setToastMessage("Files processed successfully");
-        setTaskData(res);
+        data.specFile = specFile.name;
+        data.methodFile = methodFile.name;
+        setShowTaskCard(true);
+        setTaskData(data);
       });
-    }, 2000);
+    } else {
+      setShowToast(false);
+    }
   };
 
   return (
@@ -78,7 +90,7 @@ const ImportDocs = () => {
           {"Process"}
         </Button>
       </Flex>
-      <TaskCard data={taskData} />
+      {showTaskCard && <TaskCard data={taskData} setTaskData={setTaskData} />}
       {showToast && (
         <Toast
           show={showToast}
