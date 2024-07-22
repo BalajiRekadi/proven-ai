@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Button } from "@mantine/core";
 import { Title, Text } from "@mantine/core";
 import "./modal.css";
-import AssayTable from "../master-data/create/worksheets/AssayTable";
+import AccordionTable from "../../shared/components/AccordionTable";
 
 function DescriptionModal({ opened, onClose, content }) {
   return (
@@ -15,7 +15,7 @@ function DescriptionModal({ opened, onClose, content }) {
       <div className="modal-body">
         {content === "export" ? (
           <div>
-            <AssayTable></AssayTable>
+            <AccordionTable></AccordionTable>
           </div>
         ) : (
           <>

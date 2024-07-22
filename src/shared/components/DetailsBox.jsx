@@ -1,79 +1,47 @@
 import React from "react";
-import { TextInput, Group, Box } from "@mantine/core";
-import { IconEdit, IconDeviceFloppy } from "@tabler/icons-react";
+import { TextInput, Group, ActionIcon, Card, Flex } from "@mantine/core";
+import { IconDeviceFloppy } from "@tabler/icons-react";
 
-const DetailsBox = () => {
+const DetailsBox = ({ data, setData, onSave }) => {
+  const handleValueChange = (event, field) => {
+    setData({ ...data, [field]: event.target.value });
+  };
+
   return (
-    <Box
-      style={{
-        padding: "16px",
-        backgroundColor: "#f9f9f9",
-        borderRadius: "8px",
-        boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-      }}
-    >
+    <Card shadow="sm" padding="lg" radius="md" my={16} withBorder>
       <Group justify="apart" grow>
         <TextInput
-          style={{
-            backgroundColor: "#fff", // White background
-            border: "none", // No border
-            boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)", // Light box shadow
-            borderRadius: "4px", // Optional: Add some border radius for rounded corners
-            padding: "10px", // Optional: Adjust padding as needed
-          }}
+          placeholder="Enter"
           label="Product / Material Code"
-          value="100001234"
-          readOnly
+          value={data?.product}
+          onChange={(event) => handleValueChange(event, "product")}
         />
         <TextInput
+          placeholder="Enter"
           label="Spec No."
-          value="F0-100001234-00"
-          readOnly
-          style={{
-            backgroundColor: "#fff", // White background
-            border: "none", // No border
-            boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)", // Light box shadow
-            borderRadius: "4px", // Optional: Add some border radius for rounded corners
-            padding: "10px", // Optional: Adjust padding as needed
-          }}
+          value={data?.specId}
+          onChange={(event) => handleValueChange(event, "specId")}
         />
         <TextInput
+          placeholder="Enter"
           label="Method No."
-          value="M0-100001234-00"
-          readOnly
-          style={{
-            backgroundColor: "#fff", // White background
-            border: "none", // No border
-            boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)", // Light box shadow
-            borderRadius: "4px", // Optional: Add some border radius for rounded corners
-            padding: "10px", // Optional: Adjust padding as needed
-          }}
+          value={data?.methodId}
+          onChange={(event) => handleValueChange(event, "methodId")}
         />
         <TextInput
-          label="Market/Pharmacopeia"
-          value="USA"
-          readOnly
-          style={{
-            backgroundColor: "#fff", // White background
-            border: "none", // No border
-            boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)", // Light box shadow
-            borderRadius: "4px", // Optional: Add some border radius for rounded corners
-            padding: "10px", // Optional: Adjust padding as needed
-          }}
+          placeholder="Enter"
+          label="Market / Pharmacopeia"
+          value={data?.market}
+          onChange={(event) => handleValueChange(event, "market")}
         />
       </Group>
 
-      <Box
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          marginTop: "16px",
-        }}
-      >
-        <IconEdit size={24} style={{ cursor: "pointer", marginRight: "8px" }} />
-        <IconDeviceFloppy size={24} style={{ cursor: "pointer" }} />
-      </Box>
-    </Box>
+      <Flex justify={"end"} px={16} pt={16}>
+        <ActionIcon variant="subtle" onClick={onSave}>
+          <IconDeviceFloppy size={24} />
+        </ActionIcon>
+      </Flex>
+    </Card>
   );
 };
 

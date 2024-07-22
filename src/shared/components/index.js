@@ -4,7 +4,7 @@ import TextCard from "./TextCard";
 import DetailsBox from "./DetailsBox";
 import AccordionGroup from "./AccordionGroup";
 import Toast from "./Toast";
-import TaskDetailsModal from "./TaskDetailsModal";
+import TextModal from "./TextModal";
 
 export {
   UploadCard,
@@ -13,5 +13,5 @@ export {
   DetailsBox,
   AccordionGroup,
   Toast,
-  TaskDetailsModal,
+  TextModal,
 };
