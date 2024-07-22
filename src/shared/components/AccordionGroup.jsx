@@ -1,18 +1,14 @@
 import { Accordion, Box, Group, Title } from "@mantine/core";
 import { IconRun } from "@tabler/icons-react";
 import React from "react";
+import AccordionTable from "./AccordionTable";
 
-const AccordionGroup = ({ accordions, groupTitle }) => {
+const AccordionGroup = ({ accordions, groupTitle, updateData }) => {
   return (
-    <div>
-      <Group
-        position="left"
-        mb="md"
-        style={{ marginTop: "16px", marginBottom: "16px" }}
-      >
-        <Title order={4} style={{ display: "flex", alignItems: "center" }}>
-          {groupTitle} <IconRun size={24} style={{ marginLeft: "8px" }} />
-        </Title>
+    <>
+      <Group align="center" py={16} pt={32}>
+        <Title order={4}>{groupTitle}</Title>
+        <IconRun size={24} />
       </Group>
       <Box>
         <Accordion
@@ -26,12 +22,18 @@ const AccordionGroup = ({ accordions, groupTitle }) => {
           {accordions.map((acc) => (
             <Accordion.Item value={acc.label} key={acc.label}>
               <Accordion.Control>{acc.label}</Accordion.Control>
-              <Accordion.Panel>{acc.content}</Accordion.Panel>
+              <Accordion.Panel>
+                <AccordionTable
+                  data={acc.content}
+                  updateData={updateData}
+                  label={acc.label}
+                />
+              </Accordion.Panel>
             </Accordion.Item>
           ))}
         </Accordion>
       </Box>
-    </div>
+    </>
   );
 };
 

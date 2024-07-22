@@ -17,7 +17,12 @@
     "@mantine/modals": "^7.11.2",
     "@mantine/notifications": "^7.11.2",
     "@tabler/icons-react": "^3.11.0",
+<<<<<<< HEAD
     "@tanstack/react-query": "^5.51.11",
+=======
+    "@tanstack/react-query": "^5.51.9",
+    "axios": "^1.7.2",
+>>>>>>> 207dfdb693eefe72d4ed2b7b0904bbca5badbb61
     "dayjs": "^1.11.11",
     "mantine-react-table": "^2.0.0-beta.5",
     "postcss-preset-mantine": "^1.16.0",

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ActionIcon, Card, Flex, TextInput } from "@mantine/core";
 import { IconCircleArrowDownFilled, IconEyeFilled } from "@tabler/icons-react";
 import { downloadJSONFromObj } from "../utilities";
-import TaskDetailsModal from "./TaskDetailsModal";
+import TextModal from "./TextModal";
 
 const InfoCard = ({ data, type, typeValue, setTaskData }) => {
   const [showTaskDetails, setShowTaskDetails] = useState(false);
@@ -66,7 +66,7 @@ const InfoCard = ({ data, type, typeValue, setTaskData }) => {
           </Flex>
         </Card.Section>
       </Card>
-      <TaskDetailsModal
+      <TextModal
         title="Task Details"
         open={showTaskDetails}
         onClose={toggleModal}

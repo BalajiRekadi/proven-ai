@@ -14,13 +14,16 @@ import {
   IconFileFilled,
   IconCheckbox,
 } from "@tabler/icons-react";
-import DescriptionModal from "../../../home/DescriptionModal";
+import DescriptionModal from "../../components/home/DescriptionModal";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import { DEFAULT_TABLE_CONFIG } from "../../../../shared/constants";
+import { DEFAULT_TABLE_CONFIG } from "../constants";
+import TextModal from "./TextModal";
 
-const AssayTable = () => {
-  const [modalOpened, setModalOpened] = useState(false);
-  const [modalContent, setModalContent] = useState("");
+const AccordionTable = ({ data = [], label = "", updateData }) => {
+  const [contentModalOpened, setContentModalOpened] = useState(false);
+  const [inputModalOpened, setInputModalOpened] = useState(false);
+  const [selectedContent, setSelectedContent] = useState("");
+  const [selectedInput, setSelectedInput] = useState("");
 
   const handleCopy = (content) => {
     navigator.clipboard
@@ -36,30 +39,28 @@ const AssayTable = () => {
   };
 
   const handleContentClick = (content) => {
-    setModalContent(content);
-    setModalOpened(true);
+    setSelectedContent(content);
+    setContentModalOpened(true);
   };
 
-  const data = [
-    {
-      solution: "Mobile Phase",
-      type: "Worksheet",
-      name: "PARA_DISS_MP_01",
-      content: "Worksheet Content",
-    },
-    {
-      solution: "Standard Preparation",
-      type: "Section Worksheet",
-      name: "PARA_DISS_MP_01",
-      content: "Worksheet Content",
-    },
-    {
-      solution: "Mobile Phase",
-      type: "Section Worksheet",
-      name: "PARA_DISS_MP_01",
-      content: "Worksheet Content",
-    },
-  ];
+  const getTableData = () => {
+    const tableData = [];
+    data.forEach((item) => {
+      const keys = Object.keys(item);
+      keys.forEach((key) => {
+        tableData.push({
+          solution: key,
+          input: item[key],
+        });
+      });
+    });
+    return tableData;
+  };
+
+  const handleInputIconClick = (input) => {
+    setSelectedInput(input.value);
+    setInputModalOpened(true);
+  };
 
   const columns = useMemo(
     () => [
@@ -73,29 +74,34 @@ const AssayTable = () => {
         accessorKey: "input",
         Cell: ({ cell }) => (
           <ActionIcon variant="subtle">
-            <IconFileFilled />
+            <IconFileFilled
+              onClick={() => handleInputIconClick(cell.getValue())}
+            />
           </ActionIcon>
         ),
       },
       {
         header: "Type",
         accessorKey: "type",
-        Cell: ({ cell }) => (
+        Cell: ({ cell, row }) => (
           <Select
             placeholder="Select"
+            value={row[`${row.original}`]}
             variant="default"
             data={["Worksheet", "Section Worksheet"]}
+            onChange={(event) => updateData(event, "type", label, row.original)}
           />
         ),
       },
       {
         header: "Name",
         accessorKey: "name",
-        Cell: ({ cell }) => (
+        Cell: ({ cell, row }) => (
           <TextInput
             placeholder="Enter"
-            variant="unstyled"
+            variant="default"
             value={cell.getValue()}
+            onChange={(event) => updateData(event, "name", label, row.original)}
           />
         ),
       },
@@ -109,6 +115,7 @@ const AssayTable = () => {
               justify="space-between"
               pb={10}
               onClick={handleContentClick}
+              pl={0}
             >
               Worksheet Content
             </Button>
@@ -142,7 +149,7 @@ const AssayTable = () => {
 
   const tableConfig = {
     columns,
-    data,
+    data: getTableData(),
     ...DEFAULT_TABLE_CONFIG,
     enableRowNumbers: true,
   };
@@ -155,13 +162,19 @@ const AssayTable = () => {
         <Button>Merge</Button>
         <Button variant="outline">Cancel</Button>
       </Group>
+      <TextModal
+        open={inputModalOpened}
+        onClose={() => setInputModalOpened(false)}
+        title="Solution"
+        content={selectedInput}
+      />
       <DescriptionModal
-        opened={modalOpened}
-        onClose={() => setModalOpened(false)}
-        content={modalContent}
+        opened={contentModalOpened}
+        onClose={() => setContentModalOpened(false)}
+        content={selectedContent}
       />
     </Box>
   );
 };
 
-export default AssayTable;
+export default AccordionTable;

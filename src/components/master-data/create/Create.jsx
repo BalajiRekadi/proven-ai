@@ -8,7 +8,7 @@ import Tests from "./tests/Tests";
 import TestPlan from "./test-plan/TestPlan";
 import "./create.css";
 import DescriptionModal from "../../home/DescriptionModal";
-import { saveImportDocsData } from "../../../api/helpers";
+import { saveImportDocsData, saveWorksheetData } from "../../../api/helpers";
 import { Toast } from "../../../shared/components";
 import { appendDocxExtension } from "../../../shared/utilities";
 
@@ -21,6 +21,7 @@ const CreateFlow = () => {
   const [methodFile, setMethodFile] = useState(null);
   const [showTaskCard, setShowTaskCard] = useState(false);
   const [taskData, setTaskData] = useState({});
+  const [worksheetsData, setWorksheetsData] = useState();
 
   const nextStep = () =>
     setActive((current) => (current < 5 ? current + 1 : current));
@@ -45,6 +46,7 @@ const CreateFlow = () => {
     setModalOpened(true);
   };
 
+  // TODO: define separate footer btns for each step and rework this method
   const handleSave = () => {
     if (active == 0) {
       const payload = {
@@ -58,7 +60,13 @@ const CreateFlow = () => {
       };
       saveImportDocsData(payload).then((data) => {
         setShowToast(true);
-        console.log(data);
+      });
+    } else if (active == 1) {
+      saveWorksheetData({
+        product: taskData.product,
+        ...worksheetsData,
+      }).then((res) => {
+        setShowToast(true);
       });
     }
   };
@@ -94,7 +102,12 @@ const CreateFlow = () => {
           />
         </Stepper.Step>
         <Stepper.Step label="Worksheets">
-          <Worksheets />
+          <Worksheets
+            taskData={taskData}
+            setTaskData={setTaskData}
+            worksheetsData={worksheetsData}
+            setWorksheetsData={setWorksheetsData}
+          />
         </Stepper.Step>
         <Stepper.Step label="Tests">
           <Tests />
@@ -133,7 +146,7 @@ const CreateFlow = () => {
       {showToast && (
         <Toast
           show={showToast}
-          message={"Saved successfully"}
+          message={"Saved details successfully"}
           color={"green"}
           isLoading={false}
           onHide={handleToastHide}
