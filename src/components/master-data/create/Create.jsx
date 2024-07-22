@@ -63,10 +63,11 @@ const CreateFlow = () => {
       });
     } else if (active == 1) {
       saveWorksheetData({
-        product: taskData.product || "3000714",
+        product: taskData.product,
         ...worksheetsData,
+      }).then((res) => {
+        setShowToast(true);
       });
-      console.log("xxx", worksheetsData);
     }
   };
 
@@ -145,7 +146,7 @@ const CreateFlow = () => {
       {showToast && (
         <Toast
           show={showToast}
-          message={"Saved successfully"}
+          message={"Saved details successfully"}
           color={"green"}
           isLoading={false}
           onHide={handleToastHide}
