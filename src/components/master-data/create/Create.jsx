@@ -22,6 +22,7 @@ const CreateFlow = () => {
   const [showTaskCard, setShowTaskCard] = useState(false);
   const [taskData, setTaskData] = useState({});
   const [worksheetsData, setWorksheetsData] = useState();
+  const [worksheetsContent, setWorksheetsContent] = useState();
 
   const nextStep = () =>
     setActive((current) => (current < 5 ? current + 1 : current));
@@ -107,6 +108,8 @@ const CreateFlow = () => {
             setTaskData={setTaskData}
             worksheetsData={worksheetsData}
             setWorksheetsData={setWorksheetsData}
+            worksheetsContent={worksheetsContent}
+            setWorksheetsContent={setWorksheetsContent}
           />
         </Stepper.Step>
         <Stepper.Step label="Tests">

@@ -13,23 +13,9 @@ function DescriptionModal({ opened, onClose, content }) {
       className="custom-Modal-content"
     >
       <div className="modal-body">
-        {content === "export" ? (
-          <div>
-            <AccordionTable></AccordionTable>
-          </div>
-        ) : (
-          <>
-            <Title order={5}>Work Sheet Field(s) List:</Title>
-            <Text size="md" w={500} c="black" align="left" mt="md">
-              Chemicals (Chemicals) | | Instruments (Instruments)
-            </Text>
-            <div className="dotted-line"></div>
-            <Title order={5}>Worksheet Content</Title>
-            <Text size="md" w={500} c="black" align="left" mt="md">
-              This is worksheet description content
-            </Text>
-          </>
-        )}
+        <>
+          <p>{content}</p>
+        </>
         <div className="modal-footer">
           <Button onClick={onClose}>Edit</Button>
           <Button onClick={onClose}>Save</Button>

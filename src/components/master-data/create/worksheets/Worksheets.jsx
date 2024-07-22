@@ -4,7 +4,11 @@ import {
   DetailsBox,
   Toast,
 } from "../../../../shared/components";
-import { fetchWorksheets, saveImportDocsData } from "../../../../api/helpers";
+import {
+  fetchWorksheets,
+  runWorksheet,
+  saveImportDocsData,
+} from "../../../../api/helpers";
 import { deepClone } from "../../../../shared/utilities";
 
 const Worksheets = ({
@@ -12,6 +16,8 @@ const Worksheets = ({
   setTaskData,
   worksheetsData,
   setWorksheetsData,
+  worksheetsContent,
+  setWorksheetsContent,
 }) => {
   const [showToast, setShowToast] = useState(true);
   const [loadingToast, setLoadingToast] = useState(true);
@@ -72,6 +78,21 @@ const Worksheets = ({
     });
   };
 
+  const handleRunClick = (label, data) => {
+    const item = deepClone(worksheetsData[label]);
+    item[0] = { [data.solution]: item[0][data.solution] };
+    runWorksheet(taskData.product || "3000714", {
+      [label]: item,
+    }).then((res) => {
+      setWorksheetsData((prev) => {
+        const clone = deepClone(prev);
+        clone[label][0][data.solution].content =
+          res[label][0][data.solution][1];
+        return clone;
+      });
+    });
+  };
+
   return (
     <>
       <DetailsBox data={taskData} setData={setTaskData} onSave={saveTaskData} />
@@ -79,6 +100,7 @@ const Worksheets = ({
         accordions={getAccordions()}
         updateData={updateWorkSheetData}
         groupTitle={"Work Sheet Details"}
+        onRun={handleRunClick}
       />
       {showToast && (
         <Toast

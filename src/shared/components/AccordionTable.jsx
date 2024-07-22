@@ -6,6 +6,7 @@ import {
   Select,
   ActionIcon,
   TextInput,
+  Flex,
 } from "@mantine/core";
 import {
   IconRun,
@@ -14,12 +15,11 @@ import {
   IconFileFilled,
   IconCheckbox,
 } from "@tabler/icons-react";
-import DescriptionModal from "../../components/home/DescriptionModal";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { DEFAULT_TABLE_CONFIG } from "../constants";
 import TextModal from "./TextModal";
 
-const AccordionTable = ({ data = [], label = "", updateData }) => {
+const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
   const [contentModalOpened, setContentModalOpened] = useState(false);
   const [inputModalOpened, setInputModalOpened] = useState(false);
   const [selectedContent, setSelectedContent] = useState("");
@@ -51,6 +51,8 @@ const AccordionTable = ({ data = [], label = "", updateData }) => {
         tableData.push({
           solution: key,
           input: item[key],
+          content: item[key].content,
+          disableWorksheet: true,
         });
       });
     });
@@ -60,6 +62,10 @@ const AccordionTable = ({ data = [], label = "", updateData }) => {
   const handleInputIconClick = (input) => {
     setSelectedInput(input.value);
     setInputModalOpened(true);
+  };
+
+  const handleRunClick = (label, row) => {
+    onRun(label, row.original);
   };
 
   const columns = useMemo(
@@ -109,33 +115,36 @@ const AccordionTable = ({ data = [], label = "", updateData }) => {
         header: "Content",
         accessorKey: "content",
         Cell: ({ cell }) => (
-          <>
+          <Flex align={"center"}>
             <Button
               variant="transparent"
               justify="space-between"
-              pb={10}
-              onClick={handleContentClick}
-              pl={0}
+              onClick={() => handleContentClick(cell.getValue())}
+              pl={4}
+              disabled={!cell.getValue()}
             >
               Worksheet Content
             </Button>
-            <ActionIcon variant="subtle">
+            <ActionIcon variant="subtle" disabled={!cell.getValue()}>
               <IconCopy onClick={handleCopy} />
             </ActionIcon>
-          </>
+          </Flex>
         ),
       },
       {
         header: "Merge",
         size: 50,
         accessorKey: "merge",
-        Cell: ({ cell }) => (
+        Cell: ({ row }) => (
           <>
             <ActionIcon variant="subtle">
               <IconCheckbox />
             </ActionIcon>
             <ActionIcon variant="subtle">
-              <IconRun color="green" />
+              <IconRun
+                color="green"
+                onClick={() => handleRunClick(label, row)}
+              />
             </ActionIcon>
             <ActionIcon variant="subtle">
               <IconShare />
@@ -168,9 +177,10 @@ const AccordionTable = ({ data = [], label = "", updateData }) => {
         title="Solution"
         content={selectedInput}
       />
-      <DescriptionModal
-        opened={contentModalOpened}
+      <TextModal
+        open={contentModalOpened}
         onClose={() => setContentModalOpened(false)}
+        title="Description"
         content={selectedContent}
       />
     </Box>

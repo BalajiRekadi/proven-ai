@@ -3,7 +3,7 @@ import { IconRun } from "@tabler/icons-react";
 import React from "react";
 import AccordionTable from "./AccordionTable";
 
-const AccordionGroup = ({ accordions, groupTitle, updateData }) => {
+const AccordionGroup = ({ accordions, groupTitle, updateData, onRun }) => {
   return (
     <>
       <Group align="center" py={16} pt={32}>
@@ -27,6 +27,7 @@ const AccordionGroup = ({ accordions, groupTitle, updateData }) => {
                   data={acc.content}
                   updateData={updateData}
                   label={acc.label}
+                  onRun={onRun}
                 />
               </Accordion.Panel>
             </Accordion.Item>
