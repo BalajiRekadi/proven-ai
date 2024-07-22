@@ -79,6 +79,10 @@ const Worksheets = ({
   };
 
   const handleRunClick = (label, data) => {
+    setShowToast(true);
+    setToastMessage('Loading worksheet content..');
+    setLoadingToast(true)
+    setIsPersistant(true)
     const item = deepClone(worksheetsData[label]);
     item[0] = { [data.solution]: item[0][data.solution] };
     runWorksheet(taskData.product || "3000714", {
@@ -90,6 +94,10 @@ const Worksheets = ({
           res[label][0][data.solution][1];
         return clone;
       });
+      setShowToast(false);
+      setToastMessage('Worksheet content loaded successfully');
+      setLoadingToast(false);
+      setIsPersistant(false);
     });
   };
 
