@@ -7,34 +7,34 @@ import {
   ActionIcon,
   TextInput,
   Flex,
+  Checkbox,
 } from "@mantine/core";
 import {
   IconRun,
   IconCopy,
   IconShare,
   IconFileFilled,
-  IconCheckbox,
 } from "@tabler/icons-react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { DEFAULT_TABLE_CONFIG } from "../constants";
 import TextModal from "./TextModal";
+import Toast from "./Toast";
 
 const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
   const [contentModalOpened, setContentModalOpened] = useState(false);
   const [inputModalOpened, setInputModalOpened] = useState(false);
   const [selectedContent, setSelectedContent] = useState("");
   const [selectedInput, setSelectedInput] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   const handleCopy = (content) => {
     navigator.clipboard
-      .writeText(content)
+      .writeText(JSON.stringify(content))
       .then(() => {
-        console.log("Copied to clipboard");
-        // Optionally, you can show a success message or perform any other action
+        setShowToast(true)
       })
       .catch((err) => {
         console.error("Failed to copy: ", err);
-        // Handle errors if copy fails
       });
   };
 
@@ -126,7 +126,7 @@ const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
               Worksheet Content
             </Button>
             <ActionIcon variant="subtle" disabled={!cell.getValue()}>
-              <IconCopy onClick={handleCopy} />
+              <IconCopy onClick={() => handleCopy(cell.getValue())} />
             </ActionIcon>
           </Flex>
         ),
@@ -138,7 +138,7 @@ const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
         Cell: ({ row }) => (
           <>
             <ActionIcon variant="subtle">
-              <IconCheckbox />
+              <Checkbox label=''/>
             </ActionIcon>
             <ActionIcon variant="subtle">
               <IconRun
@@ -165,6 +165,7 @@ const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
   const table = useMantineReactTable(tableConfig);
 
   return (
+    <>
     <Box>
       <MantineReactTable table={table} />
       <Group justify="right" mt="md">
@@ -184,6 +185,17 @@ const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
         content={selectedContent}
       />
     </Box>
+    {showToast && (
+      <Toast
+        show={showToast}
+        message={"Content copied to clipboard"}
+        color={"green"}
+        isLoading={false}
+        onHide={() => setShowToast(false)}
+        isPersistant={false}
+      />
+    )}
+    </>
   );
 };
 
