@@ -31,7 +31,7 @@ const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
     navigator.clipboard
       .writeText(JSON.stringify(content))
       .then(() => {
-        setShowToast(true)
+        setShowToast(true);
       })
       .catch((err) => {
         console.error("Failed to copy: ", err);
@@ -45,17 +45,19 @@ const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
 
   const getTableData = () => {
     const tableData = [];
-    data.forEach((item) => {
-      const keys = Object.keys(item);
-      keys.forEach((key) => {
-        tableData.push({
-          solution: key,
-          input: item[key],
-          content: item[key].content,
-          disableWorksheet: true,
+    if (data.forEach) {
+      data.forEach((item) => {
+        const keys = Object.keys(item);
+        keys.forEach((key) => {
+          tableData.push({
+            solution: key,
+            input: item[key],
+            content: item[key].content,
+            disableWorksheet: true,
+          });
         });
       });
-    });
+    }
     return tableData;
   };
 
@@ -138,7 +140,7 @@ const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
         Cell: ({ row }) => (
           <>
             <ActionIcon variant="subtle">
-              <Checkbox label=''/>
+              <Checkbox label="" />
             </ActionIcon>
             <ActionIcon variant="subtle">
               <IconRun
@@ -166,35 +168,35 @@ const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
 
   return (
     <>
-    <Box>
-      <MantineReactTable table={table} />
-      <Group justify="right" mt="md">
-        <Button>Merge</Button>
-        <Button variant="outline">Cancel</Button>
-      </Group>
-      <TextModal
-        open={inputModalOpened}
-        onClose={() => setInputModalOpened(false)}
-        title="Solution"
-        content={selectedInput}
-      />
-      <TextModal
-        open={contentModalOpened}
-        onClose={() => setContentModalOpened(false)}
-        title="Description"
-        content={selectedContent}
-      />
-    </Box>
-    {showToast && (
-      <Toast
-        show={showToast}
-        message={"Content copied to clipboard"}
-        color={"green"}
-        isLoading={false}
-        onHide={() => setShowToast(false)}
-        isPersistant={false}
-      />
-    )}
+      <Box>
+        <MantineReactTable table={table} />
+        <Group justify="right" mt="md">
+          <Button>Merge</Button>
+          <Button variant="outline">Cancel</Button>
+        </Group>
+        <TextModal
+          open={inputModalOpened}
+          onClose={() => setInputModalOpened(false)}
+          title="Solution"
+          content={selectedInput}
+        />
+        <TextModal
+          open={contentModalOpened}
+          onClose={() => setContentModalOpened(false)}
+          title="Description"
+          content={selectedContent}
+        />
+      </Box>
+      {showToast && (
+        <Toast
+          show={showToast}
+          message={"Content copied to clipboard"}
+          color={"green"}
+          isLoading={false}
+          onHide={() => setShowToast(false)}
+          isPersistant={false}
+        />
+      )}
     </>
   );
 };

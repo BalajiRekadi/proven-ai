@@ -19,7 +19,7 @@ const ImportDocs = ({
   const [loadingToast, setLoadingToast] = useState(true);
   const [isPersistant, setIsPersistant] = useState(true);
   const [toastMessage, setToastMessage] = useState(
-    "File upload is in progress.."
+    "Files upload is in progress.."
   );
 
   const handleUploadFiles = () => {

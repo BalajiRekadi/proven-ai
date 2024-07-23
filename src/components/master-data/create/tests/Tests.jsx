@@ -1,30 +1,38 @@
 import React from "react";
-import { AccordionGroup, DetailsBox } from "../../../../shared/components";
+import { AccordionGroup } from "../../../../shared/components";
 import AssayTable from "./AssayTable";
 
 const Tests = () => {
   const accordions = [
     {
       label: "Description",
-      content: <div>Hello</div>,
+      content: "Todo",
+      isCustom: true,
     },
     {
       label: "Water",
       content: "Todo",
+      isCustom: true,
     },
     {
       label: "Assay",
       content: <AssayTable />,
+      isCustom: true,
     },
     {
       label: "Impurities",
       content: "Todo",
+      isCustom: true,
     },
   ];
   return (
     <>
-      <DetailsBox />
-      <AccordionGroup accordions={accordions} groupTitle={"Test Details"} />
+      <AccordionGroup
+        accordions={accordions}
+        groupTitle={"Test Details"}
+        updateData={() => undefined}
+        onRun={() => undefined}
+      />
     </>
   );
 };

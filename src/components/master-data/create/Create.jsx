@@ -9,7 +9,7 @@ import TestPlan from "./test-plan/TestPlan";
 import "./create.css";
 import DescriptionModal from "../../home/DescriptionModal";
 import { saveImportDocsData, saveWorksheetData } from "../../../api/helpers";
-import { Toast } from "../../../shared/components";
+import { DetailsBox, Toast } from "../../../shared/components";
 import { appendDocxExtension } from "../../../shared/utilities";
 
 const CreateFlow = () => {
@@ -22,7 +22,6 @@ const CreateFlow = () => {
   const [showTaskCard, setShowTaskCard] = useState(false);
   const [taskData, setTaskData] = useState({});
   const [worksheetsData, setWorksheetsData] = useState();
-  const [worksheetsContent, setWorksheetsContent] = useState();
 
   const nextStep = () =>
     setActive((current) => (current < 5 ? current + 1 : current));
@@ -76,6 +75,21 @@ const CreateFlow = () => {
     setShowToast(false);
   };
 
+  const saveTaskData = () => {
+    const payload = {
+      ...taskData,
+      filename1: appendDocxExtension(specFile?.name),
+      filename2: appendDocxExtension(methodFile?.name),
+      Product: taskData.product,
+      MARKET: taskData.market,
+      company: taskData.company,
+      facility: taskData.facility,
+    };
+    saveImportDocsData(payload).then((data) => {
+      setShowToast(true);
+    });
+  };
+
   return (
     <>
       <Group align="center">
@@ -103,19 +117,31 @@ const CreateFlow = () => {
           />
         </Stepper.Step>
         <Stepper.Step label="Worksheets">
+          <DetailsBox
+            data={taskData}
+            setData={setTaskData}
+            onSave={saveTaskData}
+          />
           <Worksheets
             taskData={taskData}
-            setTaskData={setTaskData}
             worksheetsData={worksheetsData}
             setWorksheetsData={setWorksheetsData}
-            worksheetsContent={worksheetsContent}
-            setWorksheetsContent={setWorksheetsContent}
           />
         </Stepper.Step>
         <Stepper.Step label="Tests">
+          <DetailsBox
+            data={taskData}
+            setData={setTaskData}
+            onSave={saveTaskData}
+          />
           <Tests />
         </Stepper.Step>
         <Stepper.Step label="Test Plan">
+          <DetailsBox
+            data={taskData}
+            setData={setTaskData}
+            onSave={saveTaskData}
+          />
           <TestPlan />
         </Stepper.Step>
         <Stepper.Step label="Export">

@@ -23,12 +23,15 @@ const AccordionGroup = ({ accordions, groupTitle, updateData, onRun }) => {
             <Accordion.Item value={acc.label} key={acc.label}>
               <Accordion.Control>{acc.label}</Accordion.Control>
               <Accordion.Panel>
-                <AccordionTable
-                  data={acc.content}
-                  updateData={updateData}
-                  label={acc.label}
-                  onRun={onRun}
-                />
+                {acc.isCustom && acc.content}
+                {!acc.isCustom && (
+                  <AccordionTable
+                    data={acc.content}
+                    updateData={updateData}
+                    label={acc.label}
+                    onRun={onRun}
+                  />
+                )}
               </Accordion.Panel>
             </Accordion.Item>
           ))}

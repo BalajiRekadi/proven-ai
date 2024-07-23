@@ -3,39 +3,9 @@ import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import React, { useMemo } from "react";
 import { DEFAULT_TABLE_CONFIG } from "../../../../shared/constants";
 import { IconDeviceFloppy, IconEdit } from "@tabler/icons-react";
+import data from "./assayData.json";
 
 const AssayModal = ({ open, onClose }) => {
-  const data = [
-    {
-      name: "Text 001",
-      date: "01/01/2024",
-      amount: "Rs. 2000",
-      percentage: "50%",
-      time: "1h 20min",
-    },
-    {
-      name: "Text 001",
-      date: "01/01/2024",
-      amount: "Rs. 2000",
-      percentage: "50%",
-      time: "1h 20min",
-    },
-    {
-      name: "Text 001",
-      date: "01/01/2024",
-      amount: "Rs. 2000",
-      percentage: "50%",
-      time: "1h 20min",
-    },
-    {
-      name: "Text 001",
-      date: "01/01/2024",
-      amount: "Rs. 2000",
-      percentage: "50%",
-      time: "1h 20min",
-    },
-  ];
-
   const columns = useMemo(
     () => [
       {
