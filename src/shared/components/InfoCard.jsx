@@ -18,7 +18,7 @@ const InfoCard = ({ data, type, typeValue, setTaskData }) => {
   };
 
   const handleDownload = () => {
-    downloadJSONFromObj(data, "task.json");
+    downloadJSONFromObj(data, "task");
   };
 
   const viewTaskDetails = () => {

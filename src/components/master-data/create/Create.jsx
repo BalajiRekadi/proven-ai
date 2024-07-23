@@ -142,7 +142,7 @@ const CreateFlow = () => {
             setData={setTaskData}
             onSave={saveTaskData}
           />
-          <TestPlan />
+          <TestPlan taskData={taskData} />
         </Stepper.Step>
         <Stepper.Step label="Export">
           <Export />

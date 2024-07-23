@@ -1,11 +1,11 @@
 import React from "react";
 import { AccordionGroup } from "../../../../shared/components";
 
-const TestPlan = () => {
+const TestPlan = ({ taskData }) => {
   const accordions = [
     {
-      label: "Description",
-      content: <div>Hello</div>,
+      label: taskData?.specId || "Description",
+      content: <div>Todo</div>,
       isCustom: true,
     },
   ];
