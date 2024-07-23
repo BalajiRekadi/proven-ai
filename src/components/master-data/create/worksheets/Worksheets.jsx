@@ -30,7 +30,7 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
         if (!key.includes("__")) {
           accordions.push({
             label: key,
-            content: worksheetsData[key],
+            content: worksheetsData[key][0] == {} ? [] : worksheetsData[key],
           });
         }
       });
