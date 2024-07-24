@@ -1,8 +1,9 @@
 import axios from "axios";
+import { DOMAIN } from "../../shared/constants";
 
 const runWorksheet = async (product, payload) => {
   const res = await axios({
-    url: `https://8df4-2405-201-c03a-a1f1-8493-81f2-6680-8b27.ngrok-free.app/run/?code=${product}`,
+    url: `${DOMAIN}/run/?code=${product}`,
     method: "POST",
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",

@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { AccordionGroup, Toast } from "../../../../shared/components";
+import React, { useEffect } from "react";
+import { AccordionGroup } from "../../../../shared/components";
 import { fetchWorksheets, runWorksheet } from "../../../../api/helpers";
 import { deepClone } from "../../../../shared/utilities";
+import { useToast } from "../../../../shared/components/toast/useToast";
 
 const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
-  const [showToast, setShowToast] = useState(false);
-  const [loadingToast, setLoadingToast] = useState(true);
-  const [isPersistant, setIsPersistant] = useState(true);
-  const [toastMessage, setToastMessage] = useState(
-    "Work Sheet Details are loading.."
-  );
-
+  const toast = useToast();
   useEffect(() => {
     if (taskData.product && !worksheetsData) {
-      setShowToast(true);
+      toast.load("Worksheet details are loading..");
       fetchWorksheets(taskData.product).then((data) => {
-        setLoadingToast(false);
-        setIsPersistant(false);
-        setToastMessage("Worksheet details loaded successfully");
+        toast.success("Worksheet details have been loaded successfully");
         setWorksheetsData(data);
       });
     }
@@ -51,10 +44,7 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
   };
 
   const handleRunClick = (label, data) => {
-    setShowToast(true);
-    setToastMessage("Loading worksheet content..");
-    setLoadingToast(true);
-    setIsPersistant(true);
+    toast.load("Loading worksheet content..");
     const item = deepClone(worksheetsData[label]);
     item[0] = { [data.solution]: item[0][data.solution] };
     runWorksheet(taskData.product || "3000714", {
@@ -66,10 +56,7 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
           res[label][0][data.solution][1];
         return clone;
       });
-      setShowToast(true);
-      setToastMessage("Worksheet content loaded successfully");
-      setLoadingToast(false);
-      setIsPersistant(false);
+      toast.success("Worksheet content have been loaded successfully");
     });
   };
 
@@ -81,16 +68,6 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
         groupTitle={"Work Sheet Details"}
         onRun={handleRunClick}
       />
-      {showToast && (
-        <Toast
-          show={showToast}
-          message={toastMessage}
-          color={"green"}
-          isLoading={loadingToast}
-          onHide={() => setShowToast(false)}
-          isPersistant={isPersistant}
-        />
-      )}
     </>
   );
 };

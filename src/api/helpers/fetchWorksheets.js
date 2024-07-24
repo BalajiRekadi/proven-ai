@@ -1,12 +1,11 @@
+import { DOMAIN } from "../../shared/constants";
+
 const fetchWorksheets = async (product) => {
-  const res = await fetch(
-    `https://8df4-2405-201-c03a-a1f1-8493-81f2-6680-8b27.ngrok-free.app/generate_worksheet/?Product=${product}`,
-    {
-      headers: new Headers({
-        "ngrok-skip-browser-warning": "69420",
-      }),
-    }
-  );
+  const res = await fetch(`${DOMAIN}/generate_worksheet/?Product=${product}`, {
+    headers: new Headers({
+      "ngrok-skip-browser-warning": "69420",
+    }),
+  });
   const data = await res.clone().json();
   return data;
 };

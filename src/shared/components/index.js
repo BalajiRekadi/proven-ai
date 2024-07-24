@@ -3,8 +3,8 @@ import InfoCard from "./InfoCard";
 import TextCard from "./TextCard";
 import DetailsBox from "./DetailsBox";
 import AccordionGroup from "./AccordionGroup";
-import Toast from "./Toast";
 import TextModal from "./TextModal";
+import { ToastContextProvider } from "./toast/ToastProvider";
 
 export {
   UploadCard,
@@ -12,6 +12,6 @@ export {
   TextCard,
   DetailsBox,
   AccordionGroup,
-  Toast,
+  ToastContextProvider,
   TextModal,
 };

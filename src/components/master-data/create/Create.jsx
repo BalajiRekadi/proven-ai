@@ -9,12 +9,12 @@ import TestPlan from "./test-plan/TestPlan";
 import "./create.css";
 import DescriptionModal from "../../home/DescriptionModal";
 import { saveImportDocsData, saveWorksheetData } from "../../../api/helpers";
-import { DetailsBox, Toast } from "../../../shared/components";
+import { DetailsBox } from "../../../shared/components";
 import { appendDocxExtension } from "../../../shared/utilities";
+import { useToast } from "../../../shared/components/toast/useToast";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
-  const [showToast, setShowToast] = useState(false);
   const [modalOpened, setModalOpened] = useState(false);
   const [modalContent, setModalContent] = useState("");
   const [specFile, setSpecFile] = useState(null);
@@ -22,6 +22,7 @@ const CreateFlow = () => {
   const [showTaskCard, setShowTaskCard] = useState(false);
   const [taskData, setTaskData] = useState({});
   const [worksheetsData, setWorksheetsData] = useState();
+  const toast = useToast();
 
   const nextStep = () =>
     setActive((current) => (current < 5 ? current + 1 : current));
@@ -59,20 +60,16 @@ const CreateFlow = () => {
         facility: taskData.facility,
       };
       saveImportDocsData(payload).then((data) => {
-        setShowToast(true);
+        toast.success("Deatils saved successfully");
       });
     } else if (active == 1) {
       saveWorksheetData({
         product: taskData.product,
         ...worksheetsData,
       }).then((res) => {
-        setShowToast(true);
+        toast.success("Deatils saved successfully");
       });
     }
-  };
-
-  const handleToastHide = () => {
-    setShowToast(false);
   };
 
   const saveTaskData = () => {
@@ -86,7 +83,7 @@ const CreateFlow = () => {
       facility: taskData.facility,
     };
     saveImportDocsData(payload).then((data) => {
-      setShowToast(true);
+      toast.success("Deatils saved successfully");
     });
   };
 
@@ -172,16 +169,6 @@ const CreateFlow = () => {
           content={modalContent}
         />
       </Flex>
-      {showToast && (
-        <Toast
-          show={showToast}
-          message={"Saved details successfully"}
-          color={"green"}
-          isLoading={false}
-          onHide={handleToastHide}
-          isPersistant={false}
-        />
-      )}
     </>
   );
 };

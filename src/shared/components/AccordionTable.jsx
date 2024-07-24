@@ -18,7 +18,7 @@ import {
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { DEFAULT_TABLE_CONFIG } from "../constants";
 import TextModal from "./TextModal";
-import Toast from "./Toast";
+import Toast from "./toast/Toast";
 
 const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
   const [contentModalOpened, setContentModalOpened] = useState(false);
