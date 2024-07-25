@@ -1,8 +1,8 @@
 import { DOMAIN } from "../../shared/constants";
 import { appendDocxExtension } from "../../shared/utilities";
 
-const processFiles = async (fileName) => {
-  // const name = appendDocxExtension(fileName);
+const processFiles = async (file1, file2) => {
+  // const name = appendDocxExtension(file1);
   // const res = await fetch(`${DOMAIN}/process/?file_name=${name}`, {
   //   headers: new Headers({
   //     "ngrok-skip-browser-warning": "69420",
@@ -16,6 +16,10 @@ const processFiles = async (fileName) => {
     Rev_No: "5.0",
     CC_No: "1614274",
   };
+  return mapResponse(data, file1, file2);
+};
+
+const mapResponse = (data, file1, file2) => {
   return {
     company: "",
     facility: "",
@@ -23,9 +27,11 @@ const processFiles = async (fileName) => {
     specId: data["Spec_id"] || "NA",
     methodId: data["method_id"] || "NA",
     market: data["MARKET"],
-    Test_Plan_Code: data["Test_Plan_Code"],
-    Rev_No: data["Rev_No"],
-    CC_No: data["CC_No"],
+    testPlanCode: data["Test_Plan_Code"],
+    revNo: data["Rev_No"],
+    ccNo: data["CC_No"],
+    specFile: file1,
+    methodFile: file2,
   };
 };
 

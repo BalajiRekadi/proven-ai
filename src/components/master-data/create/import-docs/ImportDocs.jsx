@@ -29,10 +29,8 @@ const ImportDocs = ({
   const handleProcess = () => {
     toast.load("Files processing is in progress..");
     if (specFile?.name && methodFile?.name) {
-      processFiles(specFile.name).then((data) => {
+      processFiles(specFile.name, methodFile.name).then((data) => {
         toast.success("Files processed successfully");
-        data.specFile = specFile.name;
-        data.methodFile = methodFile.name;
         setShowTaskCard(true);
         setTaskData(data);
       });

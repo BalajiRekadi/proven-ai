@@ -20,19 +20,17 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
     let accordions = [];
     if (worksheetsData) {
       Object.keys(worksheetsData).forEach((key) => {
-        if (!key.includes("__")) {
-          accordions.push({
-            label: key,
-            content: (
-              <AccordionTable
-                // TODO: Remove ternary operator when properly mapping api
-                data={worksheetsData[key][0] == {} ? [] : worksheetsData[key]}
-                updateData={updateWorkSheetData}
-                onRun={handleRunClick}
-              />
-            ),
-          });
-        }
+        accordions.push({
+          label: key,
+          content: (
+            <AccordionTable
+              // TODO: Remove ternary operator when properly mapping api
+              data={worksheetsData[key][0] == {} ? [] : worksheetsData[key]}
+              updateData={updateWorkSheetData}
+              onRun={handleRunClick}
+            />
+          ),
+        });
       });
     }
     return accordions;
@@ -63,7 +61,7 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
           res[label][0][data.solution][1];
         return clone;
       });
-      toast.success("Worksheet content have been loaded successfully");
+      toast.success("Worksheet content loaded successfully");
     });
   };
 

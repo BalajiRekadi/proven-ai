@@ -14,7 +14,7 @@ const Toast = ({ message, type, loading = false }) => {
         clearTimeout(timeout);
       };
     }
-  }, []);
+  }, [loading]);
 
   const getColor = () => {
     switch (type) {
@@ -37,6 +37,7 @@ const Toast = ({ message, type, loading = false }) => {
       w={"20rem"}
       withCloseButton={false}
       title={message}
+      style={{ zIndex: 1000 }}
     ></Notification>
   );
 };

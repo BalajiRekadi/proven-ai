@@ -30,7 +30,7 @@ export const ToastContextProvider = ({ children }) => {
   };
 
   const hide = () => {
-    dispatch({ type: "HIDE_TOAST" });
+    dispatch({ type: "HIDE_TOAST", payload: { message: "" } });
   };
 
   const error = (message) => {

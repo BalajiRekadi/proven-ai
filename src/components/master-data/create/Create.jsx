@@ -10,7 +10,6 @@ import "./create.css";
 import DescriptionModal from "../../home/DescriptionModal";
 import { saveImportDocsData, saveWorksheetData } from "../../../api/helpers";
 import { DetailsBox } from "../../../shared/components";
-import { appendDocxExtension } from "../../../shared/utilities";
 import { useToast } from "../../../shared/components/toast/useToast";
 
 const CreateFlow = () => {
@@ -47,42 +46,28 @@ const CreateFlow = () => {
     setModalOpened(true);
   };
 
-  // TODO: define separate footer btns for each step and rework this method
   const handleSave = () => {
-    if (active == 0) {
-      const payload = {
-        ...taskData,
-        filename1: appendDocxExtension(specFile?.name),
-        filename2: appendDocxExtension(methodFile?.name),
-        Product: taskData.product,
-        MARKET: taskData.market,
-        company: taskData.company,
-        facility: taskData.facility,
-      };
-      saveImportDocsData(payload).then((data) => {
-        toast.success("Deatils saved successfully");
-      });
-    } else if (active == 1) {
-      saveWorksheetData({
-        product: taskData.product,
-        ...worksheetsData,
-      }).then((res) => {
-        toast.success("Deatils saved successfully");
-      });
+    switch (active) {
+      case 0: {
+        saveTaskData();
+        break;
+      }
+      case 1: {
+        saveWorksheetData({
+          product: taskData.product,
+          ...worksheetsData,
+        }).then((res) => {
+          toast.success("Deatils saved successfully");
+        });
+        break;
+      }
+      default:
+        break;
     }
   };
 
   const saveTaskData = () => {
-    const payload = {
-      ...taskData,
-      filename1: appendDocxExtension(specFile?.name),
-      filename2: appendDocxExtension(methodFile?.name),
-      Product: taskData.product,
-      MARKET: taskData.market,
-      company: taskData.company,
-      facility: taskData.facility,
-    };
-    saveImportDocsData(payload).then((data) => {
+    saveImportDocsData(taskData, specFile, methodFile).then(() => {
       toast.success("Deatils saved successfully");
     });
   };
