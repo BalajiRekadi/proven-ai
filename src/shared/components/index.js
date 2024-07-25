@@ -5,6 +5,7 @@ import DetailsBox from "./DetailsBox";
 import AccordionGroup from "./AccordionGroup";
 import AccordionTable from "./AccordionTable";
 import TextModal from "./TextModal";
+import ModuleSelect from "./ModuleSelect";
 import { ToastContextProvider } from "./toast/ToastProvider";
 
 export {
@@ -16,4 +17,5 @@ export {
   ToastContextProvider,
   AccordionTable,
   TextModal,
+  ModuleSelect,
 };

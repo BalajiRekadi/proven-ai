@@ -1,7 +1,7 @@
 import React from "react";
-import { InfoCard, TextCard } from "../../../../shared/components";
 import { Card, Flex, Text, TextInput } from "@mantine/core";
 import { IconEdit } from "@tabler/icons-react";
+import { InfoCard } from "../../../../../shared/components";
 
 const TaskCard = ({ data, setTaskData }) => {
   const handleCompanyChange = (event) => {

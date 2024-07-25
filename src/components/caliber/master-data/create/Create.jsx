@@ -7,10 +7,9 @@ import Export from "./export/Export";
 import Tests from "./tests/Tests";
 import TestPlan from "./test-plan/TestPlan";
 import "./create.css";
-import DescriptionModal from "../../home/DescriptionModal";
-import { saveImportDocsData, saveWorksheetData } from "../../../api/helpers";
-import { DetailsBox } from "../../../shared/components";
-import { useToast } from "../../../shared/components/toast/useToast";
+import { saveImportDocsData, saveWorksheetData } from "../../../../api/helpers";
+import { DetailsBox, TextModal } from "../../../../shared/components";
+import { useToast } from "../../../../shared/components/toast/useToast";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
@@ -148,9 +147,10 @@ const CreateFlow = () => {
             <Button onClick={nextStep}>{getNextBtnLabel()}</Button>
           )}
         </Group>
-        <DescriptionModal
-          opened={modalOpened}
+        <TextModal
+          open={modalOpened}
           onClose={() => setModalOpened(false)}
+          title={"Description"}
           content={modalContent}
         />
       </Flex>

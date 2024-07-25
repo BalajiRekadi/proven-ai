@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { Accordion, Button, Group, Image, Text } from "@mantine/core";
+import { Accordion, Button, Group, Text } from "@mantine/core";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./routes.css";
-import { ROUTES } from "../../../shared/constants";
+import { ROUTES } from "../../shared/constants";
+import { useStore } from "../../store/useStore";
 
 const Routes = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { module } = useStore();
   const [selectedRoute, setSelectedRoute] = useState(location.pathname);
 
   const handleMenuItemClick = (route) => {
-    setSelectedRoute(`/user/${route}`);
-    navigate(`/user/${route}`);
+    setSelectedRoute(`/user/${module}/${route}`);
+    navigate(`/user/${module}/${route}`);
   };
 
   const items = ROUTES.map((parent) => (
@@ -27,7 +29,9 @@ const Routes = () => {
           {parent.children.map((child) => (
             <Button
               className={
-                `/user/${child.name}` == selectedRoute ? "highlight" : ""
+                `/user/${module}/${child.name}` == selectedRoute
+                  ? "highlight"
+                  : ""
               }
               key={child.name}
               variant="subtle"

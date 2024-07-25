@@ -1,9 +1,10 @@
-import { AppShell, Flex, Group, Select } from "@mantine/core";
+import { AppShell, Flex, Group } from "@mantine/core";
 import React from "react";
 import headerLogo from "./../../assets/headerLogo.jpeg";
 import { Outlet } from "react-router-dom";
-import Routes from "./routes/Routes";
+import Routes from "../routes/Routes";
 import "./user.css";
+import { ModuleSelect } from "../../shared/components";
 
 const User = () => {
   return (
@@ -19,20 +20,14 @@ const User = () => {
     >
       <AppShell.Header className="header">
         <Group h="100%" px="md">
-        <div><i class="fi fi-br-menu-burger"></i></div>
+          <div>
+            <i class="fi fi-br-menu-burger"></i>
+          </div>
           <img src={headerLogo} className="logo" />
           <Flex justify={"space-between"} w={"80%"}>
             <div className="header-caliber">
               <div className="header-select-div">
-                <Select
-                  placeholder="select"
-                  value="caliber"
-                  data={[
-                        { value: "caliber", label: "Caliber" },
-                        { value: "labware", label: "Labware" },
-                        { value: "labVantage", label: "LabVantage" },
-                      ]}
-                ></Select>
+                <ModuleSelect fromHeader={true} />
               </div>
             </div>
             <div>

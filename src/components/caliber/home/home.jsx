@@ -1,15 +1,13 @@
-import React, { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { DEFAULT_TABLE_CONFIG } from "../../../shared/constants";
+import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
+import React from "react";
 import { ActionIcon, Box, Select, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
-import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import DescriptionModal from "./DescriptionModal";
-import { DEFAULT_TABLE_CONFIG } from "../../shared/constants";
-import "./home.css";
 import { IconDownload, IconEdit } from "@tabler/icons-react";
+import "./home.css";
 
 const Home = () => {
-  const [modalOpened, setModalOpened] = useState(false);
-
   const data = [
     {
       taskId: "10001234",
@@ -182,11 +180,6 @@ const Home = () => {
         </div>
       </div>
       <MantineReactTable table={table} />
-
-      <DescriptionModal
-        opened={modalOpened}
-        onClose={() => setModalOpened(false)}
-      />
     </div>
   );
 };

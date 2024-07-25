@@ -1,10 +1,10 @@
 import React from "react";
-import { UploadCard } from "../../../../shared/components";
 import { Button, Flex } from "@mantine/core";
 import { IconUpload } from "@tabler/icons-react";
 import TaskCard from "./TaskCard";
-import { processFiles, uploadFiles } from "../../../../api/helpers";
-import { useToast } from "../../../../shared/components/toast/useToast";
+import { useToast } from "../../../../../shared/components/toast/useToast";
+import { processFiles, uploadFiles } from "../../../../../api/helpers";
+import { UploadCard } from "../../../../../shared/components";
 
 const ImportDocs = ({
   taskData,

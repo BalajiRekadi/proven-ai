@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
-import { AccordionGroup, AccordionTable } from "../../../../shared/components";
-import { fetchWorksheets, runWorksheet } from "../../../../api/helpers";
-import { deepClone } from "../../../../shared/utilities";
-import { useToast } from "../../../../shared/components/toast/useToast";
+import {
+  AccordionGroup,
+  AccordionTable,
+} from "../../../../../shared/components";
+import { fetchWorksheets, runWorksheet } from "../../../../../api/helpers";
+import { deepClone } from "../../../../../shared/utilities";
+import { useToast } from "../../../../../shared/components/toast/useToast";
 
 const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
   const toast = useToast();

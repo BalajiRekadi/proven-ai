@@ -1,5 +1,5 @@
 import React from "react";
-import { AccordionGroup } from "../../../../shared/components";
+import { AccordionGroup } from "../../../../../shared/components";
 import AssayTable from "./AssayTable";
 
 const Tests = () => {

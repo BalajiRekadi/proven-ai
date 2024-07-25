@@ -1,9 +1,9 @@
 import { ActionIcon, Box, Flex, Modal, Image } from "@mantine/core";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import React, { useMemo } from "react";
-import { DEFAULT_TABLE_CONFIG } from "../../../../shared/constants";
 import { IconDeviceFloppy, IconEdit } from "@tabler/icons-react";
 import data from "./assayData.json";
+import { DEFAULT_TABLE_CONFIG } from "../../../../../shared/constants";
 
 const AssayModal = ({ open, onClose }) => {
   const columns = useMemo(
