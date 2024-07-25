@@ -6,17 +6,9 @@ const TestPlan = ({ taskData }) => {
     {
       label: taskData?.specId || "Description",
       content: <div>Todo</div>,
-      isCustom: true,
     },
   ];
-  return (
-    <AccordionGroup
-      accordions={accordions}
-      groupTitle={"Test Plan"}
-      updateData={() => undefined}
-      onRun={() => undefined}
-    />
-  );
+  return <AccordionGroup accordions={accordions} groupTitle={"Test Plan"} />;
 };
 
 export default TestPlan;

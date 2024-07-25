@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { AccordionGroup } from "../../../../shared/components";
+import { AccordionGroup, AccordionTable } from "../../../../shared/components";
 import { fetchWorksheets, runWorksheet } from "../../../../api/helpers";
 import { deepClone } from "../../../../shared/utilities";
 import { useToast } from "../../../../shared/components/toast/useToast";
@@ -23,7 +23,14 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
         if (!key.includes("__")) {
           accordions.push({
             label: key,
-            content: worksheetsData[key][0] == {} ? [] : worksheetsData[key],
+            content: (
+              <AccordionTable
+                // TODO: Remove ternary operator when properly mapping api
+                data={worksheetsData[key][0] == {} ? [] : worksheetsData[key]}
+                updateData={updateWorkSheetData}
+                onRun={handleRunClick}
+              />
+            ),
           });
         }
       });
@@ -61,14 +68,10 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
   };
 
   return (
-    <>
-      <AccordionGroup
-        accordions={getAccordions()}
-        updateData={updateWorkSheetData}
-        groupTitle={"Work Sheet Details"}
-        onRun={handleRunClick}
-      />
-    </>
+    <AccordionGroup
+      accordions={getAccordions()}
+      groupTitle={"Work Sheet Details"}
+    />
   );
 };
 

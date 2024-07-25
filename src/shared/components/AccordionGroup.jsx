@@ -1,9 +1,8 @@
 import { Accordion, Box, Group, Title } from "@mantine/core";
 import { IconRun } from "@tabler/icons-react";
 import React from "react";
-import AccordionTable from "./AccordionTable";
 
-const AccordionGroup = ({ accordions, groupTitle, updateData, onRun }) => {
+const AccordionGroup = ({ accordions, groupTitle }) => {
   return (
     <>
       <Group align="center" py={16} pt={32}>
@@ -22,17 +21,7 @@ const AccordionGroup = ({ accordions, groupTitle, updateData, onRun }) => {
           {accordions.map((acc) => (
             <Accordion.Item value={acc.label} key={acc.label}>
               <Accordion.Control>{acc.label}</Accordion.Control>
-              <Accordion.Panel>
-                {acc.isCustom && acc.content}
-                {!acc.isCustom && (
-                  <AccordionTable
-                    data={acc.content}
-                    updateData={updateData}
-                    label={acc.label}
-                    onRun={onRun}
-                  />
-                )}
-              </Accordion.Panel>
+              <Accordion.Panel>{acc.content}</Accordion.Panel>
             </Accordion.Item>
           ))}
         </Accordion>
