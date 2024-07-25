@@ -18,14 +18,8 @@
     top: 0%;
   }
 }
-.menu-icon{
-  display: flex;
-}
-.fi-br-menu-burger{
-  color: white;
 
 
-}
 .navbar{
   transition: width 0.3s;
   overflow: hidden;
@@ -35,4 +29,7 @@
 }
 .menuBtn:hover{
   background-color: var(--primary);
+}
+.navbar.closed {
+  width: 0px;
 }

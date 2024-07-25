@@ -6,7 +6,7 @@ import DescriptionModal from "./DescriptionModal";
 import { DEFAULT_TABLE_CONFIG } from "../../shared/constants";
 import "./home.css";
 import { IconDownload, IconEdit } from "@tabler/icons-react";
-
+import ProductCard from '../../shared/components/ProductCard'
 const Home = () => {
   const [modalOpened, setModalOpened] = useState(false);
 
@@ -187,6 +187,8 @@ const Home = () => {
         opened={modalOpened}
         onClose={() => setModalOpened(false)}
       />
+      <br></br>
+ <ProductCard/>
     </div>
   );
 };
