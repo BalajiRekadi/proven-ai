@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useStore } from "../../store/useStore";
 import { useLocation } from "react-router-dom";
 
-const ModuleSelect = () => {
+const ModuleSelect = ({ size = "sm" }) => {
   const { module, setModule, setRoute } = useStore();
   const location = useLocation();
 
@@ -22,6 +22,7 @@ const ModuleSelect = () => {
 
   return (
     <Select
+      size={size}
       placeholder="Modules"
       data={[
         { value: "caliber", label: "Caliber" },

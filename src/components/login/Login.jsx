@@ -6,15 +6,17 @@ import {
   Image,
   Text,
   Flex,
-  Grid,
+  Box,
+  Center,
+  Stack,
+  Anchor,
 } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
 import headerLogo from "../../assets/headerLogo.jpeg";
 import logo from "../../assets/logo.jpg";
-import logo2 from "../../assets/loginform.png";
 import { useStore } from "../../store/useStore";
 import { ModuleSelect } from "../../shared/components";
+import { IconUser } from "@tabler/icons-react";
 
 function Login() {
   const navigate = useNavigate();
@@ -24,67 +26,67 @@ function Login() {
     navigate(`/user/${module}`);
   };
 
-  return (
-    <div className="main">
-      <Grid span={1}>
-        <div className="headerLogo">
-          <Image src={headerLogo} alt="Proven.AI" className="logo" />
-        </div>
-      </Grid>
-      <Flex align="center" style={{ height: "100vh" }}>
-        <div className="bg-image">
-          <div className="logo-image">
-            <Grid span={1}>
-              <Image
-                src={logo}
-                alt="Proven.AI"
-                className="logo"
-                width={500}
-                height={500}
-              />
-            </Grid>
-          </div>
-        </div>
-        <div className="bg-light">
-          <form className="login-form">
-            <div className="login-form-logo">
-              <Image src={logo2}></Image>
-            </div>
-            <div className="login">
-              <TextInput placeholder="Enter username" className="input" />
-              <br />
-              <PasswordInput placeholder="Password" className="input" />
-              <br />
-              <Flex className="loginBtn-select" gap={16}>
-                <div style={{ flex: 2 }}>
-                  <ModuleSelect />
-                </div>
+  const gradient =
+    "linear-gradient(0deg, rgba(12,12,69,1) 0%, rgba(15,15,93,1) 23%, rgba(90,90,215,1) 100%)";
 
-                <div style={{ flex: 2 }}>
-                  <Button
-                    variant="filled"
-                    color="green"
-                    className="login-button"
-                    onClick={handleLogin}
-                  >
-                    Login
-                  </Button>
-                  <div className="forgot-links">
-                    <Text component="a">Forgot username?</Text>
-                    <Text component="a">Forgot password?</Text>
-                  </div>
-                </div>
-              </Flex>
-            </div>
-          </form>
-        </div>
-      </Flex>
-      <footer>
-        <Text align="center">
+  return (
+    <Flex>
+      <Flex w={"60%"} h={"100vh"} direction={"column"}>
+        <Image src={headerLogo} alt="Header Logo" w={"7rem"} />
+        <Center flex={1}>
+          <Image src={logo} alt="Company Logo" w={"50%"} />
+        </Center>
+        <Text ta={"center"} p={16}>
           Copyright © 2024 Proven Tech. All rights reserved. Privacy Policy
         </Text>
-      </footer>
-    </div>
+      </Flex>
+      <Image
+        src={logo}
+        alt="Company Logo"
+        w={"30%"}
+        style={{
+          position: "fixed",
+          top: "12%",
+          right: "5%",
+          opacity: "30%",
+          mixBlendMode: "multiply",
+        }}
+      />
+      <Stack
+        w={"40%"}
+        h={"100vh"}
+        bg={gradient}
+        justify={"center"}
+        align={"stretch"}
+        gap={24}
+        p={48}
+      >
+        <TextInput
+          placeholder="Enter Username"
+          size="lg"
+          rightSection={<IconUser />}
+        />
+        <PasswordInput placeholder="Enter Password" size="lg" />
+        <Flex justify={"space-between"} gap={24}>
+          <Box w={"50%"}>
+            <ModuleSelect size={"lg"} />
+          </Box>
+          <Button
+            variant="filled"
+            color="green"
+            onClick={handleLogin}
+            size="lg"
+            w={"50%"}
+          >
+            Login
+          </Button>
+        </Flex>
+        <Flex justify={"space-around"}>
+          <Anchor c={"white"}>Forgot Username?</Anchor>
+          <Anchor c={"white"}>Forgot Password?</Anchor>
+        </Flex>
+      </Stack>
+    </Flex>
   );
 }
 
