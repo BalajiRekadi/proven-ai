@@ -14,7 +14,11 @@ const Routes = () => {
     if (location?.pathname) {
       setRoute(location.pathname);
     }
-  }, []);
+  }, [location?.pathname]);
+
+  useEffect(() => {
+    navigate(`/user/${module}/home`);
+  }, [module]);
 
   const handleMenuItemClick = (route) => {
     setRoute(`/user/${module}/${route}`);

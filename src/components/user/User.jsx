@@ -27,7 +27,7 @@ const User = () => {
           <Flex justify={"space-between"} w={"80%"}>
             <div className="header-caliber">
               <div className="header-select-div">
-                <ModuleSelect fromHeader={true} />
+                <ModuleSelect />
               </div>
             </div>
             <div>

@@ -36,6 +36,7 @@ function App() {
                 <Route path="labware">
                   <Route element={<Home />} index={true} />
                   <Route path="home" element={<Home />} />
+                  <Route path="create" element={<Create />} />
                 </Route>
                 <Route path="labVantage" />
               </Route>

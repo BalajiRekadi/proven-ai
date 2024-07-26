@@ -1,16 +1,19 @@
 import { Select } from "@mantine/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { useStore } from "../../store/useStore";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const ModuleSelect = ({ fromHeader = false }) => {
+const ModuleSelect = () => {
   const { module, setModule, setRoute } = useStore();
-  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location?.pathname) {
+      setRoute(location.pathname);
+    }
+  }, [location?.pathname]);
 
   const handleModuleChange = (event) => {
-    if (fromHeader) {
-      navigate(`/user/${event}`);
-    }
     setModule(event);
     setRoute(`/user/${event}/home`);
   };
