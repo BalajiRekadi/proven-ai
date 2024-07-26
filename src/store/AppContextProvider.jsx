@@ -14,7 +14,14 @@ const AppContextProvider = ({ children }) => {
     });
   };
 
-  const store = { ...state, setModule };
+  const setRoute = (module) => {
+    dispatch({
+      type: "SET_ROUTE",
+      payload: module,
+    });
+  };
+
+  const store = { ...state, setModule, setRoute };
 
   return <AppContext.Provider value={store}>{children}</AppContext.Provider>;
 };

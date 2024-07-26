@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Accordion, Button, Group, Text } from "@mantine/core";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./routes.css";
@@ -8,11 +8,16 @@ import { useStore } from "../../store/useStore";
 const Routes = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { module } = useStore();
-  const [selectedRoute, setSelectedRoute] = useState(location.pathname);
+  const { module, selectedRoute, setRoute } = useStore();
+
+  useEffect(() => {
+    if (location?.pathname) {
+      setRoute(location.pathname);
+    }
+  }, []);
 
   const handleMenuItemClick = (route) => {
-    setSelectedRoute(`/user/${module}/${route}`);
+    setRoute(`/user/${module}/${route}`);
     navigate(`/user/${module}/${route}`);
   };
 

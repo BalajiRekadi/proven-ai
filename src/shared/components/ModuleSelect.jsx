@@ -4,7 +4,7 @@ import { useStore } from "../../store/useStore";
 import { useNavigate } from "react-router-dom";
 
 const ModuleSelect = ({ fromHeader = false }) => {
-  const { module, setModule } = useStore();
+  const { module, setModule, setRoute } = useStore();
   const navigate = useNavigate();
 
   const handleModuleChange = (event) => {
@@ -12,6 +12,7 @@ const ModuleSelect = ({ fromHeader = false }) => {
       navigate(`/user/${event}`);
     }
     setModule(event);
+    setRoute(`/user/${event}/home`);
   };
 
   return (

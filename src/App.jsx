@@ -33,7 +33,10 @@ function App() {
                   <Route path="home" element={<Home />} />
                   <Route path="create" element={<Create />} />
                 </Route>
-                <Route path="labware" />
+                <Route path="labware">
+                  <Route element={<Home />} index={true} />
+                  <Route path="home" element={<Home />} />
+                </Route>
                 <Route path="labVantage" />
               </Route>
             </Routes>
