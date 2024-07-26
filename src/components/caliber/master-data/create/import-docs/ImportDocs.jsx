@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Toast, UploadCard } from "../../../../shared/components";
+import React from "react";
 import { Button, Flex } from "@mantine/core";
 import { IconUpload } from "@tabler/icons-react";
 import TaskCard from "./TaskCard";
-import { processFiles, uploadFiles } from "../../../../api/helpers";
+import { useToast } from "../../../../../shared/components/toast/useToast";
+import { processFiles, uploadFiles } from "../../../../../api/helpers";
+import { UploadCard } from "../../../../../shared/components";
 
 const ImportDocs = ({
   taskData,
@@ -15,46 +16,26 @@ const ImportDocs = ({
   showTaskCard,
   setShowTaskCard,
 }) => {
-  const [showToast, setShowToast] = useState(false);
-  const [loadingToast, setLoadingToast] = useState(true);
-  const [isPersistant, setIsPersistant] = useState(true);
-  const [toastMessage, setToastMessage] = useState(
-    "Files upload is in progress.."
-  );
+  const toast = useToast();
 
   const handleUploadFiles = () => {
-    setShowToast(true);
-    setLoadingToast(true);
-    setIsPersistant(true);
-    uploadFiles([specFile, methodFile]).then((res) => {
+    toast.load("Files upload is in progress..");
+    uploadFiles([specFile, methodFile]).then(() => {
       setShowTaskCard(false);
-      setLoadingToast(false);
-      setIsPersistant(false);
-      setToastMessage("Files uploaded successfully");
+      toast.success("Files uploaded successfully");
     });
   };
 
-  const handleToastHide = () => {
-    setShowToast(false);
-  };
-
   const handleProcess = () => {
-    setShowToast(true);
-    setLoadingToast(true);
-    setIsPersistant(true);
-    setToastMessage("Files processing is in progress..");
+    toast.load("Files processing is in progress..");
     if (specFile?.name && methodFile?.name) {
-      processFiles(specFile.name).then((data) => {
-        setLoadingToast(false);
-        setIsPersistant(false);
-        setToastMessage("Files processed successfully");
-        data.specFile = specFile.name;
-        data.methodFile = methodFile.name;
+      processFiles(specFile.name, methodFile.name).then((data) => {
+        toast.success("Files processed successfully");
         setShowTaskCard(true);
         setTaskData(data);
       });
     } else {
-      setShowToast(false);
+      toast.info("Please upload Files");
     }
   };
 
@@ -91,16 +72,6 @@ const ImportDocs = ({
         </Button>
       </Flex>
       {showTaskCard && <TaskCard data={taskData} setTaskData={setTaskData} />}
-      {showToast && (
-        <Toast
-          show={showToast}
-          message={toastMessage}
-          color={"green"}
-          isLoading={loadingToast}
-          onHide={handleToastHide}
-          isPersistant={isPersistant}
-        />
-      )}
     </div>
   );
 };

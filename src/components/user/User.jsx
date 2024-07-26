@@ -5,8 +5,9 @@ import { AppShell, Flex, Group, Select, Button } from "@mantine/core";
 import React, { useState } from "react";
 import headerLogo from "./../../assets/headerLogo.jpeg";
 import { Outlet } from "react-router-dom";
-import Routes from "./routes/Routes";
+import Routes from "../routes/Routes";
 import "./user.css";
+import { ModuleSelect } from "../../shared/components";
 import { IconMenu2 } from "@tabler/icons-react";
 
 const User = () => {
@@ -29,15 +30,7 @@ const User = () => {
           <Flex justify={"space-between"} w={"80%"}>
             <div className="header-caliber">
               <div className="header-select-div">
-                <Select
-                  placeholder="select"
-                  value="caliber"
-                  data={[
-                    { value: "caliber", label: "Caliber" },
-                    { value: "labware", label: "Labware" },
-                    { value: "labVantage", label: "LabVantage" },
-                  ]}
-                />
+                <ModuleSelect />
               </div>
             </div>
             <div>

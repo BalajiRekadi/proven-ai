@@ -18,20 +18,20 @@ import {
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { DEFAULT_TABLE_CONFIG } from "../constants";
 import TextModal from "./TextModal";
-import Toast from "./Toast";
+import { useToast } from "./toast/useToast";
 
 const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
   const [contentModalOpened, setContentModalOpened] = useState(false);
   const [inputModalOpened, setInputModalOpened] = useState(false);
   const [selectedContent, setSelectedContent] = useState("");
   const [selectedInput, setSelectedInput] = useState("");
-  const [showToast, setShowToast] = useState(false);
+  const toast = useToast();
 
   const handleCopy = (content) => {
     navigator.clipboard
       .writeText(JSON.stringify(content))
       .then(() => {
-        setShowToast(true);
+        toast.info("Content copied to clipboard");
       })
       .catch((err) => {
         console.error("Failed to copy: ", err);
@@ -187,16 +187,6 @@ const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
           content={selectedContent}
         />
       </Box>
-      {showToast && (
-        <Toast
-          show={showToast}
-          message={"Content copied to clipboard"}
-          color={"green"}
-          isLoading={false}
-          onHide={() => setShowToast(false)}
-          isPersistant={false}
-        />
-      )}
     </>
   );
 };

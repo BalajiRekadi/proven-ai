@@ -7,14 +7,12 @@ import Export from "./export/Export";
 import Tests from "./tests/Tests";
 import TestPlan from "./test-plan/TestPlan";
 import "./create.css";
-import DescriptionModal from "../../home/DescriptionModal";
-import { saveImportDocsData, saveWorksheetData } from "../../../api/helpers";
-import { DetailsBox, Toast } from "../../../shared/components";
-import { appendDocxExtension } from "../../../shared/utilities";
+import { saveImportDocsData, saveWorksheetData } from "../../../../api/helpers";
+import { DetailsBox, TextModal } from "../../../../shared/components";
+import { useToast } from "../../../../shared/components/toast/useToast";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
-  const [showToast, setShowToast] = useState(false);
   const [modalOpened, setModalOpened] = useState(false);
   const [modalContent, setModalContent] = useState("");
   const [specFile, setSpecFile] = useState(null);
@@ -22,6 +20,7 @@ const CreateFlow = () => {
   const [showTaskCard, setShowTaskCard] = useState(false);
   const [taskData, setTaskData] = useState({});
   const [worksheetsData, setWorksheetsData] = useState();
+  const toast = useToast();
 
   const nextStep = () =>
     setActive((current) => (current < 5 ? current + 1 : current));
@@ -46,47 +45,29 @@ const CreateFlow = () => {
     setModalOpened(true);
   };
 
-  // TODO: define separate footer btns for each step and rework this method
   const handleSave = () => {
-    if (active == 0) {
-      const payload = {
-        ...taskData,
-        filename1: appendDocxExtension(specFile?.name),
-        filename2: appendDocxExtension(methodFile?.name),
-        Product: taskData.product,
-        MARKET: taskData.market,
-        company: taskData.company,
-        facility: taskData.facility,
-      };
-      saveImportDocsData(payload).then((data) => {
-        setShowToast(true);
-      });
-    } else if (active == 1) {
-      saveWorksheetData({
-        product: taskData.product,
-        ...worksheetsData,
-      }).then((res) => {
-        setShowToast(true);
-      });
+    switch (active) {
+      case 0: {
+        saveTaskData();
+        break;
+      }
+      case 1: {
+        saveWorksheetData({
+          product: taskData.product,
+          ...worksheetsData,
+        }).then((res) => {
+          toast.success("Deatils saved successfully");
+        });
+        break;
+      }
+      default:
+        break;
     }
   };
 
-  const handleToastHide = () => {
-    setShowToast(false);
-  };
-
   const saveTaskData = () => {
-    const payload = {
-      ...taskData,
-      filename1: appendDocxExtension(specFile?.name),
-      filename2: appendDocxExtension(methodFile?.name),
-      Product: taskData.product,
-      MARKET: taskData.market,
-      company: taskData.company,
-      facility: taskData.facility,
-    };
-    saveImportDocsData(payload).then((data) => {
-      setShowToast(true);
+    saveImportDocsData(taskData, specFile, methodFile).then(() => {
+      toast.success("Deatils saved successfully");
     });
   };
 
@@ -166,22 +147,13 @@ const CreateFlow = () => {
             <Button onClick={nextStep}>{getNextBtnLabel()}</Button>
           )}
         </Group>
-        <DescriptionModal
-          opened={modalOpened}
+        <TextModal
+          open={modalOpened}
           onClose={() => setModalOpened(false)}
+          title={"Description"}
           content={modalContent}
         />
       </Flex>
-      {showToast && (
-        <Toast
-          show={showToast}
-          message={"Saved details successfully"}
-          color={"green"}
-          isLoading={false}
-          onHide={handleToastHide}
-          isPersistant={false}
-        />
-      )}
     </>
   );
 };
