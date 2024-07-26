@@ -81,7 +81,7 @@ function Login() {
             Login
           </Button>
         </Flex>
-        <Flex justify={"space-around"}>
+        <Flex justify={"space-around"} style={{ zIndex: 1 }}>
           <Anchor c={"white"}>Forgot Username?</Anchor>
           <Anchor c={"white"}>Forgot Password?</Anchor>
         </Flex>
