@@ -11,9 +11,10 @@ import { THEME } from "./shared/constants";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContextProvider } from "./shared/components";
 import AppContextProvider from "./store/AppContextProvider";
-import Home from "./components/caliber/home/home";
 import User from "./components/user/User";
-import Create from "./components/caliber/master-data/create/Create";
+import CaliberCreate from "./components/caliber/master-data/create/Create";
+import LabwareCreate from "./components/labware/master-data/create/Create";
+import Home from "./components/screens/Home";
 
 function App() {
   const theme = createTheme(THEME);
@@ -31,12 +32,12 @@ function App() {
                 <Route path="caliber">
                   <Route element={<Home />} index={true} />
                   <Route path="home" element={<Home />} />
-                  <Route path="create" element={<Create />} />
+                  <Route path="create" element={<CaliberCreate />} />
                 </Route>
                 <Route path="labware">
                   <Route element={<Home />} index={true} />
                   <Route path="home" element={<Home />} />
-                  <Route path="create" element={<Create />} />
+                  <Route path="create" element={<LabwareCreate />} />
                 </Route>
                 <Route path="labVantage" />
               </Route>

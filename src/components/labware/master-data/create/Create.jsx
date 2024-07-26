@@ -1,14 +1,10 @@
-import React, { useState } from "react";
 import { Button, Flex, Group, Stepper, Title } from "@mantine/core";
-import ImportDocs from "../../../screens/import-docs/ImportDocs";
-import Worksheets from "./worksheets/Worksheets";
+import { saveImportDocsData } from "../../../../api/helpers";
+import React, { useState } from "react";
 import { IconDatabase } from "@tabler/icons-react";
-import Export from "../../../screens/export/Export";
-import Tests from "./tests/Tests";
-import TestPlan from "./test-plan/TestPlan";
-import "./create.css";
-import { saveImportDocsData, saveWorksheetData } from "../../../../api/helpers";
+import ImportDocs from "../../../screens/import-docs/ImportDocs";
 import { DetailsBox, TextModal } from "../../../../shared/components";
+import Export from "../../../screens/export/Export";
 import { useToast } from "../../../../shared/components/toast/useToast";
 
 const CreateFlow = () => {
@@ -19,21 +15,18 @@ const CreateFlow = () => {
   const [methodFile, setMethodFile] = useState(null);
   const [showTaskCard, setShowTaskCard] = useState(false);
   const [taskData, setTaskData] = useState({});
-  const [worksheetsData, setWorksheetsData] = useState();
   const toast = useToast();
 
   const nextStep = () =>
-    setActive((current) => (current < 5 ? current + 1 : current));
+    setActive((current) => (current < 4 ? current + 1 : current));
 
   const getNextBtnLabel = () => {
     switch (active) {
       case 0:
-        return "Generate Worksheets";
+        return "Generate";
       case 1:
-        return "Generate Tests";
+        return "Generate Analysis";
       case 2:
-        return "Generate Test Plan";
-      case 3:
         return "Export";
       default:
         return "Next";
@@ -52,12 +45,6 @@ const CreateFlow = () => {
         break;
       }
       case 1: {
-        saveWorksheetData({
-          product: taskData.product,
-          ...worksheetsData,
-        }).then((res) => {
-          toast.success("Deatils saved successfully");
-        });
         break;
       }
       default:
@@ -97,33 +84,21 @@ const CreateFlow = () => {
             setMethodFile={setMethodFile}
           />
         </Stepper.Step>
-        <Stepper.Step label="Worksheets">
+        <Stepper.Step label="Product">
           <DetailsBox
             data={taskData}
             setData={setTaskData}
             onSave={saveTaskData}
           />
-          <Worksheets
-            taskData={taskData}
-            worksheetsData={worksheetsData}
-            setWorksheetsData={setWorksheetsData}
-          />
+          {"TODO"}
         </Stepper.Step>
-        <Stepper.Step label="Tests">
+        <Stepper.Step label="Analysis">
           <DetailsBox
             data={taskData}
             setData={setTaskData}
             onSave={saveTaskData}
           />
-          <Tests />
-        </Stepper.Step>
-        <Stepper.Step label="Test Plan">
-          <DetailsBox
-            data={taskData}
-            setData={setTaskData}
-            onSave={saveTaskData}
-          />
-          <TestPlan taskData={taskData} />
+          {"TODO"}
         </Stepper.Step>
         <Stepper.Step label="Export">
           <Export />

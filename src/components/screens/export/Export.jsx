@@ -1,9 +1,14 @@
-import { ActionIcon, Select, TextInput } from "@mantine/core";
+import { ActionIcon, Box, Flex, Select, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import React, { useMemo } from "react";
-import { IconAlertCircle, IconClipboardText } from "@tabler/icons-react";
-import { DEFAULT_TABLE_CONFIG } from "../../../../../shared/constants";
+import {
+  IconAlertCircle,
+  IconCalendar,
+  IconClipboardText,
+  IconSearch,
+} from "@tabler/icons-react";
+import { DEFAULT_TABLE_CONFIG } from "../../../shared/constants";
 
 const Export = () => {
   const data = [
@@ -86,19 +91,15 @@ const Export = () => {
   const table = useMantineReactTable(tableConfig);
 
   return (
-    <div className="home">
-      <div className="search-container">
+    <Box p={16}>
+      <Flex gap={32} justify={"space-between"} p={32} pb={64}>
         <TextInput
           placeholder="search"
           color="black"
           style={{ width: "25%" }}
-          rightSection={
-            <span>
-              <i className="fi fi-br-search"></i>
-            </span>
-          }
+          rightSection={<IconSearch />}
         />
-        <div className="date-range">
+        <Flex gap={16}>
           <Select
             placeholder="Category"
             variant="default"
@@ -112,16 +113,12 @@ const Export = () => {
           <DatePickerInput
             placeholder="Date Range"
             style={{ width: "33%" }}
-            rightSection={
-              <span>
-                <i className="fi fi-br-calendar"></i>
-              </span>
-            }
+            rightSection={<IconCalendar />}
           />
-        </div>
-      </div>
+        </Flex>
+      </Flex>
       <MantineReactTable table={table} />
-    </div>
+    </Box>
   );
 };
 
