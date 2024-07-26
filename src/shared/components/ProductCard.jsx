@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Text, Group, ActionIcon, Stack, Flex } from '@mantine/core';
-import { IconCircleArrowDownFilled,IconEyeFilled,IconShare,IconExternalLink} from '@tabler/icons-react';
+import { Card, Text, Group, ActionIcon, Stack, Flex, Paper } from '@mantine/core';
+import { IconCircleArrowDownFilled, IconEyeFilled, IconShare, IconExternalLink } from '@tabler/icons-react';
 
 const ProductCard = ({ title }) => {
   return (
@@ -9,16 +9,16 @@ const ProductCard = ({ title }) => {
         <Flex justify="space-between" align="center">
           <Text weight={500}>{title}</Text>
           <Group spacing="xs">
-            <ActionIcon variant='subtle' >
-              < IconCircleArrowDownFilled size={20} />
+            <ActionIcon variant='subtle'>
+              <IconCircleArrowDownFilled size={20} />
             </ActionIcon>
-            <ActionIcon variant='subtle' >
+            <ActionIcon variant='subtle'>
               <IconEyeFilled size={20} />
             </ActionIcon>
           </Group>
         </Flex>
       </Card>
-      <ActionIcon ml="md" variant='subtle' >
+      <ActionIcon ml="md" variant='subtle'>
         <IconExternalLink size={20} />
       </ActionIcon>
     </Flex>
@@ -27,10 +27,12 @@ const ProductCard = ({ title }) => {
 
 const App = () => {
   return (
-    <Stack>
-      <ProductCard title="Product" />
-      <ProductCard title="Product Grade" />
-    </Stack>
+    <Paper padding="md" shadow="xs">
+      <Stack>
+        <ProductCard title="Product" />
+        <ProductCard title="Product Grade" />
+      </Stack>
+    </Paper>
   );
 };
 

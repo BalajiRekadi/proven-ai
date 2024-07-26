@@ -176,7 +176,6 @@ const Home = () => {
         </Flex>
       </Flex>
       <MantineReactTable table={table} />
-      <ProductCard/>
     </Box>
   );
 };
