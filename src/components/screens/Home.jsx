@@ -10,7 +10,7 @@ import {
   IconSearch,
 } from "@tabler/icons-react";
 import { DEFAULT_TABLE_CONFIG } from "../../shared/constants";
-import ProductCard from '../../shared/components/ProductCard'
+
 const Home = () => {
   const data = [
     {
