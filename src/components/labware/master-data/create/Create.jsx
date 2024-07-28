@@ -7,6 +7,7 @@ import { DetailsBox, TextModal } from "../../../../shared/components";
 import Export from "../../../screens/export/Export";
 import { useToast } from "../../../../shared/components/toast/useToast";
 import Analysis from "./Analysis/Analysis";
+import Product from "./Product";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
@@ -16,6 +17,9 @@ const CreateFlow = () => {
   const [methodFile, setMethodFile] = useState(null);
   const [showTaskCard, setShowTaskCard] = useState(false);
   const [taskData, setTaskData] = useState({});
+  const [productDetails, setProductDetails] = useState();
+  const [analysisData, setAnalysisData] = useState();
+
   const toast = useToast();
 
   const nextStep = () =>
@@ -46,6 +50,11 @@ const CreateFlow = () => {
         break;
       }
       case 1: {
+        saveTaskData();
+        break;
+      }
+      case 2: {
+        saveTaskData();
         break;
       }
       default:
@@ -54,7 +63,7 @@ const CreateFlow = () => {
   };
 
   const saveTaskData = () => {
-    saveImportDocsData(taskData, specFile, methodFile).then(() => {
+    saveImportDocsData(taskData, specFile, methodFile, "labware").then(() => {
       toast.success("Deatils saved successfully");
     });
   };
@@ -91,7 +100,11 @@ const CreateFlow = () => {
             setData={setTaskData}
             onSave={saveTaskData}
           />
-          {"TODO"}
+          <Product
+            taskData={taskData}
+            productDetails={productDetails}
+            setProductDetails={setProductDetails}
+          />
         </Stepper.Step>
         <Stepper.Step label="Analysis">
           <DetailsBox
@@ -99,7 +112,11 @@ const CreateFlow = () => {
             setData={setTaskData}
             onSave={saveTaskData}
           />
-          <Analysis />
+          <Analysis
+            taskData={taskData}
+            analysisData={analysisData}
+            setAnalysisData={setAnalysisData}
+          />
         </Stepper.Step>
         <Stepper.Step label="Export">
           <Export />
@@ -111,7 +128,7 @@ const CreateFlow = () => {
           Save
         </Button>
         <Group>
-          {active > 0 && active < 3 && (
+          {active > 0 && active < 2 && (
             <Button
               variant="filled"
               onClick={() => handleContentClick("export")}

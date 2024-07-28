@@ -4,6 +4,8 @@ import saveImportDocsData from "./saveImportDocsData";
 import saveWorksheetData from "./saveWorksheetData";
 import fetchWorksheets from "./fetchWorksheets";
 import runWorksheet from "./runWorksheet";
+import generateProductDetails from "./generateProductDetails";
+import runAnalysis from "./runAnalysis";
 
 export {
   uploadFiles,
@@ -12,4 +14,6 @@ export {
   fetchWorksheets,
   saveWorksheetData,
   runWorksheet,
+  generateProductDetails,
+  runAnalysis,
 };

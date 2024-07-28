@@ -46,15 +46,15 @@ const DetailsBox = ({ data, setData, onSave }) => {
               w={"18rem"}
               placeholder="Enter"
               label="Grade"
-              value={data?.methodId}
-              onChange={(event) => handleValueChange(event, "methodId")}
+              value={data?.grade}
+              onChange={(event) => handleValueChange(event, "grade")}
             />
             <TextInput
               w={"18rem"}
               placeholder="Enter"
               label="Sampling Point"
-              value={data?.market}
-              onChange={(event) => handleValueChange(event, "market")}
+              value={data?.samplingPoint}
+              onChange={(event) => handleValueChange(event, "samplingPoint")}
             />
           </>
         )}

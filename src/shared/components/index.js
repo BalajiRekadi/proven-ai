@@ -6,6 +6,8 @@ import AccordionGroup from "./AccordionGroup";
 import AccordionTable from "./AccordionTable";
 import TextModal from "./TextModal";
 import ModuleSelect from "./ModuleSelect";
+import ProductCard from "./ProductCard";
+import TableViewModal from "./TableViewModal";
 import { ToastContextProvider } from "./toast/ToastProvider";
 
 export {
@@ -18,4 +20,6 @@ export {
   AccordionTable,
   TextModal,
   ModuleSelect,
+  ProductCard,
+  TableViewModal,
 };
