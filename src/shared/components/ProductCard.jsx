@@ -12,11 +12,11 @@ const ProductCard = ({ title, content }) => {
   const [modalOpened, setModalOpened] = useState(false);
 
   const formatContent = () => {
-    let formattedContent = "";
+    let formattedContent = {};
     Object.keys(content).forEach((key) => {
       const value = content[key];
       if (value && value[0] !== "") {
-        formattedContent = formattedContent + `${key}: ${value[0]}\n`;
+        formattedContent[key] = (value && value[0]) || "";
       }
     });
     return formattedContent;
@@ -53,8 +53,9 @@ const ProductCard = ({ title, content }) => {
       <TextModal
         open={modalOpened}
         onClose={() => setModalOpened(false)}
-        title={"Description"}
+        title={title}
         content={formatContent()}
+        asTable={true}
       />
     </>
   );

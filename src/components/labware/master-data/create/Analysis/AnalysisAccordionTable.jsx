@@ -6,6 +6,7 @@ import {
   Popover,
   TextInput,
   Paper,
+  Group,
 } from "@mantine/core";
 import {
   IconCircleArrowDownFilled,
@@ -20,6 +21,7 @@ import { DEFAULT_TABLE_CONFIG } from "../../../../../shared/constants";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { TableViewModal, TextModal } from "../../../../../shared/components";
 import { downloadJSONFromObj } from "../../../../../shared/utilities";
+import "./analysis-accordion-table.css";
 
 const AnalysisAccordionTable = ({
   data = {},
@@ -185,7 +187,7 @@ const AnalysisAccordionTable = ({
                 onClick={() => handleRunClick(label, row)}
               />
             </ActionIcon>
-            <Popover width={200} position="top" withArrow shadow="md">
+            <Popover position="top" withArrow shadow="md">
               <Popover.Target>
                 <ActionIcon
                   variant="subtle"
@@ -197,22 +199,26 @@ const AnalysisAccordionTable = ({
               <Popover.Dropdown>
                 {Object.keys(runDataTables).map((key) => (
                   <>
-                    <Paper>
-                      <Text>{runDataTables[key]}</Text>
-                      <Box>
-                        <ActionIcon variant="subtle">
-                          <IconEyeFilled
-                            size={20}
-                            onClick={() => onView(runDataTables[key], key, row)}
-                          />
-                        </ActionIcon>
-                        <ActionIcon variant="subtle">
-                          <IconCircleArrowDownFilled
-                            size={20}
-                            onClick={() => onDownload(key, row)}
-                          />
-                        </ActionIcon>
-                      </Box>
+                    <Paper withBorder shadow="xs" w={320} p={8} m={8}>
+                      <Flex justify={"space-between"}>
+                        <Text>{runDataTables[key]}</Text>
+                        <Group>
+                          <ActionIcon variant="subtle">
+                            <IconEyeFilled
+                              size={20}
+                              onClick={() =>
+                                onView(runDataTables[key], key, row)
+                              }
+                            />
+                          </ActionIcon>
+                          <ActionIcon variant="subtle">
+                            <IconCircleArrowDownFilled
+                              size={20}
+                              onClick={() => onDownload(key, row)}
+                            />
+                          </ActionIcon>
+                        </Group>
+                      </Flex>
                     </Paper>
                   </>
                 ))}
@@ -230,9 +236,10 @@ const AnalysisAccordionTable = ({
     data: getTableData(),
     ...DEFAULT_TABLE_CONFIG,
     enableRowNumbers: true,
-    antineTableProps: {
+    enableStickyHeader: true,
+    mantineTableProps: {
       sx: {
-        tableLayout: "fixed",
+        maxHeight: "30rem",
       },
     },
   };
@@ -240,7 +247,7 @@ const AnalysisAccordionTable = ({
 
   return (
     <>
-      <Box>
+      <Box mah={"30rem"} className="analysis-table">
         <MantineReactTable table={table} />
       </Box>
       <TextModal

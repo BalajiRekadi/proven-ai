@@ -4,11 +4,7 @@ import { Anchor, Flex, Paper, Space, Title } from "@mantine/core";
 import { generateProductDetails } from "../../../../api/helpers";
 import { useToast } from "../../../../shared/components/toast/useToast";
 
-const Product = ({
-  productDetails = { product: {}, product_grade: {} },
-  setProductDetails,
-  taskData,
-}) => {
+const Product = ({ productDetails, setProductDetails, taskData }) => {
   const toast = useToast();
   const [productDetailsLoaded, setProductDetailsLoaded] = useState(false);
 

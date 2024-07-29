@@ -17,7 +17,10 @@ const CreateFlow = () => {
   const [methodFile, setMethodFile] = useState(null);
   const [showTaskCard, setShowTaskCard] = useState(false);
   const [taskData, setTaskData] = useState({});
-  const [productDetails, setProductDetails] = useState();
+  const [productDetails, setProductDetails] = useState({
+    product: {},
+    product_grade: {},
+  });
   const [analysisData, setAnalysisData] = useState();
 
   const toast = useToast();

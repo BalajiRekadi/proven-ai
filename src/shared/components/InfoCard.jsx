@@ -30,10 +30,10 @@ const InfoCard = ({ data, type, typeValue, setTaskData }) => {
   };
 
   const getContent = () => {
-    let content = "";
+    let content = {};
     Object.keys(data).forEach((key) => {
       const value = data[key] || "NA";
-      content = content + `${key}: ${value}\n`;
+      content[key] = value;
     });
     return content;
   };
@@ -80,6 +80,7 @@ const InfoCard = ({ data, type, typeValue, setTaskData }) => {
         open={showTaskDetails}
         onClose={toggleModal}
         content={getContent()}
+        asTable={true}
       />
     </>
   );

@@ -6,26 +6,63 @@ const TableViewModal = ({ open, onClose, label, content = {} }) => {
     <Modal
       opened={open}
       onClose={onClose}
-      title={label}
+      title={<Title order={3}>{label}</Title>}
       closeOnClickOutside={false}
+      fullScreen={true}
     >
-      <ScrollArea h={"80vh"} w={"80vw"}>
-        <Flex gap={16}>
-          {Object.keys(content).map((index) => (
-            <Box key={index}>
-              <Title order={4} key={index}>
-                {index}
-              </Title>
-              {content[index].map((val, index) => (
-                <>
-                  {val && <Text key={val + index}>{val}</Text>}
-                  {!val && <Text key={val + index}>{"-"}</Text>}
-                </>
+      <Box bd={"1px solid var(--light-gray)"} style={{ borderRadius: "6px" }}>
+        <ScrollArea p={0}>
+          <Flex>
+            <>
+              {Object.keys(content).map((key) => (
+                <Title
+                  order={5}
+                  key={key}
+                  p={8}
+                  miw={"17rem"}
+                  lineClamp={1}
+                  bd={"1px solid var(--light-gray)"}
+                  bg={"gray"}
+                >
+                  {key}
+                </Title>
               ))}
-            </Box>
-          ))}
-        </Flex>
-      </ScrollArea>
+            </>
+          </Flex>
+          <Flex>
+            {Object.keys(content).map((index) => (
+              <Box key={index}>
+                {content[index].map((val, index) => (
+                  <>
+                    {val && (
+                      <ScrollArea
+                        w={"17rem"}
+                        h={"3rem"}
+                        bd={"1px solid var(--light-gray)"}
+                      >
+                        <Text key={val + index} p={8}>
+                          {val}
+                        </Text>
+                      </ScrollArea>
+                    )}
+                    {!val && (
+                      <ScrollArea
+                        w={"17rem"}
+                        h={"3rem"}
+                        bd={"1px solid var(--light-gray)"}
+                      >
+                        <Text key={val + index} p={8}>
+                          {" "}
+                        </Text>
+                      </ScrollArea>
+                    )}
+                  </>
+                ))}
+              </Box>
+            ))}
+          </Flex>
+        </ScrollArea>
+      </Box>
     </Modal>
   );
 };
