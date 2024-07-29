@@ -1,4 +1,5 @@
 
+
 import { AppShell, Flex, Group, Burger } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
@@ -42,9 +43,11 @@ const User = () => {
           </Flex>
         </Group>
       </AppShell.Header>
-      <AppShell.Navbar p="md" className="navbar" style={{ width: opened ? 300 : 0, overflow: 'hidden', transition: 'width 0.3s ease' }}>
-        {opened && <Routes />}
-      </AppShell.Navbar>
+      {opened && (
+        <AppShell.Navbar p="md" className="navbar" style={{ width: 300, overflow: 'hidden', transition: 'width 0.3s ease' }}>
+          <Routes />
+        </AppShell.Navbar>
+      )}
       <AppShell.Main>
         <Outlet />
       </AppShell.Main>
