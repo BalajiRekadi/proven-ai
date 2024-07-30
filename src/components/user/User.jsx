@@ -1,6 +1,5 @@
 
-
-import { AppShell, Flex, Group, Burger } from "@mantine/core";
+import { AppShell, Flex, Burger } from "@mantine/core"; // Make sure to import Flex
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
 import headerLogo from "./../../assets/headerLogo.jpeg";
@@ -17,31 +16,23 @@ const User = () => {
       className="user"
       header={{ height: 60 }}
       navbar={{
-        width: opened ? 300 : 0, 
-        hidden: !opened, 
+        width: opened ? 300 : 0,
+        hidden: !opened,
       }}
       padding="md"
       h={"100%"}
     >
       <AppShell.Header className="header">
-        <Group h="100%" px="md">
+        <Flex alignSelf="center" px="md" style={{margin:"1%"}}>
           <div>
             <Burger opened={opened} onClick={toggle} aria-label="Toggle navigation" color="white" />
           </div>
           <img src={headerLogo} className="logo" alt="Header Logo" />
-          <Flex justify={"space-between"} w={"80%"}>
-            <div className="header-caliber">
-              <div className="header-select-div">
-                <ModuleSelect />
-              </div>
-            </div>
-            <div>
-              <Flex align={"center"} h={"100%"}>
-                <span style={{ color: "white" }}>90001 | Super Admin</span>
-              </Flex>
-            </div>
+          <Flex justify="space-between"  style={{ flexGrow: 1, marginLeft: '16px' }}>
+            <ModuleSelect  />
+            <span style={{ color: "white" }}>90001 | Super Admin</span>
           </Flex>
-        </Group>
+        </Flex>
       </AppShell.Header>
       {opened && (
         <AppShell.Navbar p="md" className="navbar" style={{ width: 300, overflow: 'hidden', transition: 'width 0.3s ease' }}>
