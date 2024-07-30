@@ -52,6 +52,7 @@ const DEFAULT_TABLE_CONFIG = {
   enableColumnFilters: false,
   enablePagination: false,
   enableSorting: false,
+  enableStickyHeader: true,
 };
 
 export { ROUTES, THEME, DOMAIN, DEFAULT_TABLE_CONFIG };

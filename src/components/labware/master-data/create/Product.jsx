@@ -16,6 +16,7 @@ const Product = ({ productDetails, setProductDetails, taskData }) => {
       setProductDetails(res);
     });
   };
+
   return (
     <>
       <Flex justify={"space-between"}>

@@ -6,7 +6,8 @@ import {
 } from "@tabler/icons-react";
 import React, { useState } from "react";
 import TextModal from "./TextModal";
-import { downloadJSONFromObj } from "../utilities";
+import { downloadCSVFromArray, downloadJSONFromObj } from "../utilities";
+import TableViewModal from "./TableViewModal";
 
 const ProductCard = ({ title, content }) => {
   const [modalOpened, setModalOpened] = useState(false);
@@ -27,7 +28,7 @@ const ProductCard = ({ title, content }) => {
   };
 
   const onDownload = () => {
-    downloadJSONFromObj(content, title);
+    downloadCSVFromArray([formatContent()], title);
   };
 
   return (
@@ -50,12 +51,11 @@ const ProductCard = ({ title, content }) => {
           <IconExternalLink size={20} />
         </ActionIcon>
       </Flex>
-      <TextModal
+      <TableViewModal
         open={modalOpened}
         onClose={() => setModalOpened(false)}
-        title={title}
-        content={formatContent()}
-        asTable={true}
+        label={title}
+        content={[formatContent()]}
       />
     </>
   );

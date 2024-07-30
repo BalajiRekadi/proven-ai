@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { ActionIcon, Card, Flex, TextInput } from "@mantine/core";
 import { IconCircleArrowDownFilled, IconEyeFilled } from "@tabler/icons-react";
-import { downloadJSONFromObj } from "../utilities";
-import TextModal from "./TextModal";
+import { downloadCSVFromArray } from "../utilities";
+import TableViewModal from "./TableViewModal";
 
 const InfoCard = ({ data, type, typeValue, setTaskData }) => {
   const [showTaskDetails, setShowTaskDetails] = useState(false);
@@ -18,7 +18,7 @@ const InfoCard = ({ data, type, typeValue, setTaskData }) => {
   };
 
   const handleDownload = () => {
-    downloadJSONFromObj(data, "task");
+    downloadCSVFromArray([getContent()], "task");
   };
 
   const viewTaskDetails = () => {
@@ -75,12 +75,11 @@ const InfoCard = ({ data, type, typeValue, setTaskData }) => {
           </Flex>
         </Card.Section>
       </Card>
-      <TextModal
-        title="Task Details"
+      <TableViewModal
         open={showTaskDetails}
         onClose={toggleModal}
-        content={getContent()}
-        asTable={true}
+        label={"Task Details"}
+        content={[getContent()]}
       />
     </>
   );

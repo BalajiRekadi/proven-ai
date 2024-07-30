@@ -20,7 +20,7 @@ import { useMemo, useState } from "react";
 import { DEFAULT_TABLE_CONFIG } from "../../../../../shared/constants";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { TableViewModal, TextModal } from "../../../../../shared/components";
-import { downloadJSONFromObj } from "../../../../../shared/utilities";
+import { downloadCSVFromArray } from "../../../../../shared/utilities";
 import "./analysis-accordion-table.css";
 
 const AnalysisAccordionTable = ({
@@ -31,7 +31,7 @@ const AnalysisAccordionTable = ({
 }) => {
   const [showRunData, setShowRunData] = useState(false);
   const [inputModalOpened, setInputModalOpened] = useState(false);
-  const [selectedRunDataTable, setSelectedRunDataTable] = useState("");
+  const [selectedRunDataTable, setSelectedRunDataTable] = useState([]);
   const [selectedRunDataTableLabel, setSelectedRunDataTableLabel] =
     useState("");
   const [selectedInput, setSelectedInput] = useState("");
@@ -72,18 +72,30 @@ const AnalysisAccordionTable = ({
     onRun(label, row.original);
   };
 
+  const formatRunData = (data) => {
+    const keys = Object.keys(data);
+    const length = data[keys[0]].length;
+    const formattedData = Array(length).fill({});
+    formattedData.forEach((item, index) => {
+      keys.forEach((key) => {
+        item[key] = data[key][index];
+      });
+    });
+    return formattedData;
+  };
+
   const onView = (label, key, row) => {
     if (row.original.input?.runData) {
-      setSelectedRunDataTable(row.original.input?.runData[key]);
+      const data = formatRunData(row.original.input?.runData[key]);
+      setSelectedRunDataTable(data);
       setSelectedRunDataTableLabel(runDataTables[key]);
       setShowRunData(true);
     }
   };
 
   const onDownload = (key, row) => {
-    if (row.original.input?.runData) {
-      downloadJSONFromObj(row.original.input?.runData[key], key);
-    }
+    const data = formatRunData(row.original.input?.runData[key]);
+    downloadCSVFromArray(data, runDataTables[key]);
   };
 
   const disableStackIcon = (data) => {

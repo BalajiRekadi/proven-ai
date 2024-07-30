@@ -1,5 +1,13 @@
 import appendDocxExtension from "./appendDocxExtension";
-import downloadJSONFromObj from "./downloadJSONFromObj";
 import deepClone from "./deepClone";
+import downloadFile from "./downloadFile";
+import downloadCSVFromArray from "./downloadCSV";
+import downloadJSONFromObj from "./downloadJSONFromObj";
 
-export { appendDocxExtension, downloadJSONFromObj, deepClone };
+export {
+  appendDocxExtension,
+  deepClone,
+  downloadFile,
+  downloadCSVFromArray,
+  downloadJSONFromObj,
+};

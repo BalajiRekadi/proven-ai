@@ -36,7 +36,15 @@ const runAnalysis = async (taskData, label, item, solution) => {
       data: payload,
     });
 
-    return res.data;
+    if (
+      res.data[label] &&
+      res.data[label][0] &&
+      res.data[label][0][solution] &&
+      res.data[label][0][solution][1]
+    ) {
+      return res.data[label][0][solution][1];
+    }
+    return {};
   } catch (e) {
     return {
       components_table: {
