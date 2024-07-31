@@ -31,14 +31,18 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
     toast.load("Loading solution details..");
     let item = deepClone(analysisData[label]);
     item = { [data.solution]: item[data.solution] };
-    runAnalysis(taskData, label, item, data.solution).then((res) => {
-      setAnalysisData((prev) => {
-        const clone = deepClone(prev);
-        clone[label][data.solution].runData = res;
-        return clone;
+    runAnalysis(taskData, label, item, data.solution)
+      .then((res) => {
+        setAnalysisData((prev) => {
+          const clone = deepClone(prev);
+          clone[label][data.solution].runData = res;
+          return clone;
+        });
+        toast.success("Solution data loaded successfully");
+      })
+      .catch((err) => {
+        toast.error("Failed to load data");
       });
-      toast.success("Solution data loaded successfully");
-    });
   };
 
   const getAccordions = () => {

@@ -22,6 +22,7 @@ const CreateFlow = () => {
     product_grade: {},
   });
   const [analysisData, setAnalysisData] = useState();
+  const [productDetailsLoaded, setProductDetailsLoaded] = useState(false);
 
   const toast = useToast();
 
@@ -107,6 +108,8 @@ const CreateFlow = () => {
             taskData={taskData}
             productDetails={productDetails}
             setProductDetails={setProductDetails}
+            productDetailsLoaded={productDetailsLoaded}
+            setProductDetailsLoaded={setProductDetailsLoaded}
           />
         </Stepper.Step>
         <Stepper.Step label="Analysis">

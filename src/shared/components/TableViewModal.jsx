@@ -35,7 +35,6 @@ const TableViewModal = ({
     mantineTableProps: {
       striped: true,
       withColumnBorders: true,
-      highlightOnHoverColor: "#b9bcdb",
       sx: {
         maxHeight: "30rem",
       },

@@ -75,12 +75,14 @@ const AnalysisAccordionTable = ({
   const formatRunData = (data) => {
     const keys = Object.keys(data);
     const length = data[keys[0]].length;
-    const formattedData = Array(length).fill({});
-    formattedData.forEach((item, index) => {
+    const formattedData = [];
+    for (let i = 0; i < length; i++) {
+      const item = {};
       keys.forEach((key) => {
-        item[key] = data[key][index];
+        item[key] = data[key][i];
       });
-    });
+      formattedData.push(item);
+    }
     return formattedData;
   };
 

@@ -4,9 +4,14 @@ import { Anchor, Flex, Paper, Space, Title } from "@mantine/core";
 import { generateProductDetails } from "../../../../api/helpers";
 import { useToast } from "../../../../shared/components/toast/useToast";
 
-const Product = ({ productDetails, setProductDetails, taskData }) => {
+const Product = ({
+  productDetails,
+  setProductDetails,
+  taskData,
+  productDetailsLoaded,
+  setProductDetailsLoaded,
+}) => {
   const toast = useToast();
-  const [productDetailsLoaded, setProductDetailsLoaded] = useState(false);
 
   const handleGenerate = () => {
     toast.load("Generating product details");

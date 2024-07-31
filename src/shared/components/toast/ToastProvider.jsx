@@ -36,7 +36,7 @@ export const ToastContextProvider = ({ children }) => {
   const error = (message) => {
     dispatch({
       type: "SHOW_TOAST",
-      payload: { message, type: "error", loading: true },
+      payload: { message, type: "error", loading: false },
     });
   };
 
