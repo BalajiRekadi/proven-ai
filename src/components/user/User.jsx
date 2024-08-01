@@ -1,11 +1,8 @@
 
 import { AppShell, Flex, Burger } from "@mantine/core"; 
-import { AppShell, Flex, Burger, Image, Text } from "@mantine/core"; // Make sure to import Flex
 import { useDisclosure } from "@mantine/hooks";
 import React, { useMemo } from "react";
 import headerLogo from "./../../assets/headerLogo.jpeg";
-import React from "react";
-import headerLogo from "./../../assets/headerLogo.png";
 import { Outlet } from "react-router-dom";
 import Routes from "../routes/Routes";
 import "./user.css";
@@ -26,9 +23,6 @@ const User = () => {
           display: opened ? 'block' : 'none', 
           transition: 'width 0.3s ease' 
         }
-        width: 300,
-        breakpoint: "sm",
-        collapsed: { desktop: !opened },
       }}
       padding="md"
       h={"100%"}
@@ -42,21 +36,6 @@ const User = () => {
           <Flex justify="space-between" style={{ flexGrow: 1, marginLeft: '16px' }}>
             <ModuleSelect />
             <span style={{ color: "white" }}>90001 | Super Admin</span>
-        <Flex>
-          <Flex px="md" w={300} h={60} gap={16} align={"center"}>
-            <Burger
-              opened={opened}
-              onClick={toggle}
-              aria-label="Toggle navigation"
-              color="white"
-            />
-            <Image src={headerLogo} w={"10rem"} h={"2rem"} alt="Header Logo" />
-          </Flex>
-          <Flex justify="space-between" flex={1} align={"center"} h={60}>
-            <ModuleSelect />
-            <Text pr={32} c={"white"}>
-              90001 | Super Admin
-            </Text>
           </Flex>
         </Flex>
       </AppShell.Header>
@@ -72,11 +51,6 @@ const User = () => {
       >
         {memoizedRoutes}
       </AppShell.Navbar>
-      {opened && (
-        <AppShell.Navbar p="md" className="navbar" w={300}>
-          <Routes />
-        </AppShell.Navbar>
-      )}
       <AppShell.Main>
         <Outlet />
       </AppShell.Main>
