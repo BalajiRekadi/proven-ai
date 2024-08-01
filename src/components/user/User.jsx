@@ -2,7 +2,7 @@
 import { AppShell, Flex, Burger } from "@mantine/core"; 
 import { useDisclosure } from "@mantine/hooks";
 import React, { useMemo } from "react";
-import headerLogo from "./../../assets/headerLogo.jpeg";
+import headerLogo from "./../../assets/headerLogo.png";
 import { Outlet } from "react-router-dom";
 import Routes from "../routes/Routes";
 import "./user.css";
@@ -32,8 +32,8 @@ const User = () => {
           <div>
             <Burger opened={opened} onClick={toggle} aria-label="Toggle navigation" color="white" />
           </div>
-          <img src={headerLogo} className="logo" alt="Header Logo" />
-          <Flex justify="space-between" style={{ flexGrow: 1, marginLeft: '16px' }}>
+          <img src={headerLogo} className="logo" alt="Header Logo"    fit="contain" />
+          <Flex justify="space-between" style={{ flexGrow: 1, marginLeft: '8%' }}>
             <ModuleSelect />
             <span style={{ color: "white" }}>90001 | Super Admin</span>
           </Flex>
