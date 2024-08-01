@@ -15,7 +15,7 @@ import User from "./components/user/User";
 import CaliberCreate from "./components/caliber/master-data/create/Create";
 import LabwareCreate from "./components/labware/master-data/create/Create";
 import Home from "./components/screens/Home";
-
+import NotFound from "./shared/components/NotFound";
 function App() {
   const theme = createTheme(THEME);
   const queryClient = new QueryClient();
@@ -41,6 +41,7 @@ function App() {
                 </Route>
                 <Route path="labVantage" />
               </Route>
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </ToastContextProvider>
         </QueryClientProvider>

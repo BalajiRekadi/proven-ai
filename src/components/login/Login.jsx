@@ -12,7 +12,7 @@ import {
   Anchor,
 } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
-import headerLogo from "../../assets/headerLogo.jpeg";
+import headerLogo from "../../assets/headerLogo.png";
 import logo from "../../assets/logo.jpg";
 import { useStore } from "../../store/useStore";
 import { ModuleSelect } from "../../shared/components";
