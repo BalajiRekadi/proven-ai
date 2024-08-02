@@ -183,7 +183,7 @@ const AnalysisAccordionTable = ({
           <Flex align={"center"} gap={24}>
             <ActionIcon variant="subtle">
               <IconRun
-                color={"green"}
+                color="var(--green)"
                 onClick={() => handleRunClick(label, row)}
               />
             </ActionIcon>

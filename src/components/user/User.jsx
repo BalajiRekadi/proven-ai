@@ -30,12 +30,12 @@ const User = () => {
       <AppShell.Header className="header">
         <Flex alignSelf="center" px="md" style={{ margin: "1%" }}>
           <div>
-            <Burger opened={opened} onClick={toggle} aria-label="Toggle navigation" color="white" />
+            <Burger opened={opened} onClick={toggle} aria-label="Toggle navigation" color="var(--white)" />
           </div>
           <img src={headerLogo} className="logo" alt="Header Logo"    fit="contain" />
           <Flex justify="space-between" style={{ flexGrow: 1, marginLeft: '8%' }}>
             <ModuleSelect />
-            <span style={{ color: "white" }}>90001 | Super Admin</span>
+            <span style={{ color: "var(--white)" }}>90001 | Super Admin</span>
           </Flex>
         </Flex>
       </AppShell.Header>

@@ -73,7 +73,7 @@ function Login() {
           </Box>
           <Button
             variant="filled"
-            color="green"
+            color="var(--green)"
             onClick={handleLogin}
             size="lg"
             w={"50%"}

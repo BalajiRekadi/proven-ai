@@ -17,12 +17,15 @@ const NotFound = () => {
         color="blue"
         size="md"
         style={{ marginTop: '2rem' }}
-        onClick={() => navigate('/')} 
+        onClick={() => navigate(-1)} 
       >
-        Go to Home
+        Go To Home
       </Button>
     </Container>
   );
 };
 
 export default NotFound;
+
+
+

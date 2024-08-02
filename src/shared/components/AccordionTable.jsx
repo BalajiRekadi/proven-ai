@@ -144,7 +144,7 @@ const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
             </ActionIcon>
             <ActionIcon variant="subtle">
               <IconRun
-                color="green"
+                color="var(--green)"
                 onClick={() => handleRunClick(label, row)}
               />
             </ActionIcon>
