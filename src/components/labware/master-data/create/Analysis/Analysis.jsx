@@ -17,7 +17,7 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
       });
     }
   }, [taskData.code]);
-
+  
   const updateAnalysisData = (event, field, accordion, data) => {
     setAnalysisData((prev) => {
       const clonedData = deepClone(prev);

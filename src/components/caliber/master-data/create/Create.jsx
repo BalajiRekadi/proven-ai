@@ -10,6 +10,7 @@ import "./create.css";
 import { saveImportDocsData, saveWorksheetData } from "../../../../api/helpers";
 import { DetailsBox, TextModal } from "../../../../shared/components";
 import { useToast } from "../../../../shared/components/toast/useToast";
+import {DETAILS} from "../../../../shared/constants";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
@@ -56,7 +57,7 @@ const CreateFlow = () => {
           product: taskData.product,
           ...worksheetsData,
         }).then((res) => {
-          toast.success("Deatils saved successfully");
+          toast.success(DETAILS.success);
         });
         break;
       }
@@ -67,7 +68,7 @@ const CreateFlow = () => {
 
   const saveTaskData = () => {
     saveImportDocsData(taskData, specFile, methodFile).then(() => {
-      toast.success("Deatils saved successfully");
+      toast.success(DETAILS.success);
     });
   };
 

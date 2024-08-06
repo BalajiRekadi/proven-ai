@@ -19,7 +19,7 @@ import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { DEFAULT_TABLE_CONFIG } from "../constants";
 import TextModal from "./TextModal";
 import { useToast } from "./toast/useToast";
-
+import { ACCORDION_TABLE_DETAILS } from "../constants";
 const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
   const [contentModalOpened, setContentModalOpened] = useState(false);
   const [inputModalOpened, setInputModalOpened] = useState(false);
@@ -31,7 +31,7 @@ const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
     navigator.clipboard
       .writeText(JSON.stringify(content))
       .then(() => {
-        toast.info("Content copied to clipboard");
+        toast.info(ACCORDION_TABLE_DETAILS.info);
       })
       .catch((err) => {
         console.error("Failed to copy: ", err);

@@ -5,7 +5,7 @@ import React from "react";
 import { UploadCard } from "../../../shared/components";
 import { IconUpload } from "@tabler/icons-react";
 import TaskCard from "./TaskCard";
-
+import { IMPORT_DOCS_DETAILS } from "../../../shared/constants";
 const ImportDocs = ({
   taskData,
   setTaskData,
@@ -19,23 +19,23 @@ const ImportDocs = ({
   const toast = useToast();
 
   const handleUploadFiles = () => {
-    toast.load("Files upload is in progress..");
+    toast.load(IMPORT_DOCS_DETAILS.load);
     uploadFiles([specFile, methodFile]).then(() => {
       setShowTaskCard(false);
-      toast.success("Files uploaded successfully");
+      toast.success(IMPORT_DOCS_DETAILS.success);
     });
   };
 
   const handleProcess = () => {
-    toast.load("Files processing is in progress..");
+    toast.load(IMPORT_DOCS_DETAILS.loadProcess);
     if (specFile?.name && methodFile?.name) {
       processFiles(specFile.name, methodFile.name).then((data) => {
-        toast.success("Files processed successfully");
+        toast.success(IMPORT_DOCS_DETAILS.loadProcessSuccess);
         setShowTaskCard(true);
         setTaskData(data);
       });
     } else {
-      toast.info("Please upload Files");
+      toast.info(IMPORT_DOCS_DETAILS.info);
     }
   };
 

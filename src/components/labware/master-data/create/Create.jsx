@@ -8,7 +8,7 @@ import Export from "../../../screens/export/Export";
 import { useToast } from "../../../../shared/components/toast/useToast";
 import Analysis from "./Analysis/Analysis";
 import Product from "./Product";
-
+import { DETAILS } from "../../../../shared/constants";
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
   const [modalOpened, setModalOpened] = useState(false);
@@ -68,7 +68,7 @@ const CreateFlow = () => {
 
   const saveTaskData = () => {
     saveImportDocsData(taskData, specFile, methodFile, "labware").then(() => {
-      toast.success("Deatils saved successfully");
+      toast.success(DETAILS.sucess);
     });
   };
 

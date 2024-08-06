@@ -6,14 +6,14 @@ import {
 import { fetchWorksheets, runWorksheet } from "../../../../../api/helpers";
 import { deepClone } from "../../../../../shared/utilities";
 import { useToast } from "../../../../../shared/components/toast/useToast";
-
+import { WORKSHEET } from "../../../../../shared/constants";
 const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
   const toast = useToast();
   useEffect(() => {
     if (taskData.product && !worksheetsData) {
-      toast.load("Worksheet details are loading..");
+      toast.load(WORKSHEET.load);
       fetchWorksheets(taskData.product).then((data) => {
-        toast.success("Worksheet details have been loaded successfully");
+        toast.success(WORKSHEET.loadOnSucess);
         setWorksheetsData(data);
       });
     }
@@ -52,9 +52,10 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
   };
 
   const handleRunClick = (label, data) => {
-    toast.load("Loading worksheet content..");
+    toast.load(WORKSHEET.loadingContent);
     const item = deepClone(worksheetsData[label]);
     item[0] = { [data.solution]: item[0][data.solution] };
+    // TODO remove that hard coded value
     runWorksheet(taskData.product || "3000714", {
       [label]: item,
     }).then((res) => {
@@ -64,7 +65,7 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
           res[label][0][data.solution][1];
         return clone;
       });
-      toast.success("Worksheet content loaded successfully");
+      toast.success(WORKSHEET.loadingContentSuccess);
     });
   };
 

@@ -3,7 +3,7 @@ import { ProductCard, TextModal } from "../../../../shared/components";
 import { Anchor, Flex, Paper, Space, Title } from "@mantine/core";
 import { generateProductDetails } from "../../../../api/helpers";
 import { useToast } from "../../../../shared/components/toast/useToast";
-
+import {PRODUCT_DETAILS} from "../../../../shared/constants"
 const Product = ({
   productDetails,
   setProductDetails,
@@ -14,9 +14,9 @@ const Product = ({
   const toast = useToast();
 
   const handleGenerate = () => {
-    toast.load("Generating product details");
+    toast.load(PRODUCT_DETAILS.load);
     generateProductDetails(taskData).then((res) => {
-      toast.success("Generated product details successfully");
+      toast.success(PRODUCT_DETAILS.success);
       setProductDetailsLoaded(true);
       setProductDetails(res);
     });
