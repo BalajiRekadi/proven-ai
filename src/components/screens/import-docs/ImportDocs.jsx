@@ -1,10 +1,15 @@
 import { Button, Flex } from "@mantine/core";
-import { processFiles, uploadFiles } from "../../../api/helpers";
+import {
+  fetchNeulandWorksheets,
+  processFiles,
+  uploadFiles,
+} from "../../../api/helpers";
 import { useToast } from "../../../shared/components/toast/useToast";
 import React from "react";
 import { UploadCard } from "../../../shared/components";
 import { IconUpload } from "@tabler/icons-react";
 import TaskCard from "./TaskCard";
+import { useStore } from "../../../store/useStore";
 
 const ImportDocs = ({
   taskData,
@@ -15,8 +20,10 @@ const ImportDocs = ({
   setMethodFile,
   showTaskCard,
   setShowTaskCard,
+  setWorksheetsData,
 }) => {
   const toast = useToast();
+  const { client } = useStore();
 
   const handleUploadFiles = () => {
     toast.load("Files upload is in progress..");
@@ -28,14 +35,23 @@ const ImportDocs = ({
 
   const handleProcess = () => {
     toast.load("Files processing is in progress..");
-    if (specFile?.name && methodFile?.name) {
-      processFiles(specFile.name, methodFile.name).then((data) => {
-        toast.success("Files processed successfully");
-        setShowTaskCard(true);
-        setTaskData(data);
-      });
-    } else {
+    if (!specFile?.name && !methodFile?.name) {
       toast.info("Please upload Files");
+    } else {
+      if (client === "neuland") {
+        fetchNeulandWorksheets(specFile?.name).then((data) => {
+          toast.success("Files processed successfully");
+          setShowTaskCard(true);
+          setTaskData(data.taskData);
+          setWorksheetsData(data.worksheetData);
+        });
+      } else {
+        processFiles(specFile.name, methodFile.name).then((data) => {
+          toast.success("Files processed successfully");
+          setShowTaskCard(true);
+          setTaskData(data);
+        });
+      }
     }
   };
 

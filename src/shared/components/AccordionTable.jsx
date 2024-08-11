@@ -178,13 +178,13 @@ const AccordionTable = ({ data = [], label = "", updateData, onRun }) => {
           open={inputModalOpened}
           onClose={() => setInputModalOpened(false)}
           title="Solution"
-          content={selectedInput}
+          content={selectedInput || "No Data Found"}
         />
         <TextModal
           open={contentModalOpened}
           onClose={() => setContentModalOpened(false)}
           title="Description"
-          content={selectedContent}
+          content={selectedContent || "No Data Found"}
         />
       </Box>
     </>

@@ -95,6 +95,7 @@ const CreateFlow = () => {
             methodFile={methodFile}
             setSpecFile={setSpecFile}
             setMethodFile={setMethodFile}
+            setWorksheetsData={setWorksheetsData}
           />
         </Stepper.Step>
         <Stepper.Step label="Worksheets">

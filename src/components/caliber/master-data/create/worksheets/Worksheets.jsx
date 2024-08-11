@@ -3,12 +3,19 @@ import {
   AccordionGroup,
   AccordionTable,
 } from "../../../../../shared/components";
-import { fetchWorksheets, runWorksheet } from "../../../../../api/helpers";
+import {
+  fetchWorksheets,
+  runNeulandWorksheet,
+  runWorksheet,
+} from "../../../../../api/helpers";
 import { deepClone } from "../../../../../shared/utilities";
 import { useToast } from "../../../../../shared/components/toast/useToast";
+import { useStore } from "../../../../../store/useStore";
 
 const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
   const toast = useToast();
+  const { client } = useStore();
+
   useEffect(() => {
     if (taskData.product && !worksheetsData) {
       toast.load("Worksheet details are loading..");
@@ -23,17 +30,20 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
     let accordions = [];
     if (worksheetsData) {
       Object.keys(worksheetsData).forEach((key) => {
-        accordions.push({
-          label: key,
-          content: (
-            <AccordionTable
-              // TODO: Remove ternary operator when properly mapping api
-              data={worksheetsData[key][0] == {} ? [] : worksheetsData[key]}
-              updateData={updateWorkSheetData}
-              onRun={handleRunClick}
-            />
-          ),
-        });
+        if (key) {
+          accordions.push({
+            label: key,
+            content: (
+              <AccordionTable
+                // TODO: Remove ternary operator when properly mapping api
+                label={key}
+                data={worksheetsData[key][0] == {} ? [] : worksheetsData[key]}
+                updateData={updateWorkSheetData}
+                onRun={handleRunClick}
+              />
+            ),
+          });
+        }
       });
     }
     return accordions;
@@ -53,19 +63,31 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
 
   const handleRunClick = (label, data) => {
     toast.load("Loading worksheet content..");
-    const item = deepClone(worksheetsData[label]);
-    item[0] = { [data.solution]: item[0][data.solution] };
-    runWorksheet(taskData.product || "3000714", {
-      [label]: item,
-    }).then((res) => {
-      setWorksheetsData((prev) => {
-        const clone = deepClone(prev);
-        clone[label][0][data.solution].content =
-          res[label][0][data.solution][1];
-        return clone;
+    if (client === "neuland") {
+      runNeulandWorksheet(taskData.product).then((res) => {
+        setWorksheetsData((prev) => {
+          const clone = deepClone(prev);
+          clone[label][0][data.solution].content =
+            res["WorkSheetContent"][0]["WorkSheetContent"][1];
+          return clone;
+        });
+        toast.success("Worksheet content loaded successfully");
       });
-      toast.success("Worksheet content loaded successfully");
-    });
+    } else {
+      const item = deepClone(worksheetsData[label]);
+      item[0] = { [data.solution]: item[0][data.solution] };
+      runWorksheet(taskData.product || "3000714", {
+        [label]: item,
+      }).then((res) => {
+        setWorksheetsData((prev) => {
+          const clone = deepClone(prev);
+          clone[label][0][data.solution].content =
+            res[label][0][data.solution][1];
+          return clone;
+        });
+        toast.success("Worksheet content loaded successfully");
+      });
+    }
   };
 
   return (
