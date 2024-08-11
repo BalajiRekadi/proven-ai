@@ -10,6 +10,11 @@ export const AppReducer = (state, action) => {
         ...state,
         selectedRoute: action.payload,
       };
+    case "SET_CLIENT":
+      return {
+        ...state,
+        client: action.payload,
+      };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }

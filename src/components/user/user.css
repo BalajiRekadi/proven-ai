@@ -4,26 +4,7 @@
     border: none;
   }
 
-  .navbar {
+  .mantine-AppShell-navbar {
     background-color: var(--primary);
   }
 }
-.logo {
-  margin-right: 7%;
-}
-.header-caliber {
-  span {
-    position: absolute;
-    right: 0%;
-    top: 0%;
-  }
-}
-.menu-icon{
-  display: flex;
-}
-.fi-br-menu-burger{
-  color: white;
-
-
-}
-

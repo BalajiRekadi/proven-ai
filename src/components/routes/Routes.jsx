@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Accordion, Button, Group, Text } from "@mantine/core";
+import { Accordion, Button, Group, Stack, Text } from "@mantine/core";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./routes.css";
 import { ROUTES } from "../../shared/constants";
@@ -34,7 +34,7 @@ const Routes = () => {
         </Group>
       </Accordion.Control>
       <Accordion.Panel>
-        <ul>
+        <Stack p={8}>
           {parent.children.map((child) => (
             <Button
               className={
@@ -42,6 +42,8 @@ const Routes = () => {
                   ? "highlight"
                   : ""
               }
+              fullWidth
+              justify="start"
               key={child.name}
               variant="subtle"
               onClick={() => handleMenuItemClick(child.name)}
@@ -49,13 +51,17 @@ const Routes = () => {
               {child.label}
             </Button>
           ))}
-        </ul>
+        </Stack>
       </Accordion.Panel>
     </Accordion.Item>
   ));
 
   return (
-    <Accordion variant="filled" defaultValue="Master Data" className="routes">
+    <Accordion
+      variant="separated"
+      defaultValue="Master Data"
+      className="routes"
+    >
       {items}
     </Accordion>
   );
