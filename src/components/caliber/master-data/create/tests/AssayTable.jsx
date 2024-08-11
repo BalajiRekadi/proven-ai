@@ -47,7 +47,7 @@ const AssayTable = () => {
         Cell: ({ cell }) => (
           <Flex gap={16}>
             <ActionIcon variant="subtle">
-              <IconRun color="green" />
+              <IconRun color="var(--green)" />
             </ActionIcon>
             <ActionIcon variant="subtle">
               <IconExternalLink />

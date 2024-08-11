@@ -8,22 +8,7 @@
     background-color: var(--primary);
   }
 }
-.logo {
-  margin-right: 7%;
+.logo{
+  width: 7rem;
+ 
 }
-.header-caliber {
-  span {
-    position: absolute;
-    right: 0%;
-    top: 0%;
-  }
-}
-.menu-icon{
-  display: flex;
-}
-.fi-br-menu-burger{
-  color: white;
-
-
-}
-
