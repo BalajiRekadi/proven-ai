@@ -28,7 +28,7 @@ const ImportDocs = ({
 
   const handleUploadFiles = () => {
     toast.load("Files upload is in progress..");
-    uploadFiles([specFile, methodFile]).then(() => {
+    uploadFiles([specFile, methodFile], client).then(() => {
       setShowTaskCard(false);
       toast.success("Files uploaded successfully");
     });
