@@ -10,10 +10,7 @@ const runNeulandWorksheet = async (product, payload) => {
       content: "application/json",
     }),
 
-    data: {
-      WorkSheetContent:
-        "Instrument ID: __________ \nBalance ID: __________ \nStandard Preparation: \nWeighed __________ (400 to 500) mg of KBr and transferred into a mortar \nAdded __________ (4 to 5) mg of Working standard, triturated and prepared the pellet. \nSample Preparation: \nWeighed __________ (400 to 500) mg of KBr and transferred into a mortar Added __________ (4 to 5) mg of Sample, triturated and prepared the pellet.",
-    },
+    data: { WorkSheetContent: payload },
   });
 
   return res.data;

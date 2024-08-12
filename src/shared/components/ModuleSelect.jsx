@@ -23,6 +23,7 @@ const ModuleSelect = ({ size = "sm" }) => {
   const handleClientChange = (event) => {
     if (event) {
       setClient(event);
+      setRoute(`/user/${module}/home`);
     }
   };
 

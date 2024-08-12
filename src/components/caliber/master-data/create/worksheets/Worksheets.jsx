@@ -64,7 +64,7 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
   const handleRunClick = (label, data) => {
     toast.load("Loading worksheet content..");
     if (client === "neuland") {
-      runNeulandWorksheet(taskData.product).then((res) => {
+      runNeulandWorksheet(taskData.product, data.input?.value).then((res) => {
         setWorksheetsData((prev) => {
           const clone = deepClone(prev);
           clone[label][0][data.solution].content =

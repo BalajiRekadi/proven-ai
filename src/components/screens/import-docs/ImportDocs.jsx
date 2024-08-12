@@ -21,6 +21,7 @@ const ImportDocs = ({
   showTaskCard,
   setShowTaskCard,
   setWorksheetsData,
+  showOnlyMethodUpload = false,
 }) => {
   const toast = useToast();
   const { client } = useStore();
@@ -39,7 +40,7 @@ const ImportDocs = ({
       toast.info("Please upload Files");
     } else {
       if (client === "neuland") {
-        fetchNeulandWorksheets(specFile?.name).then((data) => {
+        fetchNeulandWorksheets(methodFile?.name).then((data) => {
           toast.success("Files processed successfully");
           setShowTaskCard(true);
           setTaskData(data.taskData);
@@ -58,12 +59,14 @@ const ImportDocs = ({
   return (
     <div style={{ width: "70%" }}>
       <Flex gap={16}>
-        <UploadCard
-          title={"Specification"}
-          label={"File Name"}
-          value={specFile}
-          onChange={setSpecFile}
-        />
+        {!showOnlyMethodUpload && (
+          <UploadCard
+            title={"Specification"}
+            label={"File Name"}
+            value={specFile}
+            onChange={setSpecFile}
+          />
+        )}
         <UploadCard
           title={"Method"}
           label={"File Name"}

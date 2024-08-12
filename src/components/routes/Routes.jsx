@@ -8,7 +8,7 @@ import { useStore } from "../../store/useStore";
 const Routes = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { module, selectedRoute, setRoute } = useStore();
+  const { module, client, selectedRoute, setRoute } = useStore();
 
   useEffect(() => {
     if (location?.pathname) {
@@ -18,7 +18,7 @@ const Routes = () => {
 
   useEffect(() => {
     navigate(`/user/${module}/home`);
-  }, [module]);
+  }, [module, client]);
 
   const handleMenuItemClick = (route) => {
     setRoute(`/user/${module}/${route}`);

@@ -10,6 +10,7 @@ import "./create.css";
 import { saveImportDocsData, saveWorksheetData } from "../../../../api/helpers";
 import { DetailsBox, TextModal } from "../../../../shared/components";
 import { useToast } from "../../../../shared/components/toast/useToast";
+import { useStore } from "../../../../store/useStore";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
@@ -21,6 +22,7 @@ const CreateFlow = () => {
   const [taskData, setTaskData] = useState({});
   const [worksheetsData, setWorksheetsData] = useState();
   const toast = useToast();
+  const { client } = useStore();
 
   const nextStep = () =>
     setActive((current) => (current < 5 ? current + 1 : current));
@@ -96,6 +98,7 @@ const CreateFlow = () => {
             setSpecFile={setSpecFile}
             setMethodFile={setMethodFile}
             setWorksheetsData={setWorksheetsData}
+            showOnlyMethodUpload={client === "neuland"}
           />
         </Stepper.Step>
         <Stepper.Step label="Worksheets">
