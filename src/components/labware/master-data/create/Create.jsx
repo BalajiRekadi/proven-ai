@@ -8,6 +8,7 @@ import Export from "../../../screens/export/Export";
 import { useToast } from "../../../../shared/components/toast/useToast";
 import Analysis from "./Analysis/Analysis";
 import Product from "./Product";
+import { useStore } from "../../../../store/useStore";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
@@ -23,6 +24,7 @@ const CreateFlow = () => {
   });
   const [analysisData, setAnalysisData] = useState();
   const [productDetailsLoaded, setProductDetailsLoaded] = useState(false);
+  const { client } = useStore();
 
   const toast = useToast();
 
@@ -96,6 +98,8 @@ const CreateFlow = () => {
             methodFile={methodFile}
             setSpecFile={setSpecFile}
             setMethodFile={setMethodFile}
+            setData={setProductDetails}
+            showOnlyMethodUpload={client === "neuland"}
           />
         </Stepper.Step>
         <Stepper.Step label="Product">

@@ -3,24 +3,20 @@ import {
   AccordionGroup,
   AccordionTable,
 } from "../../../../../shared/components";
-import {
-  fetchWorksheets,
-  runNeulandWorksheet,
-  runWorksheet,
-} from "../../../../../api/helpers";
+import { runNeulandWorksheet, runWorksheet } from "../../../../../api/helpers";
 import { deepClone } from "../../../../../shared/utilities";
 import { useToast } from "../../../../../shared/components/toast/useToast";
 import { useStore } from "../../../../../store/useStore";
+import { useGenerateWorksheets } from "../../../../../api/hooks";
 
 const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
   const toast = useToast();
   const { client } = useStore();
+  const { generateWorksheets } = useGenerateWorksheets();
 
   useEffect(() => {
     if (taskData.product && !worksheetsData) {
-      toast.load("Worksheet details are loading..");
-      fetchWorksheets(taskData.product).then((data) => {
-        toast.success("Worksheet details have been loaded successfully");
+      generateWorksheets(taskData.product).then((data) => {
         setWorksheetsData(data);
       });
     }

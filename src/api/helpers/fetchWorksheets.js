@@ -1,7 +1,7 @@
 import { DOMAIN } from "../../shared/constants";
 
-const fetchWorksheets = async (product) => {
-  const res = await fetch(`${DOMAIN}/generate_worksheet/?Product=${product}`, {
+const fetchWorksheets = async (endpoint, product) => {
+  const res = await fetch(`${DOMAIN}/${endpoint}/?Product=${product}`, {
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",
     }),

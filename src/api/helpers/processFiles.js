@@ -32,11 +32,3 @@ const mapResponse = (data, file1, file2) => {
 };
 
 export default processFiles;
-
-// {
-//   "Product": "3000714",
-//   "Test_Plan_Code": "",
-//   "MARKET": "Not applicable",
-//   "Rev_No": "5.0",
-//   "CC_No": "1614274"
-// }

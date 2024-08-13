@@ -97,7 +97,7 @@ const CreateFlow = () => {
             methodFile={methodFile}
             setSpecFile={setSpecFile}
             setMethodFile={setMethodFile}
-            setWorksheetsData={setWorksheetsData}
+            setData={setWorksheetsData}
             showOnlyMethodUpload={client === "neuland"}
           />
         </Stepper.Step>

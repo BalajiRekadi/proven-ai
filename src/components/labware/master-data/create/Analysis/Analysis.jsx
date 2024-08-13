@@ -2,17 +2,18 @@ import React, { useEffect } from "react";
 import { AccordionGroup } from "../../../../../shared/components";
 import AnalysisAccordionTable from "./AnalysisAccordionTable";
 import { useToast } from "../../../../../shared/components/toast/useToast";
-import { fetchWorksheets, runAnalysis } from "../../../../../api/helpers";
+import { runAnalysis } from "../../../../../api/helpers";
 import { deepClone } from "../../../../../shared/utilities";
+import { useGenerateWorksheets } from "../../../../../api/hooks";
 
 const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
   const toast = useToast();
+  const { generateWorksheets } = useGenerateWorksheets("analysis");
 
   useEffect(() => {
     if (taskData.code && !analysisData) {
       toast.load("Generating Analysis..");
-      fetchWorksheets(taskData.code).then((data) => {
-        toast.success("Analysis generated successfully");
+      generateWorksheets(taskData.code).then((data) => {
         setAnalysisData(data);
       });
     }

@@ -34,7 +34,7 @@ const Routes = () => {
         </Group>
       </Accordion.Control>
       <Accordion.Panel>
-        <Stack p={8}>
+        <Stack p={8} gap={4}>
           {parent.children.map((child) => (
             <Button
               className={

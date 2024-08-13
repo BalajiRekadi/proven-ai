@@ -1,4 +1,4 @@
-import uploadFiles from "./uploadFiles";
+import uploadFile from "./uploadFile";
 import processFiles from "./processFiles";
 import saveImportDocsData from "./saveImportDocsData";
 import saveWorksheetData from "./saveWorksheetData";
@@ -10,7 +10,7 @@ import fetchNeulandWorksheets from "./fetchNeulandWorksheets";
 import runNeulandWorksheet from "./runNeulandWorksheet";
 
 export {
-  uploadFiles,
+  uploadFile,
   processFiles,
   saveImportDocsData,
   fetchWorksheets,

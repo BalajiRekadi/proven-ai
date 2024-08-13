@@ -1,14 +1,11 @@
 import { DOMAIN } from "../../shared/constants";
 
-const fetchNeulandWorksheets = async (file) => {
-  const res = await fetch(
-    `${DOMAIN}/generate_worksheet_neuland/?Product=${file}`,
-    {
-      headers: new Headers({
-        "ngrok-skip-browser-warning": "69420",
-      }),
-    }
-  );
+const fetchNeulandWorksheets = async (endpoint, file) => {
+  const res = await fetch(`${DOMAIN}/${endpoint}/?Product=${file}`, {
+    headers: new Headers({
+      "ngrok-skip-browser-warning": "69420",
+    }),
+  });
   let data = await res.clone().json();
   return mapResponse(data, file);
 };

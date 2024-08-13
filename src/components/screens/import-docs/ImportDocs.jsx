@@ -1,15 +1,11 @@
 import { Button, Flex } from "@mantine/core";
-import {
-  fetchNeulandWorksheets,
-  processFiles,
-  uploadFiles,
-} from "../../../api/helpers";
-import { useToast } from "../../../shared/components/toast/useToast";
 import React from "react";
 import { UploadCard } from "../../../shared/components";
 import { IconUpload } from "@tabler/icons-react";
 import TaskCard from "./TaskCard";
+import { useGenerateWorksheets, useUploadFiles } from "../../../api/hooks";
 import { useStore } from "../../../store/useStore";
+import { processFiles } from "../../../api/helpers";
 
 const ImportDocs = ({
   taskData,
@@ -20,39 +16,32 @@ const ImportDocs = ({
   setMethodFile,
   showTaskCard,
   setShowTaskCard,
-  setWorksheetsData,
+  setData,
   showOnlyMethodUpload = false,
 }) => {
-  const toast = useToast();
+  const { uploadFiles } = useUploadFiles();
+  const { generateWorksheets } = useGenerateWorksheets("process");
   const { client } = useStore();
 
   const handleUploadFiles = () => {
-    toast.load("Files upload is in progress..");
-    uploadFiles([specFile, methodFile], client).then(() => {
+    const files = showOnlyMethodUpload ? [methodFile] : [specFile, methodFile];
+    uploadFiles(files).then(() => {
       setShowTaskCard(false);
-      toast.success("Files uploaded successfully");
     });
   };
 
   const handleProcess = () => {
-    toast.load("Files processing is in progress..");
-    if (!specFile?.name && !methodFile?.name) {
-      toast.info("Please upload Files");
+    if (client === "neuland") {
+      generateWorksheets(methodFile?.name).then((data) => {
+        setShowTaskCard(true);
+        setTaskData(data.taskData);
+        setData(data.worksheetData);
+      });
     } else {
-      if (client === "neuland") {
-        fetchNeulandWorksheets(methodFile?.name).then((data) => {
-          toast.success("Files processed successfully");
-          setShowTaskCard(true);
-          setTaskData(data.taskData);
-          setWorksheetsData(data.worksheetData);
-        });
-      } else {
-        processFiles(specFile.name, methodFile.name).then((data) => {
-          toast.success("Files processed successfully");
-          setShowTaskCard(true);
-          setTaskData(data);
-        });
-      }
+      processFiles(specFile?.name, methodFile?.name).then((data) => {
+        setShowTaskCard(true);
+        setTaskData(data);
+      });
     }
   };
 

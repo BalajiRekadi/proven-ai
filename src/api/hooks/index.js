@@ -1,3 +1,4 @@
-import useUploadFiles from './useUploadFiles';
+import useUploadFiles from "./useUploadFiles";
+import useGenerateWorksheets from "./useGenerateWorksheets";
 
-export {useUploadFiles}
+export { useUploadFiles, useGenerateWorksheets };
