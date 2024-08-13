@@ -3,9 +3,12 @@ import React from "react";
 import { UploadCard } from "../../../shared/components";
 import { IconUpload } from "@tabler/icons-react";
 import TaskCard from "./TaskCard";
-import { useGenerateWorksheets, useUploadFiles } from "../../../api/hooks";
+import {
+  useGenerateWorksheets,
+  useUploadFiles,
+  useProcessFiles,
+} from "../../../api/hooks";
 import { useStore } from "../../../store/useStore";
-import { processFiles } from "../../../api/helpers";
 
 const ImportDocs = ({
   taskData,
@@ -21,6 +24,7 @@ const ImportDocs = ({
 }) => {
   const { uploadFiles } = useUploadFiles();
   const { generateWorksheets } = useGenerateWorksheets("process");
+  const { processFile } = useProcessFiles();
   const { client } = useStore();
 
   const handleUploadFiles = () => {
@@ -38,7 +42,7 @@ const ImportDocs = ({
         setData(data.worksheetData);
       });
     } else {
-      processFiles(specFile?.name, methodFile?.name).then((data) => {
+      processFile([specFile?.name, methodFile?.name]).then((data) => {
         setShowTaskCard(true);
         setTaskData(data);
       });

@@ -22,6 +22,13 @@ const DetailsBox = ({ data, setData, onSave }) => {
         <TextInput
           w={"18rem"}
           placeholder="Enter"
+          label="Code"
+          value={data?.code}
+          onChange={(event) => handleValueChange(event, "product")}
+        />
+        <TextInput
+          w={"18rem"}
+          placeholder="Enter"
           label="Spec No."
           value={data?.specId}
           onChange={(event) => handleValueChange(event, "specId")}

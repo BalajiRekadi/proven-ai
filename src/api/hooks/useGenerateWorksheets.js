@@ -2,14 +2,19 @@ import { useMutation } from "@tanstack/react-query";
 import { fetchNeulandWorksheets, fetchWorksheets } from "../helpers";
 import { useStore } from "../../store/useStore";
 import { useToast } from "../../shared/components/toast/useToast";
+import { CLIENTS } from "../../shared/constants";
 
 const useGenerateWorksheets = (action = "") => {
   const { client } = useStore();
   const toast = useToast();
   const endpoint =
-    client === "neuland" ? "generate_worksheet_neuland" : "generate_worksheet";
+    client === CLIENTS.NEULAND.value
+      ? "generate_worksheet_neuland"
+      : client === CLIENTS.SUN_PHARMA.value
+      ? "generate_worksheet_sunpharma"
+      : "generate_worksheet";
   const helper =
-    client === "neuland" ? fetchNeulandWorksheets : fetchWorksheets;
+    client === CLIENTS.NEULAND.value ? fetchNeulandWorksheets : fetchWorksheets;
 
   const {
     mutateAsync: generateWorksheets,
@@ -44,20 +49,20 @@ const showToast = (toast, action, event) => {
   }
   if (event === "success") {
     if (action === "process") {
-      toast.load("Files processed successfully");
+      toast.success("Files processed successfully");
     } else if (action === "analysis") {
-      toast.load("Analysis generated successfully");
+      toast.success("Analysis generated successfully");
     } else {
-      toast.load("Worksheet details loaded successfully");
+      toast.success("Worksheet details loaded successfully");
     }
   }
   if (event === "error") {
     if (action === "process") {
-      toast.load("Failed to process files");
+      toast.error("Failed to process files");
     } else if (action === "analysis") {
-      toast.load("Failed to generate analysis");
+      toast.error("Failed to generate analysis");
     } else {
-      toast.load("Failed to load Worksheet details");
+      toast.error("Failed to load Worksheet details");
     }
   }
 };

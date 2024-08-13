@@ -1,15 +1,15 @@
 import { DOMAIN } from "../../shared/constants";
 import { appendDocxExtension } from "../../shared/utilities";
 
-const processFiles = async (file1, file2) => {
-  const name = appendDocxExtension(file1);
+const processFiles = async (files) => {
+  const name = appendDocxExtension(files[0]);
   const res = await fetch(`${DOMAIN}/process/?file_name=${name}`, {
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",
     }),
   });
   const data = await res.clone().json();
-  return mapResponse(data, file1, file2);
+  return mapResponse(data, files[0], files[1]);
 };
 
 const mapResponse = (data, file1, file2) => {

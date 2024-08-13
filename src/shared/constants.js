@@ -1,7 +1,6 @@
 import { IconDatabase } from "@tabler/icons-react";
 
-const DOMAIN =
-  "https://60d2-2405-201-c03a-a1f1-ed5a-7db9-cac5-7af2.ngrok-free.app";
+const DOMAIN = "https://eeab-49-205-251-99.ngrok-free.app";
 
 const ROUTES = [
   {
@@ -56,4 +55,19 @@ const DEFAULT_TABLE_CONFIG = {
   enableStickyHeader: true,
 };
 
-export { ROUTES, THEME, DOMAIN, DEFAULT_TABLE_CONFIG };
+const CLIENTS = {
+  DRL: {
+    value: "drl",
+    label: "DRL",
+  },
+  SUN_PHARMA: {
+    value: "sunpharma",
+    label: "SUN PHARMA",
+  },
+  NEULAND: {
+    value: "neuland",
+    label: "NEULAND",
+  },
+};
+
+export { ROUTES, THEME, DOMAIN, DEFAULT_TABLE_CONFIG, CLIENTS };

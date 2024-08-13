@@ -1,14 +1,18 @@
-import { Box, Flex, Modal, Text, Title } from "@mantine/core";
-import React from "react";
+import {
+  Box,
+  Flex,
+  Modal,
+  Text,
+  Title,
+  ActionIcon,
+  Textarea,
+} from "@mantine/core";
+import React, { useState } from "react";
+import { IconEdit, IconDeviceFloppy } from "@tabler/icons-react";
 
-const TextModal = ({
-  open,
-  onClose,
-  title,
-  content,
-  size = "lg",
-  asTable = false,
-}) => {
+const TextModal = ({ open, onClose, title, content, size = "lg" }) => {
+  const [isEdit, setIsEdit] = useState(false);
+
   const getFormattedContent = () => {
     if (!content) return [];
     const lines = content.split("\n");
@@ -22,23 +26,7 @@ const TextModal = ({
       title={<Title order={3}>{title}</Title>}
       size={size}
     >
-      {asTable && (
-        <Box bd={"1px solid var(--light-gray)"} style={{ borderRadius: "4px" }}>
-          {Object.keys(content).map((key) => (
-            <>
-              <Flex>
-                <Text w={"50%"} bd={"1px solid var(--light-gray)"} p={8}>
-                  {key}
-                </Text>
-                <Text w={"50%"} bd={"1px solid var(--light-gray)"} p={8}>
-                  {(content && content[key]) || ""}
-                </Text>
-              </Flex>
-            </>
-          ))}
-        </Box>
-      )}
-      {!asTable && (
+      {!isEdit && (
         <Box>
           {getFormattedContent().map((line) => (
             <Text w={"100%"} key={line} p={8}>
@@ -47,6 +35,26 @@ const TextModal = ({
           ))}
         </Box>
       )}
+
+      {isEdit && (
+        <Textarea
+          size="md"
+          label=""
+          autosize
+          minRows={10}
+          placeholder="Enter Description"
+          value={content}
+        />
+      )}
+
+      <Flex justify={"end"} p={16} gap={10}>
+        <ActionIcon variant="subtle" onClick={() => setIsEdit(true)}>
+          <IconEdit />
+        </ActionIcon>
+        <ActionIcon variant="subtle" onClick={() => setIsEdit(false)}>
+          <IconDeviceFloppy />
+        </ActionIcon>
+      </Flex>
     </Modal>
   );
 };

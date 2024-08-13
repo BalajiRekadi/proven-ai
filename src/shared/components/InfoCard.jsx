@@ -40,7 +40,7 @@ const InfoCard = ({ data, type, typeValue, setTaskData }) => {
 
   return (
     <>
-      <Card shadow="sm" padding="lg" radius="md" w={"30rem"} withBorder>
+      <Card shadow="sm" padding="lg" radius="md" w={"45rem"} withBorder>
         <Card.Section p={16}>
           <Flex justify={"right"} gap={8} pb={36}>
             <ActionIcon variant="subtle">
@@ -53,12 +53,18 @@ const InfoCard = ({ data, type, typeValue, setTaskData }) => {
               />
             </ActionIcon>
           </Flex>
-          <Flex justify={"space-between"} gap={8}>
+          <Flex justify={"space-around"} gap={8} wrap={"wrap"}>
             <TextInput
               label={"Product"}
               value={data?.product}
               placeholder="NA"
               onChange={(event) => handleValueChange(event, "product")}
+            />
+            <TextInput
+              label={"Code"}
+              value={data?.code}
+              placeholder="NA"
+              onChange={(event) => handleValueChange(event, "code")}
             />
             <TextInput
               label={"Market"}
