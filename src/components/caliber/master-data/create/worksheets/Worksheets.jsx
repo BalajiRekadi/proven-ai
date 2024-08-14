@@ -3,16 +3,17 @@ import {
   AccordionGroup,
   AccordionTable,
 } from "../../../../../shared/components";
-import { runNeulandWorksheet, runWorksheet } from "../../../../../api/helpers";
 import { deepClone } from "../../../../../shared/utilities";
-import { useToast } from "../../../../../shared/components/toast/useToast";
 import { useStore } from "../../../../../store/useStore";
-import { useGenerateWorksheets } from "../../../../../api/hooks";
+import {
+  useGenerateWorksheets,
+  useRunWorksheet,
+} from "../../../../../api/hooks";
 
 const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
-  const toast = useToast();
   const { client } = useStore();
   const { generateWorksheets } = useGenerateWorksheets();
+  const { runWorksheets } = useRunWorksheet();
 
   useEffect(() => {
     if (taskData.product && !worksheetsData) {
@@ -58,30 +59,35 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
   };
 
   const handleRunClick = (label, data) => {
-    toast.load("Loading worksheet content..");
     if (client === "neuland") {
-      runNeulandWorksheet(taskData.product, data.input?.value).then((res) => {
+      const payload = {
+        product: taskData.product,
+        body: { WorkSheetContent: data.input?.value },
+      };
+      runWorksheets(payload).then((res) => {
         setWorksheetsData((prev) => {
           const clone = deepClone(prev);
           clone[label][0][data.solution].content =
             res["WorkSheetContent"][0]["WorkSheetContent"][1];
           return clone;
         });
-        toast.success("Worksheet content loaded successfully");
       });
     } else {
       const item = deepClone(worksheetsData[label]);
       item[0] = { [data.solution]: item[0][data.solution] };
-      runWorksheet(taskData.product || "3000714", {
-        [label]: item,
-      }).then((res) => {
+      const payload = {
+        product: taskData.product,
+        body: {
+          [label]: item,
+        },
+      };
+      runWorksheets(payload).then((res) => {
         setWorksheetsData((prev) => {
           const clone = deepClone(prev);
           clone[label][0][data.solution].content =
             res[label][0][data.solution][1];
           return clone;
         });
-        toast.success("Worksheet content loaded successfully");
       });
     }
   };

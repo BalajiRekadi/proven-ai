@@ -2,15 +2,14 @@ import axios from "axios";
 import { DOMAIN } from "../../shared/constants";
 
 const generateProductDetails = async (data) => {
-  //TODO Remove hardcoded values
   const payload = {
     ITEM_CODE: data.code,
     PRODUCT_NAME: data.product,
     SPEC_ID: data.specId,
     STP_No: data.methodId,
     MARKET: data.market,
-    GRADE: data.grade || "FP",
-    SAMPLING_POINT: data.samplingPoint || "Release",
+    GRADE: data.grade,
+    SAMPLING_POINT: data.samplingPoint,
   };
 
   const res = await axios({
