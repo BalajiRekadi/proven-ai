@@ -1,95 +1,10 @@
-import { ActionIcon, Box, Flex, Select, TextInput } from "@mantine/core";
+import React from "react";
 import { DatePickerInput } from "@mantine/dates";
-import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import React, { useMemo } from "react";
-import {
-  IconAlertCircle,
-  IconCalendar,
-  IconClipboardText,
-  IconSearch,
-} from "@tabler/icons-react";
-import { DEFAULT_TABLE_CONFIG } from "../../../shared/constants";
+import { Box, Flex, Select, TextInput } from "@mantine/core";
+import { IconCalendar, IconSearch } from "@tabler/icons-react";
+import { ExportTable } from "../../../shared/components";
 
-const Export = () => {
-  const data = [
-    {
-      product: "10001234",
-      solution: "Mobile Phase",
-      name: "PARA_DISS_MAP_01",
-      type: "Worksheet",
-      content: "",
-      exceptionReport: "Success",
-    },
-    {
-      product: "10001234",
-      solution: "Mobile Phase",
-      name: "PARA_DISS_MAP_01",
-      type: "Worksheet",
-      content: "",
-      exceptionReport: "Failure",
-    },
-    {
-      product: "10001234",
-      solution: "Mobile Phase",
-      name: "PARA_DISS_MAP_01",
-      type: "Worksheet",
-      content: "",
-      exceptionReport: "Success",
-    },
-    {
-      product: "10001234",
-      solution: "Mobile Phase",
-      name: "PARA_DISS_MAP_01",
-      type: "Worksheet",
-      content: "",
-      exceptionReport: "Failure",
-    },
-  ];
-
-  const columns = useMemo(
-    () => [
-      {
-        header: "Product",
-        accessorKey: "product",
-      },
-      {
-        header: "Solution",
-        accessorKey: "solution",
-      },
-      {
-        header: "Name",
-        accessorKey: "name",
-      },
-      {
-        header: "Type",
-        accessorKey: "type",
-      },
-      {
-        header: "Content",
-        accessorKey: "content",
-        Cell: ({ cell }) => (
-          <ActionIcon variant="subtle">
-            <IconClipboardText />
-          </ActionIcon>
-        ),
-      },
-      {
-        header: "Exception Report",
-        accessorKey: "exceptionReport",
-        Cell: ({ cell }) => (
-          <IconAlertCircle
-            size={20}
-            style={{ marginRight: "8px", color: "var(--secondary)" }}
-          />
-        ),
-      },
-    ],
-    []
-  );
-
-  const tableConfig = { columns, data, ...DEFAULT_TABLE_CONFIG };
-  const table = useMantineReactTable(tableConfig);
-
+const Export = ({ data }) => {
   return (
     <Box p={16}>
       <Flex gap={32} justify={"space-between"} p={32} pb={64}>
@@ -117,7 +32,7 @@ const Export = () => {
           />
         </Flex>
       </Flex>
-      <MantineReactTable table={table} />
+      <ExportTable data={data} />
     </Box>
   );
 };

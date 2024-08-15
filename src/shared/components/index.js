@@ -9,6 +9,8 @@ import TextModal from "./TextModal";
 import ModuleSelect from "./ModuleSelect";
 import ProductCard from "./ProductCard";
 import TableViewModal from "./TableViewModal";
+import ExportModal from "./ExportModal";
+import ExportTable from "./ExportTable";
 import { ToastContextProvider } from "./toast/ToastProvider";
 
 export {
@@ -24,4 +26,6 @@ export {
   ProductCard,
   TableViewModal,
   TestAccordionTable,
+  ExportModal,
+  ExportTable,
 };

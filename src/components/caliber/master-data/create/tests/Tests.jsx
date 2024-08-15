@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import deepClone from "../../../../../shared/utilities/deepClone";
 import useSaveWorksheetData from "../../../../../api/hooks/useSaveWorksheetData";
 import {
   AccordionGroup,
   TestAccordionTable,
 } from "../../../../../shared/components";
+import { useToast } from "../../../../../shared/components/toast/useToast";
 
 const Tests = ({ testsData, taskData, setTestsData }) => {
   const { saveWorksheet } = useSaveWorksheetData("tests");
+  const toast = useToast();
+
+  useEffect(() => {
+    if (testsData) {
+      toast.success("Generated Tests details successfully");
+    }
+  }, [testsData]);
 
   const saveTextModalContent = (content, row, label, property) => {
     const clone = deepClone(testsData);

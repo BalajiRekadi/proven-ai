@@ -9,14 +9,14 @@ import TestPlan from "./test-plan/TestPlan";
 import "./create.css";
 import { saveImportDocsData } from "../../../../api/helpers";
 import { useSaveWorksheetData } from "../../../../api/hooks";
-import { DetailsBox, TextModal } from "../../../../shared/components";
+import { DetailsBox } from "../../../../shared/components";
 import { useToast } from "../../../../shared/components/toast/useToast";
 import { useStore } from "../../../../store/useStore";
+import ExportModal from "../../../../shared/components/ExportModal";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
-  const [modalOpened, setModalOpened] = useState(false);
-  const [modalContent, setModalContent] = useState("");
+  const [openExportModal, setOpenExportModal] = useState(false);
   const [specFile, setSpecFile] = useState(null);
   const [methodFile, setMethodFile] = useState(null);
   const [showTaskCard, setShowTaskCard] = useState(false);
@@ -46,9 +46,8 @@ const CreateFlow = () => {
     }
   };
 
-  const handleContentClick = (content) => {
-    setModalContent(content);
-    setModalOpened(true);
+  const handleExportClick = () => {
+    setOpenExportModal(true);
   };
 
   const handleSave = () => {
@@ -62,7 +61,7 @@ const CreateFlow = () => {
           product: taskData.product,
           ...worksheetsData,
         }).then((res) => {
-          toast.success("Deatils saved successfully");
+          toast.success("Details saved successfully");
         });
         break;
       }
@@ -71,7 +70,7 @@ const CreateFlow = () => {
           product: taskData.product,
           ...testsData,
         }).then((res) => {
-          toast.success("Deatils saved successfully");
+          toast.success("Details saved successfully");
         });
         break;
       }
@@ -84,6 +83,35 @@ const CreateFlow = () => {
     saveImportDocsData(taskData, specFile, methodFile).then(() => {
       toast.success("Deatils saved successfully");
     });
+  };
+
+  const getExportTableData = () => {
+    const data = [];
+    if (worksheetsData) {
+      Object.values(worksheetsData).forEach((item) => {
+        const row = item[0]["Procedure"] || {};
+        if (row.content) {
+          data.push({
+            code: taskData.code,
+            specification: taskData.specId || "-",
+            methodId: taskData.methodId || "-",
+            name: row.name,
+            type: row.type,
+            content: row.content,
+          });
+        }
+      });
+    }
+    return data;
+  };
+
+  const getExportStepData = () => {
+    return [];
+  };
+
+  const handleExport = () => {
+    setOpenExportModal(false);
+    setActive(4);
   };
 
   return (
@@ -148,7 +176,7 @@ const CreateFlow = () => {
           <TestPlan taskData={taskData} />
         </Stepper.Step>
         <Stepper.Step label="Export">
-          <Export />
+          <Export data={getExportStepData()} />
         </Stepper.Step>
       </Stepper>
 
@@ -160,7 +188,7 @@ const CreateFlow = () => {
           {active > 0 && active < 3 && (
             <Button
               variant="filled"
-              onClick={() => handleContentClick("export")}
+              onClick={() => handleExportClick("export")}
             >
               Export
             </Button>
@@ -169,11 +197,12 @@ const CreateFlow = () => {
             <Button onClick={nextStep}>{getNextBtnLabel()}</Button>
           )}
         </Group>
-        <TextModal
-          open={modalOpened}
-          onClose={() => setModalOpened(false)}
-          title={"Descriptionn"}
-          content={modalContent}
+        <ExportModal
+          open={openExportModal}
+          handleClose={() => setOpenExportModal(false)}
+          title={"Export"}
+          data={getExportTableData()}
+          handleExport={handleExport}
         />
       </Flex>
     </>

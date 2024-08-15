@@ -84,8 +84,9 @@ const Worksheets = ({
     } else {
       const item = deepClone(worksheetsData[label]);
       item[0] = { [data.solution]: item[0][data.solution] };
+      // TODO: product or code?
       const payload = {
-        product: taskData.product,
+        product: taskData.code,
         body: {
           [label]: item,
         },
