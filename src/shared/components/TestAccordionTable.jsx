@@ -20,8 +20,8 @@ import { DEFAULT_TABLE_CONFIG } from "../constants";
 import TextModal from "./TextModal";
 import { useToast } from "./toast/useToast";
 
-const AccordionTable = ({
-  data = [],
+const TestAccordionTable = ({
+  data = {},
   label = "",
   updateData,
   saveTextModalContent = () => {},
@@ -53,26 +53,21 @@ const AccordionTable = ({
 
   const getTableData = () => {
     const tableData = [];
-    if (data.forEach) {
-      data.forEach((item) => {
-        const keys = Object.keys(item);
-        keys.forEach((key) => {
-          if (key !== "task_id") {
-            tableData.push({
-              solution: key,
-              input: item[key],
-              content: item[key].content,
-              disableWorksheet: true,
-            });
-          }
-        });
-      });
-    }
+    tableData.push({
+      testCode: data.task_id,
+      testName: label,
+      input: data.calculation,
+      category: data.category,
+      technique: data.technoque,
+      type: data.type,
+      content: data.content,
+      disableWorksheet: true,
+    });
     return tableData;
   };
 
   const handleInputIconClick = (row, input) => {
-    setSelectedInput(input.value);
+    setSelectedInput(input[0]);
     setSelectedRow(row);
     setInputModalOpened(true);
   };
@@ -84,8 +79,12 @@ const AccordionTable = ({
   const columns = useMemo(
     () => [
       {
-        header: "Solution",
-        accessorKey: "solution",
+        header: "Test Code",
+        accessorKey: "testCode",
+      },
+      {
+        header: "Test Name",
+        accessorKey: "testName",
       },
       {
         header: "Input",
@@ -102,27 +101,42 @@ const AccordionTable = ({
         ),
       },
       {
-        header: "Type",
-        accessorKey: "type",
-        Cell: ({ cell, row }) => (
-          <Select
-            placeholder="Select"
-            value={row[`${row.original}`]}
-            variant="default"
-            data={["Worksheet", "Section Worksheet"]}
-            onChange={(event) => updateData(event, "type", label, row.original)}
-          />
-        ),
-      },
-      {
-        header: "Name",
-        accessorKey: "name",
+        header: "Test Category",
+        accessorKey: "category",
         Cell: ({ cell, row }) => (
           <TextInput
             placeholder="Enter"
             variant="default"
             value={cell.getValue()}
-            onChange={(event) => updateData(event, "name", label, row.original)}
+            onChange={(event) =>
+              updateData(event, "category", label, row.original)
+            }
+          />
+        ),
+      },
+      {
+        header: "Test Technique",
+        accessorKey: "technique",
+        Cell: ({ cell, row }) => (
+          <TextInput
+            placeholder="Enter"
+            variant="default"
+            value={cell.getValue()}
+            onChange={(event) =>
+              updateData(event, "technique", label, row.original)
+            }
+          />
+        ),
+      },
+      {
+        header: "Test Type",
+        accessorKey: "type",
+        Cell: ({ cell, row }) => (
+          <TextInput
+            placeholder="Enter"
+            variant="default"
+            value={cell.getValue()}
+            onChange={(event) => updateData(event, "type", label, row.original)}
           />
         ),
       },
@@ -138,7 +152,7 @@ const AccordionTable = ({
               pl={4}
               disabled={!cell.getValue()}
             >
-              Worksheet Content
+              Test Details
             </Button>
             <ActionIcon variant="subtle" disabled={!cell.getValue()}>
               <IconCopy onClick={() => handleCopy(cell.getValue())} />
@@ -147,22 +161,16 @@ const AccordionTable = ({
         ),
       },
       {
-        header: "Merge",
+        header: "Run",
         size: 50,
-        accessorKey: "merge",
+        accessorKey: "run",
         Cell: ({ row }) => (
           <>
-            <ActionIcon variant="subtle">
-              <Checkbox label="" />
-            </ActionIcon>
             <ActionIcon variant="subtle">
               <IconRun
                 color="green"
                 onClick={() => handleRunClick(label, row)}
               />
-            </ActionIcon>
-            <ActionIcon variant="subtle">
-              <IconShare />
             </ActionIcon>
           </>
         ),
@@ -180,23 +188,20 @@ const AccordionTable = ({
   const table = useMantineReactTable(tableConfig);
 
   const handleSaveTextModalContent = (content, property) => {
-    saveTextModalContent(content, selectedRow, label, property);
+    const value = property == "calculation" ? [content] : content;
+    saveTextModalContent(value, selectedRow, label, property);
   };
 
   return (
     <>
       <Box>
         <MantineReactTable table={table} />
-        <Group justify="right" mt="md">
-          <Button>Merge</Button>
-          <Button variant="outline">Cancel</Button>
-        </Group>
         <TextModal
           open={inputModalOpened}
           onClose={() => setInputModalOpened(false)}
           title="Solution"
           content={selectedInput}
-          onSaveContent={(e) => handleSaveTextModalContent(e, "value")}
+          onSaveContent={(e) => handleSaveTextModalContent(e, "calculation")}
         />
         <TextModal
           open={contentModalOpened}
@@ -210,4 +215,4 @@ const AccordionTable = ({
   );
 };
 
-export default AccordionTable;
+export default TestAccordionTable;

@@ -8,17 +8,25 @@ import { useStore } from "../../../../../store/useStore";
 import {
   useGenerateWorksheets,
   useRunWorksheet,
+  useSaveWorksheetData,
 } from "../../../../../api/hooks";
 
-const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
+const Worksheets = ({
+  taskData,
+  worksheetsData,
+  setWorksheetsData,
+  setTestsData,
+}) => {
   const { client } = useStore();
   const { generateWorksheets } = useGenerateWorksheets();
   const { runWorksheets } = useRunWorksheet();
+  const { saveWorksheet } = useSaveWorksheetData();
 
   useEffect(() => {
     if (taskData.product && !worksheetsData) {
       generateWorksheets(taskData.product).then((data) => {
-        setWorksheetsData(data);
+        setWorksheetsData(data.worksheets);
+        setTestsData(data.tests);
       });
     }
   }, [taskData.product]);
@@ -36,6 +44,7 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
                 label={key}
                 data={worksheetsData[key][0] == {} ? [] : worksheetsData[key]}
                 updateData={updateWorkSheetData}
+                saveTextModalContent={saveTextModalContent}
                 onRun={handleRunClick}
               />
             ),
@@ -61,7 +70,7 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
   const handleRunClick = (label, data) => {
     if (client === "neuland") {
       const payload = {
-        product: taskData.product,
+        product: taskData.code,
         body: { WorkSheetContent: data.input?.value },
       };
       runWorksheets(payload).then((res) => {
@@ -90,6 +99,17 @@ const Worksheets = ({ taskData, worksheetsData, setWorksheetsData }) => {
         });
       });
     }
+  };
+
+  const saveTextModalContent = (content, row, label, property) => {
+    const clone = deepClone(worksheetsData);
+    clone[label][0][row.solution][property] = content;
+    saveWorksheet({
+      product: taskData.product,
+      ...clone,
+    }).then((res) => {
+      setWorksheetsData(clone);
+    });
   };
 
   return (

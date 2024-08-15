@@ -1,9 +1,9 @@
 import axios from "axios";
 import { DOMAIN } from "../../shared/constants";
 
-const saveWorksheetData = (payload) => {
+const saveWorksheetData = (payload, endpoint) => {
   return axios({
-    url: `${DOMAIN}/save2`,
+    url: `${DOMAIN}/${endpoint}`,
     method: "POST",
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",

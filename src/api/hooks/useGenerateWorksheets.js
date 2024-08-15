@@ -22,7 +22,7 @@ const useGenerateWorksheets = (action = "") => {
     isError,
     isSuccess,
   } = useMutation({
-    mutationFn: (payload) => helper(endpoint, payload),
+    mutationFn: (payload) => helper(endpoint, payload, client),
     onMutate: () => {
       showToast(toast, action, "load");
     },

@@ -7,7 +7,8 @@ import Export from "../../../screens/export/Export";
 import Tests from "./tests/Tests";
 import TestPlan from "./test-plan/TestPlan";
 import "./create.css";
-import { saveImportDocsData, saveWorksheetData } from "../../../../api/helpers";
+import { saveImportDocsData } from "../../../../api/helpers";
+import { useSaveWorksheetData } from "../../../../api/hooks";
 import { DetailsBox, TextModal } from "../../../../shared/components";
 import { useToast } from "../../../../shared/components/toast/useToast";
 import { useStore } from "../../../../store/useStore";
@@ -21,8 +22,11 @@ const CreateFlow = () => {
   const [showTaskCard, setShowTaskCard] = useState(false);
   const [taskData, setTaskData] = useState({});
   const [worksheetsData, setWorksheetsData] = useState();
+  const [testsData, setTestsData] = useState();
   const toast = useToast();
   const { client } = useStore();
+  const { saveWorksheet } = useSaveWorksheetData();
+  const { saveWorksheet: saveTestData } = useSaveWorksheetData("tests");
 
   const nextStep = () =>
     setActive((current) => (current < 5 ? current + 1 : current));
@@ -54,9 +58,18 @@ const CreateFlow = () => {
         break;
       }
       case 1: {
-        saveWorksheetData({
+        saveWorksheet({
           product: taskData.product,
           ...worksheetsData,
+        }).then((res) => {
+          toast.success("Deatils saved successfully");
+        });
+        break;
+      }
+      case 2: {
+        saveTestData({
+          product: taskData.product,
+          ...testsData,
         }).then((res) => {
           toast.success("Deatils saved successfully");
         });
@@ -111,6 +124,7 @@ const CreateFlow = () => {
             taskData={taskData}
             worksheetsData={worksheetsData}
             setWorksheetsData={setWorksheetsData}
+            setTestsData={setTestsData}
           />
         </Stepper.Step>
         <Stepper.Step label="Tests">
@@ -119,7 +133,11 @@ const CreateFlow = () => {
             setData={setTaskData}
             onSave={saveTaskData}
           />
-          <Tests />
+          <Tests
+            testsData={testsData}
+            taskData={taskData}
+            setTestsData={setTestsData}
+          />
         </Stepper.Step>
         <Stepper.Step label="Test Plan">
           <DetailsBox
@@ -154,7 +172,7 @@ const CreateFlow = () => {
         <TextModal
           open={modalOpened}
           onClose={() => setModalOpened(false)}
-          title={"Description"}
+          title={"Descriptionn"}
           content={modalContent}
         />
       </Flex>

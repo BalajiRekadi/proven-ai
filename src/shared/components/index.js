@@ -4,6 +4,7 @@ import TextCard from "./TextCard";
 import DetailsBox from "./DetailsBox";
 import AccordionGroup from "./AccordionGroup";
 import AccordionTable from "./AccordionTable";
+import TestAccordionTable from "./TestAccordionTable";
 import TextModal from "./TextModal";
 import ModuleSelect from "./ModuleSelect";
 import ProductCard from "./ProductCard";
@@ -22,4 +23,5 @@ export {
   ModuleSelect,
   ProductCard,
   TableViewModal,
+  TestAccordionTable,
 };
