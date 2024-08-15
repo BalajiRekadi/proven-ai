@@ -61,6 +61,8 @@ const AccordionTable = ({
             tableData.push({
               solution: key,
               input: item[key],
+              name: item[key].name,
+              type: item[key].type,
               content: item[key].content,
               disableWorksheet: true,
             });
@@ -106,7 +108,7 @@ const AccordionTable = ({
         Cell: ({ cell, row }) => (
           <Select
             placeholder="Select"
-            value={row[`${row.original}`]}
+            value={cell.getValue()}
             variant="default"
             data={["Worksheet", "Section Worksheet"]}
             onChange={(event) => updateData(event, "type", label, row.original)}
@@ -129,12 +131,13 @@ const AccordionTable = ({
         header: "Content",
         accessorKey: "content",
         Cell: ({ cell }) => (
-          <Flex align={"center"}>
+          <Flex align={"center"} gap={4}>
             <Button
               variant="transparent"
               justify="space-between"
               onClick={() => handleContentClick(cell.getValue())}
-              pl={4}
+              pl={8}
+              pr={6}
               disabled={!cell.getValue()}
             >
               Worksheet Content
@@ -143,6 +146,7 @@ const AccordionTable = ({
               variant="subtle"
               disabled={!cell.getValue()}
               onClick={() => handleCopy(cell.getValue())}
+              size={36}
             >
               <IconCopy />
             </ActionIcon>

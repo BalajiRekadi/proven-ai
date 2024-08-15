@@ -143,12 +143,13 @@ const TestAccordionTable = ({
         header: "Content",
         accessorKey: "content",
         Cell: ({ cell }) => (
-          <Flex align={"center"}>
+          <Flex align={"center"} gap={4}>
             <Button
               variant="transparent"
               justify="space-between"
               onClick={() => handleContentClick(cell.getValue())}
-              pl={4}
+              pl={8}
+              pr={6}
               disabled={!cell.getValue()}
             >
               Test Details
@@ -157,6 +158,7 @@ const TestAccordionTable = ({
               variant="subtle"
               disabled={!cell.getValue()}
               onClick={() => handleCopy(cell.getValue())}
+              size={36}
             >
               <IconCopy />
             </ActionIcon>
