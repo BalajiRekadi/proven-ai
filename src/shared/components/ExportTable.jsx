@@ -3,16 +3,24 @@ import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { useMemo } from "react";
 import { IconAlertCircle, IconFileDownload } from "@tabler/icons-react";
 import { DEFAULT_TABLE_CONFIG } from "../constants";
+import { downloadFile } from "../utilities";
 
 const ExportTable = ({
   data,
-  rowSelection,
-  setRowSelection,
+  rowSelection = [],
+  setRowSelection = () => {},
   enableRowSelection = false,
 }) => {
-  console.log("xxx", rowSelection);
   const foo = (e) => {
     setRowSelection(e);
+  };
+
+  const onDownload = (row) => {
+    downloadFile({
+      data: row.content,
+      fileName: `${row.name}.txt`,
+      fileType: "text",
+    });
   };
 
   const columns = useMemo(
@@ -40,8 +48,8 @@ const ExportTable = ({
       {
         header: "Content",
         accessorKey: "content",
-        Cell: ({ cell }) => (
-          <ActionIcon variant="subtle">
+        Cell: ({ row }) => (
+          <ActionIcon variant="subtle" onClick={() => onDownload(row.original)}>
             <IconFileDownload />
           </ActionIcon>
         ),

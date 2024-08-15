@@ -1,6 +1,6 @@
 import React from "react";
 import { DatePickerInput } from "@mantine/dates";
-import { Box, Flex, Select, TextInput } from "@mantine/core";
+import { Box, Flex, Select, TextInput, SegmentedControl } from "@mantine/core";
 import { IconCalendar, IconSearch } from "@tabler/icons-react";
 import { ExportTable } from "../../../shared/components";
 
@@ -32,6 +32,12 @@ const Export = ({ data }) => {
           />
         </Flex>
       </Flex>
+      <SegmentedControl
+        color="proven"
+        value="Worksheets"
+        data={["Worksheets", "Tests", "Test Plans"]}
+        mb={10}
+      />
       <ExportTable data={data} />
     </Box>
   );

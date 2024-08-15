@@ -191,8 +191,8 @@ const AccordionTable = ({
       <Box>
         <MantineReactTable table={table} />
         <Group justify="right" mt="md">
-          <Button>Merge</Button>
           <Button variant="outline">Cancel</Button>
+          <Button>Merge</Button>
         </Group>
         <TextModal
           open={inputModalOpened}

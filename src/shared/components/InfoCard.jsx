@@ -52,16 +52,16 @@ const InfoCard = ({ data, type, typeValue, setTaskData }) => {
           </Flex>
           <Flex justify={"space-around"} gap={8} wrap={"wrap"}>
             <TextInput
-              label={"Product"}
-              value={data?.product}
-              placeholder="NA"
-              onChange={(event) => handleValueChange(event, "product")}
-            />
-            <TextInput
               label={"Code"}
               value={data?.code}
               placeholder="NA"
               onChange={(event) => handleValueChange(event, "code")}
+            />
+            <TextInput
+              label={"Product"}
+              value={data?.product}
+              placeholder="NA"
+              onChange={(event) => handleValueChange(event, "product")}
             />
             <TextInput
               label={"Market"}

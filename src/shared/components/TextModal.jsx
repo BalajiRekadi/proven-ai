@@ -6,6 +6,7 @@ import {
   Title,
   ActionIcon,
   Textarea,
+  Button,
 } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import { IconEdit, IconDeviceFloppy } from "@tabler/icons-react";
@@ -79,12 +80,12 @@ const TextModal = ({
       )}
 
       <Flex justify={"end"} p={16} gap={10}>
-        <ActionIcon variant="subtle" onClick={onEdit}>
-          <IconEdit />
-        </ActionIcon>
-        <ActionIcon variant="subtle" onClick={onSave}>
-          <IconDeviceFloppy />
-        </ActionIcon>
+        <Button variant="light" onClick={onEdit}>
+          Edit
+        </Button>
+        <Button variant={"filled"} onClick={onSave}>
+          Save
+        </Button>
       </Flex>
     </Modal>
   );
