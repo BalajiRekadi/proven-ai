@@ -1,10 +1,20 @@
-import { ActionIcon, Box } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { useMemo } from "react";
-import { IconAlertCircle, IconClipboardText } from "@tabler/icons-react";
+import { IconAlertCircle, IconFileDownload } from "@tabler/icons-react";
 import { DEFAULT_TABLE_CONFIG } from "../constants";
 
-const ExportTable = ({ data, enableRowSelection = false }) => {
+const ExportTable = ({
+  data,
+  rowSelection,
+  setRowSelection,
+  enableRowSelection = false,
+}) => {
+  console.log("xxx", rowSelection);
+  const foo = (e) => {
+    setRowSelection(e);
+  };
+
   const columns = useMemo(
     () => [
       {
@@ -32,7 +42,7 @@ const ExportTable = ({ data, enableRowSelection = false }) => {
         accessorKey: "content",
         Cell: ({ cell }) => (
           <ActionIcon variant="subtle">
-            <IconClipboardText />
+            <IconFileDownload />
           </ActionIcon>
         ),
       },
@@ -55,6 +65,10 @@ const ExportTable = ({ data, enableRowSelection = false }) => {
     data,
     ...DEFAULT_TABLE_CONFIG,
     enableRowSelection,
+    enableRowNumbers: !enableRowSelection,
+    // getRowId: (originalRow) => originalRow,
+    onRowSelectionChange: foo,
+    state: { rowSelection },
     mantineTableProps: {
       striped: true,
     },

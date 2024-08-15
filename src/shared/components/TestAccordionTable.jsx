@@ -91,12 +91,11 @@ const TestAccordionTable = ({
         size: 20,
         accessorKey: "input",
         Cell: ({ row, cell }) => (
-          <ActionIcon variant="subtle">
-            <IconFileFilled
-              onClick={() =>
-                handleInputIconClick(row.original, cell.getValue())
-              }
-            />
+          <ActionIcon
+            variant="subtle"
+            onClick={() => handleInputIconClick(row.original, cell.getValue())}
+          >
+            <IconFileFilled />
           </ActionIcon>
         ),
       },
@@ -154,8 +153,12 @@ const TestAccordionTable = ({
             >
               Test Details
             </Button>
-            <ActionIcon variant="subtle" disabled={!cell.getValue()}>
-              <IconCopy onClick={() => handleCopy(cell.getValue())} />
+            <ActionIcon
+              variant="subtle"
+              disabled={!cell.getValue()}
+              onClick={() => handleCopy(cell.getValue())}
+            >
+              <IconCopy />
             </ActionIcon>
           </Flex>
         ),
@@ -166,11 +169,11 @@ const TestAccordionTable = ({
         accessorKey: "run",
         Cell: ({ row }) => (
           <>
-            <ActionIcon variant="subtle">
-              <IconRun
-                color="green"
-                onClick={() => handleRunClick(label, row)}
-              />
+            <ActionIcon
+              variant="subtle"
+              onClick={() => handleRunClick(label, row)}
+            >
+              <IconRun color="green" />
             </ActionIcon>
           </>
         ),

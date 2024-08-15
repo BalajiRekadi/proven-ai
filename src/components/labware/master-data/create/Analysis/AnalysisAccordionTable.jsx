@@ -116,10 +116,11 @@ const AnalysisAccordionTable = ({
         size: 20,
         accessorKey: "input",
         Cell: ({ cell }) => (
-          <ActionIcon variant="subtle">
-            <IconFileFilled
-              onClick={() => handleInputIconClick(cell.getValue())}
-            />
+          <ActionIcon
+            variant="subtle"
+            onClick={() => handleInputIconClick(cell.getValue())}
+          >
+            <IconFileFilled />
           </ActionIcon>
         ),
       },
@@ -195,11 +196,11 @@ const AnalysisAccordionTable = ({
         header: "Actions",
         Cell: ({ row }) => (
           <Flex align={"center"} gap={24}>
-            <ActionIcon variant="subtle">
-              <IconRun
-                color={"green"}
-                onClick={() => handleRunClick(label, row)}
-              />
+            <ActionIcon
+              variant="subtle"
+              onClick={() => handleRunClick(label, row)}
+            >
+              <IconRun color={"green"} />
             </ActionIcon>
             <Popover position="top" withArrow shadow="md">
               <Popover.Target>
@@ -207,7 +208,7 @@ const AnalysisAccordionTable = ({
                   variant="subtle"
                   disabled={disableStackIcon(row.original)}
                 >
-                  <IconStackPop onClick={undefined} />
+                  <IconStackPop />
                 </ActionIcon>
               </Popover.Target>
               <Popover.Dropdown>
@@ -217,19 +218,17 @@ const AnalysisAccordionTable = ({
                       <Flex justify={"space-between"}>
                         <Text>{runDataTables[key]}</Text>
                         <Group>
-                          <ActionIcon variant="subtle">
-                            <IconEyeFilled
-                              size={20}
-                              onClick={() =>
-                                onView(runDataTables[key], key, row)
-                              }
-                            />
+                          <ActionIcon
+                            variant="subtle"
+                            onClick={() => onView(runDataTables[key], key, row)}
+                          >
+                            <IconEyeFilled size={20} />
                           </ActionIcon>
-                          <ActionIcon variant="subtle">
-                            <IconCircleArrowDownFilled
-                              size={20}
-                              onClick={() => onDownload(key, row)}
-                            />
+                          <ActionIcon
+                            variant="subtle"
+                            onClick={() => onDownload(key, row)}
+                          >
+                            <IconCircleArrowDownFilled size={20} />
                           </ActionIcon>
                         </Group>
                       </Flex>

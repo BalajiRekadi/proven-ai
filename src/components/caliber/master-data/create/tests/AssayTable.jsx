@@ -35,8 +35,8 @@ const AssayTable = () => {
         size: 50,
         accessorKey: "output",
         Cell: ({ cell }) => (
-          <ActionIcon variant="subtle">
-            <IconFileTypeCsv onClick={toggleAssayModal} />
+          <ActionIcon variant="subtle" onClick={toggleAssayModal}>
+            <IconFileTypeCsv />
           </ActionIcon>
         ),
       },

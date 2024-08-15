@@ -38,11 +38,11 @@ const ProductCard = ({ title, content }) => {
           <Flex justify="space-between" align="center">
             <Text fw={500}>{title}</Text>
             <Group gap="xs">
-              <ActionIcon variant="subtle">
-                <IconEyeFilled size={20} onClick={onView} />
+              <ActionIcon variant="subtle" onClick={onView}>
+                <IconEyeFilled size={20} />
               </ActionIcon>
-              <ActionIcon variant="subtle">
-                <IconCircleArrowDownFilled size={20} onClick={onDownload} />
+              <ActionIcon variant="subtle" onClick={onDownload}>
+                <IconCircleArrowDownFilled size={20} />
               </ActionIcon>
             </Group>
           </Flex>

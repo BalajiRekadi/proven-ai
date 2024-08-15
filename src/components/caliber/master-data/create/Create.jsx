@@ -23,6 +23,9 @@ const CreateFlow = () => {
   const [taskData, setTaskData] = useState({});
   const [worksheetsData, setWorksheetsData] = useState();
   const [testsData, setTestsData] = useState();
+  const [selectedExportData, setSelectedExportData] = useState([]);
+  const [rowSelection, setRowSelection] = useState({});
+
   const toast = useToast();
   const { client } = useStore();
   const { saveWorksheet } = useSaveWorksheetData();
@@ -106,7 +109,13 @@ const CreateFlow = () => {
   };
 
   const getExportStepData = () => {
-    return [];
+    const indices = Object.keys(rowSelection);
+    const data = getExportTableData();
+    const exportData = [];
+    indices.forEach((item) => {
+      exportData.push(data[item]);
+    });
+    return exportData;
   };
 
   const handleExport = () => {
@@ -203,6 +212,8 @@ const CreateFlow = () => {
           title={"Export"}
           data={getExportTableData()}
           handleExport={handleExport}
+          rowSelection={rowSelection}
+          setRowSelection={setRowSelection}
         />
       </Flex>
     </>

@@ -7,6 +7,8 @@ const ExportModal = ({
   handleExport,
   title,
   data,
+  rowSelection,
+  setRowSelection,
   size = "1100",
 }) => {
   return (
@@ -16,7 +18,12 @@ const ExportModal = ({
       title={<Title order={3}>{title}</Title>}
       size={size}
     >
-      <ExportTable data={data} enableRowSelection={true} />
+      <ExportTable
+        data={data}
+        enableRowSelection={true}
+        rowSelection={rowSelection}
+        setRowSelection={setRowSelection}
+      />
       <Group justify="right" mt="md">
         <Button variant="outline" onClick={handleClose}>
           Cancel

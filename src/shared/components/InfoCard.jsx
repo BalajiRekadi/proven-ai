@@ -43,14 +43,11 @@ const InfoCard = ({ data, type, typeValue, setTaskData }) => {
       <Card shadow="sm" padding="lg" radius="md" w={"45rem"} withBorder>
         <Card.Section p={16}>
           <Flex justify={"right"} gap={8} pb={36}>
-            <ActionIcon variant="subtle">
-              <IconEyeFilled color="var(--gray)" onClick={viewTaskDetails} />
+            <ActionIcon variant="subtle" onClick={viewTaskDetails}>
+              <IconEyeFilled color="var(--gray)" />
             </ActionIcon>
-            <ActionIcon variant="subtle">
-              <IconCircleArrowDownFilled
-                color="var(--gray)"
-                onClick={handleDownload}
-              />
+            <ActionIcon variant="subtle" onClick={handleDownload}>
+              <IconCircleArrowDownFilled color="var(--gray)" />
             </ActionIcon>
           </Flex>
           <Flex justify={"space-around"} gap={8} wrap={"wrap"}>
