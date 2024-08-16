@@ -1,20 +1,6 @@
 import React, { useMemo, useState } from "react";
-import {
-  Button,
-  Group,
-  Box,
-  Select,
-  ActionIcon,
-  TextInput,
-  Flex,
-  Checkbox,
-} from "@mantine/core";
-import {
-  IconRun,
-  IconCopy,
-  IconShare,
-  IconFileFilled,
-} from "@tabler/icons-react";
+import { Button, Box, ActionIcon, TextInput, Flex } from "@mantine/core";
+import { IconRun, IconCopy, IconFileFilled } from "@tabler/icons-react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { DEFAULT_TABLE_CONFIG } from "../constants";
 import TextModal from "./TextModal";

@@ -68,7 +68,7 @@ function Login() {
         />
         <PasswordInput placeholder="Enter Password" size="lg" />
         <Flex justify={"space-between"} gap={24}>
-          <Box w={"50%"}>
+          <Box w={"70%"}>
             <ModuleSelect size={"lg"} />
           </Box>
           <Button
@@ -76,7 +76,7 @@ function Login() {
             color="green"
             onClick={handleLogin}
             size="lg"
-            w={"50%"}
+            w={"30%"}
           >
             Login
           </Button>

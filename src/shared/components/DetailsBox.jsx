@@ -17,7 +17,7 @@ const DetailsBox = ({ data, setData, onSave }) => {
           placeholder="Enter"
           label="Code"
           value={data?.code}
-          onChange={(event) => handleValueChange(event, "product")}
+          onChange={(event) => handleValueChange(event, "code")}
         />
         <TextInput
           w={"18rem"}

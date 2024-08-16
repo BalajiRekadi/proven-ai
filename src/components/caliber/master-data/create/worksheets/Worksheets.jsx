@@ -86,7 +86,7 @@ const Worksheets = ({
       item[0] = { [data.solution]: item[0][data.solution] };
       // TODO: product or code?
       const payload = {
-        product: taskData.code,
+        product: taskData.product,
         body: {
           [label]: item,
         },

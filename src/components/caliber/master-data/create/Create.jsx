@@ -23,7 +23,6 @@ const CreateFlow = () => {
   const [taskData, setTaskData] = useState({});
   const [worksheetsData, setWorksheetsData] = useState();
   const [testsData, setTestsData] = useState();
-  const [selectedExportData, setSelectedExportData] = useState([]);
   const [rowSelection, setRowSelection] = useState({});
 
   const toast = useToast();
@@ -92,17 +91,20 @@ const CreateFlow = () => {
     const data = [];
     if (worksheetsData) {
       Object.values(worksheetsData).forEach((item) => {
-        const row = item[0]["Procedure"] || {};
-        if (row.content) {
-          data.push({
-            code: taskData.code,
-            specification: taskData.specId || "-",
-            methodId: taskData.methodId || "-",
-            name: row.name,
-            type: row.type,
-            content: row.content,
-          });
-        }
+        const rows = Object.keys(item[0]);
+        rows.forEach((rowKey) => {
+          const row = item[0][rowKey] || {};
+          if (row.content) {
+            data.push({
+              code: taskData.code,
+              specification: taskData.specId || "-",
+              methodId: taskData.methodId || "-",
+              name: row.name,
+              type: row.type,
+              content: row.content,
+            });
+          }
+        });
       });
     }
     return data;
