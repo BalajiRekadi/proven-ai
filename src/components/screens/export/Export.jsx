@@ -1,10 +1,40 @@
-import React from "react";
+import { useState } from "react";
 import { DatePickerInput } from "@mantine/dates";
-import { Box, Flex, Select, TextInput, SegmentedControl } from "@mantine/core";
+import {
+  Box,
+  Flex,
+  Select,
+  Button,
+  TextInput,
+  SegmentedControl,
+} from "@mantine/core";
 import { IconCalendar, IconSearch } from "@tabler/icons-react";
 import { ExportTable } from "../../../shared/components";
+import exportToCsv from "../../../shared/utilities/downloadCSV";
 
 const Export = ({ data }) => {
+  const [rowSelection, setRowSelection] = useState({});
+
+  const getExportData = () => {
+    const indices = Object.keys(rowSelection);
+    const exportData = [];
+    indices.forEach((item) => {
+      exportData.push(data[item]);
+    });
+    return exportData;
+  };
+
+  const handleExportToCSV = () => {
+    const data = getExportData();
+    if (data && data.length) {
+      const { code } = data[0];
+      const curr = new Date();
+      const date = `${curr.getDate()}${
+        curr.getMonth() + 1
+      }${curr.getFullYear()}`;
+      exportToCsv(data, `${code}_${date}`);
+    }
+  };
   return (
     <Box p={16}>
       <Flex gap={32} justify={"space-between"} p={32} pb={64}>
@@ -32,13 +62,23 @@ const Export = ({ data }) => {
           />
         </Flex>
       </Flex>
-      <SegmentedControl
-        color="proven"
-        value="Worksheets"
-        data={["Worksheets", "Tests", "Test Plans"]}
-        mb={10}
+      <Flex justify={"space-between"}>
+        <SegmentedControl
+          color="proven"
+          value="Worksheets"
+          data={["Worksheets", "Tests", "Test Plans"]}
+          mb={10}
+        />
+        <Button variant="light" onClick={handleExportToCSV}>
+          Export to Application
+        </Button>
+      </Flex>
+      <ExportTable
+        data={data}
+        enableRowSelection={true}
+        rowSelection={rowSelection}
+        setRowSelection={setRowSelection}
       />
-      <ExportTable data={data} />
     </Box>
   );
 };

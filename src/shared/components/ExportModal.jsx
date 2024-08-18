@@ -1,4 +1,4 @@
-import { Modal, Title, Group, Button } from "@mantine/core";
+import { Modal, Title, Group, Button, Box, ScrollArea } from "@mantine/core";
 import ExportTable from "./ExportTable";
 
 const ExportModal = ({
@@ -18,12 +18,14 @@ const ExportModal = ({
       title={<Title order={3}>{title}</Title>}
       size={size}
     >
-      <ExportTable
-        data={data}
-        enableRowSelection={true}
-        rowSelection={rowSelection}
-        setRowSelection={setRowSelection}
-      />
+      <ScrollArea h={"70vh"}>
+        <ExportTable
+          data={data}
+          enableRowSelection={true}
+          rowSelection={rowSelection}
+          setRowSelection={setRowSelection}
+        />
+      </ScrollArea>
       <Group justify="right" mt="md">
         <Button variant="outline" onClick={handleClose}>
           Cancel

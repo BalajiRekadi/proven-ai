@@ -74,12 +74,15 @@ const ExportTable = ({
     ...DEFAULT_TABLE_CONFIG,
     enableRowSelection,
     enableRowNumbers: !enableRowSelection,
-    // getRowId: (originalRow) => originalRow,
+    enableStickyHeader: true,
     onRowSelectionChange: foo,
     state: { rowSelection },
     mantineTableProps: {
       striped: true,
+      stickyHeader: true,
+      stickyHeaderOffset: 60,
     },
+    mantineTableContainerProps: { sx: { maxHeight: "200px" } },
   };
   const table = useMantineReactTable(tableConfig);
 
