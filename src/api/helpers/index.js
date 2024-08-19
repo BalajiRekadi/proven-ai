@@ -7,6 +7,7 @@ import runWorksheet from "./runWorksheet";
 import generateProductDetails from "./generateProductDetails";
 import runAnalysis from "./runAnalysis";
 import fetchNeulandWorksheets from "./fetchNeulandWorksheets";
+import fetchTasks from "./fetchTasks";
 
 export {
   uploadFile,
@@ -18,4 +19,5 @@ export {
   generateProductDetails,
   runAnalysis,
   fetchNeulandWorksheets,
+  fetchTasks,
 };

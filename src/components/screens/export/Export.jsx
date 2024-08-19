@@ -11,15 +11,18 @@ import {
 import { IconCalendar, IconSearch } from "@tabler/icons-react";
 import { ExportTable } from "../../../shared/components";
 import exportToCsv from "../../../shared/utilities/downloadCSV";
+import { deepClone } from "../../../shared/utilities";
 
 const Export = ({ data }) => {
   const [rowSelection, setRowSelection] = useState({});
 
   const getExportData = () => {
+    const clone = deepClone(data);
     const indices = Object.keys(rowSelection);
     const exportData = [];
     indices.forEach((item) => {
-      exportData.push(data[item]);
+      delete clone[item]["content"];
+      exportData.push(clone[item]);
     });
     return exportData;
   };

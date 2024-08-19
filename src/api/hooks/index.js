@@ -3,6 +3,7 @@ import useGenerateWorksheets from "./useGenerateWorksheets";
 import useProcessFiles from "./useProcessFiles";
 import useRunWorksheet from "./useRunWorksheet";
 import useSaveWorksheetData from "./useSaveWorksheetData";
+import useDashboard from "./useDashboard";
 
 export {
   useUploadFiles,
@@ -10,4 +11,5 @@ export {
   useProcessFiles,
   useRunWorksheet,
   useSaveWorksheetData,
+  useDashboard,
 };

@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./routes.css";
 import { ROUTES } from "../../shared/constants";
 import { useStore } from "../../store/useStore";
+import { IconHomeFilled } from "@tabler/icons-react";
 
 const Routes = () => {
   const navigate = useNavigate();
@@ -57,13 +58,25 @@ const Routes = () => {
   ));
 
   return (
-    <Accordion
-      variant="separated"
-      defaultValue="Master Data"
-      className="routes"
-    >
-      {items}
-    </Accordion>
+    <>
+      <Button
+        mb={16}
+        size="md"
+        variant="outline"
+        c={"white"}
+        leftSection={<IconHomeFilled size={20} />}
+        onClick={() => handleMenuItemClick("home")}
+      >
+        Dashboard
+      </Button>
+      <Accordion
+        variant="separated"
+        defaultValue="Master Data"
+        className="routes"
+      >
+        {items}
+      </Accordion>
+    </>
   );
 };
 
