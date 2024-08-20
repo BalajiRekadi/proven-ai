@@ -5,6 +5,7 @@ import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { DEFAULT_TABLE_CONFIG } from "../constants";
 import TextModal from "./TextModal";
 import { useToast } from "./toast/useToast";
+import TableViewModal from "./TableViewModal";
 
 const TestAccordionTable = ({
   data = {},
@@ -13,9 +14,8 @@ const TestAccordionTable = ({
   saveTextModalContent = () => {},
   onRun,
 }) => {
-  const [contentModalOpened, setContentModalOpened] = useState(false);
+  const [showRunData, setShowRunData] = useState(false);
   const [inputModalOpened, setInputModalOpened] = useState(false);
-  const [selectedContent, setSelectedContent] = useState("");
   // TODO: this state is redundant, derieve from selectedRow
   const [selectedInput, setSelectedInput] = useState("");
   const [selectedRow, setSelectedRow] = useState({});
@@ -32,9 +32,9 @@ const TestAccordionTable = ({
       });
   };
 
-  const handleContentClick = (content) => {
-    setSelectedContent(content);
-    setContentModalOpened(true);
+  const handleContentClick = (row) => {
+    setSelectedRow(row);
+    setShowRunData(true);
   };
 
   const getTableData = () => {
@@ -44,7 +44,7 @@ const TestAccordionTable = ({
       testName: label,
       input: data.calculation,
       category: data.category,
-      technique: data.technoque,
+      technique: data.technique,
       type: data.type,
       content: data.content,
       disableWorksheet: true,
@@ -128,12 +128,12 @@ const TestAccordionTable = ({
       {
         header: "Content",
         accessorKey: "content",
-        Cell: ({ cell }) => (
+        Cell: ({ row, cell }) => (
           <Flex align={"center"} gap={4}>
             <Button
               variant="transparent"
               justify="space-between"
-              onClick={() => handleContentClick(cell.getValue())}
+              onClick={() => handleContentClick(row.original)}
               pl={8}
               pr={6}
               disabled={!cell.getValue()}
@@ -194,12 +194,11 @@ const TestAccordionTable = ({
           content={selectedInput}
           onSaveContent={(e) => handleSaveTextModalContent(e, "calculation")}
         />
-        <TextModal
-          open={contentModalOpened}
-          onClose={() => setContentModalOpened(false)}
-          title="Description"
-          content={selectedContent}
-          onSaveContent={(e) => handleSaveTextModalContent(e, "content")}
+        <TableViewModal
+          open={showRunData}
+          onClose={() => setShowRunData(false)}
+          label={selectedRow.testName}
+          content={selectedRow.content}
         />
       </Box>
     </>

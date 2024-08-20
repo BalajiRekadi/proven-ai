@@ -104,12 +104,14 @@ const Worksheets = ({
 
   const saveTextModalContent = (content, row, label, property) => {
     const clone = deepClone(worksheetsData);
-    clone[label][0][row.solution][property] = content;
+    clone[label][property] = content;
     saveWorksheet({
       product: taskData.product,
       ...clone,
     }).then((res) => {
-      setWorksheetsData(clone);
+      setWorksheetsData(() => {
+        return clone;
+      });
     });
   };
 

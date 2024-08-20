@@ -6,16 +6,18 @@ import {
   TestAccordionTable,
 } from "../../../../../shared/components";
 import { useToast } from "../../../../../shared/components/toast/useToast";
+import useRunTestDetails from "../../../../../api/hooks/useRunTestDetails";
 
 const Tests = ({ testsData, taskData, setTestsData }) => {
   const { saveWorksheet } = useSaveWorksheetData("tests");
+  const { runTestDetails } = useRunTestDetails();
   const toast = useToast();
 
   useEffect(() => {
     if (testsData) {
       toast.success("Generated Tests details successfully");
     }
-  }, [testsData]);
+  }, []);
 
   const saveTextModalContent = (content, row, label, property) => {
     const clone = deepClone(testsData);
@@ -37,6 +39,28 @@ const Tests = ({ testsData, taskData, setTestsData }) => {
     });
   };
 
+  const handleRunClick = (label, data) => {
+    const payload = {
+      Code: taskData.product,
+      specid: taskData.specId,
+      testname: data.testName,
+      TestCode: data.testCode,
+      MethodNo: taskData.methodId,
+      TestCategory: data.category,
+      TestTechniques: data.technique,
+      TestType: data.type,
+      Text: data.input[0],
+    };
+    runTestDetails(payload).then((res) => {
+      setTestsData((prev) => {
+        const clone = deepClone(prev);
+        const test = clone[data.testName];
+        test.content = res;
+        return clone;
+      });
+    });
+  };
+
   const getAccordions = () => {
     let accordions = [];
     if (testsData) {
@@ -46,12 +70,11 @@ const Tests = ({ testsData, taskData, setTestsData }) => {
             label: key,
             content: (
               <TestAccordionTable
-                // TODO: Remove ternary operator when properly mapping api
                 label={key}
                 data={testsData[key]}
                 updateData={updateTestsData}
                 saveTextModalContent={saveTextModalContent}
-                onRun={undefined}
+                onRun={handleRunClick}
               />
             ),
           });

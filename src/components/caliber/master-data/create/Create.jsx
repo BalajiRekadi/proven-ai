@@ -49,7 +49,9 @@ const CreateFlow = () => {
   };
 
   const handleExportClick = () => {
-    setOpenExportModal(true);
+    if (active === 1) {
+      setOpenExportModal(true);
+    }
   };
 
   const handleSave = () => {

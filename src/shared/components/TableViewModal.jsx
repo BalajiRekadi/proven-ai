@@ -21,7 +21,7 @@ const TableViewModal = ({
         header: key,
         id: key,
         accessorKey: key,
-        size: 50,
+        size: 150,
       };
     });
     return cols;
