@@ -43,9 +43,9 @@ const TestAccordionTable = ({
       testCode: data.task_id,
       testName: label,
       input: data.calculation,
-      category: data.category,
-      technique: data.technique,
-      type: data.type,
+      TestCategory: data.TestCategory,
+      TestTechnique: data.TestTechnique,
+      TestType: data.TestType,
       content: data.content,
       disableWorksheet: true,
     });
@@ -87,41 +87,43 @@ const TestAccordionTable = ({
       },
       {
         header: "Test Category",
-        accessorKey: "category",
+        accessorKey: "TestCategory",
         Cell: ({ cell, row }) => (
           <TextInput
             placeholder="Enter"
             variant="default"
             value={cell.getValue()}
             onChange={(event) =>
-              updateData(event, "category", label, row.original)
+              updateData(event, "TestCategory", label, row.original)
             }
           />
         ),
       },
       {
         header: "Test Technique",
-        accessorKey: "technique",
+        accessorKey: "TestTechnique",
         Cell: ({ cell, row }) => (
           <TextInput
             placeholder="Enter"
             variant="default"
             value={cell.getValue()}
             onChange={(event) =>
-              updateData(event, "technique", label, row.original)
+              updateData(event, "TestTechnique", label, row.original)
             }
           />
         ),
       },
       {
         header: "Test Type",
-        accessorKey: "type",
+        accessorKey: "TestType",
         Cell: ({ cell, row }) => (
           <TextInput
             placeholder="Enter"
             variant="default"
             value={cell.getValue()}
-            onChange={(event) => updateData(event, "type", label, row.original)}
+            onChange={(event) =>
+              updateData(event, "TestType", label, row.original)
+            }
           />
         ),
       },

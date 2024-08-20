@@ -46,9 +46,9 @@ const Tests = ({ testsData, taskData, setTestsData }) => {
       testname: data.testName,
       TestCode: data.testCode,
       MethodNo: taskData.methodId,
-      TestCategory: data.category,
-      TestTechniques: data.technique,
-      TestType: data.type,
+      TestCategory: data.TestCategory,
+      TestTechnique: data.TestTechnique,
+      TestType: data.TestType,
       Text: data.input[0],
     };
     runTestDetails(payload).then((res) => {
