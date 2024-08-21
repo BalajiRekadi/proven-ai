@@ -110,7 +110,7 @@ const AccordionTable = ({
             placeholder="Select"
             value={cell.getValue()}
             variant="default"
-            data={["Worksheet", "Section Worksheet"]}
+            data={["Worksheet", "Section Worksheet", "Section"]}
             onChange={(event) => updateData(event, "type", label, row.original)}
           />
         ),

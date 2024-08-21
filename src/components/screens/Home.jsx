@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import React from "react";
-import { Badge, Box, Flex, Select, TextInput } from "@mantine/core";
+import { Badge, Box, Flex, Select, Title, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { IconCalendar, IconSearch } from "@tabler/icons-react";
 import { DEFAULT_TABLE_CONFIG } from "../../shared/constants";
@@ -90,6 +90,11 @@ const Home = () => {
     },
     enableTopToolbar: true,
     enableFullScreenToggle: true,
+    renderTopToolbarCustomActions: () => (
+      <Title order={4} pt={4} pl={8}>
+        {"Tasks"}
+      </Title>
+    ),
   };
   const table = useMantineReactTable(tableConfig);
 
