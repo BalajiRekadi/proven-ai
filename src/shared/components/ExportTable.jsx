@@ -3,8 +3,9 @@ import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { useMemo } from "react";
 import { IconAlertCircle, IconFileDownload } from "@tabler/icons-react";
 import { DEFAULT_TABLE_CONFIG } from "../constants";
-import { downloadFile } from "../utilities";
+import { downloadDocx, downloadFile } from "../utilities";
 
+// TODO: This and TableViewModal are almost same. Define a common Component
 const ExportTable = ({
   data,
   rowSelection = [],
@@ -16,6 +17,7 @@ const ExportTable = ({
   };
 
   const onDownload = (row) => {
+    // downloadDocx(row.content, row.name);
     downloadFile({
       data: row.content,
       fileName: `${row.name}.txt`,
@@ -28,24 +30,30 @@ const ExportTable = ({
       {
         header: "Code",
         accessorKey: "code",
+        size: 30,
       },
       {
         header: "Specification",
         accessorKey: "specification",
+        size: 30,
       },
       {
         header: "Method",
         accessorKey: "methodId",
+        size: 30,
       },
       {
         header: "Name",
         accessorKey: "name",
+        size: 30,
       },
       {
         header: "Type",
         accessorKey: "type",
+        size: 30,
       },
       {
+        size: 30,
         header: "Content",
         accessorKey: "content",
         Cell: ({ row }) => (
@@ -55,6 +63,7 @@ const ExportTable = ({
         ),
       },
       {
+        size: 30,
         header: "Exception Report",
         accessorKey: "exceptionReport",
         Cell: ({ cell }) => (
@@ -73,6 +82,10 @@ const ExportTable = ({
     data,
     ...DEFAULT_TABLE_CONFIG,
     enableRowSelection,
+    mantineTableBodyRowProps: ({ row }) => ({
+      onClick: row.getToggleSelectedHandler(),
+      sx: { cursor: "pointer" },
+    }),
     enableRowNumbers: !enableRowSelection,
     enableStickyHeader: true,
     onRowSelectionChange: foo,

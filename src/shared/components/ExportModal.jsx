@@ -1,5 +1,16 @@
-import { Modal, Title, Group, Button, Box, ScrollArea } from "@mantine/core";
+import {
+  Modal,
+  Title,
+  Group,
+  Button,
+  Flex,
+  ActionIcon,
+  ScrollArea,
+} from "@mantine/core";
 import ExportTable from "./ExportTable";
+import { useState } from "react";
+import { IconZoomScan } from "@tabler/icons-react";
+import "./exportModal.css";
 
 const ExportModal = ({
   open,
@@ -11,12 +22,28 @@ const ExportModal = ({
   setRowSelection,
   size = "1100",
 }) => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
   return (
     <Modal
       opened={open}
       onClose={handleClose}
-      title={<Title order={3}>{title}</Title>}
+      fullScreen={isFullscreen}
+      title={
+        <Flex justify={"space-between"}>
+          <Title order={3}>{title}</Title>
+          <ActionIcon
+            ml="md"
+            variant="subtle"
+            mr={8}
+            onClick={() => setIsFullscreen(!isFullscreen)}
+          >
+            <IconZoomScan size={20} />
+          </ActionIcon>
+        </Flex>
+      }
       size={size}
+      className="export-modal"
     >
       <ScrollArea h={"70vh"}>
         <ExportTable

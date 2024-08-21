@@ -1,0 +1,13 @@
+.export-modal {
+  .mantine-Table-thead th {
+    background-color: #c6c8e1 !important;
+  }
+
+  .mantine-Modal-title {
+    width: 100%;
+
+    .mantine-Flex-root {
+      width: 100%;
+    }
+  }
+}
