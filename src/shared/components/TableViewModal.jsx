@@ -11,6 +11,7 @@ const TableViewModal = ({
   label,
   size = "70rem",
   content = [],
+  enableRowNumbers = true,
 }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const columns = useMemo(() => {
@@ -31,7 +32,7 @@ const TableViewModal = ({
     columns,
     data: content,
     ...DEFAULT_TABLE_CONFIG,
-    enableRowNumbers: true,
+    enableRowNumbers,
     mantineTableProps: {
       striped: true,
       withColumnBorders: true,

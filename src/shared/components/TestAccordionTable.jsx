@@ -201,6 +201,7 @@ const TestAccordionTable = ({
           onClose={() => setShowRunData(false)}
           label={selectedRow.testName}
           content={selectedRow.content}
+          enableRowNumbers={false}
         />
       </Box>
     </>
