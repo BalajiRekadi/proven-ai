@@ -88,6 +88,8 @@ const Home = () => {
       striped: true,
       stickyHeader: true,
     },
+    enableTopToolbar: true,
+    enableFullScreenToggle: true,
   };
   const table = useMantineReactTable(tableConfig);
 
