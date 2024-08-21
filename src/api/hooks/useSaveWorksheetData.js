@@ -15,6 +15,8 @@ const useSaveWorksheetData = (step = "") => {
     isSuccess,
   } = useMutation({
     mutationFn: (payload) => saveWorksheetData(payload, endpoint),
+    // mutationKey: [],
+    cacheTime: 0,
     onSuccess: () => {
       toast.success("Worksheet data saved successfully");
     },

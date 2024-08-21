@@ -18,18 +18,18 @@ const mapResponse = (data) => {
   const tasks = data.map((item) => {
     return {
       id: item._id?.$oid || "-",
-      company: item.Company || "-",
-      product: item.Title || "-",
+      company: item.company || "-",
+      product: item.Product || "-",
       market: item.MARKET || "-",
       spec: item.SPEC_ID || "-",
-      method: item.Method_ID || "-",
+      method: item.methodId || "-",
       code: item.Code || "-",
       stpNo: item.STP_NO || "-",
       taskId: item.TaskId || "-",
       createdBy: item.CreatedBy || "-",
       createdOn: item.CreatedOn || "-",
       status: item.Status,
-      facility: item.Facility || "-",
+      facility: item.facility || "-",
     };
   });
   return tasks;
