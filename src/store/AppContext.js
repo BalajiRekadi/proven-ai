@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 export const initialState = {
-  module: "Caliber",
+  module: "",
   selectedRoute: "",
   client: "",
 };

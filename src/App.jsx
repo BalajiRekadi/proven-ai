@@ -14,7 +14,7 @@ import AppContextProvider from "./store/AppContextProvider";
 import User from "./components/user/User";
 import CaliberCreate from "./components/caliber/master-data/create/Create";
 import LabwareCreate from "./components/labware/master-data/create/Create";
-import Home from "./components/screens/Home";
+import Dashboard from "./components/screens/dashboard/Dashboard";
 
 function App() {
   const theme = createTheme(THEME);
@@ -30,13 +30,13 @@ function App() {
               <Route path="/" element={<Login />} />
               <Route path="/user" element={<User />}>
                 <Route path="caliber">
-                  <Route element={<Home />} index={true} />
-                  <Route path="home" element={<Home />} />
+                  <Route element={<Dashboard />} index={true} />
+                  <Route path="dashboard" element={<Dashboard />} />
                   <Route path="create" element={<CaliberCreate />} />
                 </Route>
                 <Route path="labware">
-                  <Route element={<Home />} index={true} />
-                  <Route path="home" element={<Home />} />
+                  <Route element={<Dashboard />} index={true} />
+                  <Route path="dashboard" element={<Dashboard />} />
                   <Route path="create" element={<LabwareCreate />} />
                 </Route>
                 <Route path="labVantage" />

@@ -4,11 +4,11 @@ import React from "react";
 import { Badge, Box, Flex, Select, Title, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { IconCalendar, IconSearch } from "@tabler/icons-react";
-import { DEFAULT_TABLE_CONFIG } from "../../shared/constants";
-import { useDashboard } from "../../api/hooks";
-import "./home.css";
+import { DEFAULT_TABLE_CONFIG } from "../../../shared/constants";
+import { useDashboard } from "../../../api/hooks";
+import "./dashboard.css";
 
-const Home = () => {
+const Dashboard = () => {
   const { data } = useDashboard();
 
   const columns = useMemo(
@@ -130,4 +130,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashboard;

@@ -1,6 +1,6 @@
 import { IconDatabase } from "@tabler/icons-react";
 
-const DOMAIN = "https://f60e-49-205-251-99.ngrok-free.app";
+const DOMAIN = "http://13.235.98.215:8001";
 
 const ROUTES = [
   {

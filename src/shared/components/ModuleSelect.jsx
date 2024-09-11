@@ -17,14 +17,14 @@ const ModuleSelect = ({ size = "sm" }) => {
   const handleModuleChange = (event) => {
     if (event) {
       setModule(event);
-      setRoute(`/user/${event}/home`);
+      setRoute(`/user/${event}/dashboard`);
     }
   };
 
   const handleClientChange = (event) => {
     if (event) {
       setClient(event);
-      setRoute(`/user/${module}/home`);
+      setRoute(`/user/${module}/dashboard`);
     }
   };
 

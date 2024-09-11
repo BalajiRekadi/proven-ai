@@ -18,7 +18,7 @@ const Routes = () => {
   }, [location?.pathname]);
 
   useEffect(() => {
-    navigate(`/user/${module}/home`);
+    navigate(`/user/${module}/dashboard`);
   }, [module, client]);
 
   const handleMenuItemClick = (route) => {
@@ -65,7 +65,7 @@ const Routes = () => {
         variant="outline"
         c={"white"}
         leftSection={<IconHomeFilled size={20} />}
-        onClick={() => handleMenuItemClick("home")}
+        onClick={() => handleMenuItemClick("dashboard")}
       >
         Dashboard
       </Button>
