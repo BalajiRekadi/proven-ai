@@ -20,9 +20,12 @@ import { useStore } from "../../store/useStore";
 import { IconUser } from "@tabler/icons-react";
 import "./login.css";
 import { CLIENTS } from "../../shared/constants";
+import { useLogin } from "../../api/hooks";
 
 function Login() {
   const navigate = useNavigate();
+  const { userLogin } = useLogin();
+
   const { module, client, setClient, setModule } = useStore();
   const form = useForm({
     mode: "uncontrolled",
@@ -42,9 +45,11 @@ function Login() {
   });
 
   const handleLogin = (values) => {
-    setClient(values.client);
-    setModule(values.module);
-    navigate(`/user/${values.module}/dashboard`);
+    userLogin(values).then(() => {
+      setClient(values.client);
+      setModule(values.module);
+      navigate(`/user/${values.module}/dashboard`);
+    });
   };
 
   const gradient =

@@ -9,6 +9,7 @@ import runAnalysis from "./runAnalysis";
 import fetchNeulandWorksheets from "./fetchNeulandWorksheets";
 import fetchTasks from "./fetchTasks";
 import runTestDetail from "./runTestDetail";
+import login from "./login";
 
 export {
   uploadFile,
@@ -22,4 +23,5 @@ export {
   fetchNeulandWorksheets,
   fetchTasks,
   runTestDetail,
+  login,
 };
