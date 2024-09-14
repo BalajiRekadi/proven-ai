@@ -11,6 +11,7 @@ import ProductCard from "./ProductCard";
 import TableViewModal from "./TableViewModal";
 import ExportModal from "./ExportModal";
 import ExportTable from "./ExportTable";
+import PasswordInputWithMeter from "./PasswordInputWithMeter";
 import { ToastContextProvider } from "./toast/ToastProvider";
 
 export {
@@ -28,4 +29,5 @@ export {
   TestAccordionTable,
   ExportModal,
   ExportTable,
+  PasswordInputWithMeter,
 };

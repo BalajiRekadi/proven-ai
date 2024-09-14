@@ -5,16 +5,21 @@ import {
   MultiSelect,
   Stack,
   TextInput,
-  PasswordInput,
   Button,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IconUser, IconAt } from "@tabler/icons-react";
 import { CLIENTS } from "../../shared/constants";
 import { useRegister } from "../../api/hooks";
+import { PasswordInputWithMeter } from "../../shared/components";
+import { useState, useRef } from "react";
 
 const Register = ({ open, setOpen }) => {
   const { userRegister } = useRegister();
+  const [password, setPassword] = useState("");
+  const [passwordErrorMsg, setPasswordErrorMsg] = useState("");
+  const pswdStrengthRef = useRef(0);
+
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
@@ -28,22 +33,40 @@ const Register = ({ open, setOpen }) => {
 
     validate: {
       userId: (value) => (value ? null : "Invalid user ID"),
-      password: (value) => (value ? null : "Invalid password"),
       module: (value) => (value.length > 0 ? null : "Please select modules"),
       client: (value) => (value.length > 0 ? null : "Please select clients"),
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
     },
   });
 
-  const handleRegistration = (values) => {
-    userRegister(values).then(() => {
-      setOpen(false);
-    });
+  const handleRegistration = () => {
+    const obj = form.validate();
+    if (pswdStrengthRef.current < 100) {
+      setPasswordErrorMsg("Invalid password");
+    } else if (pswdStrengthRef.current === 100) {
+      setPasswordErrorMsg("");
+      if (!obj.hasErrors) {
+        const values = { ...form.getValues(), password };
+        userRegister(values).then(() => {
+          setOpen(false);
+        });
+      }
+    }
   };
 
   const handleCancel = () => {
     setOpen(false);
     form.reset();
+  };
+
+  const handleSetPassword = (value, strength) => {
+    setPassword(value);
+    pswdStrengthRef.current = strength;
+    if (strength < 100) {
+      setPasswordErrorMsg("Invalid password");
+    } else if (strength === 100) {
+      setPasswordErrorMsg("");
+    }
   };
 
   return (
@@ -82,15 +105,11 @@ const Register = ({ open, setOpen }) => {
             key={form.key("email")}
             {...form.getInputProps("email")}
           />
-          <PasswordInput
-            placeholder="Password"
-            label="Password"
-            size="lg"
-            withAsterisk={true}
-            value={form.password}
-            key={form.key("password")}
-            {...form.getInputProps("password")}
-          />
+          <PasswordInputWithMeter
+            value={password}
+            setValue={handleSetPassword}
+            error={passwordErrorMsg}
+          ></PasswordInputWithMeter>
           <MultiSelect
             label="Modules"
             withAsterisk
@@ -121,7 +140,12 @@ const Register = ({ open, setOpen }) => {
             <Button variant="outline" size="lg" onClick={handleCancel}>
               Cancel
             </Button>
-            <Button type="submit" variant="filled" size="lg" w={"30%"}>
+            <Button
+              variant="filled"
+              size="lg"
+              w={"30%"}
+              onClick={handleRegistration}
+            >
               Register
             </Button>
           </Flex>
