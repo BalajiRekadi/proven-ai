@@ -5,6 +5,7 @@ import useRunWorksheet from "./useRunWorksheet";
 import useSaveWorksheetData from "./useSaveWorksheetData";
 import useDashboard from "./useDashboard";
 import useLogin from "./useLogin";
+import useRegister from "./useRegister";
 
 export {
   useUploadFiles,
@@ -14,4 +15,5 @@ export {
   useSaveWorksheetData,
   useDashboard,
   useLogin,
+  useRegister,
 };
