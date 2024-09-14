@@ -23,8 +23,8 @@ const Register = ({ open, setOpen }) => {
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
-      userName: "",
-      userId: "",
+      username: "",
+      userid: "",
       email: "",
       password: "",
       module: [],
@@ -46,7 +46,7 @@ const Register = ({ open, setOpen }) => {
     } else if (pswdStrengthRef.current === 100) {
       setPasswordErrorMsg("");
       if (!obj.hasErrors) {
-        const values = { ...form.getValues(), password };
+        const values = { ...form.getValues(), password, role: "SuperAdmin" };
         userRegister(values).then(() => {
           setOpen(false);
         });

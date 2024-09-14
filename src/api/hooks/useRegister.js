@@ -12,7 +12,7 @@ const useRegister = () => {
   } = useMutation({
     mutationFn: (values) => register(values),
     onSuccess: (e) => {
-      toast.error("User registration is successful.");
+      toast.success("User registration is successful.");
     },
     onError: (e) => {
       toast.error("Failed to Register, please check your details.");
