@@ -103,29 +103,29 @@ const Worksheets = ({
   };
 
   const saveTextModalContent = (content, row, label, property) => {
-    if (property === "value") {
-      const clone = deepClone(worksheetsData);
-      clone[label][0][row.solution][property] = content;
-      saveWorksheet({
-        product: taskData.product,
-        ...clone,
-      }).then((res) => {
-        setWorksheetsData(() => {
-          return clone;
-        });
+    // if (property === "value") {
+    const clone = deepClone(worksheetsData);
+    clone[label][0][row.solution][property] = content;
+    saveWorksheet({
+      product: taskData.product,
+      ...clone,
+    }).then((res) => {
+      setWorksheetsData(() => {
+        return clone;
       });
-    } else {
-      const clone = deepClone(worksheetsData);
-      clone[label][property] = content;
-      saveWorksheet({
-        product: taskData.product,
-        ...clone,
-      }).then((res) => {
-        setWorksheetsData(() => {
-          return clone;
-        });
-      });
-    }
+    });
+    // } else {
+    //   const clone = deepClone(worksheetsData);
+    //   clone[label][0][row.solution][property] = content;
+    //   saveWorksheet({
+    //     product: taskData.product,
+    //     ...clone,
+    //   }).then((res) => {
+    //     setWorksheetsData(() => {
+    //       return clone;
+    //     });
+    //   });
+    // }
   };
 
   return (

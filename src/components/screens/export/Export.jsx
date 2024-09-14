@@ -16,13 +16,30 @@ import { deepClone } from "../../../shared/utilities";
 const Export = ({ data }) => {
   const [rowSelection, setRowSelection] = useState({});
 
+  // TODO: Optimise this function
   const getExportData = () => {
     const clone = deepClone(data);
     const indices = Object.keys(rowSelection);
     const exportData = [];
-    indices.forEach((item) => {
-      delete clone[item]["content"];
-      exportData.push(clone[item]);
+    indices.forEach((index) => {
+      const content = clone[index]["content"] || "";
+      const part1 = content.split("W.S. Fields:");
+      const part2 = part1[1].split("W.S. Content:")[0];
+      const fields = part2.split("\n").filter((i) => i.trim());
+      const result = fields.reduce((acc, i) => {
+        acc = acc.trim() ? acc + " | " + i : i;
+        return acc;
+      }, "");
+      const item = {
+        Type: clone[index].type,
+        ProductMaterialCode: clone[index].code,
+        Name: clone[index].name,
+        WorkSheetFieldList: result,
+        WorksheetContent: `${clone[index].name}.txt`,
+        Status: "",
+        DocumentType: "",
+      };
+      exportData.push(item);
     });
     return exportData;
   };
@@ -30,14 +47,15 @@ const Export = ({ data }) => {
   const handleExportToCSV = () => {
     const data = getExportData();
     if (data && data.length) {
-      const { code } = data[0];
+      const { ProductMaterialCode } = data[0];
       const curr = new Date();
       const date = `${curr.getDate()}${
         curr.getMonth() + 1
       }${curr.getFullYear()}`;
-      exportToCsv(data, `${code}_${date}`);
+      exportToCsv(data, `${ProductMaterialCode}_${date}`);
     }
   };
+
   return (
     <Box p={16}>
       <Flex gap={32} justify={"space-between"} p={32} pb={64}>

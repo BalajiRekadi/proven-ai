@@ -46,8 +46,9 @@ const AccordionTable = ({
       });
   };
 
-  const handleContentClick = (content) => {
+  const handleContentClick = (row, content) => {
     setSelectedContent(content);
+    setSelectedRow(row);
     setContentModalOpened(true);
   };
 
@@ -130,12 +131,12 @@ const AccordionTable = ({
       {
         header: "Content",
         accessorKey: "content",
-        Cell: ({ cell }) => (
+        Cell: ({ row, cell }) => (
           <Flex align={"center"} gap={4}>
             <Button
               variant="transparent"
               justify="space-between"
-              onClick={() => handleContentClick(cell.getValue())}
+              onClick={() => handleContentClick(row.original, cell.getValue())}
               pl={8}
               pr={6}
               disabled={!cell.getValue()}

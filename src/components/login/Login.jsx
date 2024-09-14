@@ -48,11 +48,11 @@ function Login() {
   });
 
   const handleLogin = (values) => {
-    userLogin(values).then(() => {
-      setClient(values.client);
-      setModule(values.module);
-      navigate(`/user/${values.module}/dashboard`);
-    });
+    // userLogin(values).then(() => {
+    setClient(values.client);
+    setModule(values.module);
+    navigate(`/user/${values.module}/dashboard`);
+    // });
   };
 
   const gradient =
