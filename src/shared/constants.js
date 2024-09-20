@@ -59,11 +59,11 @@ const DEFAULT_TABLE_CONFIG = {
 
 const CLIENTS = {
   DRL: {
-    value: "drl",
+    value: "DRL",
     label: "DRL",
   },
   SUN_PHARMA: {
-    value: "sunpharma",
+    value: "Sunpharma",
     label: "SUN PHARMA",
   },
   NEULAND: {
@@ -72,4 +72,10 @@ const CLIENTS = {
   },
 };
 
-export { ROUTES, THEME, DOMAIN, DEFAULT_TABLE_CONFIG, CLIENTS };
+const MODULES = {
+  CALIBER: { value: "Caliber", label: "Caliber" },
+  LABWARE: { value: "Labware", label: "Labware" },
+  LABVANTAGE: { value: "Labvantage", label: "LabVantage" },
+};
+
+export { ROUTES, THEME, DOMAIN, DEFAULT_TABLE_CONFIG, CLIENTS, MODULES };

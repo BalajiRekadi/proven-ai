@@ -19,7 +19,7 @@ import logo from "../../assets/logo.jpg";
 import { useStore } from "../../store/useStore";
 import { IconUser } from "@tabler/icons-react";
 import "./login.css";
-import { CLIENTS } from "../../shared/constants";
+import { CLIENTS, MODULES } from "../../shared/constants";
 import { useLogin } from "../../api/hooks";
 import Register from "./Register";
 import { useState } from "react";
@@ -28,8 +28,11 @@ function Login() {
   const navigate = useNavigate();
   const { userLogin } = useLogin();
   const [openRgisterModal, setOpenRegisterModal] = useState(false);
-
   const { module, client, setClient, setModule } = useStore();
+
+  const modules = Object.values(MODULES);
+  const clients = Object.values(CLIENTS);
+
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
@@ -123,11 +126,7 @@ function Login() {
                 placeholder="Select Module"
                 withAsterisk={true}
                 label="Module"
-                data={[
-                  { value: "Caliber", label: "Caliber" },
-                  { value: "Labware", label: "Labware" },
-                  { value: "Labvantage", label: "LabVantage" },
-                ]}
+                data={modules}
                 key={form.key("module")}
                 {...form.getInputProps("module")}
                 grow
@@ -137,17 +136,7 @@ function Login() {
                 placeholder="Select Client"
                 withAsterisk={true}
                 label="Client"
-                data={[
-                  { value: CLIENTS.DRL.value, label: CLIENTS.DRL.label },
-                  {
-                    value: CLIENTS.SUN_PHARMA.value,
-                    label: CLIENTS.SUN_PHARMA.label,
-                  },
-                  {
-                    value: CLIENTS.NEULAND.value,
-                    label: CLIENTS.NEULAND.label,
-                  },
-                ]}
+                data={clients}
                 key={form.key("client")}
                 {...form.getInputProps("client")}
               />

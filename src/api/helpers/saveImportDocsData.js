@@ -2,7 +2,7 @@ import axios from "axios";
 import { DOMAIN } from "../../shared/constants";
 import { appendDocxExtension } from "../../shared/utilities";
 
-const saveImportDocsData = async (data, file1, file2, module = "Caliber") => {
+const saveImportDocsData = async (data, file1, file2, module = "") => {
   const payload = mapPayload(data, file1, file2, module);
   const res = await axios({
     url: `${DOMAIN}/save/`,

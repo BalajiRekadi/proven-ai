@@ -2,11 +2,14 @@ import { Flex, Select } from "@mantine/core";
 import React, { useEffect } from "react";
 import { useStore } from "../../store/useStore";
 import { useLocation } from "react-router-dom";
-import { CLIENTS } from "../constants";
+import { MODULES, CLIENTS } from "../constants";
 
 const ModuleSelect = ({ size = "sm" }) => {
   const { module, client, setClient, setModule, setRoute } = useStore();
   const location = useLocation();
+
+  const modules = Object.values(MODULES);
+  const clients = Object.values(CLIENTS);
 
   useEffect(() => {
     if (location?.pathname) {
@@ -33,22 +36,14 @@ const ModuleSelect = ({ size = "sm" }) => {
       <Select
         size={size}
         placeholder="Select Module"
-        data={[
-          { value: "Caliber", label: "Caliber" },
-          { value: "Labware", label: "Labware" },
-          { value: "Labvantage", label: "LabVantage" },
-        ]}
+        data={modules}
         value={module}
         onChange={(event) => handleModuleChange(event)}
       />
       <Select
         size={size}
         placeholder="Select Client"
-        data={[
-          { value: CLIENTS.DRL.value, label: CLIENTS.DRL.label },
-          { value: CLIENTS.SUN_PHARMA.value, label: CLIENTS.SUN_PHARMA.label },
-          { value: CLIENTS.NEULAND.value, label: CLIENTS.NEULAND.label },
-        ]}
+        data={clients}
         value={client}
         onChange={(event) => handleClientChange(event)}
       />

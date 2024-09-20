@@ -11,24 +11,24 @@ const fetchTasks = async (module, client) => {
     }),
   });
 
-  return mapResponse(res.data);
+  return mapResponse(res.data.response);
 };
 
 const mapResponse = (data) => {
   const tasks = data.map((item) => {
     return {
-      id: item._id?.$oid || "-",
+      id: item._id || "-",
       company: item.company || "-",
-      product: item.Product || "-",
-      market: item.MARKET || "-",
-      spec: item.SPEC_ID || "-",
-      method: item.methodId || "-",
+      product: item.product || "-",
+      market: item.market || "-",
+      spec: item.spec || "-",
+      method: item.method || "-",
       code: item.Code || "-",
       stpNo: item.STP_NO || "-",
-      taskId: item.TaskId || "-",
-      createdBy: item.CreatedBy || "-",
-      createdOn: item.CreatedOn || "-",
-      status: item.Status,
+      taskId: item.taskid || "-",
+      createdBy: item.createdby || "-",
+      createdOn: item.createdon || "-",
+      status: item.status,
       facility: item.facility || "-",
     };
   });

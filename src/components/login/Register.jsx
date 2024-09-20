@@ -9,7 +9,7 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IconUser, IconAt } from "@tabler/icons-react";
-import { CLIENTS } from "../../shared/constants";
+import { CLIENTS, MODULES } from "../../shared/constants";
 import { useRegister } from "../../api/hooks";
 import { PasswordInputWithMeter } from "../../shared/components";
 import { useState, useRef } from "react";
@@ -19,6 +19,9 @@ const Register = ({ open, setOpen }) => {
   const [password, setPassword] = useState("");
   const [passwordErrorMsg, setPasswordErrorMsg] = useState("");
   const pswdStrengthRef = useRef(0);
+
+  const modules = Object.values(MODULES);
+  const clients = Object.values(CLIENTS);
 
   const form = useForm({
     mode: "uncontrolled",
@@ -114,11 +117,7 @@ const Register = ({ open, setOpen }) => {
             label="Modules"
             withAsterisk
             placeholder="Select Modules"
-            data={[
-              { value: "Caliber", label: "Caliber" },
-              { value: "Labware", label: "Labware" },
-              { value: "Labvantage", label: "LabVantage" },
-            ]}
+            data={modules}
             size="lg"
             key={form.key("module")}
             {...form.getInputProps("module")}
@@ -129,7 +128,7 @@ const Register = ({ open, setOpen }) => {
             withAsterisk
             label="Clients"
             placeholder="Select Clients"
-            data={Object.values(CLIENTS)}
+            data={clients}
             size="lg"
             key={form.key("client")}
             {...form.getInputProps("client")}
