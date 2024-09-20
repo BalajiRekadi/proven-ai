@@ -5,11 +5,11 @@ import { Badge, Box, Flex, Select, Title, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { IconCalendar, IconSearch } from "@tabler/icons-react";
 import { DEFAULT_TABLE_CONFIG } from "../../../shared/constants";
-import { useDashboard } from "../../../api/hooks";
+import { useTasks } from "../../../api/hooks";
 import "./dashboard.css";
 
 const Dashboard = () => {
-  const { data } = useDashboard();
+  const { data } = useTasks();
 
   const columns = useMemo(
     () => [

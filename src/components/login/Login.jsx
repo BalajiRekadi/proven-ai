@@ -124,9 +124,9 @@ function Login() {
                 withAsterisk={true}
                 label="Module"
                 data={[
-                  { value: "caliber", label: "Caliber" },
-                  { value: "labware", label: "Labware" },
-                  { value: "labvantage", label: "LabVantage" },
+                  { value: "Caliber", label: "Caliber" },
+                  { value: "Labware", label: "Labware" },
+                  { value: "Labvantage", label: "LabVantage" },
                 ]}
                 key={form.key("module")}
                 {...form.getInputProps("module")}

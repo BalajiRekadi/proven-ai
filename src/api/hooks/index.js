@@ -3,7 +3,7 @@ import useGenerateWorksheets from "./useGenerateWorksheets";
 import useProcessFiles from "./useProcessFiles";
 import useRunWorksheet from "./useRunWorksheet";
 import useSaveWorksheetData from "./useSaveWorksheetData";
-import useDashboard from "./useDashboard";
+import useTasks from "./useTasks";
 import useLogin from "./useLogin";
 import useRegister from "./useRegister";
 
@@ -13,7 +13,7 @@ export {
   useProcessFiles,
   useRunWorksheet,
   useSaveWorksheetData,
-  useDashboard,
+  useTasks,
   useLogin,
   useRegister,
 };

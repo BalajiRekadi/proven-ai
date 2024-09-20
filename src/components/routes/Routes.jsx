@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Accordion, Button, Group, Stack, Text } from "@mantine/core";
-import { useLocation, useNavigate } from "react-router-dom";
-import "./routes.css";
+import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../shared/constants";
 import { useStore } from "../../store/useStore";
 import { IconHomeFilled } from "@tabler/icons-react";
+import "./routes.css";
 
 const Routes = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { module, client, selectedRoute, setRoute } = useStore();
+  const { module, selectedRoute, setRoute } = useStore();
 
   useEffect(() => {
-    if (location?.pathname) {
-      setRoute(location.pathname);
+    if (module) {
+      navigate(`/user/${module}/dashboard`);
     }
-  }, [location?.pathname]);
-
-  useEffect(() => {
-    navigate(`/user/${module}/dashboard`);
-  }, [module, client]);
+  }, [module]);
 
   const handleMenuItemClick = (route) => {
     setRoute(`/user/${module}/${route}`);

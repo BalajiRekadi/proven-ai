@@ -1,10 +1,10 @@
 import { DOMAIN } from "../../shared/constants";
 import axios from "axios";
 
-const fetchTasks = async (endpoint) => {
+const fetchTasks = async (module, client) => {
   const res = await axios({
-    url: `${DOMAIN}/${endpoint}/`,
-    method: "GET",
+    url: `${DOMAIN}/Dashboard/?module=${module}&Client=${client}`,
+    method: "POST",
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",
       content: "application/json",

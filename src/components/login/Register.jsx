@@ -115,9 +115,9 @@ const Register = ({ open, setOpen }) => {
             withAsterisk
             placeholder="Select Modules"
             data={[
-              { value: "caliber", label: "Caliber" },
-              { value: "labware", label: "Labware" },
-              { value: "labvantage", label: "LabVantage" },
+              { value: "Caliber", label: "Caliber" },
+              { value: "Labware", label: "Labware" },
+              { value: "Labvantage", label: "LabVantage" },
             ]}
             size="lg"
             key={form.key("module")}

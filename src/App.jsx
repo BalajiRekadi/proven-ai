@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import "@mantine/core/styles/global.css";
 import "./App.css";
 import "@mantine/core/styles.css";
@@ -15,10 +15,20 @@ import User from "./components/user/User";
 import CaliberCreate from "./components/caliber/master-data/create/Create";
 import LabwareCreate from "./components/labware/master-data/create/Create";
 import Dashboard from "./components/screens/dashboard/Dashboard";
+import { useStore } from "./store/useStore";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const theme = createTheme(THEME);
   const queryClient = new QueryClient();
+  const { setRoute } = useStore();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location?.pathname && setRoute) {
+      setRoute(location.pathname);
+    }
+  }, [location?.pathname]);
 
   // TODO: add fallback routing
   return (
@@ -39,7 +49,11 @@ function App() {
                   <Route path="dashboard" element={<Dashboard />} />
                   <Route path="create" element={<LabwareCreate />} />
                 </Route>
-                <Route path="labVantage" />
+                <Route path="labVantage">
+                  <Route element={<Dashboard />} index={true} />
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="create" element={<div>TODO</div>} />
+                </Route>
               </Route>
             </Routes>
           </ToastContextProvider>

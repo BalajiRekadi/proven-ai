@@ -3,20 +3,18 @@ import { useStore } from "../../store/useStore";
 import { CLIENTS } from "../../shared/constants";
 import { fetchTasks } from "../helpers";
 
-const useDashboard = () => {
+const useTasks = () => {
   const { client, module } = useStore();
-  const endpoint =
-    client === CLIENTS.SUN_PHARMA.value ? "dashboard_sunpharma" : "dashboard";
   const { data = [] } = useQuery({
     queryKey: [`${client}${module}`],
-    queryFn: () => fetchTasks(endpoint),
+    queryFn: () => fetchTasks(module, client),
     retry: 0,
     enabled: !!(client && module),
   });
   return { data };
 };
 
-export default useDashboard;
+export default useTasks;
 
 // {"Code":"20023456",
 //   "specid":"SPEC-001234",

@@ -21,10 +21,10 @@ const AppContextProvider = ({ children }) => {
     });
   };
 
-  const setRoute = (module) => {
+  const setRoute = (route) => {
     dispatch({
       type: "SET_ROUTE",
-      payload: module,
+      payload: route,
     });
   };
 
