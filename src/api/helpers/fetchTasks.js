@@ -18,32 +18,24 @@ const mapResponse = (data) => {
   const tasks = data.map((item) => {
     return {
       id: item._id || "-",
-      company: item.company || "-",
-      product: item.product || "-",
-      market: item.market || "-",
-      spec: item.spec || "-",
+      company: item.COMPANY || "-",
+      product: item.PRODUCT_NAME || "-",
+      market: item.MARKET || "-",
+      spec: item.SPEC_ID || "-",
       method: item.method || "-",
-      code: item.Code || "-",
-      stpNo: item.STP_NO || "-",
+      code: item.ITEM_CODE || "-",
+      stpNo: item.STP_No || "-",
       taskId: item.taskid || "-",
-      createdBy: item.createdby || "-",
-      createdOn: item.createdon || "-",
+      createdBy: item.createdBy || "-",
+      createdOn: item.createdOn || "-",
       status: item.status,
-      facility: item.facility || "-",
+      facility: item.FACILITY || "-",
+      revNo: item.REV_No || "-",
+      ccNo: item.CC_No || "-",
+      version: item.VERSION || "-",
     };
   });
   return tasks;
-};
-
-const mapSections = (data) => {
-  const sections = Object.values(data);
-  const dict = {};
-  sections.forEach((item) => {
-    dict[item.TestName] = [
-      { "Worksheet Content": { value: item.WorkSheetContent } },
-    ];
-  });
-  return dict;
 };
 
 export default fetchTasks;

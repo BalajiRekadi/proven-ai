@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Flex, Group, Stepper, Title } from "@mantine/core";
 import ImportDocs from "../../../screens/import-docs/ImportDocs";
 import Worksheets from "./worksheets/Worksheets";
@@ -6,13 +6,13 @@ import { IconDatabase } from "@tabler/icons-react";
 import Export from "../../../screens/export/Export";
 import Tests from "./tests/Tests";
 import TestPlan from "./test-plan/TestPlan";
-import "./create.css";
 import { saveImportDocsData } from "../../../../api/helpers";
-import { useSaveWorksheetData } from "../../../../api/hooks";
+import { useSaveWorksheetData, useTaskDetails } from "../../../../api/hooks";
 import { DetailsBox } from "../../../../shared/components";
 import { useToast } from "../../../../shared/components/toast/useToast";
 import { useStore } from "../../../../store/useStore";
 import ExportModal from "../../../../shared/components/ExportModal";
+import "./create.css";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
@@ -24,11 +24,20 @@ const CreateFlow = () => {
   const [worksheetsData, setWorksheetsData] = useState();
   const [testsData, setTestsData] = useState();
   const [rowSelection, setRowSelection] = useState({});
-
+  const { selectedTaskId } = useStore();
   const toast = useToast();
   const { client } = useStore();
   const { saveWorksheet } = useSaveWorksheetData();
   const { saveWorksheet: saveTestData } = useSaveWorksheetData("tests");
+  const { getTaskDetails } = useTaskDetails();
+
+  // useEffect(() => {
+  //   if (selectedTaskId) {
+  //     getTaskDetails(selectedTaskId).then((res) => {
+  //       console.log(res);
+  //     });
+  //   }
+  // }, []);
 
   const nextStep = () =>
     setActive((current) => (current < 5 ? current + 1 : current));

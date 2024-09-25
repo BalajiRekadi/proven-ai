@@ -6,6 +6,7 @@ import useSaveWorksheetData from "./useSaveWorksheetData";
 import useTasks from "./useTasks";
 import useLogin from "./useLogin";
 import useRegister from "./useRegister";
+import useTaskDetails from "./useTaskDetails";
 
 export {
   useUploadFiles,
@@ -16,4 +17,5 @@ export {
   useTasks,
   useLogin,
   useRegister,
+  useTaskDetails,
 };

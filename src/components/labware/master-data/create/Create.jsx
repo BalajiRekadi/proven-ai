@@ -1,6 +1,6 @@
 import { Button, Flex, Group, Stepper, Title } from "@mantine/core";
 import { saveImportDocsData } from "../../../../api/helpers";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { IconDatabase } from "@tabler/icons-react";
 import ImportDocs from "../../../screens/import-docs/ImportDocs";
 import { DetailsBox, TextModal } from "../../../../shared/components";
@@ -9,6 +9,7 @@ import { useToast } from "../../../../shared/components/toast/useToast";
 import Analysis from "./Analysis/Analysis";
 import Product from "./Product";
 import { useStore } from "../../../../store/useStore";
+import { useTaskDetails } from "../../../../api/hooks";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
@@ -24,9 +25,17 @@ const CreateFlow = () => {
   });
   const [analysisData, setAnalysisData] = useState();
   const [productDetailsLoaded, setProductDetailsLoaded] = useState(false);
-  const { client } = useStore();
-
+  const { client, selectedTaskId } = useStore();
   const toast = useToast();
+  const { getTaskDetails } = useTaskDetails();
+
+  useEffect(() => {
+    if (selectedTaskId) {
+      getTaskDetails(selectedTaskId).then((res) => {
+        console.log(res);
+      });
+    }
+  }, [selectedTaskId]);
 
   const nextStep = () =>
     setActive((current) => (current < 4 ? current + 1 : current));

@@ -6,10 +6,19 @@ import { DatePickerInput } from "@mantine/dates";
 import { IconCalendar, IconSearch } from "@tabler/icons-react";
 import { DEFAULT_TABLE_CONFIG } from "../../../shared/constants";
 import { useTasks } from "../../../api/hooks";
+import { useStore } from "../../../store/useStore";
 import "./dashboard.css";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const { data } = useTasks();
+  const { setTaskId, module } = useStore();
+  const navigate = useNavigate();
+
+  const handleRowSelect = (row) => {
+    setTaskId(row.original.taskId);
+    navigate(`/user/${module}/create`);
+  };
 
   const columns = useMemo(
     () => [
@@ -90,6 +99,9 @@ const Dashboard = () => {
     },
     enableTopToolbar: true,
     enableFullScreenToggle: true,
+    mantineTableBodyRowProps: ({ row }) => ({
+      onClick: () => handleRowSelect(row),
+    }),
     renderTopToolbarCustomActions: () => (
       <Title order={4} pt={4} pl={8}>
         {"Tasks"}

@@ -11,6 +11,7 @@ import fetchTasks from "./fetchTasks";
 import runTestDetail from "./runTestDetail";
 import login from "./login";
 import register from "./register";
+import fetchTaskDetails from "./fetchTaskDetails";
 
 export {
   uploadFile,
@@ -26,4 +27,5 @@ export {
   runTestDetail,
   login,
   register,
+  fetchTaskDetails,
 };
