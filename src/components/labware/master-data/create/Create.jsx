@@ -17,6 +17,8 @@ const CreateFlow = () => {
   const [modalContent, setModalContent] = useState("");
   const [specFile, setSpecFile] = useState(null);
   const [methodFile, setMethodFile] = useState(null);
+  const [specFileName, setSpecFileName] = useState("");
+  const [methodFileName, setMethodFileName] = useState("");
   const [showTaskCard, setShowTaskCard] = useState(false);
   const [taskData, setTaskData] = useState({});
   const [productDetails, setProductDetails] = useState({
@@ -29,10 +31,18 @@ const CreateFlow = () => {
   const toast = useToast();
   const { getTaskDetails } = useTaskDetails();
 
+  // populate generated data when clicking on a task in dashboard
   useEffect(() => {
     if (selectedTaskId) {
       getTaskDetails(selectedTaskId).then((res) => {
-        console.log(res);
+        setSpecFileName(res.taskData.specFileName);
+        setMethodFileName(res.taskData.methodFileName);
+        // import docs step
+        setTaskData(res.taskData);
+        setShowTaskCard(true);
+        // product step
+        setProductDetails(res.productData);
+        setProductDetailsLoaded(true);
       });
     }
   }, [selectedTaskId]);
@@ -105,6 +115,8 @@ const CreateFlow = () => {
             setShowTaskCard={setShowTaskCard}
             specFile={specFile}
             methodFile={methodFile}
+            specFileName={specFileName}
+            methodFileName={methodFileName}
             setSpecFile={setSpecFile}
             setMethodFile={setMethodFile}
             setData={setProductDetails}
@@ -148,10 +160,7 @@ const CreateFlow = () => {
         </Button>
         <Group>
           {active > 0 && active < 2 && (
-            <Button
-              variant="filled"
-              onClick={() => handleContentClick("export")}
-            >
+            <Button variant="filled" onClick={() => handleContentClick("Todo")}>
               Export
             </Button>
           )}

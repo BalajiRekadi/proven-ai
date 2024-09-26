@@ -14,12 +14,14 @@ const Product = ({
   const toast = useToast();
 
   const handleGenerate = () => {
-    toast.load("Generating product details");
-    generateProductDetails(taskData).then((res) => {
-      toast.success("Generated product details successfully");
-      setProductDetailsLoaded(true);
-      setProductDetails(res);
-    });
+    if (!productDetailsLoaded) {
+      toast.load("Generating product details");
+      generateProductDetails(taskData).then((res) => {
+        toast.success("Generated product details successfully");
+        setProductDetailsLoaded(true);
+        setProductDetails(res);
+      });
+    }
   };
 
   return (

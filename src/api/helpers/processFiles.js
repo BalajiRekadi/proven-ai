@@ -27,8 +27,8 @@ const mapResponse = (data, file1, file2) => {
     revNo: data["Rev_No"],
     ccNo: data["CC_No"],
     taskId: data["TaskId"],
-    specFile: file1,
-    methodFile: file2,
+    specFileName: file1,
+    methodFileName: file2,
   };
 };
 

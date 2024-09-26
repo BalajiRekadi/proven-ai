@@ -14,8 +14,10 @@ const ImportDocs = ({
   taskData,
   setTaskData,
   specFile,
+  specFileName,
   setSpecFile,
   methodFile,
+  methodFileName,
   setMethodFile,
   showTaskCard,
   setShowTaskCard,
@@ -55,15 +57,17 @@ const ImportDocs = ({
         {!showOnlyMethodUpload && (
           <UploadCard
             title={"Specification"}
-            label={"File Name"}
+            label={"Select file"}
             value={specFile}
+            fileName={specFileName}
             onChange={setSpecFile}
           />
         )}
         <UploadCard
           title={"Method"}
-          label={"File Name"}
+          label={"Select file"}
           value={methodFile}
+          fileName={methodFileName}
           onChange={setMethodFile}
         />
       </Flex>

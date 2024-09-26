@@ -11,39 +11,37 @@ const fetchTaskDetails = async (id, module, client) => {
     }),
   });
 
-  return mapResponse(res.data.records);
+  return mapResponse(res.data);
 };
 
 const mapResponse = (data) => {
-  const tasks = data.map((item) => {
-    return {
-      id: item._id || "-",
-      company: item.company || "-",
-      product: item.product || "-",
-      market: item.market || "-",
-      spec: item.spec || "-",
-      method: item.method || "-",
-      code: item.Code || "-",
-      stpNo: item.STP_NO || "-",
-      taskId: item.taskid || "-",
-      createdBy: item.createdby || "-",
-      createdOn: item.createdon || "-",
-      status: item.status,
-      facility: item.facility || "-",
-    };
-  });
-  return tasks;
-};
-
-const mapSections = (data) => {
-  const sections = Object.values(data);
-  const dict = {};
-  sections.forEach((item) => {
-    dict[item.TestName] = [
-      { "Worksheet Content": { value: item.WorkSheetContent } },
-    ];
-  });
-  return dict;
+  return {
+    taskData: {
+      id: data._id,
+      company: data.COMPANY,
+      facility: data.FACILITY,
+      grade: "",
+      samplingPoint: "",
+      product: data.PRODUCT_NAME,
+      specId: data.SPEC_ID,
+      methodId: data.STP_No,
+      market: data.MARKET,
+      code: data.ITEM_CODE,
+      testPlanCode: data["Test_Plan_Code"],
+      revNo: data["Rev_No"],
+      ccNo: data["CC_No"],
+      taskId: data.taskid,
+      specFileName: data.filename1,
+      methodFileName: data.filename2,
+      createdBy: data.createdBy,
+      createdOn: data.createdOn,
+      status: data.status,
+    },
+    productData: {
+      product: data.product,
+      product_grade: data.product_grade,
+    },
+  };
 };
 
 export default fetchTaskDetails;
