@@ -1,16 +1,18 @@
 import { useMutation } from "@tanstack/react-query";
 import { processFiles } from "../helpers";
 import { useToast } from "../../shared/components/toast/useToast";
+import { useStore } from "../../store/useStore";
 
 const useProcessFiles = () => {
   const toast = useToast();
+  const { module, client, user } = useStore();
   const {
     mutateAsync: processFile,
     isPending,
     isError,
     isSuccess,
   } = useMutation({
-    mutationFn: (files) => processFiles(files),
+    mutationFn: (files) => processFiles(files, module, client, user),
     onMutate: () => {
       toast.load("Files processing is in progress..");
     },

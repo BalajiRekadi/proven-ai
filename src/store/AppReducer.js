@@ -20,6 +20,11 @@ export const AppReducer = (state, action) => {
         ...state,
         selectedTaskId: action.payload,
       };
+    case "SET_USER":
+      return {
+        ...state,
+        user: action.payload,
+      };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }

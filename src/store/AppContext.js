@@ -5,6 +5,7 @@ export const initialState = {
   selectedRoute: "",
   selectedTaskId: "",
   client: "",
+  user: {},
 };
 
 export const AppContext = createContext(initialState);

@@ -15,7 +15,6 @@ import { useForm } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
 import headerLogo from "../../assets/headerLogo.png";
 import logo from "../../assets/logo.jpg";
-// import head from "../../assets/aiHead.png";
 import { useStore } from "../../store/useStore";
 import { IconUser } from "@tabler/icons-react";
 import "./login.css";
@@ -28,7 +27,7 @@ function Login() {
   const navigate = useNavigate();
   const { userLogin } = useLogin();
   const [openRgisterModal, setOpenRegisterModal] = useState(false);
-  const { module, client, setClient, setModule } = useStore();
+  const { module, client, setClient, setModule, setUser } = useStore();
 
   const modules = Object.values(MODULES);
   const clients = Object.values(CLIENTS);
@@ -55,6 +54,7 @@ function Login() {
     // userLogin(values).then(() => {
     setClient(values.client);
     setModule(values.module);
+    setUser({ userId: values.userId, password: values.password });
     navigate(`/user/${values.module}/dashboard`);
     // });
   };

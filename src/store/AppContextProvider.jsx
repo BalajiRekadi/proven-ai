@@ -35,7 +35,21 @@ const AppContextProvider = ({ children }) => {
     });
   };
 
-  const store = { ...state, setModule, setRoute, setClient, setTaskId };
+  const setUser = (user) => {
+    dispatch({
+      type: "SET_USER",
+      payload: user,
+    });
+  };
+
+  const store = {
+    ...state,
+    setModule,
+    setRoute,
+    setClient,
+    setTaskId,
+    setUser,
+  };
 
   return <AppContext.Provider value={store}>{children}</AppContext.Provider>;
 };

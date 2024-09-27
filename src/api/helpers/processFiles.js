@@ -1,15 +1,25 @@
 import { DOMAIN } from "../../shared/constants";
 import { appendDocxExtension } from "../../shared/utilities";
+import axios from "axios";
 
-const processFiles = async (files) => {
-  const name = appendDocxExtension(files[0]);
-  const res = await fetch(`${DOMAIN}/process/?file_name=${name}`, {
+const processFiles = async (files, module, client, user) => {
+  const spec = appendDocxExtension(files[0]);
+  const stp = appendDocxExtension(files[1]);
+
+  const res = await axios({
+    url: `${DOMAIN}/process/`,
+    method: "POST",
+    data: {
+      filenames: { spec, stp },
+      details: { module, client, userId: user.userId, password: user.password },
+    },
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",
+      content: "application/json",
     }),
   });
-  const data = await res.clone().json();
-  return mapResponse(data, files[0], files[1]);
+
+  return mapResponse(res.data);
 };
 
 const mapResponse = (data, file1, file2) => {
