@@ -7,7 +7,7 @@ const processFiles = async (files, module, client, user) => {
   const stp = appendDocxExtension(files[1]);
 
   const res = await axios({
-    url: `${DOMAIN}/process/`,
+    url: `${DOMAIN}/process`,
     method: "POST",
     data: {
       filenames: { spec, stp },
@@ -24,21 +24,25 @@ const processFiles = async (files, module, client, user) => {
 
 const mapResponse = (data, file1, file2) => {
   return {
-    company: "",
-    facility: "",
+    id: data._id,
+    company: data.COMPANY,
+    facility: data.FACILITY,
     grade: "",
     samplingPoint: "",
-    product: data["Product"] || data["Title"],
-    specId: data["SPEC_ID"] || "",
-    methodId: data["STP_NO"] || "",
-    market: data["MARKET"],
-    code: data["Code"],
+    product: data.PRODUCT_NAME,
+    specId: data.SPEC_ID,
+    methodId: data.STP_No,
+    market: data.MARKET,
+    code: data.ITEM_CODE,
     testPlanCode: data["Test_Plan_Code"],
     revNo: data["Rev_No"],
     ccNo: data["CC_No"],
-    taskId: data["TaskId"],
+    taskId: data.taskid,
     specFileName: file1,
     methodFileName: file2,
+    createdBy: data.createdBy,
+    createdOn: data.createdOn,
+    status: data.status,
   };
 };
 

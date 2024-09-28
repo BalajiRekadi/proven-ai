@@ -26,7 +26,7 @@ const runAnalysis = async (taskData, label, item, solution) => {
     data,
   };
   const res = await axios({
-    url: `${DOMAIN}/run/`,
+    url: `${DOMAIN}/run`,
     method: "POST",
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",

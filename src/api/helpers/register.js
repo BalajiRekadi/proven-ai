@@ -3,7 +3,7 @@ import axios from "axios";
 
 const register = async (data) => {
   const res = await axios({
-    url: `${DOMAIN}/register/?collection_name=Login`,
+    url: `${DOMAIN}/register?collection_name=Login`,
     method: "POST",
     data: { ...data },
     headers: new Headers({

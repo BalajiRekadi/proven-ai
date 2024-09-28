@@ -2,6 +2,7 @@ import React from "react";
 import { TextInput, ActionIcon, Card, Flex } from "@mantine/core";
 import { IconDeviceFloppy } from "@tabler/icons-react";
 import { useStore } from "../../store/useStore";
+import {MODULES} from '../constants';
 
 const DetailsBox = ({ data, setData, onSave }) => {
   const { module } = useStore();
@@ -47,7 +48,7 @@ const DetailsBox = ({ data, setData, onSave }) => {
           value={data?.market}
           onChange={(event) => handleValueChange(event, "market")}
         />
-        {module === "labware" && (
+        {module === MODULES.LABWARE.value && (
           <>
             <TextInput
               w={"18rem"}

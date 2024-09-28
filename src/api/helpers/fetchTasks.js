@@ -3,7 +3,7 @@ import axios from "axios";
 
 const fetchTasks = async (module, client) => {
   const res = await axios({
-    url: `${DOMAIN}/Dashboard/?module=${module}&Client=${client}`,
+    url: `${DOMAIN}/Dashboard?module=${module}&Client=${client}`,
     method: "POST",
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",

@@ -10,6 +10,7 @@ import Analysis from "./Analysis/Analysis";
 import Product from "./Product";
 import { useStore } from "../../../../store/useStore";
 import { useTaskDetails } from "../../../../api/hooks";
+import { MODULES } from "../../../../shared/constants.js";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
@@ -88,7 +89,13 @@ const CreateFlow = () => {
   };
 
   const saveTaskData = () => {
-    saveImportDocsData(taskData, specFile, methodFile, "labware").then(() => {
+    saveImportDocsData(
+      taskData,
+      specFile,
+      methodFile,
+      MODULES.LABWARE.value,
+      client
+    ).then(() => {
       toast.success("Deatils saved successfully");
     });
   };
