@@ -5,38 +5,56 @@ import { useToast } from "../../../../../shared/components/toast/useToast";
 import { runAnalysis } from "../../../../../api/helpers";
 import { deepClone } from "../../../../../shared/utilities";
 import { useGenerateWorksheets } from "../../../../../api/hooks";
+import { useStore } from "../../../../../store/useStore";
 
 const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
   const toast = useToast();
+  const { module, client } = useStore();
   const { generateWorksheets } = useGenerateWorksheets("analysis");
 
   useEffect(() => {
+    // TODO: Remove comment
     if (taskData.code && !analysisData) {
       toast.load("Generating Analysis..");
-      generateWorksheets(taskData.code).then((data) => {
+      generateWorksheets(taskData.taskId).then((data) => {
         setAnalysisData(data);
       });
     }
   }, [taskData.code]);
 
-  const updateAnalysisData = (event, field, accordion, data) => {
+  const updateAnalysisData = (event, field, accordion, data, index) => {
     setAnalysisData((prev) => {
       const clonedData = deepClone(prev);
-      const solutions = clonedData[accordion];
-      solutions[data.solution][field] = event.target.value;
+      const solution = clonedData[index];
+      const fieldIndex = solution.subHeadings.findIndex(
+        (i) => i == data.solution
+      );
+      solution[field][fieldIndex] = event.target.value;
       return clonedData;
     });
   };
 
-  const handleRunClick = (label, data) => {
+  const handleRunClick = (label, data, index) => {
     toast.load("Loading solution details..");
-    let item = deepClone(analysisData[label]);
-    item = { [data.solution]: item[data.solution] };
-    runAnalysis(taskData, label, item, data.solution)
+    let item = deepClone(analysisData[index]);
+    const fieldIndex = item.subHeadings.findIndex((i) => i == data.solution);
+
+    runAnalysis(
+      taskData.taskId,
+      label,
+      item,
+      data.solution,
+      module,
+      client,
+      fieldIndex
+    )
       .then((res) => {
         setAnalysisData((prev) => {
           const clone = deepClone(prev);
-          clone[label][data.solution].runData = res;
+          if (!clone[index].runData) {
+            clone[index].runData = [];
+          }
+          clone[index].runData[fieldIndex] = res;
           return clone;
         });
         toast.success("Solution data loaded successfully");
@@ -49,13 +67,14 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
   const getAccordions = () => {
     let accordions = [];
     if (analysisData) {
-      Object.keys(analysisData).forEach((key) => {
+      analysisData.forEach((accordion, index) => {
         accordions.push({
-          label: key,
+          label: accordion.heading,
           content: (
             <AnalysisAccordionTable
-              data={analysisData[key]}
-              label={key}
+              index={index}
+              data={accordion}
+              label={accordion.heading}
               updateData={updateAnalysisData}
               onRun={handleRunClick}
             />

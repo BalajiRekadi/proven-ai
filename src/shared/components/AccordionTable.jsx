@@ -75,7 +75,7 @@ const AccordionTable = ({
   };
 
   const handleInputIconClick = (row, input) => {
-    setSelectedInput(input.value);
+    setSelectedInput(input);
     setSelectedRow(row);
     setInputModalOpened(true);
   };

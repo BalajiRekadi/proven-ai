@@ -4,17 +4,17 @@ import { useStore } from "../../store/useStore";
 import { useToast } from "../../shared/components/toast/useToast";
 import { CLIENTS } from "../../shared/constants";
 
-const useGenerateWorksheets = (action = "") => {
-  const { client } = useStore();
+const useGenerateWorksheets = (action = "", taskId) => {
+  const { module, client } = useStore();
   const toast = useToast();
   const endpoint =
     client === CLIENTS.NEULAND.value
       ? "generate_worksheet_neuland"
-      : client === CLIENTS.SUN_PHARMA.value
-      ? "generate_worksheet_sunpharma"
-      : "generate_worksheet";
+      : "generate_worksheets";
   const helper =
-    client === CLIENTS.NEULAND.value ? fetchNeulandWorksheets : fetchWorksheets;
+    client === CLIENTS.NEULAND.value
+      ? (payload) => fetchNeulandWorksheets(endpoint, payload, client)
+      : (taskId) => fetchWorksheets(endpoint, taskId, module, client);
 
   const {
     mutateAsync: generateWorksheets,
@@ -22,7 +22,7 @@ const useGenerateWorksheets = (action = "") => {
     isError,
     isSuccess,
   } = useMutation({
-    mutationFn: (payload) => helper(endpoint, payload, client),
+    mutationFn: helper,
     onMutate: () => {
       showToast(toast, action, "load");
     },

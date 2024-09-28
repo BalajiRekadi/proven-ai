@@ -22,8 +22,10 @@ import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { TableViewModal, TextModal } from "../../../../../shared/components";
 import { downloadCSVFromArray } from "../../../../../shared/utilities";
 import "./analysis-accordion-table.css";
+import deepClone from "../../../../../shared/utilities/deepClone";
 
 const AnalysisAccordionTable = ({
+  index,
   data = {},
   label = "",
   updateData,
@@ -45,31 +47,28 @@ const AnalysisAccordionTable = ({
 
   const getTableData = () => {
     const tableData = [];
-    const keys = Object.keys(data);
-    keys.forEach((key) => {
+    data.subHeadings.forEach((item, index) => {
       tableData.push({
-        solution: key,
-        input: data[key],
-        content: data[key].content,
-        disableWorksheet: true,
-        name: data[key].name,
-        stage: data[key].stage,
-        specType: data[key].specType,
-        batchLink: data[key].batchLink,
-        batchType: data[key].batchType,
-        runData: {},
+        solution: item,
+        input: data.paragraphs[index],
+        content: data.runResults[index],
+        name: data.analysisNames[index],
+        stage: data.stages[index],
+        specType: data.specTypes[index],
+        batchLink: data.batchLinks[index],
+        batchType: data.batchTypes[index],
       });
     });
     return tableData;
   };
 
   const handleInputIconClick = (input) => {
-    setSelectedInput(input.value);
+    setSelectedInput(input);
     setInputModalOpened(true);
   };
 
   const handleRunClick = (label, row) => {
-    onRun(label, row.original);
+    onRun(label, row.original, index);
   };
 
   const formatRunData = (data) => {
@@ -86,9 +85,11 @@ const AnalysisAccordionTable = ({
     return formattedData;
   };
 
-  const onView = (label, key, row) => {
-    if (row.original.input?.runData) {
-      const data = formatRunData(row.original.input?.runData[key]);
+  const onView = (key, row) => {
+    const fieldIndex = data.subHeadings.findIndex((i) => i == row.solution);
+    const item = data.runData[fieldIndex];
+    if (item) {
+      const data = formatRunData(item[key]);
       setSelectedRunDataTable(data);
       setSelectedRunDataTableLabel(runDataTables[key]);
       setShowRunData(true);
@@ -96,12 +97,19 @@ const AnalysisAccordionTable = ({
   };
 
   const onDownload = (key, row) => {
-    const data = formatRunData(row.original.input?.runData[key]);
-    downloadCSVFromArray(data, runDataTables[key]);
+    const fieldIndex = data.subHeadings.findIndex((i) => i == row.solution);
+    const item = data.runData[fieldIndex];
+    if (item) {
+      const data = formatRunData(item[key]);
+      downloadCSVFromArray(data, runDataTables[key]);
+    }
+    // const data = formatRunData(row.original.input?.runData[key]);
+    // downloadCSVFromArray(data, runDataTables[key]);
   };
 
-  const disableStackIcon = (data) => {
-    return !data.input?.runData;
+  const disableStackIcon = (row) => {
+    const fieldIndex = data.subHeadings.findIndex((i) => i == row.solution);
+    return data.runData ? !data.runData[fieldIndex] : true;
   };
 
   const columns = useMemo(
@@ -132,7 +140,9 @@ const AnalysisAccordionTable = ({
             placeholder="Enter"
             variant="default"
             value={cell.getValue()}
-            onChange={(event) => updateData(event, "name", label, row.original)}
+            onChange={(event) =>
+              updateData(event, "analysisNames", label, row.original, index)
+            }
           />
         ),
       },
@@ -145,7 +155,7 @@ const AnalysisAccordionTable = ({
             variant="default"
             value={cell.getValue()}
             onChange={(event) =>
-              updateData(event, "stage", label, row.original)
+              updateData(event, "stages", label, row.original, index)
             }
           />
         ),
@@ -159,7 +169,7 @@ const AnalysisAccordionTable = ({
             variant="default"
             value={cell.getValue()}
             onChange={(event) =>
-              updateData(event, "specType", label, row.original)
+              updateData(event, "specTypes", label, row.original, index)
             }
           />
         ),
@@ -173,7 +183,7 @@ const AnalysisAccordionTable = ({
             variant="default"
             value={cell.getValue()}
             onChange={(event) =>
-              updateData(event, "batchLink", label, row.original)
+              updateData(event, "batchLinks", label, row.original, index)
             }
           />
         ),
@@ -187,7 +197,7 @@ const AnalysisAccordionTable = ({
             variant="default"
             value={cell.getValue()}
             onChange={(event) =>
-              updateData(event, "batchType", label, row.original)
+              updateData(event, "batchTypes", label, row.original, index)
             }
           />
         ),
@@ -220,13 +230,13 @@ const AnalysisAccordionTable = ({
                         <Group>
                           <ActionIcon
                             variant="subtle"
-                            onClick={() => onView(runDataTables[key], key, row)}
+                            onClick={() => onView(key, row.original)}
                           >
                             <IconEyeFilled size={20} />
                           </ActionIcon>
                           <ActionIcon
                             variant="subtle"
-                            onClick={() => onDownload(key, row)}
+                            onClick={() => onDownload(key, row.original)}
                           >
                             <IconCircleArrowDownFilled size={20} />
                           </ActionIcon>
@@ -268,6 +278,7 @@ const AnalysisAccordionTable = ({
         onClose={() => setInputModalOpened(false)}
         title="Solution"
         content={selectedInput}
+        // onSaveContent={updateData(event, "batchLinks", label, row.original, index)}
       />
       <TableViewModal
         open={showRunData}

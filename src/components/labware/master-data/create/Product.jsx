@@ -16,14 +16,14 @@ const Product = ({
   const { module, client } = useStore();
 
   const handleGenerate = () => {
-    if (!productDetailsLoaded) {
-      toast.load("Generating product details");
-      generateProductDetails(taskData, module, client).then((res) => {
-        toast.success("Generated product details successfully");
-        setProductDetailsLoaded(true);
-        setProductDetails(res);
-      });
-    }
+    // if (!productDetailsLoaded) {
+    toast.load("Generating product details");
+    generateProductDetails(taskData, module, client).then((res) => {
+      toast.success("Generated product details successfully");
+      setProductDetailsLoaded(true);
+      setProductDetails(res);
+    });
+    // }
   };
 
   return (
