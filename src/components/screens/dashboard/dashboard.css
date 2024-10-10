@@ -1,5 +1,9 @@
-.dashboard{
+.dashboard {
   .mantine-Table-thead th {
     background-color: #c6c8e1 !important;
+  }
+
+  .mantine-Table-tr {
+    cursor: pointer;
   }
 }

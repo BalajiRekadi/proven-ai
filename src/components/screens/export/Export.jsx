@@ -68,11 +68,13 @@ const Export = ({ data = [] }) => {
         <Flex gap={16}>
           <Select
             placeholder="Category"
+            comboboxProps={{ shadow: "lg" }}
             variant="default"
             data={["One", "Two", "Three"]}
           />
           <Select
             placeholder="Filter By"
+            comboboxProps={{ shadow: "lg" }}
             variant="default"
             data={["One", "Two", "Three"]}
           />

@@ -5,9 +5,13 @@ import { Outlet } from "react-router-dom";
 import Routes from "../routes/Routes";
 import "./user.css";
 import { ModuleSelect } from "../../shared/components";
+import { useStore } from "../../store/useStore";
+import { IconUserCircle } from "@tabler/icons-react";
 
 const User = () => {
   const [closed, setOpened] = useState(false);
+  const { user } = useStore();
+
   return (
     <AppShell
       className="user"
@@ -31,11 +35,20 @@ const User = () => {
             />
             <Image src={headerLogo} w={"10rem"} h={"2rem"} alt="Header Logo" />
           </Flex>
-          <Flex justify="space-between" flex={1} align={"center"} h={60}>
+          <Flex
+            justify="space-between"
+            flex={1}
+            align={"center"}
+            h={60}
+            pr={32}
+          >
             <ModuleSelect />
-            <Text pr={32} c={"white"}>
-              90001 | Super Admin
-            </Text>
+            <Flex justify={"space-around"}>
+              <Text pr={32} c={"white"}>
+                {user.userId || "-"} | Super Admin
+              </Text>
+              <IconUserCircle color="white" size={32} pr={32} stroke={1} />
+            </Flex>
           </Flex>
         </Flex>
       </AppShell.Header>

@@ -126,6 +126,7 @@ function Login() {
                 withAsterisk={true}
                 label="Module"
                 data={modules}
+                comboboxProps={{ shadow: "lg" }}
                 key={form.key("module")}
                 {...form.getInputProps("module")}
                 grow
@@ -136,6 +137,7 @@ function Login() {
                 withAsterisk={true}
                 label="Client"
                 data={clients}
+                comboboxProps={{ shadow: "lg" }}
                 key={form.key("client")}
                 {...form.getInputProps("client")}
               />

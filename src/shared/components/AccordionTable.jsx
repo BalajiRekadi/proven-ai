@@ -109,6 +109,7 @@ const AccordionTable = ({
         Cell: ({ cell, row }) => (
           <Select
             placeholder="Select"
+            comboboxProps={{ shadow: "lg" }}
             value={cell.getValue()}
             variant="default"
             data={["Worksheet", "Section Worksheet", "Section"]}

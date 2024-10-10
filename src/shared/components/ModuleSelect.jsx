@@ -35,6 +35,7 @@ const ModuleSelect = ({ size = "sm" }) => {
     <Flex gap={16} miw={"20rem"}>
       <Select
         size={size}
+        comboboxProps={{ shadow: "lg" }}
         placeholder="Select Module"
         data={modules}
         value={module}
@@ -42,6 +43,7 @@ const ModuleSelect = ({ size = "sm" }) => {
       />
       <Select
         size={size}
+        comboboxProps={{ shadow: "lg" }}
         placeholder="Select Client"
         data={clients}
         value={client}

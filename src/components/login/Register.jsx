@@ -119,6 +119,7 @@ const Register = ({ open, setOpen }) => {
             placeholder="Select Modules"
             data={modules}
             size="lg"
+            comboboxProps={{ shadow: "lg" }}
             key={form.key("module")}
             {...form.getInputProps("module")}
             searchable
@@ -130,6 +131,7 @@ const Register = ({ open, setOpen }) => {
             placeholder="Select Clients"
             data={clients}
             size="lg"
+            comboboxProps={{ shadow: "lg" }}
             key={form.key("client")}
             {...form.getInputProps("client")}
             searchable
