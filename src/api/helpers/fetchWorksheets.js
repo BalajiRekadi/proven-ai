@@ -10,6 +10,7 @@ const fetchWorksheets = async (endpoint, taskId, module, client) => {
   return mapResponse(res.data.tests);
 };
 
+// TODO: fetchTaskDetails also uses same mapping, write a shared mapper
 const mapResponse = (tests) => {
   const data = [];
   tests.forEach((item) => {

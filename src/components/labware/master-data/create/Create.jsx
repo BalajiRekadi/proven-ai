@@ -44,6 +44,8 @@ const CreateFlow = () => {
         // product step
         setProductDetails(res.productData);
         setProductDetailsLoaded(true);
+        // Analysis step
+        setAnalysisData(res.analysisData);
       });
     }
   }, [selectedTaskId]);

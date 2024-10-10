@@ -13,7 +13,7 @@ import { ExportTable } from "../../../shared/components";
 import exportToCsv from "../../../shared/utilities/downloadCSV";
 import { deepClone } from "../../../shared/utilities";
 
-const Export = ({ data }) => {
+const Export = ({ data = [] }) => {
   const [rowSelection, setRowSelection] = useState({});
 
   // TODO: Optimise this function

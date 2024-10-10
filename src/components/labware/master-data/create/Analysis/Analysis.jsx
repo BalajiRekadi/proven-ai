@@ -13,7 +13,6 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
   const { generateWorksheets } = useGenerateWorksheets("analysis");
 
   useEffect(() => {
-    // TODO: Remove comment
     if (taskData.code && !analysisData) {
       toast.load("Generating Analysis..");
       generateWorksheets(taskData.taskId).then((data) => {

@@ -41,7 +41,28 @@ const mapResponse = (data) => {
       product: data.product,
       product_grade: data.product_grade,
     },
+    analysisData: mapAnalysisData(data.tests),
   };
+};
+
+const mapAnalysisData = (tests) => {
+  const data = [];
+  tests.forEach((item) => {
+    data.push({
+      analysisNames: item.ANALYSIS_NAME,
+      batchLinks: item.BATCH_LINK,
+      batchTypes: item.C_BATCH_TEMP,
+      calculations: item.Calculation,
+      calculationResults: item.Calculation_result,
+      heading: item.Heading,
+      paragraphs: item.Paragraph,
+      runResults: item.Result,
+      specTypes: item.SPEC_TYPE,
+      stages: item.STAGE,
+      subHeadings: item.Subheading,
+    });
+  });
+  return data;
 };
 
 export default fetchTaskDetails;

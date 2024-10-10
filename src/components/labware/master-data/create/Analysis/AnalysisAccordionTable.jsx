@@ -36,7 +36,8 @@ const AnalysisAccordionTable = ({
   const [selectedRunDataTable, setSelectedRunDataTable] = useState([]);
   const [selectedRunDataTableLabel, setSelectedRunDataTableLabel] =
     useState("");
-  const [selectedInput, setSelectedInput] = useState("");
+  const [selectedInput, setSelectedInput] = useState(""); // TODO: redundant state, can be derived from selectedRow?
+  const [selectedRow, setSelectedRow] = useState("");
 
   const runDataTables = {
     components_table: "Components",
@@ -62,8 +63,9 @@ const AnalysisAccordionTable = ({
     return tableData;
   };
 
-  const handleInputIconClick = (input) => {
+  const handleInputIconClick = (input, row) => {
     setSelectedInput(input);
+    setSelectedRow(row);
     setInputModalOpened(true);
   };
 
@@ -123,10 +125,10 @@ const AnalysisAccordionTable = ({
         header: "Input",
         size: 20,
         accessorKey: "input",
-        Cell: ({ cell }) => (
+        Cell: ({ cell, row }) => (
           <ActionIcon
             variant="subtle"
-            onClick={() => handleInputIconClick(cell.getValue())}
+            onClick={() => handleInputIconClick(cell.getValue(), row.original)}
           >
             <IconFileFilled />
           </ActionIcon>
@@ -278,7 +280,15 @@ const AnalysisAccordionTable = ({
         onClose={() => setInputModalOpened(false)}
         title="Solution"
         content={selectedInput}
-        // onSaveContent={updateData(event, "batchLinks", label, row.original, index)}
+        onSaveContent={(value) =>
+          updateData(
+            { target: { value } },
+            "paragraphs",
+            label,
+            selectedRow,
+            index
+          )
+        }
       />
       <TableViewModal
         open={showRunData}

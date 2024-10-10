@@ -50,13 +50,12 @@ function Login() {
   });
 
   const handleLogin = (values) => {
-    //TODO: uncomment api call
-    // userLogin(values).then(() => {
-    setClient(values.client);
-    setModule(values.module);
-    setUser({ userId: values.userId, password: values.password });
-    navigate(`/user/${values.module}/dashboard`);
-    // });
+    userLogin(values).then(() => {
+      setClient(values.client);
+      setModule(values.module);
+      setUser({ userId: values.userId, password: values.password });
+      navigate(`/user/${values.module}/dashboard`);
+    });
   };
 
   const gradient =
