@@ -1,0 +1,5 @@
+.toast {
+  pointer-events: none;
+  height: 100vh;
+  width: 100vw;
+}

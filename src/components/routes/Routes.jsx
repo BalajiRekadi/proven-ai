@@ -8,7 +8,7 @@ import "./routes.css";
 
 const Routes = () => {
   const navigate = useNavigate();
-  const { module, selectedRoute, setRoute } = useStore();
+  const { module, selectedRoute, setRoute, setTaskId } = useStore();
 
   useEffect(() => {
     if (module) {
@@ -19,6 +19,7 @@ const Routes = () => {
   const handleMenuItemClick = (route) => {
     setRoute(`/user/${module}/${route}`);
     navigate(`/user/${module}/${route}`);
+    setTaskId("");
   };
 
   const items = ROUTES.map((parent) => (

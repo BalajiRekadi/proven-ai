@@ -22,10 +22,12 @@ import { CLIENTS, MODULES } from "../../shared/constants";
 import { useLogin } from "../../api/hooks";
 import Register from "./Register";
 import { useState } from "react";
+import { useToast } from "../../shared/components/toast/useToast";
 
 function Login() {
   const navigate = useNavigate();
   const { userLogin } = useLogin();
+  const toast = useToast();
   const [openRgisterModal, setOpenRegisterModal] = useState(false);
   const { module, client, setClient, setModule, setUser } = useStore();
 
@@ -50,11 +52,16 @@ function Login() {
   });
 
   const handleLogin = (values) => {
-    userLogin(values).then(() => {
-      setClient(values.client);
-      setModule(values.module);
-      setUser({ userId: values.userId, password: values.password });
-      navigate(`/user/${values.module}/dashboard`);
+    userLogin(values).then((res) => {
+      if (res.response) {
+        setClient(values.client);
+        setModule(values.module);
+        setUser({ userId: values.userId, password: values.password });
+        navigate(`/user/${values.module}/dashboard`);
+        toast.success("User login successful.");
+      } else {
+        toast.error("Failed to login, please check your details.");
+      }
     });
   };
 

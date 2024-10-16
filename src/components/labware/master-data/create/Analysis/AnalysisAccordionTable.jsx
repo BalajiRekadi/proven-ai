@@ -89,7 +89,7 @@ const AnalysisAccordionTable = ({
 
   const onView = (key, row) => {
     const fieldIndex = data.subHeadings.findIndex((i) => i == row.solution);
-    const item = data.runData[fieldIndex];
+    const item = data.runResults[fieldIndex]?.[0];
     if (item) {
       const data = formatRunData(item[key]);
       setSelectedRunDataTable(data);
@@ -100,18 +100,16 @@ const AnalysisAccordionTable = ({
 
   const onDownload = (key, row) => {
     const fieldIndex = data.subHeadings.findIndex((i) => i == row.solution);
-    const item = data.runData[fieldIndex];
+    const item = data.runResults[fieldIndex]?.[0];
     if (item) {
       const data = formatRunData(item[key]);
       downloadCSVFromArray(data, runDataTables[key]);
     }
-    // const data = formatRunData(row.original.input?.runData[key]);
-    // downloadCSVFromArray(data, runDataTables[key]);
   };
 
   const disableStackIcon = (row) => {
     const fieldIndex = data.subHeadings.findIndex((i) => i == row.solution);
-    return data.runData ? !data.runData[fieldIndex] : true;
+    return data.runResults ? !data.runResults?.[fieldIndex]?.length : true;
   };
 
   const columns = useMemo(

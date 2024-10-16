@@ -30,15 +30,17 @@ const Toast = ({ message, type, loading = false }) => {
   };
 
   return (
-    <Notification
-      color={getColor()}
-      loading={loading}
-      withBorder
-      w={"20rem"}
-      withCloseButton={false}
-      title={message}
-      style={{ zIndex: 1000 }}
-    ></Notification>
+    <div className="toast">
+      <Notification
+        color={getColor()}
+        loading={loading}
+        withBorder
+        w={"20rem"}
+        withCloseButton={false}
+        title={message}
+        style={{ zIndex: 1000 }}
+      ></Notification>
+    </div>
   );
 };
 

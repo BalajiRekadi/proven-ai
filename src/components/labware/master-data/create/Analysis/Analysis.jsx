@@ -50,10 +50,10 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
       .then((res) => {
         setAnalysisData((prev) => {
           const clone = deepClone(prev);
-          if (!clone[index].runData) {
-            clone[index].runData = [];
+          if (!clone[index].runResults) {
+            clone[index].runResults = [];
           }
-          clone[index].runData[fieldIndex] = res;
+          clone[index].runResults[fieldIndex] = [res];
           return clone;
         });
         toast.success("Solution data loaded successfully");
