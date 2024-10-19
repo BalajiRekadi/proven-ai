@@ -12,7 +12,13 @@ const UploadCard = ({
 }) => {
   const setFile = () => {};
   return (
-    <Card padding="lg" radius="md" w={"20rem"} withBorder={withBorder}>
+    <Card
+      padding="lg"
+      radius="md"
+      w={"20rem"}
+      bg={"var(--lighter-gray)"}
+      withBorder={withBorder}
+    >
       <Card.Section p={16}>
         <Text fw={500}>{title}</Text>
       </Card.Section>

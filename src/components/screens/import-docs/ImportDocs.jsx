@@ -1,5 +1,4 @@
 import { Button, Flex } from "@mantine/core";
-import React from "react";
 import { UploadCard } from "../../../shared/components";
 import { IconUpload } from "@tabler/icons-react";
 import TaskCard from "./TaskCard";
@@ -22,6 +21,8 @@ const ImportDocs = ({
   showTaskCard,
   setShowTaskCard,
   setData,
+  areFilesUploaded,
+  setAreFilesUploaded,
   showOnlyMethodUpload = false,
 }) => {
   const { uploadFiles } = useUploadFiles();
@@ -33,6 +34,7 @@ const ImportDocs = ({
     const files = showOnlyMethodUpload ? [methodFile] : [specFile, methodFile];
     uploadFiles(files).then(() => {
       setShowTaskCard(false);
+      setAreFilesUploaded(true);
     });
   };
 
@@ -83,7 +85,13 @@ const ImportDocs = ({
         >
           {"Upload Files"}
         </Button>
-        <Button mt="md" radius="md" variant="filled" onClick={handleProcess}>
+        <Button
+          mt="md"
+          radius="md"
+          variant="filled"
+          onClick={handleProcess}
+          disabled={!areFilesUploaded}
+        >
           {"Process"}
         </Button>
       </Flex>

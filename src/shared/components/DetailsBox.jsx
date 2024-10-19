@@ -2,7 +2,7 @@ import React from "react";
 import { TextInput, ActionIcon, Card, Flex } from "@mantine/core";
 import { IconDeviceFloppy } from "@tabler/icons-react";
 import { useStore } from "../../store/useStore";
-import {MODULES} from '../constants';
+import { MODULES } from "../constants";
 
 const DetailsBox = ({ data, setData, onSave }) => {
   const { module } = useStore();
@@ -11,7 +11,14 @@ const DetailsBox = ({ data, setData, onSave }) => {
   };
 
   return (
-    <Card shadow="sm" padding="lg" radius="md" my={16} withBorder>
+    <Card
+      shadow="sm"
+      padding="lg"
+      radius="md"
+      my={16}
+      bg={"var(--lighter-gray)"}
+      withBorder
+    >
       <Flex justify="start" wrap="wrap" gap={24}>
         <TextInput
           w={"18rem"}

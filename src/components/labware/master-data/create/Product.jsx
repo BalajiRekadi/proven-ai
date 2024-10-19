@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { ProductCard, TextModal } from "../../../../shared/components";
 import { Anchor, Flex, Paper, Space, Title } from "@mantine/core";
 import { generateProductDetails } from "../../../../api/helpers";
@@ -15,27 +15,24 @@ const Product = ({
   const toast = useToast();
   const { module, client } = useStore();
 
-  const handleGenerate = () => {
-    // if (!productDetailsLoaded) {
-    toast.load("Generating product details");
-    generateProductDetails(taskData, module, client).then((res) => {
-      toast.success("Generated product details successfully");
-      setProductDetailsLoaded(true);
-      setProductDetails(res);
-    });
-    // }
-  };
+  useEffect(() => {
+    if (!productDetailsLoaded) {
+      toast.load("Generating product details");
+      generateProductDetails(taskData, module, client).then((res) => {
+        toast.success("Generated product details successfully");
+        setProductDetailsLoaded(true);
+        setProductDetails(res);
+      });
+    }
+  }, []);
 
   return (
     <>
-      <Flex justify={"space-between"}>
-        <Title order={2}>Product Details</Title>
-        <Anchor c={"green"} onClick={handleGenerate}>
-          Generate Details
-        </Anchor>
-      </Flex>
+      <Title order={4} mt={32} mb={16}>
+        Product Details
+      </Title>
       {productDetailsLoaded && (
-        <Paper shadow="xs" p="md" withBorder>
+        <Paper shadow="xs" p="md" bg={"var(--lighter-gray)"} withBorder>
           <ProductCard
             key={"Product"}
             title={"Product"}

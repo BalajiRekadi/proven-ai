@@ -11,13 +11,22 @@ const TaskCard = ({ data, setTaskData }) => {
     setTaskData({ ...data, facility: event.target.value });
   };
   return (
-    <Card shadow="sm" padding="lg" radius="md" w={"60rem"} my={16} withBorder>
+    <Card
+      shadow="sm"
+      padding="lg"
+      radius="md"
+      w={"80rem"}
+      my={16}
+      mt={48}
+      withBorder
+    >
       <Card.Section p={16}>
         <Text fw={500} c={"green"}>
           {`Task ID: ${data.taskId}`}
         </Text>
         <Flex gap={16} pb={16}>
           <TextInput
+            w={"20rem"}
             mt="md"
             rightSectionPointerEvents="none"
             rightSection={<IconEdit />}
@@ -27,6 +36,7 @@ const TaskCard = ({ data, setTaskData }) => {
             onChange={handleCompanyChange}
           />
           <TextInput
+            w={"20rem"}
             mt="md"
             rightSectionPointerEvents="none"
             rightSection={<IconEdit />}
