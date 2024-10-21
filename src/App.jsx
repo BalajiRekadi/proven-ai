@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import "@mantine/core/styles/global.css";
-import "./App.css";
 import "@mantine/core/styles.css";
 import { Route, Routes } from "react-router-dom";
 import { Login } from "./components";
@@ -15,20 +13,11 @@ import User from "./components/user/User";
 import CaliberCreate from "./components/caliber/master-data/create/Create";
 import LabwareCreate from "./components/labware/master-data/create/Create";
 import Dashboard from "./components/screens/dashboard/Dashboard";
-import { useStore } from "./store/useStore";
-import { useLocation } from "react-router-dom";
+import "./App.css";
 
 function App() {
   const theme = createTheme(THEME);
   const queryClient = new QueryClient();
-  const { setRoute } = useStore();
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location?.pathname && setRoute) {
-      setRoute(location.pathname);
-    }
-  }, [location?.pathname]);
 
   // TODO: add fallback routing
   return (

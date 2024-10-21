@@ -59,6 +59,15 @@ function Login() {
         setUser({ userId: values.userId, password: values.password });
         navigate(`/user/${values.module}/dashboard`);
         toast.success("User login successful.");
+        // TODO: Remove this once session id is implemented
+        localStorage.setItem("userId", values.userId);
+        localStorage.setItem("password", values.password);
+        localStorage.setItem("module", values.module);
+        localStorage.setItem("client", values.client);
+        // setTimeout(() => {
+        //   localStorage.removeItem("userId");
+        //   localStorage.removeItem("password");
+        // }, 1000 * 10);
       } else {
         toast.error("Failed to login, please check your details.");
       }
