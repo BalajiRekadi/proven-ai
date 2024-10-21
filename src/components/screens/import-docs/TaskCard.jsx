@@ -21,7 +21,7 @@ const TaskCard = ({ data, setTaskData }) => {
       withBorder
     >
       <Card.Section p={16}>
-        <Text fw={500} c={"green"}>
+        <Text fw={600} c={"green"}>
           {`Task ID: ${data.taskId}`}
         </Text>
         <Flex gap={16} pb={16}>

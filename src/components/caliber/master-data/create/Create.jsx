@@ -20,6 +20,7 @@ const CreateFlow = () => {
   const [specFile, setSpecFile] = useState(null);
   const [methodFile, setMethodFile] = useState(null);
   const [showTaskCard, setShowTaskCard] = useState(false);
+  const [areFilesUploaded, setAreFilesUploaded] = useState(false);
   const [taskData, setTaskData] = useState({});
   const [worksheetsData, setWorksheetsData] = useState();
   const [testsData, setTestsData] = useState();
@@ -31,13 +32,15 @@ const CreateFlow = () => {
   const { saveWorksheet: saveTestData } = useSaveWorksheetData("tests");
   const { getTaskDetails } = useTaskDetails();
 
-  // useEffect(() => {
-  //   if (selectedTaskId) {
-  //     getTaskDetails(selectedTaskId).then((res) => {
-  //       console.log(res);
-  //     });
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (selectedTaskId) {
+      getTaskDetails(selectedTaskId).then((res) => {
+        setTaskData(res.taskData);
+        setAreFilesUploaded(true);
+        setShowTaskCard(true);
+      });
+    }
+  }, []);
 
   const nextStep = () =>
     setActive((current) => (current < 5 ? current + 1 : current));
@@ -54,6 +57,21 @@ const CreateFlow = () => {
         return "Export";
       default:
         return "Next";
+    }
+  };
+
+  const disableNextBtn = () => {
+    switch (active) {
+      case 0:
+        return !showTaskCard;
+      case 1:
+        return false;
+      case 2:
+        return false;
+      case 3:
+        return false;
+      default:
+        return false;
     }
   };
 
@@ -162,6 +180,8 @@ const CreateFlow = () => {
             setMethodFile={setMethodFile}
             setData={setWorksheetsData}
             showOnlyMethodUpload={client === "neuland"}
+            areFilesUploaded={areFilesUploaded}
+            setAreFilesUploaded={setAreFilesUploaded}
           />
         </Stepper.Step>
         <Stepper.Step label="Worksheets">
@@ -216,7 +236,9 @@ const CreateFlow = () => {
             </Button>
           )}
           {active <= 3 && (
-            <Button onClick={nextStep}>{getNextBtnLabel()}</Button>
+            <Button onClick={nextStep} disabled={disableNextBtn()}>
+              {getNextBtnLabel()}
+            </Button>
           )}
         </Group>
         <ExportModal

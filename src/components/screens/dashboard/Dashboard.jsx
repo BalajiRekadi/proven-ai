@@ -1,14 +1,13 @@
 import { useMemo } from "react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import React from "react";
 import { Badge, Box, Flex, Select, Title, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { IconCalendar, IconSearch } from "@tabler/icons-react";
 import { DEFAULT_TABLE_CONFIG } from "../../../shared/constants";
 import { useTasks } from "../../../api/hooks";
 import { useStore } from "../../../store/useStore";
-import "./dashboard.css";
 import { useNavigate } from "react-router-dom";
+import "./dashboard.css";
 
 const Dashboard = () => {
   const { data } = useTasks();

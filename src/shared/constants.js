@@ -1,7 +1,7 @@
 import { IconDatabase } from "@tabler/icons-react";
 
 // const DOMAIN = "http://13.235.98.215:8000";
-const DOMAIN = "http://13.235.98.215:27005"; // login
+const DOMAIN = "http://labwaredrl-lb-848023330.ap-south-1.elb.amazonaws.com"; // login
 // const DOMAIN = "http://13.235.98.215:8001";
 
 const ROUTES = [

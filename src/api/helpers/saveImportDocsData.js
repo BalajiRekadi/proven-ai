@@ -7,6 +7,9 @@ const saveImportDocsData = async (data, file1, file2, module, client) => {
   const res = await axios({
     url: `${DOMAIN}/save?module=${module}`,
     method: "post",
+    headers: new Headers({
+      "ngrok-skip-browser-warning": "69420",
+    }),
     data: payload,
   });
   return res.data;

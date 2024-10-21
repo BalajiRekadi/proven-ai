@@ -15,6 +15,9 @@ const generateProductDetails = async (data, module, client) => {
   const res = await axios({
     url: `${DOMAIN}/machine_res?TaskId=${data.taskId}&module=${module}&Client=${client}`,
     method: "POST",
+    headers: new Headers({
+      "ngrok-skip-browser-warning": "69420",
+    }),
     data: payload,
   });
 
