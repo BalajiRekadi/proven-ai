@@ -1,10 +1,16 @@
 import React from "react";
-import { TextInput, ActionIcon, Card, Flex } from "@mantine/core";
+import { TextInput, Button, ActionIcon, Card, Flex } from "@mantine/core";
 import { IconDeviceFloppy } from "@tabler/icons-react";
 import { useStore } from "../../store/useStore";
 import { MODULES } from "../constants";
 
-const DetailsBox = ({ data, setData, onSave }) => {
+const DetailsBox = ({
+  data,
+  setData,
+  onSave,
+  onPrimaryBtnClick = () => {},
+  showPrimaryBtn = false,
+}) => {
   const { module } = useStore();
   const handleValueChange = (event, field) => {
     setData({ ...data, [field]: event.target.value });
@@ -75,10 +81,18 @@ const DetailsBox = ({ data, setData, onSave }) => {
         )}
       </Flex>
 
-      <Flex justify={"end"} px={16} pt={16}>
+      <Flex justify={"end"} align={"center"} px={16} pt={16} gap={32}>
         <ActionIcon variant="subtle" onClick={onSave}>
           <IconDeviceFloppy size={24} />
         </ActionIcon>
+        {showPrimaryBtn && (
+          <Button
+            disabled={!(data?.grade && data?.samplingPoint)}
+            onClick={onPrimaryBtnClick}
+          >
+            Generate Product Details
+          </Button>
+        )}
       </Flex>
     </Card>
   );

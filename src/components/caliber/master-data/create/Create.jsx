@@ -27,7 +27,7 @@ const CreateFlow = () => {
   const [rowSelection, setRowSelection] = useState({});
   const { selectedTaskId } = useStore();
   const toast = useToast();
-  const { client } = useStore();
+  const { client, module } = useStore();
   const { saveWorksheet } = useSaveWorksheetData();
   const { saveWorksheet: saveTestData } = useSaveWorksheetData("tests");
   const { getTaskDetails } = useTaskDetails();
@@ -111,9 +111,11 @@ const CreateFlow = () => {
   };
 
   const saveTaskData = () => {
-    saveImportDocsData(taskData, specFile, methodFile).then(() => {
-      toast.success("Deatils saved successfully");
-    });
+    saveImportDocsData(taskData, specFile, methodFile, module, client).then(
+      () => {
+        toast.success("Deatils saved successfully");
+      }
+    );
   };
 
   const getExportTableData = () => {

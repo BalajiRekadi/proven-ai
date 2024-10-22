@@ -11,6 +11,7 @@ import Product from "./Product";
 import { useStore } from "../../../../store/useStore";
 import { useTaskDetails } from "../../../../api/hooks";
 import { MODULES } from "../../../../shared/constants.js";
+import { generateProductDetails } from "../../../../api/helpers";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
@@ -28,7 +29,7 @@ const CreateFlow = () => {
   });
   const [analysisData, setAnalysisData] = useState();
   const [productDetailsLoaded, setProductDetailsLoaded] = useState(false);
-  const { client, selectedTaskId } = useStore();
+  const { module, client, selectedTaskId } = useStore();
   const toast = useToast();
   const { getTaskDetails } = useTaskDetails();
   const [areFilesUploaded, setAreFilesUploaded] = useState(false);
@@ -55,10 +56,21 @@ const CreateFlow = () => {
   const nextStep = () =>
     setActive((current) => (current < 4 ? current + 1 : current));
 
+  const handleGenerateProductDetails = () => {
+    if (!productDetailsLoaded) {
+      toast.load("Generating product details");
+      generateProductDetails(taskData, module, client).then((res) => {
+        toast.success("Generated product details successfully");
+        setProductDetailsLoaded(true);
+        setProductDetails(res);
+      });
+    }
+  };
+
   const getNextBtnLabel = () => {
     switch (active) {
       case 0:
-        return "Generate Product Details";
+        return "Next";
       case 1:
         return "Generate Analysis";
       case 2:
@@ -93,15 +105,11 @@ const CreateFlow = () => {
   };
 
   const saveTaskData = () => {
-    saveImportDocsData(
-      taskData,
-      specFile,
-      methodFile,
-      MODULES.LABWARE.value,
-      client
-    ).then(() => {
-      toast.success("Deatils saved successfully");
-    });
+    saveImportDocsData(taskData, specFile, methodFile, module, client).then(
+      () => {
+        toast.success("Deatils saved successfully");
+      }
+    );
   };
 
   const disableNextBtn = () => {
@@ -109,7 +117,7 @@ const CreateFlow = () => {
       case 0:
         return !showTaskCard;
       case 1:
-        return false;
+        return !productDetailsLoaded;
       case 2:
         return false;
       default:
@@ -155,6 +163,8 @@ const CreateFlow = () => {
               data={taskData}
               setData={setTaskData}
               onSave={saveTaskData}
+              showPrimaryBtn={true}
+              onPrimaryBtnClick={handleGenerateProductDetails}
             />
             <Product
               taskData={taskData}

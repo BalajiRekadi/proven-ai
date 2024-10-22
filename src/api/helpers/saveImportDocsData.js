@@ -1,9 +1,8 @@
 import axios from "axios";
 import { DOMAIN, MODULES } from "../../shared/constants";
-import { appendDocxExtension } from "../../shared/utilities";
 
 const saveImportDocsData = async (data, file1, file2, module, client) => {
-  const payload = mapPayload(data, file1, file2, module, client);
+  const payload = mapPayload(data, module, client);
   const res = await axios({
     url: `${DOMAIN}/save?module=${module}`,
     method: "post",
@@ -15,7 +14,7 @@ const saveImportDocsData = async (data, file1, file2, module, client) => {
   return res.data;
 };
 
-const mapPayload = (data, client) => {
+const mapPayload = (data, module, client) => {
   return {
     PRODUCT_NAME: data.product,
     ITEM_CODE: data.code,
@@ -33,7 +32,8 @@ const mapPayload = (data, client) => {
     status: data.status,
     COMPANY: data.company,
     FACILITY: data.facility,
-    client,
+    client: client,
+    module: module,
   };
 };
 
