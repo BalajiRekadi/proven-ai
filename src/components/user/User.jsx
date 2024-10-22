@@ -1,16 +1,32 @@
-import { AppShell, Burger, Flex, Image, Text } from "@mantine/core";
+import {
+  AppShell,
+  Burger,
+  Flex,
+  Image,
+  Text,
+  Popover,
+  ActionIcon,
+  Button,
+} from "@mantine/core";
 import React, { useState } from "react";
 import headerLogo from "./../../assets/headerLogo.png";
 import { Outlet } from "react-router-dom";
 import Routes from "../routes/Routes";
-import "./user.css";
 import { ModuleSelect } from "../../shared/components";
 import { useStore } from "../../store/useStore";
 import { IconUserCircle } from "@tabler/icons-react";
+import { useNavigate } from "react-router-dom";
+import "./user.css";
 
 const User = () => {
   const [closed, setOpened] = useState(false);
   const { user } = useStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   return (
     <AppShell
@@ -47,7 +63,23 @@ const User = () => {
               <Text pr={32} c={"white"}>
                 {user.userId || "-"} | Super Admin
               </Text>
-              <IconUserCircle color="white" size={32} pr={32} stroke={1} />
+              <Popover width={200} position="bottom" withArrow shadow="lg">
+                <Popover.Target>
+                  <ActionIcon variant="transparent">
+                    <IconUserCircle
+                      color="white"
+                      size={32}
+                      pr={32}
+                      stroke={1}
+                    />
+                  </ActionIcon>
+                </Popover.Target>
+                <Popover.Dropdown>
+                  <Button variant="filled" onClick={handleLogout} fullWidth>
+                    Logout
+                  </Button>
+                </Popover.Dropdown>
+              </Popover>
             </Flex>
           </Flex>
         </Flex>

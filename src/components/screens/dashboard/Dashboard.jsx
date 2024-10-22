@@ -91,6 +91,8 @@ const Dashboard = () => {
     ...DEFAULT_TABLE_CONFIG,
     enablePagination: true,
     enableBottomToolbar: true,
+    enableGlobalFilter: true,
+    enableSorting: true,
     mantineTableProps: {
       withColumnBorders: true,
       striped: true,
