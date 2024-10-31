@@ -1,19 +1,22 @@
-import "@mantine/core/styles/global.css";
-import "@mantine/core/styles.css";
-import { Route, Routes } from "react-router-dom";
-import { Login } from "./components";
-import { MantineProvider, createTheme } from "@mantine/core";
-import "@mantine/dates/styles.css";
-import "mantine-react-table/styles.css";
-import { THEME } from "./shared/constants";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ToastContextProvider } from "./shared/components";
-import AppContextProvider from "./store/AppContextProvider";
-import User from "./components/user/User";
-import CaliberCreate from "./components/caliber/master-data/create/Create";
-import LabwareCreate from "./components/labware/master-data/create/Create";
-import Dashboard from "./components/screens/dashboard/Dashboard";
-import "./App.css";
+import '@mantine/core/styles/global.css'
+import '@mantine/core/styles.css'
+import '@mantine/dates/styles.css'
+import 'mantine-react-table/styles.css'
+import './App.css'
+
+import { Route, Routes, } from 'react-router-dom'
+
+import { createTheme, MantineProvider, } from '@mantine/core'
+import { QueryClient, QueryClientProvider, } from '@tanstack/react-query'
+
+import { Login, } from './components'
+import CaliberCreate from './components/caliber/master-data/create/Create'
+import LabwareCreate from './components/labware/master-data/create/Create'
+import Dashboard from './components/screens/dashboard/Dashboard'
+import User from './components/user/User'
+import { ToastContextProvider, } from './shared/components'
+import { THEME, } from './shared/constants'
+import AppContextProvider from './store/AppContextProvider'
 
 function App() {
   const theme = createTheme(THEME);

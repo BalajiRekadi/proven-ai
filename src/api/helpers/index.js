@@ -6,12 +6,12 @@ import fetchWorksheets from "./fetchWorksheets";
 import runWorksheet from "./runWorksheet";
 import generateProductDetails from "./generateProductDetails";
 import runAnalysis from "./runAnalysis";
-import fetchNeulandWorksheets from "./fetchNeulandWorksheets";
-import fetchTasks from "./fetchTasks";
+import fetchNeulandWorksheets from "./fetchNeulandWorksheets.ts";
+import fetchTasks from "./fetchTasks.ts";
 import runTestDetail from "./runTestDetail";
 import login from "./login";
 import register from "./register";
-import fetchTaskDetails from "./fetchTaskDetails";
+import fetchTaskDetails from "./fetchTaskDetails.ts";
 
 export {
   uploadFile,
