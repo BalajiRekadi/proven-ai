@@ -13,6 +13,7 @@ import ExportModal from "./ExportModal";
 import ExportTable from "./ExportTable";
 import PasswordInputWithMeter from "./PasswordInputWithMeter";
 import Footer from "./Footer";
+import InputTable from "./InputTable";
 import { ToastContextProvider } from "./toast/ToastProvider";
 
 export {
@@ -32,4 +33,5 @@ export {
   ExportTable,
   PasswordInputWithMeter,
   Footer,
+  InputTable,
 };

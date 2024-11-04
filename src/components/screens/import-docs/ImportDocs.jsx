@@ -1,5 +1,5 @@
-import { Button, Flex } from "@mantine/core";
-import { UploadCard } from "../../../shared/components";
+import { Box, Button, Flex } from "@mantine/core";
+import { InputTable, UploadCard } from "../../../shared/components";
 import { IconUpload } from "@tabler/icons-react";
 import TaskCard from "./TaskCard";
 import {
@@ -23,6 +23,8 @@ const ImportDocs = ({
   setData,
   areFilesUploaded,
   setAreFilesUploaded,
+  limitsData,
+  setLimitsData,
   showOnlyMethodUpload = false,
 }) => {
   const { uploadFiles } = useUploadFiles();
@@ -48,13 +50,15 @@ const ImportDocs = ({
     } else {
       processFile([specFile?.name, methodFile?.name]).then((data) => {
         setShowTaskCard(true);
-        setTaskData(data);
+        const { limits, ...task } = data;
+        setTaskData(task);
+        setLimitsData(limits);
       });
     }
   };
 
   return (
-    <div style={{ width: "70%" }}>
+    <Box pr={32}>
       <Flex gap={16}>
         {!showOnlyMethodUpload && (
           <UploadCard
@@ -96,7 +100,10 @@ const ImportDocs = ({
         </Button>
       </Flex>
       {showTaskCard && <TaskCard data={taskData} setTaskData={setTaskData} />}
-    </div>
+      {showTaskCard && (
+        <InputTable data={limitsData} updateData={setLimitsData} />
+      )}
+    </Box>
   );
 };
 

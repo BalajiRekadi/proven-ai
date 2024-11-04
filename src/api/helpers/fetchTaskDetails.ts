@@ -1,5 +1,7 @@
-import { DOMAIN } from "../../shared/constants";
-import axios from "axios";
+import axios from 'axios'
+
+import { DOMAIN } from '../../shared/constants'
+import { convertObjDataToArray } from '../../shared/utilities'
 
 const fetchTaskDetails = async (id, module, client) => {
   const res = await axios({
@@ -42,10 +44,11 @@ const mapResponse = (data) => {
       product_grade: data.product_grade,
     },
     analysisData: mapAnalysisData(data.tests),
+    limitsData: convertObjDataToArray(data.limits),
   };
 };
 
-const mapAnalysisData = (tests) => {
+const mapAnalysisData = (tests=[]) => {
   const data = [];
   tests.forEach((item) => {
     data.push({

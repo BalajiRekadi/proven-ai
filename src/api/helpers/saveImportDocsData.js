@@ -1,8 +1,16 @@
 import axios from "axios";
 import { DOMAIN, MODULES } from "../../shared/constants";
+import { convertArrayDataToObj } from "../../shared/utilities";
 
-const saveImportDocsData = async (data, file1, file2, module, client) => {
-  const payload = mapPayload(data, module, client);
+const saveImportDocsData = async (
+  data,
+  limitsData = [],
+  file1,
+  file2,
+  module,
+  client
+) => {
+  const payload = mapPayload(data, limitsData, module, client);
   const res = await axios({
     url: `${DOMAIN}/save?module=${module}`,
     method: "post",
@@ -14,7 +22,7 @@ const saveImportDocsData = async (data, file1, file2, module, client) => {
   return res.data;
 };
 
-const mapPayload = (data, module, client) => {
+const mapPayload = (data, limitsData, module, client) => {
   return {
     PRODUCT_NAME: data.product,
     ITEM_CODE: data.code,
@@ -34,6 +42,7 @@ const mapPayload = (data, module, client) => {
     FACILITY: data.facility,
     client: client,
     module: module,
+    limits: convertArrayDataToObj(limitsData),
   };
 };
 

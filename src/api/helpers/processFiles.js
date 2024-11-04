@@ -1,5 +1,8 @@
 import { DOMAIN } from "../../shared/constants";
-import { appendDocxExtension } from "../../shared/utilities";
+import {
+  appendDocxExtension,
+  convertObjDataToArray,
+} from "../../shared/utilities";
 import axios from "axios";
 
 const processFiles = async (files, module, client, user) => {
@@ -43,6 +46,7 @@ const mapResponse = (data, file1, file2) => {
     createdBy: data.createdBy,
     createdOn: data.createdOn,
     status: data.status,
+    limits: convertObjDataToArray(data.limits),
   };
 };
 

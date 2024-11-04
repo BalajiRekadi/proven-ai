@@ -10,7 +10,6 @@ import Analysis from "./Analysis/Analysis";
 import Product from "./Product";
 import { useStore } from "../../../../store/useStore";
 import { useTaskDetails } from "../../../../api/hooks";
-import { MODULES } from "../../../../shared/constants.js";
 import { generateProductDetails } from "../../../../api/helpers";
 
 const CreateFlow = () => {
@@ -23,6 +22,7 @@ const CreateFlow = () => {
   const [methodFileName, setMethodFileName] = useState("");
   const [showTaskCard, setShowTaskCard] = useState(false);
   const [taskData, setTaskData] = useState({});
+  const [limitsData, setLimitsData] = useState({});
   const [productDetails, setProductDetails] = useState({
     product: {},
     product_grade: {},
@@ -42,6 +42,7 @@ const CreateFlow = () => {
         setMethodFileName(res.taskData.methodFileName);
         // import docs step
         setTaskData(res.taskData);
+        setLimitsData(res.limitsData);
         setAreFilesUploaded(true);
         setShowTaskCard(true);
         // product step
@@ -105,11 +106,16 @@ const CreateFlow = () => {
   };
 
   const saveTaskData = () => {
-    saveImportDocsData(taskData, specFile, methodFile, module, client).then(
-      () => {
-        toast.success("Deatils saved successfully");
-      }
-    );
+    saveImportDocsData(
+      taskData,
+      limitsData,
+      specFile,
+      methodFile,
+      module,
+      client
+    ).then(() => {
+      toast.success("Deatils saved successfully");
+    });
   };
 
   const disableNextBtn = () => {
@@ -156,6 +162,8 @@ const CreateFlow = () => {
               showOnlyMethodUpload={client === "neuland"}
               areFilesUploaded={areFilesUploaded}
               setAreFilesUploaded={setAreFilesUploaded}
+              limitsData={limitsData}
+              setLimitsData={setLimitsData}
             />
           </Stepper.Step>
           <Stepper.Step label="Product">
