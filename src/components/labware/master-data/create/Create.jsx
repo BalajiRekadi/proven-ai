@@ -11,6 +11,7 @@ import Product from "./Product";
 import { useStore } from "../../../../store/useStore";
 import { useTaskDetails } from "../../../../api/hooks";
 import { generateProductDetails } from "../../../../api/helpers";
+import AnnotationValidations from "./AnnotationValidations";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0);
@@ -33,6 +34,11 @@ const CreateFlow = () => {
   const toast = useToast();
   const { getTaskDetails } = useTaskDetails();
   const [areFilesUploaded, setAreFilesUploaded] = useState(false);
+  const [annotationValidations, setAnnotationValidations] = useState({
+    Issues: [],
+  });
+  const [showAnnotationsValidation, setShowAnnotationsValidation] =
+    useState(false);
 
   // populate generated data when clicking on a task in dashboard
   useEffect(() => {
@@ -51,7 +57,10 @@ const CreateFlow = () => {
         // Analysis step
         setAnalysisData(res.analysisData);
         // show annotation validations
-        showAnnotationValidations(res.annotationValidation);
+        if (res.annotationValidation?.ErrorCount) {
+          setShowAnnotationsValidation(true);
+        }
+        setAnnotationValidations(res.annotationValidation);
       });
     }
   }, [selectedTaskId]);
@@ -67,16 +76,6 @@ const CreateFlow = () => {
         setProductDetailsLoaded(true);
         setProductDetails(res);
       });
-    }
-  };
-
-  const showAnnotationValidations = (validations) => {
-    if (validations.Issues) {
-      let msg = "";
-      validations.Issues.forEach((issue) => {
-        msg = issue.Message;
-      });
-      toast.error("");
     }
   };
 
@@ -235,6 +234,12 @@ const CreateFlow = () => {
         onClose={() => setModalOpened(false)}
         title={"Description"}
         content={modalContent}
+      />
+
+      <AnnotationValidations
+        annotationValidations={annotationValidations}
+        open={showAnnotationsValidation}
+        handleClose={() => setShowAnnotationsValidation(false)}
       />
     </Stack>
   );
