@@ -45,6 +45,7 @@ const mapResponse = (data) => {
     },
     analysisData: mapAnalysisData(data.tests),
     limitsData: convertObjDataToArray(data.limits),
+    annotationValidation: data.AnnotationValidation
   };
 };
 

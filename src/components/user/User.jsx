@@ -8,7 +8,7 @@ import {
   ActionIcon,
   Button,
 } from "@mantine/core";
-import React, { useState } from "react";
+import { useState } from "react";
 import headerLogo from "./../../assets/headerLogo.png";
 import { Outlet } from "react-router-dom";
 import Routes from "../routes/Routes";

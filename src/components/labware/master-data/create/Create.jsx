@@ -50,6 +50,8 @@ const CreateFlow = () => {
         setProductDetailsLoaded(true);
         // Analysis step
         setAnalysisData(res.analysisData);
+        // show annotation validations
+        showAnnotationValidations(res.annotationValidation);
       });
     }
   }, [selectedTaskId]);
@@ -65,6 +67,16 @@ const CreateFlow = () => {
         setProductDetailsLoaded(true);
         setProductDetails(res);
       });
+    }
+  };
+
+  const showAnnotationValidations = (validations) => {
+    if (validations.Issues) {
+      let msg = "";
+      validations.Issues.forEach((issue) => {
+        msg = issue.Message;
+      });
+      toast.error("");
     }
   };
 
@@ -175,11 +187,8 @@ const CreateFlow = () => {
               onPrimaryBtnClick={handleGenerateProductDetails}
             />
             <Product
-              taskData={taskData}
               productDetails={productDetails}
-              setProductDetails={setProductDetails}
               productDetailsLoaded={productDetailsLoaded}
-              setProductDetailsLoaded={setProductDetailsLoaded}
             />
           </Stepper.Step>
           <Stepper.Step label="Analysis">

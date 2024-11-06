@@ -50,9 +50,8 @@ const ImportDocs = ({
     } else {
       processFile([specFile?.name, methodFile?.name]).then((data) => {
         setShowTaskCard(true);
-        const { limits, ...task } = data;
-        setTaskData(task);
-        setLimitsData(limits);
+        setTaskData(data.taskData);
+        setLimitsData(data.limits);
       });
     }
   };
