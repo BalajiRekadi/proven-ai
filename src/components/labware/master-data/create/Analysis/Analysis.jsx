@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AccordionGroup } from "../../../../../shared/components";
 import AnalysisAccordionTable from "./AnalysisAccordionTable";
 import { useToast } from "../../../../../shared/components/toast/useToast";
@@ -6,11 +6,17 @@ import { runAnalysis } from "../../../../../api/helpers";
 import { deepClone } from "../../../../../shared/utilities";
 import { useGenerateWorksheets } from "../../../../../api/hooks";
 import { useStore } from "../../../../../store/useStore";
+import { Box, Button, Flex, Popover, Title } from "@mantine/core";
+import { IconStackPop } from "@tabler/icons-react";
+import useMergeAll from "../../../../../api/hooks/useMergeAllAnalysis";
+import AnalysisPopover from "./AnalysisPopover";
 
 const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
   const toast = useToast();
   const { module, client } = useStore();
   const { generateWorksheets } = useGenerateWorksheets("analysis");
+  const { mergeAll } = useMergeAll();
+  const [mergedData, setMergedData] = useState(null);
 
   useEffect(() => {
     if (taskData.code && !analysisData) {
@@ -84,11 +90,37 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
     return accordions;
   };
 
+  const hanldeMergeAll = () => {
+    mergeAll(taskData.taskId).then((data) => {
+      setMergedData(data);
+    });
+  };
+
   return (
-    <AccordionGroup
-      accordions={getAccordions()}
-      groupTitle={"Analysis Details"}
-    />
+    <>
+      <Box py={16} pt={32}>
+        <Title order={4}>Analysis Details</Title>
+        <Flex justify={"flex-end"}>
+          <Button.Group>
+            <Button variant="light" onClick={() => hanldeMergeAll()}>
+              Merge all
+            </Button>
+            <Popover position="top" withArrow shadow="md">
+              <Popover.Target>
+                <Button
+                  p={0}
+                  pl={10}
+                  disabled={!mergedData}
+                  leftSection={<IconStackPop size={24} />}
+                ></Button>
+              </Popover.Target>
+              <AnalysisPopover tables={mergedData} />
+            </Popover>
+          </Button.Group>
+        </Flex>
+      </Box>
+      <AccordionGroup accordions={getAccordions()} />
+    </>
   );
 };
 

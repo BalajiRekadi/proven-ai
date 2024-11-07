@@ -12,6 +12,7 @@ import runTestDetail from "./runTestDetail";
 import login from "./login";
 import register from "./register";
 import fetchTaskDetails from "./fetchTaskDetails.ts";
+import mergeAllAnalysis from "./mergeAllAnalysis.ts";
 
 export {
   uploadFile,
@@ -28,4 +29,5 @@ export {
   login,
   register,
   fetchTaskDetails,
+  mergeAllAnalysis,
 };

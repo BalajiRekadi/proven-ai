@@ -7,6 +7,7 @@ import {
 } from "../../../../../shared/components";
 import { useToast } from "../../../../../shared/components/toast/useToast";
 import useRunTestDetails from "../../../../../api/hooks/useRunTestDetails";
+import { Box, Title } from "@mantine/core";
 
 const Tests = ({ testsData, taskData, setTestsData }) => {
   const { saveWorksheet } = useSaveWorksheetData("tests");
@@ -85,7 +86,12 @@ const Tests = ({ testsData, taskData, setTestsData }) => {
   };
 
   return (
-    <AccordionGroup accordions={getAccordions()} groupTitle={"Tests Details"} />
+    <>
+      <Box py={16} pt={32}>
+        <Title order={4}>Tests Details</Title>
+      </Box>
+      <AccordionGroup accordions={getAccordions()} />
+    </>
   );
 };
 

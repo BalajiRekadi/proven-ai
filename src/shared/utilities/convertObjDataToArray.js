@@ -1,14 +1,16 @@
 const convertObjDataToArray = (data) => {
   const keys = Object.keys(data);
   const length = data[keys[0]]?.length;
-  const result = Array(length).fill({});
+  const result = [];
 
   if (keys?.length) {
-    result.forEach((obj, index) => {
+    for (let i = 0; i < length; i++) {
+      const item = {};
       keys.forEach((key) => {
-        obj[key] = data[key][index];
+        item[key] = data[key][i];
       });
-    });
+      result.push(item);
+    }
   }
 
   return result;

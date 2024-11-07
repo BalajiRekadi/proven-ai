@@ -1,14 +1,8 @@
-import { Accordion, Box, Group, Title } from "@mantine/core";
-import { IconRun } from "@tabler/icons-react";
-import React from "react";
+import { Accordion, Box } from "@mantine/core";
 
-const AccordionGroup = ({ accordions, groupTitle }) => {
+const AccordionGroup = ({ accordions }) => {
   return (
     <>
-      <Group align="center" py={16} pt={32}>
-        <Title order={4}>{groupTitle}</Title>
-        <IconRun size={24} />
-      </Group>
       <Box>
         <Accordion
           variant="separated"

@@ -1,5 +1,5 @@
-import React from "react";
 import { AccordionGroup } from "../../../../../shared/components";
+import { Box, Title } from "@mantine/core";
 
 const TestPlan = ({ taskData }) => {
   const accordions = [
@@ -8,7 +8,14 @@ const TestPlan = ({ taskData }) => {
       content: <div>Todo</div>,
     },
   ];
-  return <AccordionGroup accordions={accordions} groupTitle={"Test Plan"} />;
+  return (
+    <>
+      <Box py={16} pt={32}>
+        <Title order={4}>Test Plan</Title>
+      </Box>
+      <AccordionGroup accordions={accordions} />;
+    </>
+  );
 };
 
 export default TestPlan;

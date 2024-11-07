@@ -15,14 +15,12 @@ import {
   IconRun,
   IconStackPop,
 } from "@tabler/icons-react";
-import React from "react";
 import { useMemo, useState } from "react";
 import { DEFAULT_TABLE_CONFIG } from "../../../../../shared/constants";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { TableViewModal, TextModal } from "../../../../../shared/components";
 import { downloadCSVFromArray } from "../../../../../shared/utilities";
 import "./analysis-accordion-table.css";
-import deepClone from "../../../../../shared/utilities/deepClone";
 
 const AnalysisAccordionTable = ({
   index,

@@ -10,6 +10,7 @@ import {
   useRunWorksheet,
   useSaveWorksheetData,
 } from "../../../../../api/hooks";
+import { Box, Title } from "@mantine/core";
 
 const Worksheets = ({
   taskData,
@@ -114,25 +115,15 @@ const Worksheets = ({
         return clone;
       });
     });
-    // } else {
-    //   const clone = deepClone(worksheetsData);
-    //   clone[label][0][row.solution][property] = content;
-    //   saveWorksheet({
-    //     product: taskData.product,
-    //     ...clone,
-    //   }).then((res) => {
-    //     setWorksheetsData(() => {
-    //       return clone;
-    //     });
-    //   });
-    // }
   };
 
   return (
-    <AccordionGroup
-      accordions={getAccordions()}
-      groupTitle={"Work Sheet Details"}
-    />
+    <>
+      <Box py={16} pt={32}>
+        <Title order={4}>Worksheet Details</Title>
+      </Box>
+      <AccordionGroup accordions={getAccordions()} />
+    </>
   );
 };
 

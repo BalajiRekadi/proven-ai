@@ -1,7 +1,7 @@
 import { Button, Flex, Group, Stepper, Title, Stack } from "@mantine/core";
 import { saveImportDocsData } from "../../../../api/helpers";
 import { useState, useEffect } from "react";
-import { IconDatabase } from "@tabler/icons-react";
+import { IconArrowRight, IconDatabase } from "@tabler/icons-react";
 import ImportDocs from "../../../screens/import-docs/ImportDocs";
 import { DetailsBox, TextModal } from "../../../../shared/components";
 import Export from "../../../screens/export/Export";
@@ -220,8 +220,12 @@ const CreateFlow = () => {
                 Export
               </Button>
             )}
-            {active <= 3 && (
-              <Button onClick={nextStep} disabled={disableNextBtn()}>
+            {active < 3 && (
+              <Button
+                onClick={nextStep}
+                disabled={disableNextBtn()}
+                rightSection={<IconArrowRight />}
+              >
                 {getNextBtnLabel()}
               </Button>
             )}
