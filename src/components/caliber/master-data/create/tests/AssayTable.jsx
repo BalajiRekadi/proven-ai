@@ -28,12 +28,14 @@ const AssayTable = () => {
       {
         header: "Test Code",
         accessorKey: "testCode",
+        id: "testCode",
         size: 50,
       },
       {
         header: "Output",
         size: 50,
         accessorKey: "output",
+        id: "output",
         Cell: ({ cell }) => (
           <ActionIcon variant="subtle" onClick={toggleAssayModal}>
             <IconFileTypeCsv />
@@ -44,6 +46,7 @@ const AssayTable = () => {
         header: "",
         size: 50,
         accessorKey: "actions",
+        id: "actions",
         Cell: ({ cell }) => (
           <Flex gap={16}>
             <ActionIcon variant="subtle">

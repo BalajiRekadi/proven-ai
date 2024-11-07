@@ -21,47 +21,56 @@ const Dashboard = () => {
     () => [
       {
         header: "Task ID",
+        id: "taskId",
         accessorKey: "taskId",
         size: 20,
       },
       {
         header: "Company",
         accessorKey: "company",
+        id: "company",
         size: 30,
       },
       {
         header: "Facility",
         accessorKey: "facility",
+        id: "facility",
         size: 30,
       },
       {
         header: "Product",
         accessorKey: "product",
+        id: "product",
         size: 40,
       },
       {
         header: "Spec",
         accessorKey: "spec",
+        id: "spec",
         size: 30,
       },
       {
         header: "Method",
         accessorKey: "method",
+        id: "method",
         size: 30,
       },
       {
         header: "Created By",
         accessorKey: "createdBy",
+        id: "createdBy",
         size: 30,
       },
       {
         header: "Created On",
         accessorKey: "createdOn",
+        id: "createdOn",
         size: 30,
       },
       {
         header: "Status",
         accessorKey: "status",
+        id: "status",
         size: 150,
         Cell: ({ cell }) => (
           <Badge

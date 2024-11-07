@@ -11,22 +11,27 @@ const AssayModal = ({ open, onClose }) => {
       {
         header: "Name",
         accessorKey: "name",
+        id: "name",
       },
       {
         header: "Date",
         accessorKey: "date",
+        id: "date",
       },
       {
         header: "Amount",
         accessorKey: "amount",
+        id: "amount",
       },
       {
         header: "Percentage",
         accessorKey: "percentage",
+        id: "percentage",
       },
       {
         header: "Time",
         accessorKey: "time",
+        id: "time",
       },
     ],
     []

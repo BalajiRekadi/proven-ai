@@ -89,11 +89,13 @@ const AccordionTable = ({
       {
         header: "Solution",
         accessorKey: "solution",
+        id: "solution",
       },
       {
         header: "Input",
         size: 20,
         accessorKey: "input",
+        id: "input",
         Cell: ({ row, cell }) => (
           <ActionIcon
             variant="subtle"
@@ -106,6 +108,7 @@ const AccordionTable = ({
       {
         header: "Type",
         accessorKey: "type",
+        id: "type",
         Cell: ({ cell, row }) => (
           <Select
             placeholder="Select"
@@ -120,6 +123,7 @@ const AccordionTable = ({
       {
         header: "Name",
         accessorKey: "name",
+        id: "name",
         Cell: ({ cell, row }) => (
           <TextInput
             placeholder="Enter"
@@ -132,6 +136,7 @@ const AccordionTable = ({
       {
         header: "Content",
         accessorKey: "content",
+        id: "content",
         Cell: ({ row, cell }) => (
           <Flex align={"center"} gap={4}>
             <Button
@@ -159,6 +164,7 @@ const AccordionTable = ({
         header: "Merge",
         size: 50,
         accessorKey: "merge",
+        id: "merge",
         Cell: ({ row }) => (
           <>
             <ActionIcon variant="subtle">

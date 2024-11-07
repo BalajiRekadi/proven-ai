@@ -30,32 +30,38 @@ const ExportTable = ({
       {
         header: "Code",
         accessorKey: "code",
+        id: "code",
         size: 30,
       },
       {
         header: "Specification",
         accessorKey: "specification",
+        id: "specification",
         size: 30,
       },
       {
         header: "Method",
         accessorKey: "methodId",
+        id: "methodId",
         size: 30,
       },
       {
         header: "Name",
         accessorKey: "name",
+        id: "name",
         size: 30,
       },
       {
         header: "Type",
         accessorKey: "type",
+        id: "type",
         size: 30,
       },
       {
         size: 30,
         header: "Content",
         accessorKey: "content",
+        id: "content",
         Cell: ({ row }) => (
           <ActionIcon variant="subtle" onClick={() => onDownload(row.original)}>
             <IconFileDownload />
@@ -66,6 +72,7 @@ const ExportTable = ({
         size: 30,
         header: "Exception Report",
         accessorKey: "exceptionReport",
+        id: "exceptionReport",
         Cell: ({ cell }) => (
           <IconAlertCircle
             size={20}

@@ -115,12 +115,14 @@ const AnalysisAccordionTable = ({
       {
         header: "Solution",
         accessorKey: "solution",
+        id: "solution",
         size: 50,
       },
       {
         header: "Input",
         size: 20,
         accessorKey: "input",
+        id: "input",
         Cell: ({ cell, row }) => (
           <ActionIcon
             variant="subtle"
@@ -133,6 +135,7 @@ const AnalysisAccordionTable = ({
       {
         header: "Name",
         accessorKey: "name",
+        id: "name",
         Cell: ({ cell, row }) => (
           <TextInput
             placeholder="Enter"
@@ -147,6 +150,7 @@ const AnalysisAccordionTable = ({
       {
         header: "Stage",
         accessorKey: "stage",
+        id: "stage",
         Cell: ({ cell, row }) => (
           <TextInput
             placeholder="Enter"
@@ -161,6 +165,7 @@ const AnalysisAccordionTable = ({
       {
         header: "Spec Type",
         accessorKey: "specType",
+        id: "specType",
         Cell: ({ cell, row }) => (
           <TextInput
             placeholder="Enter"
@@ -175,6 +180,7 @@ const AnalysisAccordionTable = ({
       {
         header: "Batch Link",
         accessorKey: "batchLink",
+        id: "batchLink",
         Cell: ({ cell, row }) => (
           <TextInput
             placeholder="Enter"
@@ -189,6 +195,7 @@ const AnalysisAccordionTable = ({
       {
         header: "Batch Type",
         accessorKey: "batchType",
+        id: "batchType",
         Cell: ({ cell, row }) => (
           <TextInput
             placeholder="Enter"
@@ -202,6 +209,7 @@ const AnalysisAccordionTable = ({
       },
       {
         header: "Actions",
+        id: "actions",
         Cell: ({ row }) => (
           <Flex align={"center"} gap={24}>
             <ActionIcon

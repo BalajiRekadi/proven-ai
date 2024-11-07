@@ -67,15 +67,18 @@ const TestAccordionTable = ({
       {
         header: "Test Code",
         accessorKey: "testCode",
+        id: "testCode",
       },
       {
         header: "Test Name",
         accessorKey: "testName",
+        id: "testName",
       },
       {
         header: "Input",
         size: 20,
         accessorKey: "input",
+        id: "input",
         Cell: ({ row, cell }) => (
           <ActionIcon
             variant="subtle"
@@ -88,6 +91,7 @@ const TestAccordionTable = ({
       {
         header: "Test Category",
         accessorKey: "TestCategory",
+        id: "TestCategory",
         Cell: ({ cell, row }) => (
           <TextInput
             placeholder="Enter"
@@ -102,6 +106,7 @@ const TestAccordionTable = ({
       {
         header: "Test Technique",
         accessorKey: "TestTechnique",
+        id: "TestTechnique",
         Cell: ({ cell, row }) => (
           <TextInput
             placeholder="Enter"
@@ -116,6 +121,7 @@ const TestAccordionTable = ({
       {
         header: "Test Type",
         accessorKey: "TestType",
+        id: "TestType",
         Cell: ({ cell, row }) => (
           <TextInput
             placeholder="Enter"
@@ -130,6 +136,7 @@ const TestAccordionTable = ({
       {
         header: "Content",
         accessorKey: "content",
+        id: "content",
         Cell: ({ row, cell }) => (
           <Flex align={"center"} gap={4}>
             <Button
@@ -157,6 +164,7 @@ const TestAccordionTable = ({
         header: "Run",
         size: 50,
         accessorKey: "run",
+        id: "run",
         Cell: ({ row }) => (
           <>
             <ActionIcon
