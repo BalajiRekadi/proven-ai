@@ -51,6 +51,7 @@ const DEFAULT_TABLE_CONFIG = {
   enableColumnOrdering: false,
   enableGlobalFilter: false,
   enableColumnActions: false,
+  paginationDisplayMode: "pages",
   enableColumnFilters: false,
   enablePagination: false,
   enableSorting: false,

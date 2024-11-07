@@ -15,7 +15,7 @@ const useMergeAll = () => {
   } = useMutation({
     mutationFn: (taskId) => mergeAllAnalysis(taskId, module, client),
     onSuccess: () => {
-      toast.success("Successfully merged all solutions.");
+      toast.success("Successfully merged all analysis details.");
     },
     onError: (e) => {
       toast.error("Failed to merge all analysis.");

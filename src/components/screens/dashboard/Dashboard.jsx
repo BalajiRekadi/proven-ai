@@ -1,8 +1,6 @@
 import { useMemo } from "react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import { Badge, Box, Flex, Select, Title, TextInput } from "@mantine/core";
-import { DatePickerInput } from "@mantine/dates";
-import { IconCalendar, IconSearch } from "@tabler/icons-react";
+import { Badge, Box, Title } from "@mantine/core";
 import { DEFAULT_TABLE_CONFIG } from "../../../shared/constants";
 import { useTasks } from "../../../api/hooks";
 import { useStore } from "../../../store/useStore";
@@ -64,7 +62,7 @@ const Dashboard = () => {
       {
         header: "Status",
         accessorKey: "status",
-        size: 30,
+        size: 150,
         Cell: ({ cell }) => (
           <Badge
             color={
@@ -90,6 +88,7 @@ const Dashboard = () => {
     data,
     ...DEFAULT_TABLE_CONFIG,
     enablePagination: true,
+    paginationDisplayMode: "pages",
     enableBottomToolbar: true,
     enableGlobalFilter: true,
     enableSorting: true,
@@ -100,6 +99,7 @@ const Dashboard = () => {
     },
     enableTopToolbar: true,
     enableFullScreenToggle: true,
+    mantinePaginationProps: {},
     mantineTableBodyRowProps: ({ row }) => ({
       onClick: () => handleRowSelect(row),
     }),
@@ -113,33 +113,6 @@ const Dashboard = () => {
 
   return (
     <Box p={16} className="dashboard">
-      <Flex gap={32} justify={"space-between"} p={32} pb={64}>
-        <TextInput
-          placeholder="search"
-          color="black"
-          style={{ width: "25%" }}
-          rightSection={<IconSearch />}
-        />
-        <Flex gap={16}>
-          <Select
-            placeholder="Category"
-            comboboxProps={{ shadow: "lg" }}
-            variant="default"
-            data={["One", "Two", "Three"]}
-          />
-          <Select
-            placeholder="Filter By"
-            comboboxProps={{ shadow: "lg" }}
-            variant="default"
-            data={["One", "Two", "Three"]}
-          />
-          <DatePickerInput
-            placeholder="Date Range"
-            style={{ width: "33%" }}
-            rightSection={<IconCalendar />}
-          />
-        </Flex>
-      </Flex>
       <MantineReactTable table={table} />
     </Box>
   );
