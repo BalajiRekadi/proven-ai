@@ -170,7 +170,7 @@ const CreateFlow = () => {
         p={32}
         className="master-data-create-stepper"
       >
-        <Stepper.Step label="Input Docs">
+        <Stepper.Step label="Input Documents">
           <ImportDocs
             taskData={taskData}
             setTaskData={setTaskData}
