@@ -4,9 +4,8 @@ import {
   IconExternalLink,
   IconEyeFilled,
 } from "@tabler/icons-react";
-import React, { useState } from "react";
-import TextModal from "./TextModal";
-import { downloadCSVFromArray, downloadJSONFromObj } from "../utilities";
+import { useState } from "react";
+import { downloadCSVFromArray } from "../utilities";
 import TableViewModal from "./TableViewModal";
 
 const ProductCard = ({ title, content }) => {
@@ -16,8 +15,8 @@ const ProductCard = ({ title, content }) => {
     let formattedContent = {};
     Object.keys(content).forEach((key) => {
       const value = content[key];
-      if (value && value[0] !== "") {
-        formattedContent[key] = (value && value[0]) || "";
+      if (value) {
+        formattedContent[key] = value[0] || "";
       }
     });
     return formattedContent;
