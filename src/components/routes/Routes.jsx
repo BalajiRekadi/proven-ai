@@ -95,8 +95,17 @@ const Routes = () => {
       <Button
         mb={16}
         size="md"
-        variant="outline"
-        c={"white"}
+        variant={"light"}
+        bg={
+          `/user/${module}/dashboard` == selectedRoute
+            ? ""
+            : "rgba(0, 0, 0, 0.3)"
+        }
+        color={
+          `/user/${module}/dashboard` == selectedRoute
+            ? "var(--secondary)"
+            : "white"
+        }
         leftSection={<IconHomeFilled size={20} />}
         onClick={() => handleMenuItemClick("dashboard")}
       >
