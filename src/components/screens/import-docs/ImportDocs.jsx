@@ -1,4 +1,4 @@
-import { Box, Button, Flex } from "@mantine/core";
+import { Accordion, Box, Button, Flex, Title } from "@mantine/core";
 import { InputTable, UploadCard } from "../../../shared/components";
 import { IconUpload } from "@tabler/icons-react";
 import TaskCard from "./TaskCard";
@@ -100,7 +100,24 @@ const ImportDocs = ({
       </Flex>
       {showTaskCard && <TaskCard data={taskData} setTaskData={setTaskData} />}
       {showTaskCard && (
-        <InputTable data={limitsData} updateData={setLimitsData} />
+        <Accordion
+          variant="separated"
+          mt={32}
+          styles={{
+            item: {
+              boxShadow: "0 1px 2px rgba(0, 0, 0, 0.2)",
+            },
+          }}
+        >
+          <Accordion.Item value={"Limits"}>
+            <Accordion.Control>
+              <Title order={4}>Limits</Title>
+            </Accordion.Control>
+            <Accordion.Panel>
+              <InputTable data={limitsData} updateData={setLimitsData} />
+            </Accordion.Panel>
+          </Accordion.Item>
+        </Accordion>
       )}
     </Box>
   );

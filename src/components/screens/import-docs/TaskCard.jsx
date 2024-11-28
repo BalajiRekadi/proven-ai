@@ -1,5 +1,4 @@
-import React from "react";
-import { Card, Flex, Text, TextInput } from "@mantine/core";
+import { Card, Flex, Group, TextInput, Title } from "@mantine/core";
 import { IconEdit } from "@tabler/icons-react";
 import { InfoCard } from "../../../shared/components";
 
@@ -21,9 +20,12 @@ const TaskCard = ({ data, setTaskData }) => {
       withBorder
     >
       <Card.Section p={16}>
-        <Text fw={600} c={"green"}>
-          {`Task ID: ${data.taskId}`}
-        </Text>
+        <Group>
+          <Title order={5}>Task ID:</Title>
+          <Title order={5} c={"green"}>
+            {data.taskId}
+          </Title>
+        </Group>
         <Flex gap={16} pb={16}>
           <TextInput
             w={"20rem"}

@@ -148,6 +148,14 @@ const CreateFlow = () => {
         <IconDatabase stroke={3} size={32} />
         <Title order={2}>Create Master Data</Title>
       </Group>
+      {selectedTaskId && (
+        <Group pl={48}>
+          <Title order={5}>Task ID:</Title>
+          <Title order={5} c={"green"}>
+            {selectedTaskId}
+          </Title>
+        </Group>
+      )}
 
       <Stack justify="space-between" h={"85vh"}>
         <Stepper

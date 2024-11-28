@@ -1,10 +1,10 @@
-import { MantineReactTable, useMantineReactTable } from 'mantine-react-table'
-import { useState } from 'react'
+import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
+import { useState } from "react";
 
-import { Box, Input, Title } from '@mantine/core'
+import { Box, Input } from "@mantine/core";
 
-import { DEFAULT_TABLE_CONFIG } from '../constants'
-import deepClone from '../utilities/deepClone'
+import { DEFAULT_TABLE_CONFIG } from "../constants";
+import deepClone from "../utilities/deepClone";
 
 const InputTable = ({ data = [], updateData }) => {
   const [tableData, setTableData] = useState(data);
@@ -58,9 +58,6 @@ const InputTable = ({ data = [], updateData }) => {
 
   return (
     <Box pt={32}>
-      <Title order={4} pb={16}>
-        Limits
-      </Title>
       <MantineReactTable table={table} />
     </Box>
   );
