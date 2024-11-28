@@ -1,15 +1,7 @@
 import axios from "axios";
 import { DOMAIN } from "../../shared/constants";
 
-const runAnalysis = async (
-  taskId,
-  label,
-  item,
-  solution,
-  module,
-  client,
-  fieldIndex
-) => {
+const runAnalysis = async (taskId, item, module, client, fieldIndex) => {
   // TODO: map calculations for caliber flow
   const payload = {
     tests: [

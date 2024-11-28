@@ -1,15 +1,5 @@
-import {
-  Box,
-  Flex,
-  Modal,
-  Text,
-  Title,
-  ActionIcon,
-  Textarea,
-  Button,
-} from "@mantine/core";
-import React, { useEffect, useState } from "react";
-import { IconEdit, IconDeviceFloppy } from "@tabler/icons-react";
+import { Box, Flex, Modal, Text, Title, Textarea, Button } from "@mantine/core";
+import { useEffect, useState } from "react";
 
 const TextModal = ({
   open,

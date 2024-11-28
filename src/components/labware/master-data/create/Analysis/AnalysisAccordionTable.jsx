@@ -68,7 +68,7 @@ const AnalysisAccordionTable = ({
   };
 
   const handleRunClick = (label, row) => {
-    onRun(label, row.original, index);
+    onRun(label, row, index);
   };
 
   const formatRunData = (data) => {
@@ -86,8 +86,7 @@ const AnalysisAccordionTable = ({
   };
 
   const onView = (key, row) => {
-    const fieldIndex = data.subHeadings.findIndex((i) => i == row.solution);
-    const item = data.runResults[fieldIndex]?.[0];
+    const item = data.runResults[row.index]?.[0];
     if (item) {
       const data = formatRunData(item[key]);
       setSelectedRunDataTable(data);
@@ -97,8 +96,7 @@ const AnalysisAccordionTable = ({
   };
 
   const onDownload = (key, row) => {
-    const fieldIndex = data.subHeadings.findIndex((i) => i == row.solution);
-    const item = data.runResults[fieldIndex]?.[0];
+    const item = data.runResults[row.index]?.[0];
     if (item) {
       const data = formatRunData(item[key]);
       downloadCSVFromArray(data, runDataTables[key]);
@@ -106,8 +104,7 @@ const AnalysisAccordionTable = ({
   };
 
   const disableStackIcon = (row) => {
-    const fieldIndex = data.subHeadings.findIndex((i) => i == row.solution);
-    return data.runResults ? !data.runResults?.[fieldIndex]?.length : true;
+    return data.runResults ? !data.runResults?.[row.index]?.length : true;
   };
 
   const columns = useMemo(
@@ -126,7 +123,7 @@ const AnalysisAccordionTable = ({
         Cell: ({ cell, row }) => (
           <ActionIcon
             variant="subtle"
-            onClick={() => handleInputIconClick(cell.getValue(), row.original)}
+            onClick={() => handleInputIconClick(cell.getValue(), row)}
           >
             <IconFileFilled />
           </ActionIcon>
@@ -142,7 +139,7 @@ const AnalysisAccordionTable = ({
             variant="default"
             value={cell.getValue()}
             onChange={(event) =>
-              updateData(event, "analysisNames", label, row.original, index)
+              updateData(event, "analysisNames", label, row, index)
             }
           />
         ),
@@ -156,9 +153,7 @@ const AnalysisAccordionTable = ({
             placeholder="Enter"
             variant="default"
             value={cell.getValue()}
-            onChange={(event) =>
-              updateData(event, "stages", label, row.original, index)
-            }
+            onChange={(event) => updateData(event, "stages", label, row, index)}
           />
         ),
       },
@@ -172,7 +167,7 @@ const AnalysisAccordionTable = ({
             variant="default"
             value={cell.getValue()}
             onChange={(event) =>
-              updateData(event, "specTypes", label, row.original, index)
+              updateData(event, "specTypes", label, row, index)
             }
           />
         ),
@@ -187,7 +182,7 @@ const AnalysisAccordionTable = ({
             variant="default"
             value={cell.getValue()}
             onChange={(event) =>
-              updateData(event, "batchLinks", label, row.original, index)
+              updateData(event, "batchLinks", label, row, index)
             }
           />
         ),
@@ -202,7 +197,7 @@ const AnalysisAccordionTable = ({
             variant="default"
             value={cell.getValue()}
             onChange={(event) =>
-              updateData(event, "batchTypes", label, row.original, index)
+              updateData(event, "batchTypes", label, row, index)
             }
           />
         ),
@@ -220,10 +215,7 @@ const AnalysisAccordionTable = ({
             </ActionIcon>
             <Popover position="top" withArrow shadow="md">
               <Popover.Target>
-                <ActionIcon
-                  variant="subtle"
-                  disabled={disableStackIcon(row.original)}
-                >
+                <ActionIcon variant="subtle" disabled={disableStackIcon(row)}>
                   <IconStackPop />
                 </ActionIcon>
               </Popover.Target>
@@ -236,13 +228,13 @@ const AnalysisAccordionTable = ({
                         <Group>
                           <ActionIcon
                             variant="subtle"
-                            onClick={() => onView(key, row.original)}
+                            onClick={() => onView(key, row)}
                           >
                             <IconEyeFilled size={20} />
                           </ActionIcon>
                           <ActionIcon
                             variant="subtle"
-                            onClick={() => onDownload(key, row.original)}
+                            onClick={() => onDownload(key, row)}
                           >
                             <IconCircleArrowDownFilled size={20} />
                           </ActionIcon>

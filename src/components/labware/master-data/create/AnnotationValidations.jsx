@@ -22,7 +22,7 @@ const AnnotationValidations = ({
         </Box>
       ))}
       <Flex justify={"flex-end"}>
-        <Button>Close</Button>
+        <Button onClick={handleClose}>Close</Button>
       </Flex>
     </Modal>
   );

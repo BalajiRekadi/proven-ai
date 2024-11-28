@@ -27,14 +27,11 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
     }
   }, [taskData.code]);
 
-  const updateAnalysisData = (event, field, accordion, data, index) => {
+  const updateAnalysisData = (event, field, accordion, row, index) => {
     setAnalysisData((prev) => {
       const clonedData = deepClone(prev);
       const solution = clonedData[index];
-      const fieldIndex = solution.subHeadings.findIndex(
-        (i) => i == data.solution
-      );
-      solution[field][fieldIndex] = event.target.value;
+      solution[field][row.index] = event.target.value;
       return clonedData;
     });
   };
@@ -42,24 +39,15 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
   const handleRunClick = (label, data, index) => {
     toast.load("Loading solution details..");
     let item = deepClone(analysisData[index]);
-    const fieldIndex = item.subHeadings.findIndex((i) => i == data.solution);
 
-    runAnalysis(
-      taskData.taskId,
-      label,
-      item,
-      data.solution,
-      module,
-      client,
-      fieldIndex
-    )
+    runAnalysis(taskData.taskId, item, module, client, data.index)
       .then((res) => {
         setAnalysisData((prev) => {
           const clone = deepClone(prev);
           if (!clone[index].runResults) {
             clone[index].runResults = [];
           }
-          clone[index].runResults[fieldIndex] = [res];
+          clone[index].runResults[data.index] = [res];
           return clone;
         });
         toast.success("Solution data loaded successfully");

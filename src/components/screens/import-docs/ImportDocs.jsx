@@ -25,6 +25,8 @@ const ImportDocs = ({
   setAreFilesUploaded,
   limitsData,
   setLimitsData,
+  setShowAnnotationsValidation,
+  setAnnotationValidations,
   showOnlyMethodUpload = false,
 }) => {
   const { uploadFiles } = useUploadFiles();
@@ -52,6 +54,10 @@ const ImportDocs = ({
         setShowTaskCard(true);
         setTaskData(data.taskData);
         setLimitsData(data.limits);
+        if (data.annotationValidation?.ErrorCount) {
+          setShowAnnotationsValidation(true);
+        }
+        setAnnotationValidations(data.annotationValidation);
       });
     }
   };

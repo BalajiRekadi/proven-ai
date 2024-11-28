@@ -148,11 +148,11 @@ const CreateFlow = () => {
         <IconDatabase stroke={3} size={32} />
         <Title order={2}>Create Master Data</Title>
       </Group>
-      {selectedTaskId && (
+      {taskData && (
         <Group pl={48}>
           <Title order={5}>Task ID:</Title>
           <Title order={5} c={"green"}>
-            {selectedTaskId}
+            {taskData.taskId}
           </Title>
         </Group>
       )}
@@ -183,6 +183,8 @@ const CreateFlow = () => {
               setAreFilesUploaded={setAreFilesUploaded}
               limitsData={limitsData}
               setLimitsData={setLimitsData}
+              setAnnotationValidations={setAnnotationValidations}
+              setShowAnnotationsValidation={setShowAnnotationsValidation}
             />
           </Stepper.Step>
           <Stepper.Step label="Product">
