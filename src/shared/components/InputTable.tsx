@@ -1,13 +1,15 @@
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { useState } from "react";
 
-import { Box, Input } from "@mantine/core";
+import { ActionIcon, Button, Flex, Input } from "@mantine/core";
+import { IconPlaylistAdd, IconX } from "@tabler/icons-react";
 
 import { DEFAULT_TABLE_CONFIG } from "../constants";
 import deepClone from "../utilities/deepClone";
 
 const InputTable = ({ data = [], updateData }) => {
   const [tableData, setTableData] = useState(data);
+  const columnNames = Object.keys(data?.[0] || {});
 
   const handleEdit = (event, cell) => {
     setTableData((prev) => {
@@ -17,9 +19,16 @@ const InputTable = ({ data = [], updateData }) => {
     });
   };
 
+  const handleDelete = (row) => {
+    setTableData((prev) => {
+      const newState = deepClone(prev);
+      newState.splice(row.index, 1);
+      return newState;
+    });
+  };
+
   const getColumns = () => {
-    const columnNames = Object.keys(tableData?.[0] || {});
-    return columnNames.map((column) => {
+    const columns = columnNames.map((column) => {
       return {
         id: column,
         header: column,
@@ -38,6 +47,23 @@ const InputTable = ({ data = [], updateData }) => {
         ),
       };
     });
+    columns.push({
+      id: "delete",
+      header: "",
+      size: 20,
+      Cell: ({ row }) => (
+        <ActionIcon
+          variant="light"
+          color="var(--error)"
+          onClick={() => {
+            handleDelete(row);
+          }}
+        >
+          <IconX color="var(--error)" />
+        </ActionIcon>
+      ),
+    });
+    return columns;
   };
 
   const tableConfig = {
@@ -56,10 +82,25 @@ const InputTable = ({ data = [], updateData }) => {
   };
   const table = useMantineReactTable(tableConfig as any);
 
+  const handleAdd = () => {
+    setTableData((prev) => {
+      const item = {};
+      columnNames.forEach((key) => {
+        item[key] = "";
+      });
+      return [item, ...deepClone(prev)];
+    });
+  };
+
   return (
-    <Box pt={32}>
+    <>
+      <Flex justify={"flex-end"} pb={16}>
+        <Button leftSection={<IconPlaylistAdd />} onClick={handleAdd}>
+          Add
+        </Button>
+      </Flex>
       <MantineReactTable table={table} />
-    </Box>
+    </>
   );
 };
 

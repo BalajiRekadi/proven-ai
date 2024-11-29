@@ -23,7 +23,7 @@ const CreateFlow = () => {
   const [methodFileName, setMethodFileName] = useState("");
   const [showTaskCard, setShowTaskCard] = useState(false);
   const [taskData, setTaskData] = useState({});
-  const [limitsData, setLimitsData] = useState({});
+  const [limitsData, setLimitsData] = useState([]);
   const [productDetails, setProductDetails] = useState({
     product: {},
     product_grade: {},
