@@ -43,6 +43,7 @@ const AnalysisAccordionTable = ({
     useState("");
   const [selectedInput, setSelectedInput] = useState(""); // TODO: redundant state, can be derived from selectedRow?
   const [selectedRow, setSelectedRow] = useState("");
+
   // TODO: is there any use for this?
   const STAGES = useMemo(() => STAGE_OPTIONS, []);
   const SPECTYPES = useMemo(() => SPEC_TYPES, []);
@@ -166,7 +167,7 @@ const AnalysisAccordionTable = ({
             data={STAGES}
             value={cell.getValue()}
             onChange={(event) => updateData(event, "stages", label, row, index)}
-            limit={100}
+            limit={25}
             searchable
           />
         ),
@@ -183,7 +184,7 @@ const AnalysisAccordionTable = ({
             onChange={(event) =>
               updateData(event, "specTypes", label, row, index)
             }
-            limit={100}
+            limit={25}
             searchable
           />
         ),
@@ -200,7 +201,7 @@ const AnalysisAccordionTable = ({
             onChange={(event) =>
               updateData(event, "batchLinks", label, row, index)
             }
-            limit={100}
+            limit={25}
             searchable
           />
         ),
@@ -217,7 +218,7 @@ const AnalysisAccordionTable = ({
             onChange={(event) =>
               updateData(event, "batchTypes", label, row, index)
             }
-            limit={100}
+            limit={25}
             searchable
           />
         ),
