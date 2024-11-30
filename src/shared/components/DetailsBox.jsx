@@ -81,6 +81,7 @@ const DetailsBox = ({
               placeholder="Select value"
               data={GRADE_OPTIONS}
               value={data?.grade}
+              limit={20}
               onChange={(event) => handleValueChange(event, "grade")}
               searchable
             />
