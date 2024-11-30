@@ -2,7 +2,7 @@ import { Flex, Select } from "@mantine/core";
 import React, { useEffect } from "react";
 import { useStore } from "../../store/useStore";
 import { useLocation } from "react-router-dom";
-import { MODULES, CLIENTS } from "../constants";
+import { MODULES, CLIENTS } from "../constants/constants";
 
 const ModuleSelect = ({ size = "sm" }) => {
   const { module, client, setClient, setModule, setRoute } = useStore();

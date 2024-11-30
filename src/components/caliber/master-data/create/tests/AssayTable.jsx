@@ -2,7 +2,7 @@ import { ActionIcon, Box, Flex } from "@mantine/core";
 import React, { useMemo, useState } from "react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import AssayModal from "./AssayModal";
-import { DEFAULT_TABLE_CONFIG } from "../../../../../shared/constants";
+import { DEFAULT_TABLE_CONFIG } from "../../../../../shared/constants/constants";
 import {
   IconExternalLink,
   IconFileTypeCsv,

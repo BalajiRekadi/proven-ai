@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { Badge, Box, Title } from "@mantine/core";
-import { DEFAULT_TABLE_CONFIG } from "../../../shared/constants";
+import { DEFAULT_TABLE_CONFIG } from "../../../shared/constants/constants";
 import { useTasks } from "../../../api/hooks";
 import { useStore } from "../../../store/useStore";
 import { useNavigate } from "react-router-dom";

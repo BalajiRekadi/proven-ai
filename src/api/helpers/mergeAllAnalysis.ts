@@ -1,6 +1,6 @@
 import axios, { AxiosHeaders } from 'axios'
 
-import { DOMAIN } from '../../shared/constants'
+import { DOMAIN } from '../../shared/constants/constants'
 
 const mergeAllAnalysis = async (taskId: string, module: string, client: string) => {
   const res = await axios({

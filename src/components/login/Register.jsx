@@ -9,7 +9,7 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IconUser, IconAt } from "@tabler/icons-react";
-import { CLIENTS, MODULES } from "../../shared/constants";
+import { CLIENTS, MODULES } from "../../shared/constants/constants";
 import { useRegister } from "../../api/hooks";
 import { PasswordInputWithMeter } from "../../shared/components";
 import { useState, useRef } from "react";

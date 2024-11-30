@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ActionIcon, Button, Flex, Input } from "@mantine/core";
 import { IconPlaylistAdd, IconX } from "@tabler/icons-react";
 
-import { DEFAULT_TABLE_CONFIG } from "../constants";
+import { DEFAULT_TABLE_CONFIG } from "../constants/constants";
 import deepClone from "../utilities/deepClone";
 
 const InputTable = ({ data = [], updateData }) => {

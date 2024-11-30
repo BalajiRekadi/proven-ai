@@ -18,7 +18,7 @@ import logo from "../../assets/logo.jpg";
 import { useStore } from "../../store/useStore";
 import { IconUser } from "@tabler/icons-react";
 import "./login.css";
-import { CLIENTS, MODULES } from "../../shared/constants";
+import { CLIENTS, MODULES } from "../../shared/constants/constants";
 import { useLogin } from "../../api/hooks";
 import Register from "./Register";
 import { useState } from "react";

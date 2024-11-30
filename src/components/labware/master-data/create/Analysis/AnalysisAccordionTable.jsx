@@ -7,6 +7,7 @@ import {
   TextInput,
   Paper,
   Group,
+  Select,
 } from "@mantine/core";
 import {
   IconCircleArrowDownFilled,
@@ -16,7 +17,13 @@ import {
   IconStackPop,
 } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
-import { DEFAULT_TABLE_CONFIG } from "../../../../../shared/constants";
+import {
+  BATCH_LINKS,
+  BATCH_TEMPLATES,
+  DEFAULT_TABLE_CONFIG,
+  SPEC_TYPES,
+  STAGE_OPTIONS,
+} from "../../../../../shared/constants/constants";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { TableViewModal, TextModal } from "../../../../../shared/components";
 import { downloadCSVFromArray } from "../../../../../shared/utilities";
@@ -36,6 +43,11 @@ const AnalysisAccordionTable = ({
     useState("");
   const [selectedInput, setSelectedInput] = useState(""); // TODO: redundant state, can be derived from selectedRow?
   const [selectedRow, setSelectedRow] = useState("");
+  // TODO: is there any use for this?
+  const STAGES = useMemo(() => STAGE_OPTIONS, []);
+  const SPECTYPES = useMemo(() => SPEC_TYPES, []);
+  const BATCHLINKS = useMemo(() => BATCH_LINKS, []);
+  const BATCHTEMPLATES = useMemo(() => BATCH_TEMPLATES, []);
 
   const runDataTables = {
     components_table: "Components",
@@ -149,11 +161,13 @@ const AnalysisAccordionTable = ({
         accessorKey: "stage",
         id: "stage",
         Cell: ({ cell, row }) => (
-          <TextInput
-            placeholder="Enter"
-            variant="default"
+          <Select
+            placeholder="Select value"
+            data={STAGES}
             value={cell.getValue()}
             onChange={(event) => updateData(event, "stages", label, row, index)}
+            limit={100}
+            searchable
           />
         ),
       },
@@ -162,13 +176,15 @@ const AnalysisAccordionTable = ({
         accessorKey: "specType",
         id: "specType",
         Cell: ({ cell, row }) => (
-          <TextInput
-            placeholder="Enter"
-            variant="default"
+          <Select
+            placeholder="Select value"
+            data={SPECTYPES}
             value={cell.getValue()}
             onChange={(event) =>
               updateData(event, "specTypes", label, row, index)
             }
+            limit={100}
+            searchable
           />
         ),
       },
@@ -177,28 +193,32 @@ const AnalysisAccordionTable = ({
         accessorKey: "batchLink",
         id: "batchLink",
         Cell: ({ cell, row }) => (
-          <TextInput
-            placeholder="Enter"
-            variant="default"
+          <Select
+            placeholder="Select value"
+            data={BATCHLINKS}
             value={cell.getValue()}
             onChange={(event) =>
               updateData(event, "batchLinks", label, row, index)
             }
+            limit={100}
+            searchable
           />
         ),
       },
       {
-        header: "Batch Type",
+        header: "Batch Template",
         accessorKey: "batchType",
         id: "batchType",
         Cell: ({ cell, row }) => (
-          <TextInput
-            placeholder="Enter"
-            variant="default"
+          <Select
+            placeholder="Select value"
+            data={BATCHTEMPLATES}
             value={cell.getValue()}
             onChange={(event) =>
               updateData(event, "batchTypes", label, row, index)
             }
+            limit={100}
+            searchable
           />
         ),
       },

@@ -16,7 +16,7 @@ import {
   IconFileFilled,
 } from "@tabler/icons-react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import { DEFAULT_TABLE_CONFIG } from "../constants";
+import { DEFAULT_TABLE_CONFIG } from "../constants/constants";
 import TextModal from "./TextModal";
 import { useToast } from "./toast/useToast";
 

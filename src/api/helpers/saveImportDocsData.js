@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DOMAIN, MODULES } from "../../shared/constants";
+import { DOMAIN, MODULES } from "../../shared/constants/constants";
 import { convertArrayDataToObj } from "../../shared/utilities";
 
 const saveImportDocsData = async (

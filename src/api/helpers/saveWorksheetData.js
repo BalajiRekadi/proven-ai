@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DOMAIN } from "../../shared/constants";
+import { DOMAIN } from "../../shared/constants/constants";
 
 const saveWorksheetData = (payload, endpoint) => {
   return axios({

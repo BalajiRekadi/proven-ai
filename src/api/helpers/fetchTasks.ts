@@ -1,5 +1,6 @@
-import { DOMAIN } from "../../shared/constants";
-import axios from "axios";
+import axios from 'axios'
+
+import { DOMAIN } from '../../shared/constants/constants'
 
 const fetchTasks = async (module, client) => {
   const res = await axios({

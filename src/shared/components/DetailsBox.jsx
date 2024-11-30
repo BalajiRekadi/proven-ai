@@ -1,8 +1,18 @@
-import React from "react";
-import { TextInput, Button, ActionIcon, Card, Flex } from "@mantine/core";
+import {
+  TextInput,
+  Button,
+  ActionIcon,
+  Card,
+  Flex,
+  Select,
+} from "@mantine/core";
 import { IconDeviceFloppy } from "@tabler/icons-react";
 import { useStore } from "../../store/useStore";
-import { MODULES } from "../constants";
+import {
+  GRADE_OPTIONS,
+  MODULES,
+  SAMPLING_POINT_OPTIONS,
+} from "../constants/constants";
 
 const DetailsBox = ({
   data,
@@ -13,7 +23,9 @@ const DetailsBox = ({
 }) => {
   const { module } = useStore();
   const handleValueChange = (event, field) => {
-    setData({ ...data, [field]: event.target.value });
+    const value =
+      field == "grade" || field == "samplingPoint" ? event : event.target.value;
+    setData({ ...data, [field]: value });
   };
 
   return (
@@ -63,19 +75,23 @@ const DetailsBox = ({
         />
         {module === MODULES.LABWARE.value && (
           <>
-            <TextInput
+            <Select
               w={"18rem"}
-              placeholder="Enter"
               label="Grade"
+              placeholder="Select value"
+              data={GRADE_OPTIONS}
               value={data?.grade}
               onChange={(event) => handleValueChange(event, "grade")}
+              searchable
             />
-            <TextInput
+            <Select
               w={"18rem"}
-              placeholder="Enter"
               label="Sampling Point"
+              placeholder="Select value"
+              data={SAMPLING_POINT_OPTIONS}
               value={data?.samplingPoint}
               onChange={(event) => handleValueChange(event, "samplingPoint")}
+              searchable
             />
           </>
         )}

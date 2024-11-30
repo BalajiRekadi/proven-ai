@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { fetchNeulandWorksheets, fetchWorksheets } from "../helpers";
 import { useStore } from "../../store/useStore";
 import { useToast } from "../../shared/components/toast/useToast";
-import { CLIENTS } from "../../shared/constants";
+import { CLIENTS } from "../../shared/constants/constants";
 
 const useGenerateWorksheets = (action = "", taskId) => {
   const { module, client } = useStore();

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { DOMAIN } from '../../shared/constants'
+import { DOMAIN } from '../../shared/constants/constants'
 import { convertObjDataToArray } from '../../shared/utilities'
 
 const fetchTaskDetails = async (id, module, client) => {

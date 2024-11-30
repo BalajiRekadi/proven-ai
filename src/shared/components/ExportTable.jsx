@@ -2,7 +2,7 @@ import { ActionIcon } from "@mantine/core";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { useMemo } from "react";
 import { IconAlertCircle, IconFileDownload } from "@tabler/icons-react";
-import { DEFAULT_TABLE_CONFIG } from "../constants";
+import { DEFAULT_TABLE_CONFIG } from "../constants/constants";
 import { downloadDocx, downloadFile } from "../utilities";
 
 // TODO: This and TableViewModal are almost same. Define a common Component

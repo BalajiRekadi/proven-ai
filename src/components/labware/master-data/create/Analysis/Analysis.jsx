@@ -31,7 +31,14 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
     setAnalysisData((prev) => {
       const clonedData = deepClone(prev);
       const solution = clonedData[index];
-      solution[field][row.index] = event.target.value;
+      const value =
+        field == "stages" ||
+        field == "specTypes" ||
+        field == "batchLinks" ||
+        field == "batchTypes"
+          ? event
+          : event.target.value;
+      solution[field][row.index] = value;
       return clonedData;
     });
   };

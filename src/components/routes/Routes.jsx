@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Accordion, Button, Group, Stack, Text } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
-import { ROUTES, MODULES, CLIENTS } from "../../shared/constants";
+import { ROUTES, MODULES, CLIENTS } from "../../shared/constants/constants";
 import { useStore } from "../../store/useStore";
 import { IconHomeFilled } from "@tabler/icons-react";
 import { useLocation } from "react-router-dom";

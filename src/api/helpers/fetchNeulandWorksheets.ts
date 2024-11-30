@@ -1,4 +1,4 @@
-import { DOMAIN } from "../../shared/constants";
+import { DOMAIN } from '../../shared/constants/constants'
 
 const fetchNeulandWorksheets = async (endpoint, file) => {
   const res = await fetch(`${DOMAIN}/${endpoint}?Product=${file}`, {

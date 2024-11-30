@@ -1,6 +1,6 @@
 import { ActionIcon, Box, Flex, Modal, Title } from "@mantine/core";
 import React, { useMemo, useState } from "react";
-import { DEFAULT_TABLE_CONFIG } from "../constants";
+import { DEFAULT_TABLE_CONFIG } from "../constants/constants";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import "./tableViewModal.css";
 import { IconZoomScan } from "@tabler/icons-react";

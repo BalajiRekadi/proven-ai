@@ -1,4 +1,4 @@
-import { DOMAIN } from "../../shared/constants";
+import { DOMAIN } from "../../shared/constants/constants";
 import axios from "axios";
 
 const register = async (data) => {

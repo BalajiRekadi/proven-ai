@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DOMAIN } from "../../shared/constants";
+import { DOMAIN } from "../../shared/constants/constants";
 
 const uploadFile = async (endpoint, files) => {
   const form = new FormData();

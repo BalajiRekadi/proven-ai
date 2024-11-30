@@ -3,7 +3,7 @@ import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import React, { useMemo } from "react";
 import { IconDeviceFloppy, IconEdit } from "@tabler/icons-react";
 import data from "./assayData.json";
-import { DEFAULT_TABLE_CONFIG } from "../../../../../shared/constants";
+import { DEFAULT_TABLE_CONFIG } from "../../../../../shared/constants/constants";
 
 const AssayModal = ({ open, onClose }) => {
   const columns = useMemo(
