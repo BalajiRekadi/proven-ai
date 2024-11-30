@@ -167,7 +167,7 @@ const AnalysisAccordionTable = ({
             data={STAGES}
             value={cell.getValue()}
             onChange={(event) => updateData(event, "stages", label, row, index)}
-            limit={25}
+            limit={15}
             searchable
           />
         ),
@@ -184,7 +184,7 @@ const AnalysisAccordionTable = ({
             onChange={(event) =>
               updateData(event, "specTypes", label, row, index)
             }
-            limit={25}
+            limit={15}
             searchable
           />
         ),
@@ -201,7 +201,7 @@ const AnalysisAccordionTable = ({
             onChange={(event) =>
               updateData(event, "batchLinks", label, row, index)
             }
-            limit={25}
+            limit={15}
             searchable
           />
         ),
@@ -218,7 +218,7 @@ const AnalysisAccordionTable = ({
             onChange={(event) =>
               updateData(event, "batchTypes", label, row, index)
             }
-            limit={25}
+            limit={15}
             searchable
           />
         ),
