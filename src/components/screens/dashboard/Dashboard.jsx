@@ -47,7 +47,6 @@ const Dashboard = () => {
         header: "Spec",
         accessorKey: "spec",
         id: "spec",
-        size: 30,
       },
       {
         header: "Method",
@@ -95,6 +94,9 @@ const Dashboard = () => {
   const tableConfig = {
     columns,
     data: data || [],
+    enableColumnResizing: true,
+    defaultColumn: { minSize: 200, maxSize: 1000, size: 500 },
+    columnResizeMode: "onChange",
     ...DEFAULT_TABLE_CONFIG,
     enablePagination: true,
     paginationDisplayMode: "pages",
@@ -105,6 +107,9 @@ const Dashboard = () => {
       withColumnBorders: true,
       striped: true,
       stickyHeader: true,
+      sx: {
+        tableLayout: "fixed",
+      },
     },
     enableTopToolbar: true,
     enableFullScreenToggle: true,

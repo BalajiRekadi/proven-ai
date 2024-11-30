@@ -1,5 +1,5 @@
 import { ActionIcon, Box, Flex, Modal, Title } from "@mantine/core";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { DEFAULT_TABLE_CONFIG } from "../constants/constants";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import "./tableViewModal.css";
@@ -31,6 +31,9 @@ const TableViewModal = ({
   const tableConfig = {
     columns,
     data: content,
+    enableColumnResizing: true,
+    defaultColumn: { minSize: 200, maxSize: 1500, size: 500 },
+    columnResizeMode: "onChange",
     ...DEFAULT_TABLE_CONFIG,
     enableRowNumbers,
     mantineTableProps: {
