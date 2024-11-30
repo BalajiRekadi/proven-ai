@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import { Badge, Box, Title } from "@mantine/core";
+import { Badge, Box, Skeleton, Title } from "@mantine/core";
 import { DEFAULT_TABLE_CONFIG } from "../../../shared/constants/constants";
 import { useTasks } from "../../../api/hooks";
 import { useStore } from "../../../store/useStore";
@@ -94,7 +94,7 @@ const Dashboard = () => {
 
   const tableConfig = {
     columns,
-    data,
+    data: data || [],
     ...DEFAULT_TABLE_CONFIG,
     enablePagination: true,
     paginationDisplayMode: "pages",
@@ -122,7 +122,17 @@ const Dashboard = () => {
 
   return (
     <Box p={16} className="dashboard">
-      <MantineReactTable table={table} />
+      {!data && (
+        <>
+          <Skeleton height={36} radius="xl" mb={24} />
+          <Skeleton height={36} radius="xl" mb={24} />
+          <Skeleton height={36} radius="xl" mb={24} />
+          <Skeleton height={36} radius="xl" mb={24} />
+          <Skeleton height={36} radius="xl" mb={24} />
+          <Skeleton height={36} radius="xl" mb={24} />
+        </>
+      )}
+      {data && <MantineReactTable table={table} />}
     </Box>
   );
 };

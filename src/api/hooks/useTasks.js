@@ -4,7 +4,7 @@ import { fetchTasks } from "../helpers";
 
 const useTasks = () => {
   const { client, module } = useStore();
-  const { data = [] } = useQuery({
+  const { data = null } = useQuery({
     queryKey: [`${client}${module}`],
     queryFn: () => fetchTasks(module, client),
     retry: 0,
