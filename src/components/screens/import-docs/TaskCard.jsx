@@ -3,12 +3,10 @@ import { IconEdit } from "@tabler/icons-react";
 import { InfoCard } from "../../../shared/components";
 
 const TaskCard = ({ data, setTaskData }) => {
-  const handleCompanyChange = (event) => {
-    setTaskData({ ...data, company: event.target.value });
+  const handleValueChange = (event, key) => {
+    setTaskData({ ...data, [key]: event.target.value });
   };
-  const handleFacilityChange = (event) => {
-    setTaskData({ ...data, facility: event.target.value });
-  };
+
   return (
     <Card
       shadow="sm"
@@ -35,7 +33,7 @@ const TaskCard = ({ data, setTaskData }) => {
             label={"Company"}
             value={data.company}
             placeholder="NA"
-            onChange={handleCompanyChange}
+            onChange={(e) => handleValueChange(e, "company")}
           />
           <TextInput
             w={"20rem"}
@@ -45,7 +43,17 @@ const TaskCard = ({ data, setTaskData }) => {
             label={"Facility"}
             value={data.facility}
             placeholder="NA"
-            onChange={handleFacilityChange}
+            onChange={(e) => handleValueChange(e, "facility")}
+          />
+          <TextInput
+            w={"20rem"}
+            mt="md"
+            rightSectionPointerEvents="none"
+            rightSection={<IconEdit />}
+            label={"Label claim"}
+            value={data.labelClaim}
+            placeholder="NA"
+            onChange={(e) => handleValueChange(e, "labelClaim")}
           />
         </Flex>
 

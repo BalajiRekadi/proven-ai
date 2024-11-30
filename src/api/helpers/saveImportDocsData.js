@@ -29,6 +29,7 @@ const mapPayload = (data, limitsData, module, client) => {
     SPEC_ID: data.specId,
     STP_No: data.methodId,
     GRADE: data.grade,
+    LABEL_CLAIM: data.labelClaim,
     SAMPLING_POINT: data.samplingPoint,
     Test_Plan_Code: data.testPlanCode,
     MARKET: data.market,

@@ -38,6 +38,7 @@ const mapResponse = (data, file1, file2) => {
       methodId: data.STP_No,
       market: data.MARKET,
       code: data.ITEM_CODE,
+      labelClaim: data.LABEL_CLAIM,
       testPlanCode: data["Test_Plan_Code"],
       revNo: data["Rev_No"],
       ccNo: data["CC_No"],
