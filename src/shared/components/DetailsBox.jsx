@@ -28,6 +28,12 @@ const DetailsBox = ({
     setData({ ...data, [field]: value });
   };
 
+  const filterOptions = ({ options, search }) => {
+    return options.filter((option) =>
+      option.label.toLowerCase().trim().startsWith(search.toLowerCase())
+    );
+  };
+
   return (
     <Card
       shadow="sm"
@@ -81,7 +87,8 @@ const DetailsBox = ({
               placeholder="Select value"
               data={GRADE_OPTIONS}
               value={data?.grade}
-              limit={20}
+              limit={50}
+              filter={filterOptions}
               onChange={(event) => handleValueChange(event, "grade")}
               searchable
             />
@@ -91,6 +98,8 @@ const DetailsBox = ({
               placeholder="Select value"
               data={SAMPLING_POINT_OPTIONS}
               value={data?.samplingPoint}
+              limit={50}
+              filter={filterOptions}
               onChange={(event) => handleValueChange(event, "samplingPoint")}
               searchable
             />

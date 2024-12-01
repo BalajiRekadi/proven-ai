@@ -56,10 +56,7 @@ const CreateFlow = () => {
         setProductDetailsLoaded(true);
         // Analysis step
         setAnalysisData(res.analysisData);
-        // show annotation validations
-        if (res.annotationValidation?.ErrorCount) {
-          setShowAnnotationsValidation(true);
-        }
+        // annotation validations
         setAnnotationValidations(res.annotationValidation);
       });
     }
@@ -183,6 +180,7 @@ const CreateFlow = () => {
               setAreFilesUploaded={setAreFilesUploaded}
               limitsData={limitsData}
               setLimitsData={setLimitsData}
+              annotationValidations={annotationValidations}
               setAnnotationValidations={setAnnotationValidations}
               setShowAnnotationsValidation={setShowAnnotationsValidation}
             />

@@ -4,10 +4,8 @@ import {
   Flex,
   Text,
   Popover,
-  TextInput,
   Paper,
   Group,
-  Select,
 } from "@mantine/core";
 import {
   IconCircleArrowDownFilled,
@@ -120,18 +118,26 @@ const AnalysisAccordionTable = ({
     return data.runResults ? !data.runResults?.[row.index]?.length : true;
   };
 
+  const filterOptions = ({ options, search }) => {
+    return options.filter((option) =>
+      option.label.toLowerCase().trim().startsWith(search.toLowerCase())
+    );
+  };
+
   const columns = useMemo(
     () => [
       {
         header: "Solution",
         accessorKey: "solution",
         id: "solution",
+        enableEditing: false,
         size: 50,
       },
       {
         header: "Input",
         size: 20,
         accessorKey: "input",
+        enableEditing: false,
         id: "input",
         Cell: ({ cell, row }) => (
           <ActionIcon
@@ -146,86 +152,82 @@ const AnalysisAccordionTable = ({
         header: "Name",
         accessorKey: "name",
         id: "name",
-        Cell: ({ cell, row }) => (
-          <TextInput
-            placeholder="Enter"
-            variant="default"
-            value={cell.getValue()}
-            onChange={(event) =>
-              updateData(event, "analysisNames", label, row, index)
-            }
-          />
-        ),
+        enableEditing: true,
+        mantineEditTextInputProps: ({ cell, row }) => ({
+          placeholder: "Enter",
+          onBlur: (event) => {
+            updateData(event, "analysisNames", label, row, index);
+          },
+        }),
       },
       {
         header: "Stage",
         accessorKey: "stage",
         id: "stage",
-        Cell: ({ cell, row }) => (
-          <Select
-            placeholder="Select value"
-            data={STAGES}
-            value={cell.getValue()}
-            onChange={(event) => updateData(event, "stages", label, row, index)}
-            limit={7}
-            searchable
-          />
-        ),
+        editVariant: "select",
+        enableEditing: true,
+        mantineEditSelectProps: ({ cell, row }) => ({
+          placeholder: "Select",
+          data: STAGES,
+          searchable: true,
+          filter: filterOptions,
+          onChange: (event) => {
+            updateData(event, "stages", label, row, index);
+          },
+        }),
       },
       {
         header: "Spec Type",
         accessorKey: "specType",
         id: "specType",
-        Cell: ({ cell, row }) => (
-          <Select
-            placeholder="Select value"
-            data={SPECTYPES}
-            value={cell.getValue()}
-            onChange={(event) =>
-              updateData(event, "specTypes", label, row, index)
-            }
-            limit={7}
-            searchable
-          />
-        ),
+        editVariant: "select",
+        enableEditing: true,
+        mantineEditSelectProps: ({ cell, row }) => ({
+          placeholder: "Select",
+          data: SPECTYPES,
+          searchable: true,
+          filter: filterOptions,
+          onChange: (event) => {
+            updateData(event, "specTypes", label, row, index);
+          },
+        }),
       },
       {
         header: "Batch Link",
         accessorKey: "batchLink",
         id: "batchLink",
-        Cell: ({ cell, row }) => (
-          <Select
-            placeholder="Select value"
-            data={BATCHLINKS}
-            value={cell.getValue()}
-            onChange={(event) =>
-              updateData(event, "batchLinks", label, row, index)
-            }
-            limit={7}
-            searchable
-          />
-        ),
+        editVariant: "select",
+        enableEditing: true,
+        mantineEditSelectProps: ({ cell, row }) => ({
+          placeholder: "Select",
+          data: BATCHLINKS,
+          searchable: true,
+          filter: filterOptions,
+          onChange: (event) => {
+            updateData(event, "batchLinks", label, row, index);
+          },
+        }),
       },
       {
         header: "Batch Template",
         accessorKey: "batchType",
         id: "batchType",
-        Cell: ({ cell, row }) => (
-          <Select
-            placeholder="Select value"
-            data={BATCHTEMPLATES}
-            value={cell.getValue()}
-            onChange={(event) =>
-              updateData(event, "batchTypes", label, row, index)
-            }
-            limit={7}
-            searchable
-          />
-        ),
+        editVariant: "select",
+        enableEditing: true,
+        mantineEditSelectProps: ({ cell, row }) => ({
+          placeholder: "Select",
+          data: BATCHTEMPLATES,
+          searchable: true,
+          filter: filterOptions,
+          onChange: (event) => {
+            updateData(event, "batchTypes", label, row, index);
+          },
+        }),
       },
       {
         header: "Actions",
         id: "actions",
+        enableEditing: false,
         Cell: ({ row }) => (
           <Flex align={"center"} gap={24}>
             <ActionIcon
@@ -276,7 +278,11 @@ const AnalysisAccordionTable = ({
   const tableConfig = {
     columns,
     data: getTableData(),
+    memoMode: "rows",
     ...DEFAULT_TABLE_CONFIG,
+    enableEditing: true,
+    editDisplayMode: "cell",
+    enableDensityToggle: false,
     enableRowNumbers: true,
     enableStickyHeader: true,
     mantineTableProps: {

@@ -27,7 +27,7 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
     }
   }, [taskData.code]);
 
-  const updateAnalysisData = (event, field, accordion, row, index) => {
+  const updateAnalysisData = (event, field, accordion, row, index, column) => {
     setAnalysisData((prev) => {
       const clonedData = deepClone(prev);
       const solution = clonedData[index];

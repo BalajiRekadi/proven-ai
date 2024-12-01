@@ -1,6 +1,14 @@
-import { Accordion, Box, Button, Flex, Title } from "@mantine/core";
+import {
+  Accordion,
+  ActionIcon,
+  Box,
+  Button,
+  Flex,
+  Title,
+  Tooltip,
+} from "@mantine/core";
 import { InputTable, UploadCard } from "../../../shared/components";
-import { IconUpload } from "@tabler/icons-react";
+import { IconExclamationCircle, IconUpload } from "@tabler/icons-react";
 import TaskCard from "./TaskCard";
 import {
   useGenerateWorksheets,
@@ -25,6 +33,7 @@ const ImportDocs = ({
   setAreFilesUploaded,
   limitsData,
   setLimitsData,
+  annotationValidations,
   setShowAnnotationsValidation,
   setAnnotationValidations,
   showOnlyMethodUpload = false,
@@ -54,9 +63,6 @@ const ImportDocs = ({
         setShowTaskCard(true);
         setTaskData(data.taskData);
         setLimitsData(data.limits);
-        if (data.annotationValidation?.ErrorCount) {
-          setShowAnnotationsValidation(true);
-        }
         setAnnotationValidations(data.annotationValidation);
       });
     }
@@ -82,9 +88,8 @@ const ImportDocs = ({
           onChange={setMethodFile}
         />
       </Flex>
-      <Flex gap={16}>
+      <Flex gap={16} align={"center"} mt={"md"}>
         <Button
-          mt="md"
           radius="md"
           variant="outline"
           justify="space-between"
@@ -95,7 +100,6 @@ const ImportDocs = ({
           {"Upload Files"}
         </Button>
         <Button
-          mt="md"
           radius="md"
           variant="filled"
           onClick={handleProcess}
@@ -103,6 +107,21 @@ const ImportDocs = ({
         >
           {"Process"}
         </Button>
+        {annotationValidations?.ErrorCount && (
+          <Tooltip
+            label="There are some annotation issues occured during process, click to view."
+            arrowSize={8}
+            withArrow
+          >
+            <ActionIcon
+              variant="subtle"
+              color="var(--error)"
+              onClick={() => setShowAnnotationsValidation(true)}
+            >
+              <IconExclamationCircle />
+            </ActionIcon>
+          </Tooltip>
+        )}
       </Flex>
       {showTaskCard && <TaskCard data={taskData} setTaskData={setTaskData} />}
       {showTaskCard && (
