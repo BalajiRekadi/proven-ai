@@ -153,8 +153,10 @@ const AnalysisAccordionTable = ({
         accessorKey: "name",
         id: "name",
         enableEditing: true,
+        Cell: ({ cell }) =>
+          cell.getValue() || <Text c="var(--light-gray)">Enter Value</Text>,
         mantineEditTextInputProps: ({ cell, row }) => ({
-          placeholder: "Enter",
+          placeholder: "Enter Value",
           onBlur: (event) => {
             updateData(event, "analysisNames", label, row, index);
           },
@@ -166,11 +168,14 @@ const AnalysisAccordionTable = ({
         id: "stage",
         editVariant: "select",
         enableEditing: true,
+        Cell: ({ cell }) =>
+          cell.getValue() || <Text c="var(--light-gray)">Select Option</Text>,
         mantineEditSelectProps: ({ cell, row }) => ({
-          placeholder: "Select",
+          placeholder: "Select Option",
           data: STAGES,
           searchable: true,
           filter: filterOptions,
+          comboboxProps: { shadow: "md" },
           onChange: (event) => {
             updateData(event, "stages", label, row, index);
           },
@@ -182,11 +187,14 @@ const AnalysisAccordionTable = ({
         id: "specType",
         editVariant: "select",
         enableEditing: true,
+        Cell: ({ cell }) =>
+          cell.getValue() || <Text c="var(--light-gray)">Select Option</Text>,
         mantineEditSelectProps: ({ cell, row }) => ({
           placeholder: "Select",
           data: SPECTYPES,
           searchable: true,
           filter: filterOptions,
+          comboboxProps: { shadow: "md" },
           onChange: (event) => {
             updateData(event, "specTypes", label, row, index);
           },
@@ -198,11 +206,14 @@ const AnalysisAccordionTable = ({
         id: "batchLink",
         editVariant: "select",
         enableEditing: true,
+        Cell: ({ cell }) =>
+          cell.getValue() || <Text c="var(--light-gray)">Select Option</Text>,
         mantineEditSelectProps: ({ cell, row }) => ({
           placeholder: "Select",
           data: BATCHLINKS,
           searchable: true,
           filter: filterOptions,
+          comboboxProps: { shadow: "md" },
           onChange: (event) => {
             updateData(event, "batchLinks", label, row, index);
           },
@@ -214,11 +225,14 @@ const AnalysisAccordionTable = ({
         id: "batchType",
         editVariant: "select",
         enableEditing: true,
+        Cell: ({ cell }) =>
+          cell.getValue() || <Text c="var(--light-gray)">Select Option</Text>,
         mantineEditSelectProps: ({ cell, row }) => ({
           placeholder: "Select",
           data: BATCHTEMPLATES,
           searchable: true,
           filter: filterOptions,
+          comboboxProps: { shadow: "md" },
           onChange: (event) => {
             updateData(event, "batchTypes", label, row, index);
           },
