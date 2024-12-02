@@ -1,0 +1,3 @@
+const COMPONENT_MANUALS = ["ANALYSIS", "LIST_KEY"];
+
+export default COMPONENT_MANUALS;

@@ -1,6 +1,12 @@
 .table-view-modal {
   .mantine-Table-thead th {
-    background-color: #c6c8e1 !important;
+    background-color: #d7d9ea !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .mantine-Table-thead th[data-index='0'] {
+    padding: 10px !important;
   }
 
   .mantine-Modal-title {
@@ -9,5 +15,23 @@
     .mantine-Flex-root {
       width: 100%;
     }
+  }
+
+  .common {
+    padding: 10px;
+    height: 42px;
+    width: 400px;
+  }
+
+  .default-header {
+    background-color: var(--green);
+  }
+
+  .double-check-header {
+    background-color: var(--orange);
+  }
+
+  .manual-header {
+    background-color: var(--blue);
   }
 }

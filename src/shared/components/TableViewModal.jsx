@@ -1,6 +1,14 @@
 import { ActionIcon, Box, Flex, Modal, Title } from "@mantine/core";
 import { useMemo, useState } from "react";
-import { DEFAULT_TABLE_CONFIG } from "../constants/constants";
+import {
+  COMPONENT_DEFAULTS,
+  COMPONENT_DOUBLE_CHECKS,
+  COMPONENT_MANUALS,
+  DEFAULT_TABLE_CONFIG,
+  PRODUCT_SPEC_DEFAULTS,
+  PRODUCT_SPEC_DOUBLE_CHECKS,
+  PRODUCT_SPEC_MANUALS,
+} from "../constants/constants";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import "./tableViewModal.css";
 import { IconZoomScan } from "@tabler/icons-react";
@@ -14,12 +22,43 @@ const TableViewModal = ({
   enableRowNumbers = true,
 }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const getClassName = (header) => {
+    if (label == "Components") {
+      if (COMPONENT_DEFAULTS.includes(header)) {
+        return "default-header";
+      } else if (COMPONENT_DOUBLE_CHECKS.includes(header)) {
+        return "double-check-header";
+      } else if (COMPONENT_MANUALS.includes(header)) {
+        return "manual-header";
+      } else {
+        return "";
+      }
+    }
+    if (label == "Product Spec") {
+      if (PRODUCT_SPEC_DEFAULTS.includes(header)) {
+        return "default-header";
+      } else if (PRODUCT_SPEC_DOUBLE_CHECKS.includes(header)) {
+        return "double-check-header";
+      } else if (PRODUCT_SPEC_MANUALS.includes(header)) {
+        return "manual-header";
+      } else {
+        return "";
+      }
+    }
+  };
+
   const columns = useMemo(() => {
     if (content.length < 1) return [];
     const keys = Object.keys(content[0]);
     const cols = keys.filter(Boolean).map((key) => {
       return {
         header: key,
+        Header: ({ column }) => (
+          <Box className={`common ${getClassName(key)}`}>
+            {column.columnDef.header}
+          </Box>
+        ),
         id: key,
         accessorKey: key,
         size: 150,
@@ -32,7 +71,7 @@ const TableViewModal = ({
     columns,
     data: content,
     enableColumnResizing: true,
-    defaultColumn: { minSize: 200, maxSize: 1500, size: 500 },
+    defaultColumn: { minSize: 250, maxSize: 1500, size: 500 },
     columnResizeMode: "onChange",
     ...DEFAULT_TABLE_CONFIG,
     enableRowNumbers,
@@ -43,6 +82,13 @@ const TableViewModal = ({
         maxHeight: "30rem",
       },
     },
+    // mantineTableHeadCellProps: {
+    //   sx: {
+    //     fontWeight: "normal",
+    //     fontSize: "19px",
+    //     backgroundColor: "red",
+    //   },
+    // },
   };
   const table = useMantineReactTable(tableConfig);
 

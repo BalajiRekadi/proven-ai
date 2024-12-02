@@ -47,6 +47,7 @@ const Dashboard = () => {
         header: "Spec",
         accessorKey: "spec",
         id: "spec",
+        size: 40,
       },
       {
         header: "Method",
@@ -103,6 +104,11 @@ const Dashboard = () => {
     enableBottomToolbar: true,
     enableGlobalFilter: true,
     enableSorting: true,
+    initialState: {
+      pagination: { pageSize: 15, pageIndex: 0 },
+      density: "xs",
+      sorting: [{ id: "createdOn", desc: true }],
+    },
     mantineTableProps: {
       withColumnBorders: true,
       striped: true,

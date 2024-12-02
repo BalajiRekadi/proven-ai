@@ -5,6 +5,12 @@ import STAGE_OPTIONS from "./stage";
 import SPEC_TYPES from "./specTypes";
 import BATCH_LINKS from "./batchLinks";
 import BATCH_TEMPLATES from "./batchTemplates";
+import COMPONENT_DEFAULTS from "./componentDefaults";
+import COMPONENT_DOUBLE_CHECKS from "./componentDoubleChecks";
+import COMPONENT_MANUALS from "./componentManuals";
+import PRODUCT_SPEC_DEFAULTS from "./productSpecDefaults";
+import PRODUCT_SPEC_DOUBLE_CHECKS from "./productSpecDoubleChecks";
+import PRODUCT_SPEC_MANUALS from "./productSpecManuals";
 
 // const DOMAIN = "http://13.235.98.215:8000";
 const DOMAIN = "http://labwaredrl-lb-848023330.ap-south-1.elb.amazonaws.com"; // login
@@ -98,4 +104,10 @@ export {
   SPEC_TYPES,
   BATCH_LINKS,
   BATCH_TEMPLATES,
+  COMPONENT_DEFAULTS,
+  COMPONENT_DOUBLE_CHECKS,
+  COMPONENT_MANUALS,
+  PRODUCT_SPEC_DEFAULTS,
+  PRODUCT_SPEC_DOUBLE_CHECKS,
+  PRODUCT_SPEC_MANUALS,
 };

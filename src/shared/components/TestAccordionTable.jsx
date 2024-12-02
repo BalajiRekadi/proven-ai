@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Button, Box, ActionIcon, TextInput, Flex } from "@mantine/core";
 import { IconRun, IconCopy, IconFileFilled } from "@tabler/icons-react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
