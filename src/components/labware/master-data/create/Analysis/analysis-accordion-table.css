@@ -1,5 +1,9 @@
 .analysis-table {
   .mrt-table-container {
     max-height: 30rem;
+
+    td {
+      outline: none !important;
+    }
   }
 }

@@ -14,7 +14,11 @@ import { Outlet } from "react-router-dom";
 import Routes from "../routes/Routes";
 import { ModuleSelect } from "../../shared/components";
 import { useStore } from "../../store/useStore";
-import { IconUserCircle } from "@tabler/icons-react";
+import {
+  IconArrowBarRight,
+  IconMenu2,
+  IconUserCircle,
+} from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import "./user.css";
 
@@ -43,12 +47,30 @@ const User = () => {
       <AppShell.Header className="header">
         <Flex>
           <Flex px="md" w={300} h={60} gap={16} align={"center"}>
-            <Burger
-              opened={closed}
-              onClick={() => setOpened(!closed)}
-              aria-label="Toggle navigation"
-              color="white"
-            />
+            {closed && (
+              <ActionIcon
+                onClick={() => setOpened(!closed)}
+                variant="transparent"
+                color="white"
+              >
+                <IconArrowBarRight
+                  style={{ width: "32px", height: "32px" }}
+                  stroke={2}
+                />
+              </ActionIcon>
+            )}
+            {!closed && (
+              <ActionIcon
+                onClick={() => setOpened(!closed)}
+                variant="transparent"
+                color="white"
+              >
+                <IconMenu2
+                  stroke={2}
+                  style={{ width: "32px", height: "32px" }}
+                />
+              </ActionIcon>
+            )}
             <Image src={headerLogo} w={"10rem"} h={"2rem"} alt="Header Logo" />
           </Flex>
           <Flex

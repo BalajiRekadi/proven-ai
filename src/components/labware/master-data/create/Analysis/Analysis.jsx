@@ -35,7 +35,8 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
         field == "stages" ||
         field == "specTypes" ||
         field == "batchLinks" ||
-        field == "batchTypes"
+        field == "batchTypes" ||
+        field == "analysisNames"
           ? event
           : event.target.value;
       solution[field][row.index] = value;

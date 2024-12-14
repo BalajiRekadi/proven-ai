@@ -11,9 +11,10 @@ import COMPONENT_MANUALS from "./componentManuals";
 import PRODUCT_SPEC_DEFAULTS from "./productSpecDefaults";
 import PRODUCT_SPEC_DOUBLE_CHECKS from "./productSpecDoubleChecks";
 import PRODUCT_SPEC_MANUALS from "./productSpecManuals";
+import NAMES from "./names";
 
 // const DOMAIN = "http://13.235.98.215:8000";
-const DOMAIN = "http://labwaredrl-lb-848023330.ap-south-1.elb.amazonaws.com"; // login
+const DOMAIN = "http://13.235.98.215:27020"; // login
 // const DOMAIN = "http://13.235.98.215:8001";
 
 const ROUTES = [
@@ -75,13 +76,17 @@ const CLIENTS = {
     value: "DRL",
     label: "DRL",
   },
-  SUN_PHARMA: {
-    value: "Sunpharma",
-    label: "SUN PHARMA",
+  GLENMARK: {
+    value: "glenmark",
+    label: "GLENMARK",
   },
   NEULAND: {
     value: "neuland",
     label: "NEULAND",
+  },
+  SUN_PHARMA: {
+    value: "Sunpharma",
+    label: "SUN PHARMA",
   },
 };
 
@@ -110,4 +115,5 @@ export {
   PRODUCT_SPEC_DEFAULTS,
   PRODUCT_SPEC_DOUBLE_CHECKS,
   PRODUCT_SPEC_MANUALS,
+  NAMES,
 };

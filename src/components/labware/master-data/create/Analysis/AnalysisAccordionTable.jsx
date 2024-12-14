@@ -6,6 +6,7 @@ import {
   Popover,
   Paper,
   Group,
+  Select,
 } from "@mantine/core";
 import {
   IconCircleArrowDownFilled,
@@ -21,6 +22,7 @@ import {
   DEFAULT_TABLE_CONFIG,
   SPEC_TYPES,
   STAGE_OPTIONS,
+  NAMES,
 } from "../../../../../shared/constants/constants";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { TableViewModal, TextModal } from "../../../../../shared/components";
@@ -47,6 +49,7 @@ const AnalysisAccordionTable = ({
   const SPECTYPES = useMemo(() => SPEC_TYPES, []);
   const BATCHLINKS = useMemo(() => BATCH_LINKS, []);
   const BATCHTEMPLATES = useMemo(() => BATCH_TEMPLATES, []);
+  const NAMEOPTIONS = useMemo(() => NAMES, []);
 
   const runDataTables = {
     components_table: "Components",
@@ -152,12 +155,26 @@ const AnalysisAccordionTable = ({
         header: "Name",
         accessorKey: "name",
         id: "name",
+        editVariant: "select",
         enableEditing: true,
-        Cell: ({ cell }) =>
-          cell.getValue() || <Text c="var(--light-gray)">Enter Value</Text>,
-        mantineEditTextInputProps: ({ cell, row }) => ({
-          placeholder: "Enter Value",
-          onBlur: (event) => {
+        Cell: ({ cell }) => {
+          const value = cell.getValue();
+          return (
+            <Select
+              value={value}
+              readOnly
+              data={value ? [value] : []}
+              placeholder="Select"
+            ></Select>
+          );
+        },
+        mantineEditSelectProps: ({ cell, row }) => ({
+          placeholder: "Select",
+          data: NAMEOPTIONS,
+          searchable: true,
+          filter: filterOptions,
+          comboboxProps: { shadow: "md" },
+          onChange: (event) => {
             updateData(event, "analysisNames", label, row, index);
           },
         }),
@@ -168,10 +185,19 @@ const AnalysisAccordionTable = ({
         id: "stage",
         editVariant: "select",
         enableEditing: true,
-        Cell: ({ cell }) =>
-          cell.getValue() || <Text c="var(--light-gray)">Select Option</Text>,
+        Cell: ({ cell }) => {
+          const value = cell.getValue();
+          return (
+            <Select
+              value={value}
+              data={value ? [value] : []}
+              placeholder="Select"
+              readOnly
+            ></Select>
+          );
+        },
         mantineEditSelectProps: ({ cell, row }) => ({
-          placeholder: "Select Option",
+          placeholder: "Select",
           data: STAGES,
           searchable: true,
           filter: filterOptions,
@@ -187,8 +213,17 @@ const AnalysisAccordionTable = ({
         id: "specType",
         editVariant: "select",
         enableEditing: true,
-        Cell: ({ cell }) =>
-          cell.getValue() || <Text c="var(--light-gray)">Select Option</Text>,
+        Cell: ({ cell }) => {
+          const value = cell.getValue();
+          return (
+            <Select
+              value={value}
+              data={value ? [value] : []}
+              placeholder="Select"
+              readOnly
+            ></Select>
+          );
+        },
         mantineEditSelectProps: ({ cell, row }) => ({
           placeholder: "Select",
           data: SPECTYPES,
@@ -206,8 +241,17 @@ const AnalysisAccordionTable = ({
         id: "batchLink",
         editVariant: "select",
         enableEditing: true,
-        Cell: ({ cell }) =>
-          cell.getValue() || <Text c="var(--light-gray)">Select Option</Text>,
+        Cell: ({ cell }) => {
+          const value = cell.getValue();
+          return (
+            <Select
+              value={value}
+              data={value ? [value] : []}
+              placeholder="Select"
+              readOnly
+            ></Select>
+          );
+        },
         mantineEditSelectProps: ({ cell, row }) => ({
           placeholder: "Select",
           data: BATCHLINKS,
@@ -225,8 +269,17 @@ const AnalysisAccordionTable = ({
         id: "batchType",
         editVariant: "select",
         enableEditing: true,
-        Cell: ({ cell }) =>
-          cell.getValue() || <Text c="var(--light-gray)">Select Option</Text>,
+        Cell: ({ cell }) => {
+          const value = cell.getValue();
+          return (
+            <Select
+              value={value}
+              data={value ? [value] : []}
+              placeholder="Select"
+              readOnly
+            ></Select>
+          );
+        },
         mantineEditSelectProps: ({ cell, row }) => ({
           placeholder: "Select",
           data: BATCHTEMPLATES,
