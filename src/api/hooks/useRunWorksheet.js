@@ -14,7 +14,7 @@ const useRunWorksheet = () => {
     isError,
     isSuccess,
   } = useMutation({
-    mutationFn: (payload) => runWorksheet(payload, endpoint),
+    mutationFn: (payload) => runWorksheet(payload, endpoint, client),
     onMutate: () => {
       toast.load("Worksheet content is loading..");
     },

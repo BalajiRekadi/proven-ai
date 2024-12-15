@@ -1,7 +1,7 @@
-import { DOMAIN } from '../../shared/constants/constants'
+import { getDomain } from '../../shared/utilities'
 
-const fetchNeulandWorksheets = async (endpoint, file) => {
-  const res = await fetch(`${DOMAIN}/${endpoint}?Product=${file}`, {
+const fetchNeulandWorksheets = async (endpoint, file, client) => {
+  const res = await fetch(`${getDomain(client)}/${endpoint}?Product=${file}`, {
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",
     }),

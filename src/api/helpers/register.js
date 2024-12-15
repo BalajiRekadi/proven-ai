@@ -1,9 +1,9 @@
-import { DOMAIN } from "../../shared/constants/constants";
 import axios from "axios";
+import { getDomain } from "../../shared/utilities";
 
 const register = async (data) => {
   const res = await axios({
-    url: `${DOMAIN}/register?collection_name=Login`,
+    url: `${getDomain(data.client[0])}/register?collection_name=Login`,
     method: "POST",
     data: { ...data },
     headers: new Headers({

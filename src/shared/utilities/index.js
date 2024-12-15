@@ -6,6 +6,7 @@ import downloadJSONFromObj from "./downloadJSONFromObj";
 import downloadDocx from "./downloadDocx";
 import convertObjDataToArray from "./convertObjDataToArray";
 import convertArrayDataToObj from "./convertArrayDataToObj";
+import getDomain from "./getDomain";
 
 export {
   appendDocxExtension,
@@ -16,4 +17,5 @@ export {
   downloadDocx,
   convertObjDataToArray,
   convertArrayDataToObj,
+  getDomain,
 };

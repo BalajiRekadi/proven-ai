@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DOMAIN } from "../../shared/constants/constants";
+import { getDomain } from "../../shared/utilities";
 
 const runAnalysis = async (taskId, item, module, client, fieldIndex) => {
   // TODO: map calculations for caliber flow
@@ -21,7 +21,9 @@ const runAnalysis = async (taskId, item, module, client, fieldIndex) => {
     ],
   };
   const res = await axios({
-    url: `${DOMAIN}/Run?TaskId=${taskId}&Module=${module}&Client=${client}`,
+    url: `${getDomain(
+      client
+    )}/Run?TaskId=${taskId}&Module=${module}&Client=${client}`,
     method: "POST",
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",

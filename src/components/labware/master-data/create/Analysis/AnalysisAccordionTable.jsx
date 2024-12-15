@@ -174,6 +174,7 @@ const AnalysisAccordionTable = ({
           searchable: true,
           filter: filterOptions,
           comboboxProps: { shadow: "md" },
+          limit: 100,
           onChange: (event) => {
             updateData(event, "analysisNames", label, row, index);
           },
@@ -201,6 +202,7 @@ const AnalysisAccordionTable = ({
           data: STAGES,
           searchable: true,
           filter: filterOptions,
+          limit: 100,
           comboboxProps: { shadow: "md" },
           onChange: (event) => {
             updateData(event, "stages", label, row, index);
@@ -229,6 +231,7 @@ const AnalysisAccordionTable = ({
           data: SPECTYPES,
           searchable: true,
           filter: filterOptions,
+          limit: 100,
           comboboxProps: { shadow: "md" },
           onChange: (event) => {
             updateData(event, "specTypes", label, row, index);
@@ -257,6 +260,7 @@ const AnalysisAccordionTable = ({
           data: BATCHLINKS,
           searchable: true,
           filter: filterOptions,
+          limit: 100,
           comboboxProps: { shadow: "md" },
           onChange: (event) => {
             updateData(event, "batchLinks", label, row, index);
@@ -285,6 +289,7 @@ const AnalysisAccordionTable = ({
           data: BATCHTEMPLATES,
           searchable: true,
           filter: filterOptions,
+          limit: 100,
           comboboxProps: { shadow: "md" },
           onChange: (event) => {
             updateData(event, "batchTypes", label, row, index);

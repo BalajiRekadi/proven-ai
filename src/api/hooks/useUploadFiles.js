@@ -14,7 +14,7 @@ const useUploadFiles = () => {
     isError,
     isSuccess,
   } = useMutation({
-    mutationFn: (files) => uploadFile(endpoint, files),
+    mutationFn: (files) => uploadFile(endpoint, files, client),
     onMutate: () => {
       toast.load("Files upload is in progress..");
     },

@@ -1,11 +1,10 @@
 import axios from 'axios'
 
-import { DOMAIN } from '../../shared/constants/constants'
-import { convertObjDataToArray } from '../../shared/utilities'
+import { convertObjDataToArray, getDomain } from '../../shared/utilities'
 
 const fetchTaskDetails = async (id, module, client) => {
   const res = await axios({
-    url: `${DOMAIN}/TaskID_search?TaskId=${id}&module=${module}&Client=${client}`,
+    url: `${getDomain(client)}/TaskID_search?TaskId=${id}&module=${module}&Client=${client}`,
     method: "POST",
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",

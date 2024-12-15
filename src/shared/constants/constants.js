@@ -13,9 +13,8 @@ import PRODUCT_SPEC_DOUBLE_CHECKS from "./productSpecDoubleChecks";
 import PRODUCT_SPEC_MANUALS from "./productSpecManuals";
 import NAMES from "./names";
 
-// const DOMAIN = "http://13.235.98.215:8000";
-const DOMAIN = "http://13.235.98.215:27020"; // login
-// const DOMAIN = "http://13.235.98.215:8001";
+const DOMAIN = "http://labwaredrl-lb-848023330.ap-south-1.elb.amazonaws.com";
+const GLENMARK_DOMAIN = "http://13.235.98.215:27020";
 
 const ROUTES = [
   {
@@ -116,4 +115,5 @@ export {
   PRODUCT_SPEC_DOUBLE_CHECKS,
   PRODUCT_SPEC_MANUALS,
   NAMES,
+  GLENMARK_DOMAIN,
 };

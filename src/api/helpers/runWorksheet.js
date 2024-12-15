@@ -1,9 +1,9 @@
 import axios from "axios";
-import { DOMAIN } from "../../shared/constants/constants";
+import { getDomain } from "../../shared/utilities";
 
-const runWorksheet = async (payload, endpoint) => {
+const runWorksheet = async (payload, endpoint, client) => {
   const res = await axios({
-    url: `${DOMAIN}/${endpoint}?code=${payload.product}`,
+    url: `${getDomain(client)}/${endpoint}?code=${payload.product}`,
     method: "POST",
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",

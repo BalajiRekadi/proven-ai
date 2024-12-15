@@ -1,12 +1,13 @@
 import { Flex, Select } from "@mantine/core";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useStore } from "../../store/useStore";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MODULES, CLIENTS } from "../constants/constants";
 
 const ModuleSelect = ({ size = "sm" }) => {
   const { module, client, setClient, setModule, setRoute } = useStore();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const modules = Object.values(MODULES);
   const clients = Object.values(CLIENTS);
@@ -21,6 +22,7 @@ const ModuleSelect = ({ size = "sm" }) => {
     if (event) {
       setModule(event);
       setRoute(`/user/${event}/dashboard`);
+      navigate(`/user/${event}/dashboard`);
     }
   };
 
@@ -28,6 +30,7 @@ const ModuleSelect = ({ size = "sm" }) => {
     if (event) {
       setClient(event);
       setRoute(`/user/${module}/dashboard`);
+      navigate(`/user/${module}/dashboard`);
     }
   };
 

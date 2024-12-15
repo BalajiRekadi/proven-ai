@@ -1,7 +1,7 @@
-import { DOMAIN } from "../../shared/constants/constants";
 import {
   appendDocxExtension,
   convertObjDataToArray,
+  getDomain,
 } from "../../shared/utilities";
 import axios from "axios";
 
@@ -10,7 +10,7 @@ const processFiles = async (files, module, client, user) => {
   const stp = appendDocxExtension(files[1]);
 
   const res = await axios({
-    url: `${DOMAIN}/process`,
+    url: `${getDomain(client)}/process`,
     method: "POST",
     data: {
       filenames: { spec, stp },

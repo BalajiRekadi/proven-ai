@@ -1,6 +1,5 @@
 import axios from "axios";
-import { DOMAIN, MODULES } from "../../shared/constants/constants";
-import { convertArrayDataToObj } from "../../shared/utilities";
+import { convertArrayDataToObj, getDomain } from "../../shared/utilities";
 
 const saveImportDocsData = async (
   data,
@@ -12,7 +11,7 @@ const saveImportDocsData = async (
 ) => {
   const payload = mapPayload(data, limitsData, module, client);
   const res = await axios({
-    url: `${DOMAIN}/save?module=${module}`,
+    url: `${getDomain(client)}/save?module=${module}`,
     method: "post",
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",

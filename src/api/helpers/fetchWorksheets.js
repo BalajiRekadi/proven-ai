@@ -1,9 +1,11 @@
-import { DOMAIN } from "../../shared/constants/constants";
 import axios from "axios";
+import { getDomain } from "../../shared/utilities";
 
 const fetchWorksheets = async (endpoint, taskId, module, client) => {
   const res = await axios({
-    url: `${DOMAIN}/${endpoint}?TaskId=${taskId}&module=${module}&Client=${client}`,
+    url: `${getDomain(
+      client
+    )}/${endpoint}?TaskId=${taskId}&module=${module}&Client=${client}`,
     method: "POST",
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",
