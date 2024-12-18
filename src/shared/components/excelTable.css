@@ -1,0 +1,61 @@
+.excel-table {
+  .mantine-Table-thead th {
+    background-color: #d7d9ea !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .mantine-Table-thead th[data-index='0'] {
+    padding: 10px !important;
+  }
+
+  .mantine-Table-tr {
+    height: 2.6rem;
+
+    td {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    td:hover {
+      box-sizing: border-box;
+      box-shadow: 0 0 0 2px var(--cell-border) inset !important;
+      border-radius: 2px !important;
+    }
+  }
+
+  .mantine-Table-tr:hover {
+    background-color: transparent !important;
+  }
+
+  .mantine-TextInput-root {
+    width: 100%;
+  }
+
+
+  .mantine-Modal-title {
+    width: 100%;
+
+    .mantine-Flex-root {
+      width: 100%;
+    }
+  }
+
+  .common {
+    padding: 10px;
+    height: 42px;
+    min-width: 220px;
+  }
+
+  .default-header {
+    background-color: var(--green);
+  }
+
+  .double-check-header {
+    background-color: var(--orange);
+  }
+
+  .manual-header {
+    background-color: var(--blue);
+  }
+}

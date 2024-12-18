@@ -1,4 +1,4 @@
-import './excelTable.css'
+import './dataTable.css'
 
 import { MantineReactTable, useMantineReactTable } from 'mantine-react-table'
 import { useMemo } from 'react'
@@ -10,11 +10,7 @@ import {
     PRODUCT_SPEC_DEFAULTS, PRODUCT_SPEC_DOUBLE_CHECKS, PRODUCT_SPEC_MANUALS,
 } from '../constants/constants'
 
-const TableViewModal = ({
-  label,
-  content = [],
-  enableRowNumbers = true,
-}: any) => {
+const DataTable = ({ label, content = [], enableRowNumbers = true }) => {
   const getClassName = (header) => {
     if (label == "Components") {
       if (COMPONENT_DEFAULTS.includes(header)) {
@@ -53,6 +49,7 @@ const TableViewModal = ({
         ),
         id: key,
         accessorKey: key,
+        // size: 150,
       };
     });
     return cols;
@@ -62,36 +59,25 @@ const TableViewModal = ({
     ...DEFAULT_TABLE_CONFIG,
     columns,
     data: content,
-    enableColumnResizing: false,
+    enableColumnResizing: true,
     // defaultColumn: { minSize: 250, maxSize: 1500, size: 500 },
+    columnResizeMode: "onChange",
     enableRowNumbers,
     mantineTableProps: {
       striped: true,
       withColumnBorders: true,
-      highlightOnHover: false,
       sx: {
         maxHeight: "30rem",
       },
     },
-    enableEditing: true,
-    editDisplayMode: "table",
-    mantineEditTextInputProps: ({ cell }) => ({
-      //onBlur is more efficient, but could use onChange instead
-      onBlur: (event) => {
-        console.log(cell, event.target.value);
-      },
-      variant: "unstyled",
-      size: "md",
-    }),
   };
 
   const table = useMantineReactTable(tableConfig);
-
   return (
-    <Box className="excel-table" h={"70vh"}>
+    <Box className="data-table" h={"70vh"}>
       <MantineReactTable table={table} />
     </Box>
   );
 };
 
-export default TableViewModal;
+export default DataTable;

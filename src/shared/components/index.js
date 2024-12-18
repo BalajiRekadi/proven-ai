@@ -15,6 +15,7 @@ import PasswordInputWithMeter from "./PasswordInputWithMeter";
 import Footer from "./Footer";
 import InputTable from "./InputTable";
 import ExcelTable from "./ExcelTable";
+import DataTable from "./DataTable";
 import { ToastContextProvider } from "./toast/ToastProvider";
 
 export {
@@ -36,4 +37,5 @@ export {
   Footer,
   InputTable,
   ExcelTable,
+  DataTable,
 };

@@ -58,6 +58,7 @@ const AnalysisPopover = ({ tables }) => {
         onClose={() => setShowRunData(false)}
         label={selectedRunDataTableLabel}
         content={selectedRunDataTable}
+        showAsExcel={true}
       />
     </>
   );

@@ -390,6 +390,7 @@ const AnalysisAccordionTable = ({
         onClose={() => setShowRunData(false)}
         label={selectedRunDataTableLabel}
         content={selectedRunDataTable}
+        showAsExcel={true}
       />
     </>
   );
