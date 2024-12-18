@@ -26,7 +26,10 @@ import {
 } from "../../../../../shared/constants/constants";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { TableViewModal, TextModal } from "../../../../../shared/components";
-import { downloadCSVFromArray } from "../../../../../shared/utilities";
+import {
+  downloadCSVFromArray,
+  downloadXLSX,
+} from "../../../../../shared/utilities";
 import "./analysis-accordion-table.css";
 
 const AnalysisAccordionTable = ({
@@ -113,7 +116,7 @@ const AnalysisAccordionTable = ({
     const item = data.runResults[row.index]?.[0];
     if (item) {
       const data = formatRunData(item[key]);
-      downloadCSVFromArray(data, runDataTables[key]);
+      downloadXLSX(data, runDataTables[key]);
     }
   };
 

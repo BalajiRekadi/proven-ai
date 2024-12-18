@@ -7,6 +7,7 @@ import downloadDocx from "./downloadDocx";
 import convertObjDataToArray from "./convertObjDataToArray";
 import convertArrayDataToObj from "./convertArrayDataToObj";
 import getDomain from "./getDomain";
+import downloadXLSX from "./downloadXLSX";
 
 export {
   appendDocxExtension,
@@ -18,4 +19,5 @@ export {
   convertObjDataToArray,
   convertArrayDataToObj,
   getDomain,
+  downloadXLSX,
 };
