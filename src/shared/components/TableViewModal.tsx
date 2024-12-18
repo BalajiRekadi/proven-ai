@@ -1,17 +1,15 @@
-import { ActionIcon, Box, Flex, Modal, Title } from "@mantine/core";
-import { useMemo, useState } from "react";
+import './tableViewModal.css'
+
+import { MantineReactTable, useMantineReactTable } from 'mantine-react-table'
+import { useMemo, useState } from 'react'
+
+import { ActionIcon, Box, Flex, Modal, Title } from '@mantine/core'
+import { IconZoomScan } from '@tabler/icons-react'
+
 import {
-  COMPONENT_DEFAULTS,
-  COMPONENT_DOUBLE_CHECKS,
-  COMPONENT_MANUALS,
-  DEFAULT_TABLE_CONFIG,
-  PRODUCT_SPEC_DEFAULTS,
-  PRODUCT_SPEC_DOUBLE_CHECKS,
-  PRODUCT_SPEC_MANUALS,
-} from "../constants/constants";
-import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import "./tableViewModal.css";
-import { IconZoomScan } from "@tabler/icons-react";
+    COMPONENT_DEFAULTS, COMPONENT_DOUBLE_CHECKS, COMPONENT_MANUALS, DEFAULT_TABLE_CONFIG,
+    PRODUCT_SPEC_DEFAULTS, PRODUCT_SPEC_DOUBLE_CHECKS, PRODUCT_SPEC_MANUALS,
+} from '../constants/constants'
 
 const TableViewModal = ({
   open,
@@ -20,7 +18,7 @@ const TableViewModal = ({
   size = "70rem",
   content = [],
   enableRowNumbers = true,
-}) => {
+}: any) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const getClassName = (header) => {
@@ -82,13 +80,6 @@ const TableViewModal = ({
         maxHeight: "30rem",
       },
     },
-    // mantineTableHeadCellProps: {
-    //   sx: {
-    //     fontWeight: "normal",
-    //     fontSize: "19px",
-    //     backgroundColor: "red",
-    //   },
-    // },
   };
   const table = useMantineReactTable(tableConfig);
 
@@ -124,59 +115,3 @@ const TableViewModal = ({
 };
 
 export default TableViewModal;
-
-{
-  /* <Box bd={"1px solid var(--light-gray)"} style={{ borderRadius: "6px" }}>
-<ScrollArea p={0}>
-  <Flex>
-    <>
-      {Object.keys(content).map((key) => (
-        <Title
-          order={5}
-          key={key}
-          p={8}
-          miw={"17rem"}
-          lineClamp={1}
-          bd={"1px solid var(--light-gray)"}
-          bg={"gray"}
-        >
-          {key}
-        </Title>
-      ))}
-    </>
-  </Flex>
-  <Flex>
-    {Object.keys(content).map((index) => (
-      <Box key={index}>
-        {content[index].map((val, index) => (
-          <>
-            {val && (
-              <ScrollArea
-                w={"17rem"}
-                h={"3rem"}
-                bd={"1px solid var(--light-gray)"}
-              >
-                <Text key={val + index} p={8}>
-                  {val}
-                </Text>
-              </ScrollArea>
-            )}
-            {!val && (
-              <ScrollArea
-                w={"17rem"}
-                h={"3rem"}
-                bd={"1px solid var(--light-gray)"}
-              >
-                <Text key={val + index} p={8}>
-                  {" "}
-                </Text>
-              </ScrollArea>
-            )}
-          </>
-        ))}
-      </Box>
-    ))}
-  </Flex>
-</ScrollArea>
-</Box> */
-}

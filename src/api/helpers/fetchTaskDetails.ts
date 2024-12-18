@@ -43,7 +43,7 @@ const mapResponse = (data) => {
       product: data.product,
       product_grade: data.product_grade,
     },
-    analysisData: mapAnalysisData(data.tests),
+    analysisData: data.tests ? mapAnalysisData(data.tests) : null,
     limitsData: convertObjDataToArray(data.limits),
     annotationValidation: data.AnnotationValidation
   };

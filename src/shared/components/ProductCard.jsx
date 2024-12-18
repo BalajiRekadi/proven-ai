@@ -8,7 +8,7 @@ import { useState } from "react";
 import { downloadCSVFromArray } from "../utilities";
 import TableViewModal from "./TableViewModal";
 
-const ProductCard = ({ title, content }) => {
+const ProductCard = ({ title, content = {} }) => {
   const [modalOpened, setModalOpened] = useState(false);
 
   const formatContent = () => {

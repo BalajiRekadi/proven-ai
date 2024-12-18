@@ -52,8 +52,10 @@ const CreateFlow = () => {
         setAreFilesUploaded(true);
         setShowTaskCard(true);
         // product step
-        setProductDetails(res.productData);
-        setProductDetailsLoaded(true);
+        if (res.productData.product && res.productData.product_grade) {
+          setProductDetails(res.productData);
+          setProductDetailsLoaded(true);
+        }
         // Analysis step
         setAnalysisData(res.analysisData);
         // annotation validations
