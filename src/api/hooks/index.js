@@ -7,6 +7,7 @@ import useTasks from "./useTasks";
 import useLogin from "./useLogin";
 import useRegister from "./useRegister";
 import useTaskDetails from "./useTaskDetails";
+import useUpdateRunResults from "./useUpdateRunResults";
 
 export {
   useUploadFiles,
@@ -18,4 +19,5 @@ export {
   useLogin,
   useRegister,
   useTaskDetails,
+  useUpdateRunResults,
 };

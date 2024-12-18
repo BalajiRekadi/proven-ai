@@ -14,6 +14,7 @@ const TableViewModal = ({
   label,
   content = [],
   enableRowNumbers = true,
+  handleCellEdit,
 }: any) => {
   const getClassName = (header) => {
     if (label == "Components") {
@@ -75,11 +76,9 @@ const TableViewModal = ({
     },
     enableEditing: true,
     editDisplayMode: "table",
-    mantineEditTextInputProps: ({ cell }) => ({
+    mantineEditTextInputProps: ({ table, column, row }) => ({
       //onBlur is more efficient, but could use onChange instead
-      onBlur: (event) => {
-        console.log(cell, event.target.value);
-      },
+      onBlur: (event) => handleCellEdit(row, table, column, event.target.value),
       variant: "unstyled",
       size: "md",
     }),

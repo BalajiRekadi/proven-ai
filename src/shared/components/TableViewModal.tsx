@@ -16,8 +16,18 @@ const TableViewModal = ({
   content = [],
   enableRowNumbers = true,
   showAsExcel = false,
+  updateData,
+  commitUpdatedRunResults,
 }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const handleSave = () => {
+    commitUpdatedRunResults();
+  };
+
+  const handleCellEdit = (row, table, column, value) => {
+    updateData(row, table, column, value);
+  };
 
   return (
     <Modal
@@ -55,11 +65,16 @@ const TableViewModal = ({
           label={label}
           content={content}
           enableRowNumbers={enableRowNumbers}
+          handleCellEdit={handleCellEdit}
         />
       )}
-      <Flex justify={"flex-end"}>
-        <Button variant="filled">Save</Button>
-      </Flex>
+      {showAsExcel && (
+        <Flex justify={"flex-end"}>
+          <Button variant="filled" onClick={handleSave}>
+            Save
+          </Button>
+        </Flex>
+      )}
     </Modal>
   );
 };

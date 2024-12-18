@@ -4,7 +4,10 @@ import AnalysisAccordionTable from "./AnalysisAccordionTable";
 import { useToast } from "../../../../../shared/components/toast/useToast";
 import { runAnalysis } from "../../../../../api/helpers";
 import { deepClone } from "../../../../../shared/utilities";
-import { useGenerateWorksheets } from "../../../../../api/hooks";
+import {
+  useGenerateWorksheets,
+  useUpdateRunResults,
+} from "../../../../../api/hooks";
 import { useStore } from "../../../../../store/useStore";
 import { Box, Button, Flex, Popover, Title } from "@mantine/core";
 import { IconStackPop } from "@tabler/icons-react";
@@ -17,6 +20,14 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
   const { generateWorksheets } = useGenerateWorksheets("analysis");
   const { mergeAll } = useMergeAll();
   const [mergedData, setMergedData] = useState(null);
+  const { saveRunResults } = useUpdateRunResults(taskData?.taskId);
+
+  const runDataTables = {
+    components_table: "Components",
+    analysis_table: "Analysis",
+    prod_gr_st_table: "Product Grade Stage",
+    prod_spec_table: "Product Spec",
+  };
 
   useEffect(() => {
     if (taskData.code && !analysisData) {
@@ -42,6 +53,32 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
       solution[field][row.index] = value;
       return clonedData;
     });
+  };
+
+  const updateRunResults = (
+    index,
+    solutionRow,
+    tableLabel,
+    row,
+    table,
+    column,
+    value
+  ) => {
+    setAnalysisData((prev) => {
+      const clonedData = deepClone(prev);
+      const tableKey = Object.keys(runDataTables).filter(
+        (i) => runDataTables[i] === tableLabel
+      )?.[0];
+      clonedData[index]["runResults"][solutionRow?.index][0][tableKey][
+        column.id
+      ][row.index] = value;
+
+      return clonedData;
+    });
+  };
+
+  const commitUpdatedRunResults = () => {
+    saveRunResults(analysisData);
   };
 
   const handleRunClick = (label, data, index) => {
@@ -76,7 +113,10 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
               index={index}
               data={accordion}
               label={accordion.heading}
+              runDataTables={runDataTables}
               updateData={updateAnalysisData}
+              updateRunResults={updateRunResults}
+              commitUpdatedRunResults={commitUpdatedRunResults}
               onRun={handleRunClick}
             />
           ),

@@ -13,6 +13,7 @@ import login from "./login";
 import register from "./register";
 import fetchTaskDetails from "./fetchTaskDetails.ts";
 import mergeAllAnalysis from "./mergeAllAnalysis.ts";
+import updateRunResults from "./updateRunResults.ts";
 
 export {
   uploadFile,
@@ -30,4 +31,5 @@ export {
   register,
   fetchTaskDetails,
   mergeAllAnalysis,
+  updateRunResults,
 };

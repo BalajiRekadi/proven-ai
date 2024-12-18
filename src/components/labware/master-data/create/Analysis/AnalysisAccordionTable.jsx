@@ -26,10 +26,7 @@ import {
 } from "../../../../../shared/constants/constants";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { TableViewModal, TextModal } from "../../../../../shared/components";
-import {
-  downloadCSVFromArray,
-  downloadXLSX,
-} from "../../../../../shared/utilities";
+import { downloadXLSX } from "../../../../../shared/utilities";
 import "./analysis-accordion-table.css";
 
 const AnalysisAccordionTable = ({
@@ -37,6 +34,9 @@ const AnalysisAccordionTable = ({
   data = {},
   label = "",
   updateData,
+  runDataTables = {},
+  updateRunResults,
+  commitUpdatedRunResults,
   onRun,
 }) => {
   const [showRunData, setShowRunData] = useState(false);
@@ -53,13 +53,6 @@ const AnalysisAccordionTable = ({
   const BATCHLINKS = useMemo(() => BATCH_LINKS, []);
   const BATCHTEMPLATES = useMemo(() => BATCH_TEMPLATES, []);
   const NAMEOPTIONS = useMemo(() => NAMES, []);
-
-  const runDataTables = {
-    components_table: "Components",
-    analysis_table: "Analysis",
-    prod_gr_st_table: "Product Grade Stage",
-    prod_spec_table: "Product Spec",
-  };
 
   const getTableData = () => {
     const tableData = [];
@@ -86,6 +79,7 @@ const AnalysisAccordionTable = ({
 
   const handleRunClick = (label, row) => {
     onRun(label, row, index);
+    setSelectedRow(row);
   };
 
   const formatRunData = (data) => {
@@ -311,7 +305,12 @@ const AnalysisAccordionTable = ({
             >
               <IconRun color={"green"} />
             </ActionIcon>
-            <Popover position="top" withArrow shadow="md">
+            <Popover
+              position="top"
+              withArrow
+              shadow="md"
+              onOpen={() => setSelectedRow(row)}
+            >
               <Popover.Target>
                 <ActionIcon variant="subtle" disabled={disableStackIcon(row)}>
                   <IconStackPop />
@@ -392,6 +391,18 @@ const AnalysisAccordionTable = ({
         open={showRunData}
         onClose={() => setShowRunData(false)}
         label={selectedRunDataTableLabel}
+        updateData={(row, table, column, value) =>
+          updateRunResults(
+            index,
+            selectedRow,
+            selectedRunDataTableLabel,
+            row,
+            table,
+            column,
+            value
+          )
+        }
+        commitUpdatedRunResults={commitUpdatedRunResults}
         content={selectedRunDataTable}
         showAsExcel={true}
       />
