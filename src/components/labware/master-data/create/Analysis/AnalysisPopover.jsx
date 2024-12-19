@@ -3,6 +3,7 @@ import { IconCircleArrowDownFilled, IconEyeFilled } from "@tabler/icons-react";
 import {
   convertObjDataToArray,
   downloadCSVFromArray,
+  downloadXLSX,
 } from "../../../../../shared/utilities";
 import { useState } from "react";
 import { TableViewModal } from "../../../../../shared/components";
@@ -29,7 +30,7 @@ const AnalysisPopover = ({ tables }) => {
 
   const onDownload = (tableName) => {
     const data = convertObjDataToArray(tables[tableName]);
-    downloadCSVFromArray(data, runDataTables[tableName]);
+    downloadXLSX(data, runDataTables[tableName]);
   };
 
   return (

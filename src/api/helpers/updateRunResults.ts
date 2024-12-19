@@ -23,7 +23,7 @@ const updateRunResults = async (payload, taskId, client, module) => {
   const res = await axios({
     url: `${getDomain(
       client
-    )}/run_update?TaskId=${taskId}&Module=${module}&Client=${client}`,
+    )}/run_update?TaskId=${taskId}&module=${module}&Client=${client}`,
     method: "POST",
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",
