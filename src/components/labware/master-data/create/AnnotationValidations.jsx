@@ -13,8 +13,8 @@ const AnnotationValidations = ({
       size={"xl"}
       centered
     >
-      {annotationValidations.Issues.map((issue) => (
-        <Box p={16}>
+      {annotationValidations.Issues.map((issue, index) => (
+        <Box p={16} key={index}>
           <Title order={5}>{issue.Type}</Title>
           <Text>{issue.Message}</Text>
           <Text>{issue.MessageCount || "-"}</Text>

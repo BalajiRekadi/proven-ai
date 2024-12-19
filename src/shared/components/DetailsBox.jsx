@@ -13,6 +13,7 @@ import {
   MODULES,
   SAMPLING_POINT_OPTIONS,
 } from "../constants/constants";
+import { useMemo } from "react";
 
 const DetailsBox = ({
   data,
@@ -21,6 +22,12 @@ const DetailsBox = ({
   onPrimaryBtnClick = () => {},
   showPrimaryBtn = false,
 }) => {
+  const GRADEOPTIONS = useMemo(() => GRADE_OPTIONS.flatMap((i) => i), []);
+  const SAMPLINGPOINTOPTIONS = useMemo(
+    () => SAMPLING_POINT_OPTIONS.flatMap((i) => i),
+    []
+  );
+
   const { module } = useStore();
   const handleValueChange = (event, field) => {
     const value =
@@ -85,7 +92,7 @@ const DetailsBox = ({
               w={"18rem"}
               label="Grade"
               placeholder="Select value"
-              data={GRADE_OPTIONS}
+              data={GRADEOPTIONS}
               value={data?.grade}
               limit={50}
               filter={filterOptions}
@@ -96,7 +103,7 @@ const DetailsBox = ({
               w={"18rem"}
               label="Sampling Point"
               placeholder="Select value"
-              data={SAMPLING_POINT_OPTIONS}
+              data={SAMPLINGPOINTOPTIONS}
               value={data?.samplingPoint}
               limit={50}
               filter={filterOptions}

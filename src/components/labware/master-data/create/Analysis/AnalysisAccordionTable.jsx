@@ -13,6 +13,7 @@ import {
   IconEyeFilled,
   IconFileFilled,
   IconRun,
+  IconSelector,
   IconStackPop,
 } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
@@ -155,18 +156,35 @@ const AnalysisAccordionTable = ({
         editVariant: "select",
         enableEditing: true,
         Cell: ({ cell }) => {
-          const value = cell.getValue();
+          let value = cell.getValue();
+          value = value ? (Array.isArray(value) ? value[0] : value) : "";
           return (
-            <Select
-              value={value}
-              readOnly
-              data={value ? [value] : []}
-              placeholder="Select"
-            ></Select>
+            // <Select
+            //   value={value}
+            //   readOnly
+            //   data={[value]}
+            //   placeholder="Select"
+            // ></Select>
+            <Paper withBorder shadow="none" p={7}>
+              <Flex justify={"space-between"} align={"center"}>
+                {value && (
+                  <Text size="sm" pr={4}>
+                    {value}
+                  </Text>
+                )}
+                {!value && (
+                  <Text size="sm" pr={4} c={"grey"}>
+                    Select
+                  </Text>
+                )}
+                <IconSelector stroke={2} size={16} color="grey" />
+              </Flex>
+            </Paper>
           );
         },
         mantineEditSelectProps: ({ cell, row }) => ({
           placeholder: "Select",
+          value: cell.getValue(),
           data: NAMEOPTIONS,
           searchable: true,
           filter: filterOptions,
@@ -184,14 +202,24 @@ const AnalysisAccordionTable = ({
         editVariant: "select",
         enableEditing: true,
         Cell: ({ cell }) => {
-          const value = cell.getValue();
+          let value = cell.getValue();
+          value = value ? (Array.isArray(value) ? value[0] : value) : "";
           return (
-            <Select
-              value={value}
-              data={value ? [value] : []}
-              placeholder="Select"
-              readOnly
-            ></Select>
+            <Paper withBorder shadow="none" p={7}>
+              <Flex justify={"space-between"} align={"center"}>
+                {value && (
+                  <Text size="sm" pr={4}>
+                    {value}
+                  </Text>
+                )}
+                {!value && (
+                  <Text size="sm" pr={4} c={"grey"}>
+                    Select
+                  </Text>
+                )}
+                <IconSelector stroke={2} size={16} color="grey" />
+              </Flex>
+            </Paper>
           );
         },
         mantineEditSelectProps: ({ cell, row }) => ({
@@ -213,14 +241,24 @@ const AnalysisAccordionTable = ({
         editVariant: "select",
         enableEditing: true,
         Cell: ({ cell }) => {
-          const value = cell.getValue();
+          let value = cell.getValue();
+          value = value ? (Array.isArray(value) ? value[0] : value) : "";
           return (
-            <Select
-              value={value}
-              data={value ? [value] : []}
-              placeholder="Select"
-              readOnly
-            ></Select>
+            <Paper withBorder shadow="none" p={7}>
+              <Flex justify={"space-between"} align={"center"}>
+                {value && (
+                  <Text size="sm" pr={4}>
+                    {value}
+                  </Text>
+                )}
+                {!value && (
+                  <Text size="sm" pr={4} c={"grey"}>
+                    Select
+                  </Text>
+                )}
+                <IconSelector stroke={2} size={16} color="grey" />
+              </Flex>
+            </Paper>
           );
         },
         mantineEditSelectProps: ({ cell, row }) => ({
@@ -242,14 +280,24 @@ const AnalysisAccordionTable = ({
         editVariant: "select",
         enableEditing: true,
         Cell: ({ cell }) => {
-          const value = cell.getValue();
+          let value = cell.getValue();
+          value = value ? (Array.isArray(value) ? value[0] : value) : "";
           return (
-            <Select
-              value={value}
-              data={value ? [value] : []}
-              placeholder="Select"
-              readOnly
-            ></Select>
+            <Paper withBorder shadow="none" p={7}>
+              <Flex justify={"space-between"} align={"center"}>
+                {value && (
+                  <Text size="sm" pr={4}>
+                    {value}
+                  </Text>
+                )}
+                {!value && (
+                  <Text size="sm" pr={4} c={"grey"}>
+                    Select
+                  </Text>
+                )}
+                <IconSelector stroke={2} size={16} color="grey" />
+              </Flex>
+            </Paper>
           );
         },
         mantineEditSelectProps: ({ cell, row }) => ({
@@ -271,14 +319,24 @@ const AnalysisAccordionTable = ({
         editVariant: "select",
         enableEditing: true,
         Cell: ({ cell }) => {
-          const value = cell.getValue();
+          let value = cell.getValue();
+          value = value ? (Array.isArray(value) ? value[0] : value) : "";
           return (
-            <Select
-              value={value}
-              data={value ? [value] : []}
-              placeholder="Select"
-              readOnly
-            ></Select>
+            <Paper withBorder shadow="none" p={7}>
+              <Flex justify={"space-between"} align={"center"}>
+                {value && (
+                  <Text size="sm" pr={4}>
+                    {value}
+                  </Text>
+                )}
+                {!value && (
+                  <Text size="sm" pr={4} c={"grey"}>
+                    Select
+                  </Text>
+                )}
+                <IconSelector stroke={2} size={16} color="grey" />
+              </Flex>
+            </Paper>
           );
         },
         mantineEditSelectProps: ({ cell, row }) => ({

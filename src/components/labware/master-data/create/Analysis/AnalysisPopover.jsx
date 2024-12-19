@@ -1,4 +1,12 @@
-import { Flex, Group, Paper, Text, Popover, ActionIcon } from "@mantine/core";
+import {
+  Flex,
+  Group,
+  Paper,
+  Text,
+  Popover,
+  ActionIcon,
+  Box,
+} from "@mantine/core";
 import { IconCircleArrowDownFilled, IconEyeFilled } from "@tabler/icons-react";
 import {
   convertObjDataToArray,
@@ -37,7 +45,7 @@ const AnalysisPopover = ({ tables }) => {
     <>
       <Popover.Dropdown>
         {Object.keys(runDataTables).map((key) => (
-          <>
+          <Box key={key}>
             <Paper withBorder shadow="xs" w={320} p={8} m={8}>
               <Flex justify={"space-between"}>
                 <Text>{runDataTables[key]}</Text>
@@ -51,7 +59,7 @@ const AnalysisPopover = ({ tables }) => {
                 </Group>
               </Flex>
             </Paper>
-          </>
+          </Box>
         ))}
       </Popover.Dropdown>
       <TableViewModal
