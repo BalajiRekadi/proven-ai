@@ -71,7 +71,7 @@ const TableViewModal = ({
       withColumnBorders: true,
       highlightOnHover: false,
       sx: {
-        maxHeight: "30rem",
+        maxHeight: "20rem",
       },
     },
     enableEditing: true,

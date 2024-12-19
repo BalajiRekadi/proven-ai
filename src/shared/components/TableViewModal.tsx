@@ -41,14 +41,21 @@ const TableViewModal = ({
       title={
         <Flex justify={"space-between"}>
           <Title order={3}>{label}</Title>
-          <ActionIcon
-            ml="md"
-            variant="subtle"
-            mr={8}
-            onClick={() => setIsFullscreen(!isFullscreen)}
-          >
-            <IconZoomScan size={20} />
-          </ActionIcon>
+          <Flex w={showAsExcel ? 130 : 50} align={"center"}>
+            {showAsExcel && (
+              <Button variant="filled" onClick={handleSave}>
+                Save
+              </Button>
+            )}
+            <ActionIcon
+              ml="md"
+              variant="subtle"
+              mr={8}
+              onClick={() => setIsFullscreen(!isFullscreen)}
+            >
+              <IconZoomScan size={20} />
+            </ActionIcon>
+          </Flex>
         </Flex>
       }
       className="table-view-modal"
@@ -67,13 +74,6 @@ const TableViewModal = ({
           enableRowNumbers={enableRowNumbers}
           handleCellEdit={handleCellEdit}
         />
-      )}
-      {showAsExcel && (
-        <Flex justify={"flex-end"}>
-          <Button variant="filled" onClick={handleSave}>
-            Save
-          </Button>
-        </Flex>
       )}
     </Modal>
   );

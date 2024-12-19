@@ -10,13 +10,12 @@ import {
 import { IconCircleArrowDownFilled, IconEyeFilled } from "@tabler/icons-react";
 import {
   convertObjDataToArray,
-  downloadCSVFromArray,
   downloadXLSX,
 } from "../../../../../shared/utilities";
 import { useState } from "react";
 import { TableViewModal } from "../../../../../shared/components";
 
-const AnalysisPopover = ({ tables }) => {
+const AnalysisPopover = ({ tables, commitUpdatedRunResults }) => {
   const [showRunData, setShowRunData] = useState(false);
   const [selectedRunDataTable, setSelectedRunDataTable] = useState([]);
   const [selectedRunDataTableLabel, setSelectedRunDataTableLabel] =
@@ -67,7 +66,6 @@ const AnalysisPopover = ({ tables }) => {
         onClose={() => setShowRunData(false)}
         label={selectedRunDataTableLabel}
         content={selectedRunDataTable}
-        showAsExcel={true}
       />
     </>
   );
