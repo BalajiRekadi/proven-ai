@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AccordionGroup } from "../../../../../shared/components";
 import AnalysisAccordionTable from "./AnalysisAccordionTable";
 import { useToast } from "../../../../../shared/components/toast/useToast";
-import { runAnalysis } from "../../../../../api/helpers";
+import { runAllAnalysis, runAnalysis } from "../../../../../api/helpers";
 import { deepClone } from "../../../../../shared/utilities";
 import {
   useGenerateWorksheets,
@@ -132,11 +132,23 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
     });
   };
 
+  const handleRunAll = () => {
+    toast.load("Loading solution details..");
+    runAllAnalysis(taskData.taskId, module, client, analysisData).then(() => {
+      toast.success(
+        "Solution data processed successfully. Please open the task from dashboard to check updated results."
+      );
+    });
+  };
+
   return (
     <>
       <Box py={16} pt={32}>
         <Title order={4}>Analysis Details</Title>
-        <Flex justify={"flex-end"}>
+        <Flex justify={"flex-end"} gap={16}>
+          <Button variant="light" onClick={() => handleRunAll()}>
+            Run all
+          </Button>
           <Button.Group>
             <Button variant="light" onClick={() => hanldeMergeAll()}>
               Merge all

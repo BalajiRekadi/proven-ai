@@ -6,7 +6,6 @@ import {
   Popover,
   Paper,
   Group,
-  Select,
 } from "@mantine/core";
 import {
   IconCircleArrowDownFilled,
@@ -24,11 +23,13 @@ import {
   SPEC_TYPES,
   STAGE_OPTIONS,
   NAMES,
+  CLIENTS,
 } from "../../../../../shared/constants/constants";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { TableViewModal, TextModal } from "../../../../../shared/components";
 import { downloadXLSX } from "../../../../../shared/utilities";
 import "./analysis-accordion-table.css";
+import { useStore } from "../../../../../store/useStore";
 
 const AnalysisAccordionTable = ({
   index,
@@ -47,6 +48,7 @@ const AnalysisAccordionTable = ({
     useState("");
   const [selectedInput, setSelectedInput] = useState(""); // TODO: redundant state, can be derived from selectedRow?
   const [selectedRow, setSelectedRow] = useState("");
+  const { client } = useStore();
 
   // TODO: is there any use for this?
   const STAGES = useMemo(() => STAGE_OPTIONS, []);
@@ -125,6 +127,89 @@ const AnalysisAccordionTable = ({
     );
   };
 
+  const nameProps =
+    client === CLIENTS.DRL.value
+      ? {
+          header: "Name",
+          accessorKey: "name",
+          id: "name",
+          editVariant: "text",
+          enableEditing: true,
+          Cell: ({ cell }) => {
+            let value = cell.getValue();
+            value = value ? (Array.isArray(value) ? value[0] : value) : "";
+            return (
+              <Paper withBorder shadow="none" p={7}>
+                <Flex justify={"space-between"} align={"center"}>
+                  {value && (
+                    <Text size="sm" pr={4}>
+                      {value}
+                    </Text>
+                  )}
+                  {!value && (
+                    <Text size="sm" pr={4} c={"grey"}>
+                      Enter
+                    </Text>
+                  )}
+                </Flex>
+              </Paper>
+            );
+          },
+          mantineEditTextInputProps: ({ cell, row }) => ({
+            placeholder: "Enter",
+            value: cell.getValue(),
+            onChange: (event) => {
+              updateData(
+                event?.target?.value,
+                "analysisNames",
+                label,
+                row,
+                index
+              );
+            },
+          }),
+        }
+      : {
+          header: "Name",
+          accessorKey: "name",
+          id: "name",
+          editVariant: client === CLIENTS.DRL ? "text" : "select",
+          enableEditing: true,
+          Cell: ({ cell }) => {
+            let value = cell.getValue();
+            value = value ? (Array.isArray(value) ? value[0] : value) : "";
+            return (
+              <Paper withBorder shadow="none" p={7}>
+                <Flex justify={"space-between"} align={"center"}>
+                  {value && (
+                    <Text size="sm" pr={4}>
+                      {value}
+                    </Text>
+                  )}
+                  {!value && (
+                    <Text size="sm" pr={4} c={"grey"}>
+                      Select
+                    </Text>
+                  )}
+                  <IconSelector stroke={2} size={16} color="grey" />
+                </Flex>
+              </Paper>
+            );
+          },
+          mantineEditSelectProps: ({ cell, row }) => ({
+            placeholder: "Select",
+            value: cell.getValue(),
+            data: NAMEOPTIONS,
+            searchable: true,
+            filter: filterOptions,
+            comboboxProps: { shadow: "md" },
+            limit: 100,
+            onChange: (event) => {
+              updateData(event, "analysisNames", label, row, index);
+            },
+          }),
+        };
+
   const columns = useMemo(
     () => [
       {
@@ -150,50 +235,7 @@ const AnalysisAccordionTable = ({
         ),
       },
       {
-        header: "Name",
-        accessorKey: "name",
-        id: "name",
-        editVariant: "select",
-        enableEditing: true,
-        Cell: ({ cell }) => {
-          let value = cell.getValue();
-          value = value ? (Array.isArray(value) ? value[0] : value) : "";
-          return (
-            // <Select
-            //   value={value}
-            //   readOnly
-            //   data={[value]}
-            //   placeholder="Select"
-            // ></Select>
-            <Paper withBorder shadow="none" p={7}>
-              <Flex justify={"space-between"} align={"center"}>
-                {value && (
-                  <Text size="sm" pr={4}>
-                    {value}
-                  </Text>
-                )}
-                {!value && (
-                  <Text size="sm" pr={4} c={"grey"}>
-                    Select
-                  </Text>
-                )}
-                <IconSelector stroke={2} size={16} color="grey" />
-              </Flex>
-            </Paper>
-          );
-        },
-        mantineEditSelectProps: ({ cell, row }) => ({
-          placeholder: "Select",
-          value: cell.getValue(),
-          data: NAMEOPTIONS,
-          searchable: true,
-          filter: filterOptions,
-          comboboxProps: { shadow: "md" },
-          limit: 100,
-          onChange: (event) => {
-            updateData(event, "analysisNames", label, row, index);
-          },
-        }),
+        ...nameProps,
       },
       {
         header: "Stage",

@@ -6,6 +6,7 @@ import fetchWorksheets from "./fetchWorksheets";
 import runWorksheet from "./runWorksheet";
 import generateProductDetails from "./generateProductDetails";
 import runAnalysis from "./runAnalysis";
+import runAllAnalysis from "./runAllAnalysis";
 import fetchNeulandWorksheets from "./fetchNeulandWorksheets.ts";
 import fetchTasks from "./fetchTasks.ts";
 import runTestDetail from "./runTestDetail";
@@ -32,4 +33,5 @@ export {
   fetchTaskDetails,
   mergeAllAnalysis,
   updateRunResults,
+  runAllAnalysis,
 };
