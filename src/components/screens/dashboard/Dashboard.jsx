@@ -1,21 +1,21 @@
-import { useMemo } from "react";
-import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import { Badge, Box, Skeleton, Title } from "@mantine/core";
-import { DEFAULT_TABLE_CONFIG } from "../../../shared/constants/constants";
-import { useTasks } from "../../../api/hooks";
-import { useStore } from "../../../store/useStore";
-import { useNavigate } from "react-router-dom";
-import "./dashboard.css";
+import { useMemo } from "react"
+import { MantineReactTable, useMantineReactTable } from "mantine-react-table"
+import { Badge, Box, Skeleton, Title } from "@mantine/core"
+import { DEFAULT_TABLE_CONFIG } from "../../../shared/constants/constants"
+import { useTasks } from "../../../api/hooks"
+import { useStore } from "../../../store/useStore"
+import { useNavigate } from "react-router-dom"
+import "./dashboard.css"
 
 const Dashboard = () => {
-  const { data } = useTasks();
-  const { setTaskId, module } = useStore();
-  const navigate = useNavigate();
+  const { data } = useTasks()
+  const { setTaskId, module } = useStore()
+  const navigate = useNavigate()
 
   const handleRowSelect = (row) => {
-    setTaskId(row.original.taskId);
-    navigate(`/user/${module}/create`);
-  };
+    setTaskId(row.original.taskId)
+    navigate(`/user/${module}/create`)
+  }
 
   const columns = useMemo(
     () => [
@@ -90,7 +90,7 @@ const Dashboard = () => {
       },
     ],
     []
-  );
+  )
 
   const tableConfig = {
     columns,
@@ -107,7 +107,7 @@ const Dashboard = () => {
     initialState: {
       pagination: { pageSize: 15, pageIndex: 0 },
       density: "xs",
-      sorting: [{ id: "createdOn", desc: true }],
+      sorting: [{ id: "taskId", desc: true }],
     },
     mantineTableProps: {
       withColumnBorders: true,
@@ -128,24 +128,24 @@ const Dashboard = () => {
         {"Tasks"}
       </Title>
     ),
-  };
-  const table = useMantineReactTable(tableConfig);
+  }
+  const table = useMantineReactTable(tableConfig)
 
   return (
     <Box p={16} className="dashboard">
       {!data && (
         <>
-          <Skeleton height={36} radius="xl" mb={24} />
-          <Skeleton height={36} radius="xl" mb={24} />
-          <Skeleton height={36} radius="xl" mb={24} />
-          <Skeleton height={36} radius="xl" mb={24} />
-          <Skeleton height={36} radius="xl" mb={24} />
-          <Skeleton height={36} radius="xl" mb={24} />
+          <Skeleton height={36} radius="sm" mb={24} />
+          <Skeleton height={36} radius="sm" mb={24} />
+          <Skeleton height={36} radius="sm" mb={24} />
+          <Skeleton height={36} radius="sm" mb={24} />
+          <Skeleton height={36} radius="sm" mb={24} />
+          <Skeleton height={36} radius="sm" mb={24} />
         </>
       )}
       {data && <MantineReactTable table={table} />}
     </Box>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

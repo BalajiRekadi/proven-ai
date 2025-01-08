@@ -1,20 +1,20 @@
-import { ActionIcon } from "@mantine/core";
-import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import { useMemo } from "react";
-import { IconAlertCircle, IconFileDownload } from "@tabler/icons-react";
-import { DEFAULT_TABLE_CONFIG } from "../constants/constants";
-import { downloadDocx, downloadFile } from "../utilities";
+import { ActionIcon } from "@mantine/core"
+import { MantineReactTable, useMantineReactTable } from "mantine-react-table"
+import { useMemo } from "react"
+import { IconAlertCircle, IconFileDownload } from "@tabler/icons-react"
+import { DEFAULT_TABLE_CONFIG } from "../constants/constants"
+import { downloadFile } from "../utilities"
 
 // TODO: This and TableViewModal are almost same. Define a common Component
 const ExportTable = ({
   data,
   rowSelection = [],
-  setRowSelection = () => {},
+  setRowSelection = (e) => {},
   enableRowSelection = false,
 }) => {
   const foo = (e) => {
-    setRowSelection(e);
-  };
+    setRowSelection(e)
+  }
 
   const onDownload = (row) => {
     // downloadDocx(row.content, row.name);
@@ -22,8 +22,8 @@ const ExportTable = ({
       data: row.content,
       fileName: `${row.name}.txt`,
       fileType: "text",
-    });
-  };
+    })
+  }
 
   const columns = useMemo(
     () => [
@@ -82,7 +82,7 @@ const ExportTable = ({
       },
     ],
     []
-  );
+  )
 
   const tableConfig = {
     columns,
@@ -103,10 +103,10 @@ const ExportTable = ({
       stickyHeaderOffset: 60,
     },
     mantineTableContainerProps: { sx: { maxHeight: "200px" } },
-  };
-  const table = useMantineReactTable(tableConfig);
+  }
+  const table = useMantineReactTable(tableConfig)
 
-  return <MantineReactTable table={table} />;
-};
+  return <MantineReactTable table={table} />
+}
 
-export default ExportTable;
+export default ExportTable

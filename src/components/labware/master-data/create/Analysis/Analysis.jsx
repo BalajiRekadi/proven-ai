@@ -1,47 +1,49 @@
-import { useEffect, useState } from "react";
-import { AccordionGroup } from "../../../../../shared/components";
-import AnalysisAccordionTable from "./AnalysisAccordionTable";
-import { useToast } from "../../../../../shared/components/toast/useToast";
-import { runAllAnalysis, runAnalysis } from "../../../../../api/helpers";
-import { deepClone } from "../../../../../shared/utilities";
+import { useEffect, useState } from "react"
+import { AccordionGroup } from "../../../../../shared/components"
+import AnalysisAccordionTable from "./AnalysisAccordionTable"
+import { useToast } from "../../../../../shared/components/toast/useToast"
+import { runAllAnalysis, runAnalysis } from "../../../../../api/helpers"
+import { deepClone } from "../../../../../shared/utilities"
 import {
   useGenerateWorksheets,
   useUpdateRunResults,
-} from "../../../../../api/hooks";
-import { useStore } from "../../../../../store/useStore";
-import { Box, Button, Flex, Popover, Title } from "@mantine/core";
-import { IconStackPop } from "@tabler/icons-react";
-import useMergeAll from "../../../../../api/hooks/useMergeAllAnalysis";
-import AnalysisPopover from "./AnalysisPopover";
+} from "../../../../../api/hooks"
+import { useStore } from "../../../../../store/useStore"
+import { Box, Button, Flex, Popover, Title } from "@mantine/core"
+import { IconStackPop } from "@tabler/icons-react"
+import useMergeAll from "../../../../../api/hooks/useMergeAllAnalysis"
+import AnalysisPopover from "./AnalysisPopover"
+import ExportXMLModal from "./ExportXMLModal"
 
 const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
-  const toast = useToast();
-  const { module, client } = useStore();
-  const { generateWorksheets } = useGenerateWorksheets("analysis");
-  const { mergeAll } = useMergeAll();
-  const [mergedData, setMergedData] = useState(null);
-  const { saveRunResults } = useUpdateRunResults(taskData?.taskId);
+  const toast = useToast()
+  const { module, client } = useStore()
+  const { generateWorksheets } = useGenerateWorksheets("analysis")
+  const { mergeAll } = useMergeAll()
+  const [mergedData, setMergedData] = useState(null)
+  const [showExportXMLModal, setShowExportXMLModal] = useState(false)
+  const { saveRunResults } = useUpdateRunResults(taskData?.taskId)
 
   const runDataTables = {
     components_table: "Components",
     analysis_table: "Analysis",
     prod_gr_st_table: "Product Grade Stage",
     prod_spec_table: "Product Spec",
-  };
+  }
 
   useEffect(() => {
     if (taskData.code && !analysisData) {
-      toast.load("Generating Analysis..");
+      toast.load("Generating Analysis..")
       generateWorksheets(taskData.taskId).then((data) => {
-        setAnalysisData(data);
-      });
+        setAnalysisData(data)
+      })
     }
-  }, [taskData.code]);
+  }, [taskData.code])
 
   const updateAnalysisData = (event, field, accordion, row, index, column) => {
     setAnalysisData((prev) => {
-      const clonedData = deepClone(prev);
-      const solution = clonedData[index];
+      const clonedData = deepClone(prev)
+      const solution = clonedData[index]
       const value =
         field == "stages" ||
         field == "specTypes" ||
@@ -49,11 +51,11 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
         field == "batchTypes" ||
         field == "analysisNames"
           ? event
-          : event.target.value;
-      solution[field][row.index] = value;
-      return clonedData;
-    });
-  };
+          : event.target.value
+      solution[field][row.index] = value
+      return clonedData
+    })
+  }
 
   const updateRunResults = (
     index,
@@ -65,45 +67,45 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
     value
   ) => {
     setAnalysisData((prev) => {
-      const clonedData = deepClone(prev);
+      const clonedData = deepClone(prev)
       const tableKey = Object.keys(runDataTables).filter(
         (i) => runDataTables[i] === tableLabel
-      )?.[0];
+      )?.[0]
       clonedData[index]["runResults"][solutionRow?.index][0][tableKey][
         column.id
-      ][row.index] = value;
+      ][row.index] = value
 
-      return clonedData;
-    });
-  };
+      return clonedData
+    })
+  }
 
   const commitUpdatedRunResults = () => {
-    saveRunResults(analysisData);
-  };
+    saveRunResults(analysisData)
+  }
 
   const handleRunClick = (label, data, index) => {
-    toast.load("Loading solution details..");
-    let item = deepClone(analysisData[index]);
+    toast.load("Loading solution details..")
+    let item = deepClone(analysisData[index])
 
     runAnalysis(taskData.taskId, item, module, client, data.index)
       .then((res) => {
         setAnalysisData((prev) => {
-          const clone = deepClone(prev);
+          const clone = deepClone(prev)
           if (!clone[index].runResults) {
-            clone[index].runResults = [];
+            clone[index].runResults = []
           }
-          clone[index].runResults[data.index] = [res];
-          return clone;
-        });
-        toast.success("Solution data loaded successfully");
+          clone[index].runResults[data.index] = [res]
+          return clone
+        })
+        toast.success("Solution data loaded successfully")
       })
       .catch((err) => {
-        toast.error("Failed to load data");
-      });
-  };
+        toast.error("Failed to load data")
+      })
+  }
 
   const getAccordions = () => {
-    let accordions = [];
+    let accordions = []
     if (analysisData) {
       analysisData.forEach((accordion, index) => {
         accordions.push({
@@ -120,32 +122,39 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
               onRun={handleRunClick}
             />
           ),
-        });
-      });
+        })
+      })
     }
-    return accordions;
-  };
+    return accordions
+  }
 
   const hanldeMergeAll = () => {
     mergeAll(taskData.taskId).then((data) => {
-      setMergedData(data);
-    });
-  };
+      setMergedData(data)
+    })
+  }
 
   const handleRunAll = () => {
-    toast.load("Loading solution details..");
+    toast.load("Loading solution details..")
     runAllAnalysis(taskData.taskId, module, client, analysisData).then(() => {
       toast.success(
         "Solution data processed successfully. Please open the task from dashboard to check updated results."
-      );
-    });
-  };
+      )
+    })
+  }
+
+  const handleExport = () => {
+    setShowExportXMLModal(true)
+  }
 
   return (
     <>
       <Box py={16} pt={32}>
         <Title order={4}>Analysis Details</Title>
         <Flex justify={"flex-end"} gap={16}>
+          <Button variant="light" onClick={() => handleExport()}>
+            Export XML
+          </Button>
           <Button variant="light" onClick={() => handleRunAll()}>
             Run all
           </Button>
@@ -168,8 +177,15 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
         </Flex>
       </Box>
       <AccordionGroup accordions={getAccordions()} />
+      {showExportXMLModal && (
+        <ExportXMLModal
+          open={showExportXMLModal}
+          handleClose={() => setShowExportXMLModal(false)}
+          taskId={taskData?.taskId}
+        />
+      )}
     </>
-  );
-};
+  )
+}
 
-export default Analysis;
+export default Analysis

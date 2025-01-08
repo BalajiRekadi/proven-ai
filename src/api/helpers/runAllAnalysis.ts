@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios'
 
-import { getDomain } from "../../shared/utilities";
+import { getDomain } from '../../shared/utilities'
 
 const runAllAnalysis = async (taskId, module, client, data) => {
   // TODO: map calculations for caliber flow
@@ -12,15 +12,16 @@ const runAllAnalysis = async (taskId, module, client, data) => {
         C_BATCH_TEMP: item.batchTypes,
         Calculation: item.calculations,
         Calculation_result: item.calculationResults,
+        ID: item.ids,
         Heading: item.heading,
         Paragraph: item.paragraphs,
         Result: item.runResults,
         SPEC_TYPE: item.specTypes,
         STAGE: item.stages,
         Subheading: item.subHeadings,
-      };
+      }
     }),
-  };
+  }
   const res = await axios({
     url: `${getDomain(
       client
@@ -30,9 +31,9 @@ const runAllAnalysis = async (taskId, module, client, data) => {
       "ngrok-skip-browser-warning": "69420",
     }),
     data: payload,
-  });
+  })
 
-  return res.data;
-};
+  return res.data
+}
 
-export default runAllAnalysis;
+export default runAllAnalysis
