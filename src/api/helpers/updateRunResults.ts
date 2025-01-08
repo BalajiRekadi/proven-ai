@@ -12,14 +12,15 @@ const updateRunResults = async (payload, taskId, client, module) => {
         Calculation: [item.calculations],
         Calculation_result: [item.calculationResults],
         Heading: item.heading,
+        ID: item.ids,
         Paragraph: item.paragraphs,
         Result: item.runResults,
         SPEC_TYPE: item.specTypes,
         STAGE: item.stages,
         Subheading: item.subHeadings,
-      };
+      }
     }),
-  };
+  }
   const res = await axios({
     url: `${getDomain(
       client
@@ -29,9 +30,9 @@ const updateRunResults = async (payload, taskId, client, module) => {
       "ngrok-skip-browser-warning": "69420",
     }),
     data: body,
-  });
+  })
 
-  return res.data;
-};
+  return res.data
+}
 
-export default updateRunResults;
+export default updateRunResults

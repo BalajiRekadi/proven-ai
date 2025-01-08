@@ -136,11 +136,16 @@ const Analysis = ({ taskData, analysisData, setAnalysisData }) => {
 
   const handleRunAll = () => {
     toast.load("Loading solution details..")
-    runAllAnalysis(taskData.taskId, module, client, analysisData).then(() => {
-      toast.success(
-        "Solution data processed successfully. Please open the task from dashboard to check updated results."
-      )
-    })
+    runAllAnalysis(taskData.taskId, module, client, analysisData).then(
+      () => {
+        toast.success(
+          "Solution data processed successfully. Please open the task from dashboard to check updated results."
+        )
+      },
+      () => {
+        toast.error("Failed to run all solutions.")
+      }
+    )
   }
 
   const handleExport = () => {

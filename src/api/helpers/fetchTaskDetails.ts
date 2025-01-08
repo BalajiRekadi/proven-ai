@@ -4,16 +4,18 @@ import { convertObjDataToArray, getDomain } from '../../shared/utilities'
 
 const fetchTaskDetails = async (id, module, client) => {
   const res = await axios({
-    url: `${getDomain(client)}/TaskID_search?TaskId=${id}&module=${module}&Client=${client}`,
+    url: `${getDomain(
+      client
+    )}/TaskID_search?TaskId=${id}&module=${module}&Client=${client}`,
     method: "POST",
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",
       content: "application/json",
     }),
-  });
+  })
 
-  return mapResponse(res.data);
-};
+  return mapResponse(res.data)
+}
 
 const mapResponse = (data) => {
   return {
@@ -33,8 +35,8 @@ const mapResponse = (data) => {
       revNo: data["Rev_No"],
       ccNo: data["CC_No"],
       taskId: data.taskid,
-      specFileName: data.filename1,
-      methodFileName: data.filename2,
+      specFileName: data.SPEC,
+      methodFileName: data.STP,
       createdBy: data.createdBy,
       createdOn: data.createdOn,
       status: data.status,
@@ -45,12 +47,12 @@ const mapResponse = (data) => {
     },
     analysisData: data.tests ? mapAnalysisData(data.tests) : null,
     limitsData: convertObjDataToArray(data.limits),
-    annotationValidation: data.AnnotationValidation
-  };
-};
+    annotationValidation: data.AnnotationValidation,
+  }
+}
 
-const mapAnalysisData = (tests=[]) => {
-  const data = [];
+const mapAnalysisData = (tests = []) => {
+  const data = []
   tests.forEach((item) => {
     data.push({
       analysisNames: item.ANALYSIS_NAME,
@@ -59,14 +61,15 @@ const mapAnalysisData = (tests=[]) => {
       calculations: item.Calculation,
       calculationResults: item.Calculation_result,
       heading: item.Heading,
+      ids: item.ID,
       paragraphs: item.Paragraph,
       runResults: item.Result,
       specTypes: item.SPEC_TYPE,
       stages: item.STAGE,
       subHeadings: item.Subheading,
-    });
-  });
-  return data;
-};
+    })
+  })
+  return data
+}
 
-export default fetchTaskDetails;
+export default fetchTaskDetails
