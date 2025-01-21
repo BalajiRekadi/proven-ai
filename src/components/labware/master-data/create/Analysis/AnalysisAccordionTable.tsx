@@ -1,12 +1,17 @@
+import "./analysis-accordion-table.css"
+
+import { MantineReactTable, useMantineReactTable } from "mantine-react-table"
+import { useMemo, useState } from "react"
+
 import {
   ActionIcon,
   Box,
   Flex,
-  Text,
-  Popover,
-  Paper,
   Group,
-} from "@mantine/core";
+  Paper,
+  Popover,
+  Text,
+} from "@mantine/core"
 import {
   IconCircleArrowDownFilled,
   IconEyeFilled,
@@ -14,22 +19,23 @@ import {
   IconRun,
   IconSelector,
   IconStackPop,
-} from "@tabler/icons-react";
-import { useMemo, useState } from "react";
+} from "@tabler/icons-react"
+
+import {
+  InputWithValues,
+  TableViewModal,
+  TextModal,
+} from "../../../../../shared/components"
 import {
   BATCH_LINKS,
   BATCH_TEMPLATES,
   DEFAULT_TABLE_CONFIG,
+  NAMES,
   SPEC_TYPES,
   STAGE_OPTIONS,
-  NAMES,
-  CLIENTS,
-} from "../../../../../shared/constants/constants";
-import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import { TableViewModal, TextModal } from "../../../../../shared/components";
-import { downloadXLSX } from "../../../../../shared/utilities";
-import "./analysis-accordion-table.css";
-import { useStore } from "../../../../../store/useStore";
+} from "../../../../../shared/constants/constants"
+import { downloadXLSX } from "../../../../../shared/utilities"
+import { useStore } from "../../../../../store/useStore"
 
 const AnalysisAccordionTable = ({
   index,
@@ -41,24 +47,22 @@ const AnalysisAccordionTable = ({
   commitUpdatedRunResults,
   onRun,
 }) => {
-  const [showRunData, setShowRunData] = useState(false);
-  const [inputModalOpened, setInputModalOpened] = useState(false);
-  const [selectedRunDataTable, setSelectedRunDataTable] = useState([]);
-  const [selectedRunDataTableLabel, setSelectedRunDataTableLabel] =
-    useState("");
-  const [selectedInput, setSelectedInput] = useState(""); // TODO: redundant state, can be derived from selectedRow?
-  const [selectedRow, setSelectedRow] = useState("");
-  const { client } = useStore();
+  const [showRunData, setShowRunData] = useState(false)
+  const [inputModalOpened, setInputModalOpened] = useState(false)
+  const [selectedRunDataTable, setSelectedRunDataTable] = useState([])
+  const [selectedRunDataTableLabel, setSelectedRunDataTableLabel] = useState("")
+  const [selectedInput, setSelectedInput] = useState("") // TODO: redundant state, can be derived from selectedRow?
+  const [selectedRow, setSelectedRow] = useState("")
 
   // TODO: is there any use for this?
-  const STAGES = useMemo(() => STAGE_OPTIONS, []);
-  const SPECTYPES = useMemo(() => SPEC_TYPES, []);
-  const BATCHLINKS = useMemo(() => BATCH_LINKS, []);
-  const BATCHTEMPLATES = useMemo(() => BATCH_TEMPLATES, []);
-  const NAMEOPTIONS = useMemo(() => NAMES, []);
+  const STAGES = useMemo(() => STAGE_OPTIONS, [])
+  const SPECTYPES = useMemo(() => SPEC_TYPES, [])
+  const BATCHLINKS = useMemo(() => BATCH_LINKS, [])
+  const BATCHTEMPLATES = useMemo(() => BATCH_TEMPLATES, [])
+  const NAMEOPTIONS = useMemo(() => NAMES, [])
 
   const getTableData = () => {
-    const tableData = [];
+    const tableData = []
     data.subHeadings.forEach((item, index) => {
       tableData.push({
         solution: item,
@@ -69,146 +73,67 @@ const AnalysisAccordionTable = ({
         specType: data.specTypes[index],
         batchLink: data.batchLinks[index],
         batchType: data.batchTypes[index],
-      });
-    });
-    return tableData;
-  };
+      })
+    })
+    return tableData
+  }
 
   const handleInputIconClick = (input, row) => {
-    setSelectedInput(input);
-    setSelectedRow(row);
-    setInputModalOpened(true);
-  };
+    setSelectedInput(input)
+    setSelectedRow(row)
+    setInputModalOpened(true)
+  }
 
   const handleRunClick = (label, row) => {
-    onRun(label, row, index);
-    setSelectedRow(row);
-  };
+    onRun(label, row, index)
+    setSelectedRow(row)
+  }
 
   const formatRunData = (data) => {
-    const keys = Object.keys(data);
-    const length = data[keys[0]].length;
-    const formattedData = [];
+    const keys = Object.keys(data)
+    const length = data[keys[0]].length
+    const formattedData = []
     for (let i = 0; i < length; i++) {
-      const item = {};
+      const item = {}
       keys.forEach((key) => {
-        item[key] = data[key][i];
-      });
-      formattedData.push(item);
+        item[key] = data[key][i]
+      })
+      formattedData.push(item)
     }
-    return formattedData;
-  };
+    return formattedData
+  }
 
   const onView = (key, row) => {
-    const item = data.runResults[row.index]?.[0];
+    const item = data.runResults[row.index]?.[0]
     if (item) {
-      const data = formatRunData(item[key]);
-      setSelectedRunDataTable(data);
-      setSelectedRunDataTableLabel(runDataTables[key]);
-      setShowRunData(true);
+      const data = formatRunData(item[key])
+      setSelectedRunDataTable(data)
+      setSelectedRunDataTableLabel(runDataTables[key])
+      setShowRunData(true)
     }
-  };
+  }
 
   const onDownload = (key, row) => {
-    const item = data.runResults[row.index]?.[0];
+    const item = data.runResults[row.index]?.[0]
     if (item) {
-      const data = formatRunData(item[key]);
-      downloadXLSX(data, runDataTables[key]);
+      const data = formatRunData(item[key])
+      downloadXLSX(data, runDataTables[key])
     }
-  };
+  }
 
   const disableStackIcon = (row) => {
-    return data.runResults ? !data.runResults?.[row.index]?.length : true;
-  };
+    return data.runResults ? !data.runResults?.[row.index]?.length : true
+  }
 
   const filterOptions = ({ options, search }) => {
     return options.filter((option) =>
       option.label.toLowerCase().trim().startsWith(search.toLowerCase())
-    );
-  };
+    )
+  }
 
-  const nameProps =
-    client === CLIENTS.DRL.value
-      ? {
-          header: "Name",
-          accessorKey: "name",
-          id: "name",
-          editVariant: "text",
-          enableEditing: true,
-          Cell: ({ cell }) => {
-            let value = cell.getValue();
-            value = value ? (Array.isArray(value) ? value[0] : value) : "";
-            return (
-              <Paper withBorder shadow="none" p={7}>
-                <Flex justify={"space-between"} align={"center"}>
-                  {value && (
-                    <Text size="sm" pr={4}>
-                      {value}
-                    </Text>
-                  )}
-                  {!value && (
-                    <Text size="sm" pr={4} c={"grey"}>
-                      Enter
-                    </Text>
-                  )}
-                </Flex>
-              </Paper>
-            );
-          },
-          mantineEditTextInputProps: ({ cell, row }) => ({
-            placeholder: "Enter",
-            value: cell.getValue(),
-            onChange: (event) => {
-              updateData(
-                event?.target?.value,
-                "analysisNames",
-                label,
-                row,
-                index
-              );
-            },
-          }),
-        }
-      : {
-          header: "Name",
-          accessorKey: "name",
-          id: "name",
-          editVariant: client === CLIENTS.DRL ? "text" : "select",
-          enableEditing: true,
-          Cell: ({ cell }) => {
-            let value = cell.getValue();
-            value = value ? (Array.isArray(value) ? value[0] : value) : "";
-            return (
-              <Paper withBorder shadow="none" p={7}>
-                <Flex justify={"space-between"} align={"center"}>
-                  {value && (
-                    <Text size="sm" pr={4}>
-                      {value}
-                    </Text>
-                  )}
-                  {!value && (
-                    <Text size="sm" pr={4} c={"grey"}>
-                      Select
-                    </Text>
-                  )}
-                  <IconSelector stroke={2} size={16} color="grey" />
-                </Flex>
-              </Paper>
-            );
-          },
-          mantineEditSelectProps: ({ cell, row }) => ({
-            placeholder: "Select",
-            value: cell.getValue(),
-            data: NAMEOPTIONS,
-            searchable: true,
-            filter: filterOptions,
-            comboboxProps: { shadow: "md" },
-            limit: 100,
-            onChange: (event) => {
-              updateData(event, "analysisNames", label, row, index);
-            },
-          }),
-        };
+  const onNameFieldChange = (event, row) => {
+    updateData(event, "analysisNames", label, row, index)
+  }
 
   const columns = useMemo(
     () => [
@@ -217,7 +142,7 @@ const AnalysisAccordionTable = ({
         accessorKey: "solution",
         id: "solution",
         enableEditing: false,
-        size: 50,
+        size: 80,
       },
       {
         header: "Input",
@@ -235,7 +160,21 @@ const AnalysisAccordionTable = ({
         ),
       },
       {
-        ...nameProps,
+        header: "Name",
+        accessorKey: "name",
+        id: "name",
+        enableEditing: false,
+        Cell: ({ cell, row }) => {
+          let value = cell.getValue()
+          return (
+            <InputWithValues
+              value={value}
+              values={NAMEOPTIONS}
+              row={row}
+              onBlur={onNameFieldChange}
+            />
+          )
+        },
       },
       {
         header: "Stage",
@@ -244,8 +183,8 @@ const AnalysisAccordionTable = ({
         editVariant: "select",
         enableEditing: true,
         Cell: ({ cell }) => {
-          let value = cell.getValue();
-          value = value ? (Array.isArray(value) ? value[0] : value) : "";
+          let value = cell.getValue()
+          value = value ? (Array.isArray(value) ? value[0] : value) : ""
           return (
             <Paper withBorder shadow="none" p={7}>
               <Flex justify={"space-between"} align={"center"}>
@@ -262,7 +201,7 @@ const AnalysisAccordionTable = ({
                 <IconSelector stroke={2} size={16} color="grey" />
               </Flex>
             </Paper>
-          );
+          )
         },
         mantineEditSelectProps: ({ cell, row }) => ({
           placeholder: "Select",
@@ -272,7 +211,7 @@ const AnalysisAccordionTable = ({
           limit: 100,
           comboboxProps: { shadow: "md" },
           onChange: (event) => {
-            updateData(event, "stages", label, row, index);
+            updateData(event, "stages", label, row, index)
           },
         }),
       },
@@ -283,8 +222,8 @@ const AnalysisAccordionTable = ({
         editVariant: "select",
         enableEditing: true,
         Cell: ({ cell }) => {
-          let value = cell.getValue();
-          value = value ? (Array.isArray(value) ? value[0] : value) : "";
+          let value = cell.getValue()
+          value = value ? (Array.isArray(value) ? value[0] : value) : ""
           return (
             <Paper withBorder shadow="none" p={7}>
               <Flex justify={"space-between"} align={"center"}>
@@ -301,7 +240,7 @@ const AnalysisAccordionTable = ({
                 <IconSelector stroke={2} size={16} color="grey" />
               </Flex>
             </Paper>
-          );
+          )
         },
         mantineEditSelectProps: ({ cell, row }) => ({
           placeholder: "Select",
@@ -311,7 +250,7 @@ const AnalysisAccordionTable = ({
           limit: 100,
           comboboxProps: { shadow: "md" },
           onChange: (event) => {
-            updateData(event, "specTypes", label, row, index);
+            updateData(event, "specTypes", label, row, index)
           },
         }),
       },
@@ -322,8 +261,8 @@ const AnalysisAccordionTable = ({
         editVariant: "select",
         enableEditing: true,
         Cell: ({ cell }) => {
-          let value = cell.getValue();
-          value = value ? (Array.isArray(value) ? value[0] : value) : "";
+          let value = cell.getValue()
+          value = value ? (Array.isArray(value) ? value[0] : value) : ""
           return (
             <Paper withBorder shadow="none" p={7}>
               <Flex justify={"space-between"} align={"center"}>
@@ -340,7 +279,7 @@ const AnalysisAccordionTable = ({
                 <IconSelector stroke={2} size={16} color="grey" />
               </Flex>
             </Paper>
-          );
+          )
         },
         mantineEditSelectProps: ({ cell, row }) => ({
           placeholder: "Select",
@@ -350,7 +289,7 @@ const AnalysisAccordionTable = ({
           limit: 100,
           comboboxProps: { shadow: "md" },
           onChange: (event) => {
-            updateData(event, "batchLinks", label, row, index);
+            updateData(event, "batchLinks", label, row, index)
           },
         }),
       },
@@ -361,8 +300,8 @@ const AnalysisAccordionTable = ({
         editVariant: "select",
         enableEditing: true,
         Cell: ({ cell }) => {
-          let value = cell.getValue();
-          value = value ? (Array.isArray(value) ? value[0] : value) : "";
+          let value = cell.getValue()
+          value = value ? (Array.isArray(value) ? value[0] : value) : ""
           return (
             <Paper withBorder shadow="none" p={7}>
               <Flex justify={"space-between"} align={"center"}>
@@ -379,7 +318,7 @@ const AnalysisAccordionTable = ({
                 <IconSelector stroke={2} size={16} color="grey" />
               </Flex>
             </Paper>
-          );
+          )
         },
         mantineEditSelectProps: ({ cell, row }) => ({
           placeholder: "Select",
@@ -389,7 +328,7 @@ const AnalysisAccordionTable = ({
           limit: 100,
           comboboxProps: { shadow: "md" },
           onChange: (event) => {
-            updateData(event, "batchTypes", label, row, index);
+            updateData(event, "batchTypes", label, row, index)
           },
         }),
       },
@@ -447,7 +386,7 @@ const AnalysisAccordionTable = ({
       },
     ],
     [data]
-  );
+  )
 
   const tableConfig = {
     columns,
@@ -464,8 +403,8 @@ const AnalysisAccordionTable = ({
         maxHeight: "30rem",
       },
     },
-  };
-  const table = useMantineReactTable(tableConfig);
+  }
+  const table = useMantineReactTable(tableConfig)
 
   return (
     <>
@@ -507,7 +446,7 @@ const AnalysisAccordionTable = ({
         showAsExcel={true}
       />
     </>
-  );
-};
+  )
+}
 
-export default AnalysisAccordionTable;
+export default AnalysisAccordionTable

@@ -1,0 +1,13 @@
+.input-with-values {
+  .field {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    cursor: pointer;
+  }
+
+  .popover {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    cursor: pointer;
+  }
+}

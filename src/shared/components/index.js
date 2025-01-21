@@ -1,22 +1,23 @@
-import UploadCard from "./UploadCard";
-import InfoCard from "./InfoCard";
-import TextCard from "./TextCard";
-import DetailsBox from "./DetailsBox";
-import AccordionGroup from "./AccordionGroup";
-import AccordionTable from "./AccordionTable";
-import TestAccordionTable from "./TestAccordionTable";
-import TextModal from "./TextModal";
-import ModuleSelect from "./ModuleSelect";
-import ProductCard from "./ProductCard";
-import TableViewModal from "./TableViewModal";
-import ExportModal from "./ExportModal";
-import ExportTable from "./ExportTable";
-import PasswordInputWithMeter from "./PasswordInputWithMeter";
-import Footer from "./Footer";
-import InputTable from "./InputTable";
-import ExcelTable from "./ExcelTable";
-import DataTable from "./DataTable";
-import { ToastContextProvider } from "./toast/ToastProvider";
+import UploadCard from "./UploadCard"
+import InfoCard from "./InfoCard"
+import TextCard from "./TextCard"
+import DetailsBox from "./DetailsBox"
+import AccordionGroup from "./AccordionGroup"
+import AccordionTable from "./AccordionTable"
+import TestAccordionTable from "./TestAccordionTable"
+import TextModal from "./TextModal"
+import ModuleSelect from "./ModuleSelect"
+import ProductCard from "./ProductCard"
+import TableViewModal from "./TableViewModal"
+import ExportModal from "./ExportModal"
+import ExportTable from "./ExportTable"
+import PasswordInputWithMeter from "./PasswordInputWithMeter"
+import Footer from "./Footer"
+import InputTable from "./InputTable"
+import ExcelTable from "./ExcelTable"
+import DataTable from "./DataTable"
+import InputWithValues from "./InputWithValues"
+import { ToastContextProvider } from "./toast/ToastProvider"
 
 export {
   UploadCard,
@@ -38,4 +39,5 @@ export {
   InputTable,
   ExcelTable,
   DataTable,
-};
+  InputWithValues,
+}
