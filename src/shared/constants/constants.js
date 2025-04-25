@@ -1,20 +1,21 @@
-import { IconDatabase } from "@tabler/icons-react";
-import GRADE_OPTIONS from "./grade";
-import SAMPLING_POINT_OPTIONS from "./samplingPoints";
-import STAGE_OPTIONS from "./stage";
-import SPEC_TYPES from "./specTypes";
-import BATCH_LINKS from "./batchLinks";
-import BATCH_TEMPLATES from "./batchTemplates";
-import COMPONENT_DEFAULTS from "./componentDefaults";
-import COMPONENT_DOUBLE_CHECKS from "./componentDoubleChecks";
-import COMPONENT_MANUALS from "./componentManuals";
-import PRODUCT_SPEC_DEFAULTS from "./productSpecDefaults";
-import PRODUCT_SPEC_DOUBLE_CHECKS from "./productSpecDoubleChecks";
-import PRODUCT_SPEC_MANUALS from "./productSpecManuals";
-import NAMES from "./names";
+import { IconDatabase } from "@tabler/icons-react"
+import GRADE_OPTIONS from "./grade"
+import SAMPLING_POINT_OPTIONS from "./samplingPoints"
+import STAGE_OPTIONS from "./stage"
+import SPEC_TYPES from "./specTypes"
+import BATCH_LINKS from "./batchLinks"
+import BATCH_TEMPLATES from "./batchTemplates"
+import COMPONENT_DEFAULTS from "./componentDefaults"
+import COMPONENT_DOUBLE_CHECKS from "./componentDoubleChecks"
+import COMPONENT_MANUALS from "./componentManuals"
+import PRODUCT_SPEC_DEFAULTS from "./productSpecDefaults"
+import PRODUCT_SPEC_DOUBLE_CHECKS from "./productSpecDoubleChecks"
+import PRODUCT_SPEC_MANUALS from "./productSpecManuals"
+import NAMES from "./names"
 
-const DOMAIN = "http://13.235.98.215:27005";
-const GLENMARK_DOMAIN = "http://13.235.98.215:27020";
+const DOMAIN = "http://13.235.98.215:27005"
+const GLENMARK_DOMAIN = "http://13.235.98.215:27020"
+const DEMO_DOMAIN = "http://13.235.98.215:27001"
 
 const ROUTES = [
   {
@@ -35,7 +36,7 @@ const ROUTES = [
       },
     ],
   },
-];
+]
 
 const THEME = {
   primaryColor: "proven",
@@ -53,7 +54,7 @@ const THEME = {
       "#31397d",
     ],
   },
-};
+}
 
 const DEFAULT_TABLE_CONFIG = {
   initialState: { density: "xs" },
@@ -68,9 +69,13 @@ const DEFAULT_TABLE_CONFIG = {
   enablePagination: false,
   enableSorting: false,
   enableStickyHeader: true,
-};
+}
 
 const CLIENTS = {
+  DEMO: {
+    value: "demo",
+    label: "DEMO",
+  },
   DRL: {
     value: "DRL",
     label: "DRL",
@@ -78,6 +83,10 @@ const CLIENTS = {
   GLENMARK: {
     value: "glenmark",
     label: "GLENMARK",
+  },
+  LUPIN: {
+    value: "Lupin",
+    label: "LUPIN",
   },
   NEULAND: {
     value: "neuland",
@@ -87,13 +96,13 @@ const CLIENTS = {
     value: "Sunpharma",
     label: "SUN PHARMA",
   },
-};
+}
 
 const MODULES = {
   CALIBER: { value: "Caliber", label: "Caliber" },
   LABWARE: { value: "Labware", label: "Labware" },
   LABVANTAGE: { value: "Labvantage", label: "LabVantage" },
-};
+}
 
 export {
   ROUTES,
@@ -115,5 +124,6 @@ export {
   PRODUCT_SPEC_DOUBLE_CHECKS,
   PRODUCT_SPEC_MANUALS,
   NAMES,
+  DEMO_DOMAIN,
   GLENMARK_DOMAIN,
-};
+}
