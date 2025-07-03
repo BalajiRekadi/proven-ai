@@ -10,29 +10,29 @@ import {
   Anchor,
   Select,
   Group,
-} from "@mantine/core";
-import { useForm } from "@mantine/form";
-import { useNavigate } from "react-router-dom";
-import headerLogo from "../../assets/headerLogo.png";
-import logo from "../../assets/logo.jpg";
-import { useStore } from "../../store/useStore";
-import { IconUser } from "@tabler/icons-react";
-import "./login.css";
-import { CLIENTS, MODULES } from "../../shared/constants/constants";
-import { useLogin } from "../../api/hooks";
-import Register from "./Register";
-import { useState } from "react";
-import { useToast } from "../../shared/components/toast/useToast";
+} from "@mantine/core"
+import { useForm } from "@mantine/form"
+import { useNavigate } from "react-router-dom"
+import headerLogo from "../../assets/headerLogo.png"
+import logo from "../../assets/logo.jpg"
+import { useStore } from "../../store/useStore"
+import { IconUser } from "@tabler/icons-react"
+import "./login.css"
+import { CLIENTS, MODULES } from "../../shared/constants/constants"
+import { useLogin } from "../../api/hooks"
+import Register from "./Register"
+import { useState } from "react"
+import { useToast } from "../../shared/components/toast/useToast"
 
 function Login() {
-  const navigate = useNavigate();
-  const { userLogin } = useLogin();
-  const toast = useToast();
-  const [openRgisterModal, setOpenRegisterModal] = useState(false);
-  const { module, client, setClient, setModule, setUser } = useStore();
+  const navigate = useNavigate()
+  const { userLogin } = useLogin()
+  const toast = useToast()
+  const [openRgisterModal, setOpenRegisterModal] = useState(false)
+  const { module, client, setClient, setModule, setUser } = useStore()
 
-  const modules = Object.values(MODULES);
-  const clients = Object.values(CLIENTS);
+  const modules = Object.values(MODULES)
+  const clients = Object.values(CLIENTS)
 
   const form = useForm({
     mode: "uncontrolled",
@@ -49,39 +49,40 @@ function Login() {
       module: (value) => (value ? null : "Please select a module"),
       client: (value) => (value ? null : "Please select a client"),
     },
-  });
+  })
 
   const handleLogin = (values) => {
     userLogin(values).then((res) => {
       if (res.response) {
-        setClient(values.client);
-        setModule(values.module);
-        setUser({ userId: values.userId, password: values.password });
-        navigate(`/user/${values.module}/dashboard`);
-        toast.success("User login successful.");
+        setClient(values.client)
+        setModule(values.module)
+        setUser({ userId: values.userId, password: values.password })
+        navigate(`/user/${values.module}/dashboard`)
+        toast.success("User login successful.")
         // TODO: Remove this once session id is implemented
-        localStorage.setItem("userId", values.userId);
-        localStorage.setItem("password", values.password);
-        localStorage.setItem("module", values.module);
-        localStorage.setItem("client", values.client);
+        localStorage.setItem("userId", values.userId)
+        localStorage.setItem("password", values.password)
+        localStorage.setItem("module", values.module)
+        localStorage.setItem("client", values.client)
         // setTimeout(() => {
         //   localStorage.removeItem("userId");
         //   localStorage.removeItem("password");
         // }, 1000 * 10);
       } else {
-        toast.error("Failed to login, please check your details.");
+        toast.error("Failed to login, please check your details.")
       }
-    });
-  };
+    })
+  }
 
   const gradient =
-    "linear-gradient(0deg, rgba(12,12,69,1) 0%, rgba(15,15,93,1) 23%, rgba(90,90,215,1) 100%)";
+    "linear-gradient(0deg, rgba(12,12,69,1) 0%, rgba(15,15,93,1) 23%, rgba(90,90,215,1) 100%)"
 
   return (
     <>
       <form
         onSubmit={form.onSubmit((values) => {
-          handleLogin(values);
+          console.log(values)
+          handleLogin(values)
         })}
       >
         <Flex className="login-page">
@@ -189,7 +190,7 @@ function Login() {
         setOpen={setOpenRegisterModal}
       ></Register>
     </>
-  );
+  )
 }
 
-export default Login;
+export default Login

@@ -1,41 +1,20 @@
-import "./analysis-accordion-table.css"
+import './analysis-accordion-table.css'
 
-import { MantineReactTable, useMantineReactTable } from "mantine-react-table"
-import { useMemo, useState } from "react"
+import { MantineReactTable, useMantineReactTable } from 'mantine-react-table'
+import { useMemo, useState } from 'react'
 
+import { ActionIcon, Box, Flex, Group, Paper, Popover, Text } from '@mantine/core'
 import {
-  ActionIcon,
-  Box,
-  Flex,
-  Group,
-  Paper,
-  Popover,
-  Text,
-} from "@mantine/core"
-import {
-  IconCircleArrowDownFilled,
-  IconEyeFilled,
-  IconFileFilled,
-  IconRun,
-  IconSelector,
-  IconStackPop,
-} from "@tabler/icons-react"
+    IconCircleArrowDownFilled, IconEyeFilled, IconFileFilled, IconRun, IconSelector, IconStackPop,
+} from '@tabler/icons-react'
 
+import { InputWithValues, TableViewModal, TextModal } from '../../../../../shared/components'
 import {
-  InputWithValues,
-  TableViewModal,
-  TextModal,
-} from "../../../../../shared/components"
-import {
-  BATCH_LINKS,
-  BATCH_TEMPLATES,
-  DEFAULT_TABLE_CONFIG,
-  NAMES,
-  SPEC_TYPES,
-  STAGE_OPTIONS,
-} from "../../../../../shared/constants/constants"
-import { downloadXLSX } from "../../../../../shared/utilities"
-import { useStore } from "../../../../../store/useStore"
+    BATCH_LINKS, BATCH_TEMPLATES, CLIENTS, DEFAULT_TABLE_CONFIG, NAMES, NAMES_LUPIN, SPEC_TYPES,
+    STAGE_OPTIONS,
+} from '../../../../../shared/constants/constants'
+import { downloadXLSX } from '../../../../../shared/utilities'
+import { useStore } from '../../../../../store/useStore'
 
 const AnalysisAccordionTable = ({
   index,
@@ -53,6 +32,7 @@ const AnalysisAccordionTable = ({
   const [selectedRunDataTableLabel, setSelectedRunDataTableLabel] = useState("")
   const [selectedInput, setSelectedInput] = useState("") // TODO: redundant state, can be derived from selectedRow?
   const [selectedRow, setSelectedRow] = useState("")
+  const { client } = useStore()
 
   // TODO: is there any use for this?
   const STAGES = useMemo(() => STAGE_OPTIONS, [])
@@ -60,6 +40,7 @@ const AnalysisAccordionTable = ({
   const BATCHLINKS = useMemo(() => BATCH_LINKS, [])
   const BATCHTEMPLATES = useMemo(() => BATCH_TEMPLATES, [])
   const NAMEOPTIONS = useMemo(() => NAMES, [])
+  const NAMELUPINOPTIONS = useMemo(() => NAMES_LUPIN, [])
 
   const getTableData = () => {
     const tableData = []
@@ -169,7 +150,9 @@ const AnalysisAccordionTable = ({
           return (
             <InputWithValues
               value={value}
-              values={NAMEOPTIONS}
+              values={
+                client === CLIENTS.LUPIN.value ? NAMELUPINOPTIONS : NAMEOPTIONS
+              }
               row={row}
               onBlur={onNameFieldChange}
             />
@@ -385,7 +368,7 @@ const AnalysisAccordionTable = ({
         ),
       },
     ],
-    [data]
+    [data, client]
   )
 
   const tableConfig = {

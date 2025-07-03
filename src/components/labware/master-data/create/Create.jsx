@@ -1,119 +1,119 @@
-import { Button, Flex, Group, Stepper, Title, Stack } from "@mantine/core";
-import { saveImportDocsData } from "../../../../api/helpers";
-import { useState, useEffect } from "react";
-import { IconArrowRight, IconDatabase } from "@tabler/icons-react";
-import ImportDocs from "../../../screens/import-docs/ImportDocs";
-import { DetailsBox, TextModal } from "../../../../shared/components";
-import Export from "../../../screens/export/Export";
-import { useToast } from "../../../../shared/components/toast/useToast";
-import Analysis from "./Analysis/Analysis";
-import Product from "./Product";
-import { useStore } from "../../../../store/useStore";
-import { useTaskDetails } from "../../../../api/hooks";
-import { generateProductDetails } from "../../../../api/helpers";
-import AnnotationValidations from "./AnnotationValidations";
+import { Button, Flex, Group, Stepper, Title, Stack } from "@mantine/core"
+import { saveImportDocsData } from "../../../../api/helpers"
+import { useState, useEffect } from "react"
+import { IconArrowRight, IconDatabase } from "@tabler/icons-react"
+import ImportDocs from "../../../screens/import-docs/ImportDocs"
+import { DetailsBox, TextModal } from "../../../../shared/components"
+import Export from "../../../screens/export/Export"
+import { useToast } from "../../../../shared/components/toast/useToast"
+import Analysis from "./Analysis/Analysis"
+import Product from "./Product"
+import { useStore } from "../../../../store/useStore"
+import { useTaskDetails } from "../../../../api/hooks"
+import { generateProductDetails } from "../../../../api/helpers"
+import AnnotationValidations from "./AnnotationValidations"
 
 const CreateFlow = () => {
-  const [active, setActive] = useState(0);
-  const [modalOpened, setModalOpened] = useState(false);
-  const [modalContent, setModalContent] = useState("");
-  const [specFile, setSpecFile] = useState(null);
-  const [methodFile, setMethodFile] = useState(null);
-  const [specFileName, setSpecFileName] = useState("");
-  const [methodFileName, setMethodFileName] = useState("");
-  const [showTaskCard, setShowTaskCard] = useState(false);
-  const [taskData, setTaskData] = useState({});
-  const [limitsData, setLimitsData] = useState([]);
+  const [active, setActive] = useState(0)
+  const [modalOpened, setModalOpened] = useState(false)
+  const [modalContent, setModalContent] = useState("")
+  const [specFile, setSpecFile] = useState(null)
+  const [methodFile, setMethodFile] = useState(null)
+  const [specFileName, setSpecFileName] = useState("")
+  const [methodFileName, setMethodFileName] = useState("")
+  const [showTaskCard, setShowTaskCard] = useState(false)
+  const [taskData, setTaskData] = useState({})
+  const [limitsData, setLimitsData] = useState([])
   const [productDetails, setProductDetails] = useState({
     product: {},
     product_grade: {},
-  });
-  const [analysisData, setAnalysisData] = useState();
-  const [productDetailsLoaded, setProductDetailsLoaded] = useState(false);
-  const { module, client, selectedTaskId } = useStore();
-  const toast = useToast();
-  const { getTaskDetails } = useTaskDetails();
-  const [areFilesUploaded, setAreFilesUploaded] = useState(false);
+  })
+  const [analysisData, setAnalysisData] = useState()
+  const [productDetailsLoaded, setProductDetailsLoaded] = useState(false)
+  const { module, client, selectedTaskId } = useStore()
+  const toast = useToast()
+  const { getTaskDetails } = useTaskDetails()
+  const [areFilesUploaded, setAreFilesUploaded] = useState(false)
   const [annotationValidations, setAnnotationValidations] = useState({
     Issues: [],
-  });
+  })
   const [showAnnotationsValidation, setShowAnnotationsValidation] =
-    useState(false);
+    useState(false)
 
   // populate generated data when clicking on a task in dashboard
   useEffect(() => {
     if (selectedTaskId) {
       getTaskDetails(selectedTaskId).then((res) => {
-        setSpecFileName(res.taskData.specFileName);
-        setMethodFileName(res.taskData.methodFileName);
+        setSpecFileName(res.taskData.specFileName)
+        setMethodFileName(res.taskData.methodFileName)
         // import docs step
-        setTaskData(res.taskData);
-        setLimitsData(res.limitsData);
-        setAreFilesUploaded(true);
-        setShowTaskCard(true);
+        setTaskData(res.taskData)
+        setLimitsData(res.limitsData)
+        setAreFilesUploaded(true)
+        setShowTaskCard(true)
         // product step
         if (res.productData.product && res.productData.product_grade) {
-          setProductDetails(res.productData);
-          setProductDetailsLoaded(true);
+          setProductDetails(res.productData)
+          setProductDetailsLoaded(true)
         }
         // Analysis step
-        setAnalysisData(res.analysisData);
+        setAnalysisData(res.analysisData)
         // annotation validations
-        setAnnotationValidations(res.annotationValidation);
-      });
+        setAnnotationValidations(res.annotationValidation)
+      })
     }
-  }, [selectedTaskId]);
+  }, [selectedTaskId])
 
   const nextStep = () =>
-    setActive((current) => (current < 4 ? current + 1 : current));
+    setActive((current) => (current < 4 ? current + 1 : current))
 
   const handleGenerateProductDetails = () => {
     if (!productDetailsLoaded) {
-      toast.load("Generating product details");
+      toast.load("Generating product details")
       generateProductDetails(taskData, module, client).then((res) => {
-        toast.success("Generated product details successfully");
-        setProductDetailsLoaded(true);
-        setProductDetails(res);
-      });
+        toast.success("Generated product details successfully")
+        setProductDetailsLoaded(true)
+        setProductDetails(res)
+      })
     }
-  };
+  }
 
   const getNextBtnLabel = () => {
     switch (active) {
       case 0:
-        return "Next";
+        return "Next"
       case 1:
-        return "Generate Analysis";
+        return "Generate Analysis"
       case 2:
-        return "Export";
+        return "Export"
       default:
-        return "Next";
+        return "Next"
     }
-  };
+  }
 
   const handleContentClick = (content) => {
-    setModalContent(content);
-    setModalOpened(true);
-  };
+    setModalContent(content)
+    setModalOpened(true)
+  }
 
   const handleSave = () => {
     switch (active) {
       case 0: {
-        saveTaskData();
-        break;
+        saveTaskData()
+        break
       }
       case 1: {
-        saveTaskData();
-        break;
+        saveTaskData()
+        break
       }
       case 2: {
-        saveTaskData();
-        break;
+        saveTaskData()
+        break
       }
       default:
-        break;
+        break
     }
-  };
+  }
 
   const saveTaskData = () => {
     saveImportDocsData(
@@ -124,22 +124,22 @@ const CreateFlow = () => {
       module,
       client
     ).then(() => {
-      toast.success("Deatils saved successfully");
-    });
-  };
+      toast.success("Deatils saved successfully")
+    })
+  }
 
   const disableNextBtn = () => {
     switch (active) {
       case 0:
-        return !showTaskCard;
+        return !showTaskCard
       case 1:
-        return !productDetailsLoaded;
+        return !productDetailsLoaded
       case 2:
-        return false;
+        return false
       default:
-        return false;
+        return false
     }
-  };
+  }
 
   return (
     <Stack>
@@ -256,7 +256,7 @@ const CreateFlow = () => {
         handleClose={() => setShowAnnotationsValidation(false)}
       />
     </Stack>
-  );
-};
+  )
+}
 
-export default CreateFlow;
+export default CreateFlow

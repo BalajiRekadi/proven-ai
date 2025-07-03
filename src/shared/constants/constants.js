@@ -12,10 +12,12 @@ import PRODUCT_SPEC_DEFAULTS from "./productSpecDefaults"
 import PRODUCT_SPEC_DOUBLE_CHECKS from "./productSpecDoubleChecks"
 import PRODUCT_SPEC_MANUALS from "./productSpecManuals"
 import NAMES from "./names"
+import NAMES_LUPIN from "./names_lupin"
 
-const DOMAIN = "http://13.235.98.215:27005"
-const GLENMARK_DOMAIN = "http://13.235.98.215:27020"
-const DEMO_DOMAIN = "http://13.235.98.215:27001"
+const DOMAIN = "http://13.235.98.215:8003"
+const GLENMARK_DOMAIN = "http://13.235.98.215:8000"
+const DEMO_DOMAIN = "http://13.235.98.215:8000"
+const LUPIN_DOMAIN = "http://13.235.98.215:8009"
 
 const ROUTES = [
   {
@@ -124,6 +126,8 @@ export {
   PRODUCT_SPEC_DOUBLE_CHECKS,
   PRODUCT_SPEC_MANUALS,
   NAMES,
+  NAMES_LUPIN,
   DEMO_DOMAIN,
+  LUPIN_DOMAIN,
   GLENMARK_DOMAIN,
 }
