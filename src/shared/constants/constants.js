@@ -18,6 +18,8 @@ const DOMAIN = "http://13.235.98.215:8003"
 const GLENMARK_DOMAIN = "http://13.235.98.215:8000"
 const DEMO_DOMAIN = "http://13.235.98.215:8000"
 const LUPIN_DOMAIN = "http://13.235.98.215:8009"
+const PIRAMAL_DOMAIN = "http://13.235.98.215:8011"
+const STRIDES_DOMAIN = "http://13.235.98.215:8013"
 
 const ROUTES = [
   {
@@ -90,20 +92,20 @@ const CLIENTS = {
     value: "Lupin",
     label: "LUPIN",
   },
-  NEULAND: {
-    value: "neuland",
-    label: "NEULAND",
+  PIRAMAL: {
+    value: "Piramal",
+    label: "PIRAMAL",
   },
-  SUN_PHARMA: {
-    value: "Sunpharma",
-    label: "SUN PHARMA",
+  STRIDES: {
+    value: "Strides",
+    label: "STRIDES",
   },
 }
 
 const MODULES = {
-  CALIBER: { value: "Caliber", label: "Caliber" },
+  // CALIBER: { value: "Caliber", label: "Caliber" },
   LABWARE: { value: "Labware", label: "Labware" },
-  LABVANTAGE: { value: "Labvantage", label: "LabVantage" },
+  // LABVANTAGE: { value: "Labvantage", label: "LabVantage" },
 }
 
 export {
@@ -130,4 +132,6 @@ export {
   DEMO_DOMAIN,
   LUPIN_DOMAIN,
   GLENMARK_DOMAIN,
+  PIRAMAL_DOMAIN,
+  STRIDES_DOMAIN,
 }
