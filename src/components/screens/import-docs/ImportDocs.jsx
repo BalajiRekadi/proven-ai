@@ -17,7 +17,7 @@ import {
 } from "../../../api/hooks"
 import { useStore } from "../../../store/useStore"
 import { useState } from "react"
-import AnnotationPopup from "./AnnotationPopup"
+import AnnotationModal from "./annotation-modal/AnnotationModal"
 
 const ImportDocs = ({
   taskData,
@@ -162,7 +162,7 @@ const ImportDocs = ({
           </Accordion>
         )}
       </Box>
-      <AnnotationPopup
+      <AnnotationModal
         open={openAnnotationPopup}
         handleClose={() => setOpenAnnotationPopup(false)}
       />
