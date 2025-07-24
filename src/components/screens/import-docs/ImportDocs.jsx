@@ -6,16 +6,18 @@ import {
   Flex,
   Title,
   Tooltip,
-} from "@mantine/core";
-import { InputTable, UploadCard } from "../../../shared/components";
-import { IconExclamationCircle, IconUpload } from "@tabler/icons-react";
-import TaskCard from "./TaskCard";
+} from "@mantine/core"
+import { InputTable, UploadCard } from "../../../shared/components"
+import { IconExclamationCircle, IconUpload } from "@tabler/icons-react"
+import TaskCard from "./TaskCard"
 import {
   useGenerateWorksheets,
   useUploadFiles,
   useProcessFiles,
-} from "../../../api/hooks";
-import { useStore } from "../../../store/useStore";
+} from "../../../api/hooks"
+import { useStore } from "../../../store/useStore"
+import { useState } from "react"
+import AnnotationPopup from "./AnnotationPopup"
 
 const ImportDocs = ({
   taskData,
@@ -38,114 +40,134 @@ const ImportDocs = ({
   setAnnotationValidations,
   showOnlyMethodUpload = false,
 }) => {
-  const { uploadFiles } = useUploadFiles();
-  const { generateWorksheets } = useGenerateWorksheets("process");
-  const { processFile } = useProcessFiles();
-  const { client } = useStore();
+  const { uploadFiles } = useUploadFiles()
+  const { generateWorksheets } = useGenerateWorksheets("process")
+  const { processFile } = useProcessFiles()
+  const { client } = useStore()
+
+  const [openAnnotationPopup, setOpenAnnotationPopup] = useState(false)
 
   const handleUploadFiles = () => {
-    const files = showOnlyMethodUpload ? [methodFile] : [specFile, methodFile];
+    const files = showOnlyMethodUpload ? [methodFile] : [specFile, methodFile]
     uploadFiles(files).then(() => {
-      setShowTaskCard(false);
-      setAreFilesUploaded(true);
-    });
-  };
+      setShowTaskCard(false)
+      setAreFilesUploaded(true)
+    })
+  }
 
   const handleProcess = () => {
     if (client === "neuland") {
       generateWorksheets(methodFile?.name).then((data) => {
-        setShowTaskCard(true);
-        setTaskData(data.taskData);
-        setData(data.worksheetData);
-      });
+        setShowTaskCard(true)
+        setTaskData(data.taskData)
+        setData(data.worksheetData)
+      })
     } else {
       processFile([specFile?.name, methodFile?.name]).then((data) => {
-        setShowTaskCard(true);
-        setTaskData(data.taskData);
-        setLimitsData(data.limits);
-        setAnnotationValidations(data.annotationValidation);
-      });
+        setShowTaskCard(true)
+        setTaskData(data.taskData)
+        setLimitsData(data.limits)
+        setAnnotationValidations(data.annotationValidation)
+      })
     }
-  };
+  }
+
+  const handleAnnotationPopup = () => {
+    setOpenAnnotationPopup(true)
+  }
 
   return (
-    <Box pr={32}>
-      <Flex gap={16}>
-        {!showOnlyMethodUpload && (
+    <>
+      <Box pr={32}>
+        <Flex gap={16}>
+          {!showOnlyMethodUpload && (
+            <UploadCard
+              title={"Specification"}
+              label={"Select file"}
+              value={specFile}
+              fileName={specFileName}
+              onChange={setSpecFile}
+            />
+          )}
           <UploadCard
-            title={"Specification"}
+            title={"Method"}
             label={"Select file"}
-            value={specFile}
-            fileName={specFileName}
-            onChange={setSpecFile}
+            value={methodFile}
+            fileName={methodFileName}
+            onChange={setMethodFile}
           />
-        )}
-        <UploadCard
-          title={"Method"}
-          label={"Select file"}
-          value={methodFile}
-          fileName={methodFileName}
-          onChange={setMethodFile}
-        />
-      </Flex>
-      <Flex gap={16} align={"center"} mt={"md"}>
-        <Button
-          radius="md"
-          variant="outline"
-          justify="space-between"
-          w={150}
-          rightSection={<IconUpload />}
-          onClick={handleUploadFiles}
-        >
-          {"Upload Files"}
-        </Button>
-        <Button
-          radius="md"
-          variant="filled"
-          onClick={handleProcess}
-          disabled={!areFilesUploaded}
-        >
-          {"Process"}
-        </Button>
-        {annotationValidations?.ErrorCount && (
-          <Tooltip
-            label="There are some annotation issues occured during process, click to view."
-            arrowSize={8}
-            withArrow
+        </Flex>
+        <Flex gap={16} align={"center"} mt={"md"}>
+          <Button
+            radius="md"
+            variant="outline"
+            justify="space-between"
+            w={150}
+            rightSection={<IconUpload />}
+            onClick={handleUploadFiles}
           >
-            <ActionIcon
-              variant="subtle"
-              color="var(--error)"
-              onClick={() => setShowAnnotationsValidation(true)}
+            {"Upload Files"}
+          </Button>
+          <Button
+            radius="md"
+            variant="filled"
+            onClick={handleAnnotationPopup}
+            disabled={false}
+          >
+            {"Annotate Method File"}
+          </Button>
+          <Button
+            radius="md"
+            variant="filled"
+            onClick={handleProcess}
+            disabled={!areFilesUploaded}
+          >
+            {"Process"}
+          </Button>
+          {annotationValidations?.ErrorCount && (
+            <Tooltip
+              label="There are some annotation issues occured during process, click to view."
+              arrowSize={8}
+              withArrow
             >
-              <IconExclamationCircle />
-            </ActionIcon>
-          </Tooltip>
+              <ActionIcon
+                variant="subtle"
+                color="var(--error)"
+                onClick={() => setShowAnnotationsValidation(true)}
+              >
+                <IconExclamationCircle />
+              </ActionIcon>
+            </Tooltip>
+          )}
+        </Flex>
+        {showTaskCard && <TaskCard data={taskData} setTaskData={setTaskData} />}
+        {showTaskCard && (
+          <Accordion
+            variant="separated"
+            mt={32}
+            styles={{
+              item: {
+                boxShadow: "0 1px 2px rgba(0, 0, 0, 0.2)",
+              },
+            }}
+          >
+            <Accordion.Item value={"Limits"}>
+              <Accordion.Control>
+                <Title order={4}>Limits</Title>
+              </Accordion.Control>
+              <Accordion.Panel>
+                <InputTable data={limitsData} updateData={setLimitsData} />
+              </Accordion.Panel>
+            </Accordion.Item>
+          </Accordion>
         )}
-      </Flex>
-      {showTaskCard && <TaskCard data={taskData} setTaskData={setTaskData} />}
-      {showTaskCard && (
-        <Accordion
-          variant="separated"
-          mt={32}
-          styles={{
-            item: {
-              boxShadow: "0 1px 2px rgba(0, 0, 0, 0.2)",
-            },
-          }}
-        >
-          <Accordion.Item value={"Limits"}>
-            <Accordion.Control>
-              <Title order={4}>Limits</Title>
-            </Accordion.Control>
-            <Accordion.Panel>
-              <InputTable data={limitsData} updateData={setLimitsData} />
-            </Accordion.Panel>
-          </Accordion.Item>
-        </Accordion>
-      )}
-    </Box>
-  );
-};
+      </Box>
+      <AnnotationPopup
+        open={openAnnotationPopup}
+        handleClose={() => setOpenAnnotationPopup(false)}
+      />
+    </>
+  )
+}
 
-export default ImportDocs;
+export default ImportDocs
