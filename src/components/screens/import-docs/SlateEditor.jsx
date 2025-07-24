@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import ReactDOM from "react-dom"
 import { createEditor, Editor, Transforms, Range } from "slate"
 import { Slate, Editable, withReact } from "slate-react"
 
-// Your initialValue preserved as-is
 const initialValue = [
   {
     type: "paragraph",
@@ -37,33 +36,19 @@ const PopoverPortal = ({ position, children }) => {
 }
 
 const SlateEditor = ({ text = "" }) => {
-  const [value, setValue] = useState([
-    { type: "paragraph", children: [{ text }] },
-  ])
+  const initialVal = useMemo(
+    () => [{ type: "paragraph", children: [{ text }] }],
+    [text]
+  )
+  const [value, setValue] = useState(initialVal)
+
   const [popoverPos, setPopoverPos] = useState(null)
   const [selection, setSelection] = useState(null)
   const [editor] = useState(() => withReact(createEditor()))
 
-  // Update popover position when selection changes
-  const updatePopover = () => {
-    const domSelection = window.getSelection()
-    if (
-      editor.selection &&
-      !Range.isCollapsed(editor.selection) &&
-      Editor.string(editor, editor.selection).trim() !== ""
-    ) {
-      const domRange = domSelection.getRangeAt(0)
-      const rect = domRange.getBoundingClientRect()
-      setPopoverPos({
-        top: rect.bottom + window.scrollY - 30,
-        left: rect.left + rect.width / 2 + window.scrollX,
-      })
-      setSelection(editor.selection)
-    } else {
-      setPopoverPos(null)
-      setSelection(null)
-    }
-  }
+  useEffect(() => {
+    setValue([{ type: "paragraph", children: [{ text }] }])
+  }, [text])
 
   useEffect(() => {
     const handleMouseUp = () => {
@@ -108,8 +93,19 @@ const SlateEditor = ({ text = "" }) => {
     <Slate
       editor={editor}
       value={value}
-      initialValue={initialValue} // ✅ Preserved initialValue
-      onChange={(val) => setValue(val)}
+      initialValue={initialVal}
+      onChange={(val) => {
+        setValue(val)
+
+        if (
+          !editor.selection ||
+          Range.isCollapsed(editor.selection) ||
+          Editor.string(editor, editor.selection).trim() === ""
+        ) {
+          setPopoverPos(null)
+          setSelection(null)
+        }
+      }}
     >
       <Editable
         style={{

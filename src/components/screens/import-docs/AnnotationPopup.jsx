@@ -12,11 +12,7 @@ function AnnotationPopup({ open, handleClose }) {
       title={<Title order={3}>{"Annotations"}</Title>}
       size={"lg"}
     >
-      <SlateEditor
-        text="Hello world"
-        onAnnotate={() => {}}
-        onCancel={() => {}}
-      />
+      <SlateEditor text="Hello world" />
     </Modal>
   )
 }
