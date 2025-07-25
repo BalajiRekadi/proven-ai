@@ -1,5 +1,9 @@
-.slate {
+.popover {
+  position: "absolute";
+  transform: "translate(-50%, -100%)";
+  background: "var(--primary)";
   border: "1px solid #ccc";
-  border-radius: "6px";
-  padding: "12px";
+  border-radius: "4px";
+  box-shadow: "0 2px 5px rgba(0,0,0,0.15)";
+  z-index: 1000;
 }

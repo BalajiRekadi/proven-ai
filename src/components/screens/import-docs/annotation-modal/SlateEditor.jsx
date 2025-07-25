@@ -4,6 +4,7 @@ import { Slate, Editable, withReact, ReactEditor } from "slate-react"
 import PopoverPortal from "./PopoverPortal"
 import { withHistory } from "slate-history"
 import "./slateEditor.css"
+import { Button } from "@mantine/core"
 
 const SlateEditor = ({ text = "" }) => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
@@ -17,10 +18,12 @@ const SlateEditor = ({ text = "" }) => {
   const [popoverPos, setPopoverPos] = useState(null)
   const [selection, setSelection] = useState(null)
 
-  const wrapWithAt = () => {
+  const wrapWith = (symbols) => {
     if (!selection) return
     const selectedText = Editor.string(editor, selection)
-    Transforms.insertText(editor, `@@@${selectedText}@@@`, { at: selection })
+    Transforms.insertText(editor, `${symbols}${selectedText}${symbols}`, {
+      at: selection,
+    })
     setPopoverPos(null)
   }
 
@@ -66,14 +69,34 @@ const SlateEditor = ({ text = "" }) => {
         style={{
           border: "2px solid #ccc",
           borderRadius: "6px",
-          padding: "12px",
+          padding: "16px",
           height: "76vh",
           overflow: "auto",
         }}
       />
 
       <PopoverPortal position={popoverPos}>
-        <button onMouseDown={wrapWithAt}>@</button>
+        <Button
+          variant="outline"
+          onMouseDown={() => wrapWith("@@@")}
+          color="white"
+        >
+          @
+        </Button>
+        <Button
+          variant="outline"
+          onMouseDown={() => wrapWith("###")}
+          color="white"
+        >
+          #
+        </Button>
+        <Button
+          variant="outline"
+          onMouseDown={() => wrapWith("&&&")}
+          color="white"
+        >
+          &
+        </Button>
       </PopoverPortal>
     </Slate>
   )
