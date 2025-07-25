@@ -14,6 +14,7 @@ import {
   useGenerateWorksheets,
   useUploadFiles,
   useProcessFiles,
+  useFileContent,
 } from "../../../api/hooks"
 import { useStore } from "../../../store/useStore"
 import { useState } from "react"
@@ -46,10 +47,12 @@ const ImportDocs = ({
   const { client } = useStore()
 
   const [openAnnotationPopup, setOpenAnnotationPopup] = useState(false)
+  const [methodFilePath, setMethodFilePath] = useState("")
 
   const handleUploadFiles = () => {
     const files = showOnlyMethodUpload ? [methodFile] : [specFile, methodFile]
-    uploadFiles(files).then(() => {
+    uploadFiles(files).then((res) => {
+      setMethodFilePath(res.file2_path)
       setShowTaskCard(false)
       setAreFilesUploaded(true)
     })
@@ -164,6 +167,7 @@ const ImportDocs = ({
       </Box>
       <AnnotationModal
         open={openAnnotationPopup}
+        methodFilePath={methodFilePath}
         handleClose={() => setOpenAnnotationPopup(false)}
       />
     </>

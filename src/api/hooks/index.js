@@ -10,6 +10,7 @@ import useTaskDetails from "./useTaskDetails"
 import useUpdateRunResults from "./useUpdateRunResults"
 import useAnalysisXMLData from "./useAnalysisXMLData"
 import useProductXMLData from "./useProductXMLData"
+import useFileContent from "./useFileContent"
 
 export {
   useUploadFiles,
@@ -24,4 +25,5 @@ export {
   useUpdateRunResults,
   useAnalysisXMLData,
   useProductXMLData,
+  useFileContent,
 }

@@ -2,9 +2,11 @@ import React, { useState, useMemo } from "react"
 import { createEditor, Editor, Transforms, Range } from "slate"
 import { Slate, Editable, withReact, ReactEditor } from "slate-react"
 import PopoverPortal from "./PopoverPortal"
+import { withHistory } from "slate-history"
+import "./slateEditor.css"
 
 const SlateEditor = ({ text = "" }) => {
-  const editor = useMemo(() => withReact(createEditor()), [])
+  const editor = useMemo(() => withHistory(withReact(createEditor())), [])
 
   const initialVal = useMemo(
     () => [{ type: "paragraph", children: [{ text }] }],
@@ -62,10 +64,11 @@ const SlateEditor = ({ text = "" }) => {
       <Editable
         placeholder="Select some text..."
         style={{
-          border: "1px solid #ccc",
+          border: "2px solid #ccc",
           borderRadius: "6px",
           padding: "12px",
-          minHeight: "120px",
+          height: "76vh",
+          overflow: "auto",
         }}
       />
 
