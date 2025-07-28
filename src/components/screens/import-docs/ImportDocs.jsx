@@ -114,7 +114,7 @@ const ImportDocs = ({
             radius="md"
             variant="filled"
             onClick={handleAnnotationPopup}
-            disabled={false}
+            disabled={!areFilesUploaded}
           >
             {"Annotate Method File"}
           </Button>
@@ -166,7 +166,7 @@ const ImportDocs = ({
       </Box>
       <AnnotationModal
         open={openAnnotationPopup}
-        methodFilePath={methodFilePath}
+        methodFilePath={methodFilePath || methodFileName}
         handleClose={() => setOpenAnnotationPopup(false)}
       />
     </>

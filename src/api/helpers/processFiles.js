@@ -1,13 +1,9 @@
-import {
-  appendDocxExtension,
-  convertObjDataToArray,
-  getDomain,
-} from "../../shared/utilities";
-import axios from "axios";
+import { convertObjDataToArray, getDomain } from "../../shared/utilities"
+import axios from "axios"
 
 const processFiles = async (files, module, client, user) => {
-  const spec = appendDocxExtension(files[0]);
-  const stp = appendDocxExtension(files[1]);
+  const spec = files[0]
+  const stp = files[1]
 
   const res = await axios({
     url: `${getDomain(client)}/process`,
@@ -20,10 +16,10 @@ const processFiles = async (files, module, client, user) => {
       "ngrok-skip-browser-warning": "69420",
       content: "application/json",
     }),
-  });
+  })
 
-  return mapResponse(res.data);
-};
+  return mapResponse(res.data)
+}
 
 const mapResponse = (data, file1, file2) => {
   return {
@@ -51,7 +47,7 @@ const mapResponse = (data, file1, file2) => {
     },
     limits: convertObjDataToArray(data.limits),
     annotationValidation: data.AnnotationValidation,
-  };
-};
+  }
+}
 
-export default processFiles;
+export default processFiles
