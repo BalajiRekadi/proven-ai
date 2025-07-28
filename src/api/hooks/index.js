@@ -11,6 +11,7 @@ import useUpdateRunResults from "./useUpdateRunResults"
 import useAnalysisXMLData from "./useAnalysisXMLData"
 import useProductXMLData from "./useProductXMLData"
 import useFileContent from "./useFileContent"
+import usePostFileContent from "./usePostFileContent"
 
 export {
   useUploadFiles,
@@ -26,4 +27,5 @@ export {
   useAnalysisXMLData,
   useProductXMLData,
   useFileContent,
+  usePostFileContent,
 }
