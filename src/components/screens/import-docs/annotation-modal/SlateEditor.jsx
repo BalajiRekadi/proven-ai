@@ -6,15 +6,9 @@ import { withHistory } from "slate-history"
 import "./slateEditor.css"
 import { Button } from "@mantine/core"
 
-const SlateEditor = ({ text = "" }) => {
+const SlateEditor = ({ initialVal = [], value = "", setValue }) => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
 
-  const initialVal = useMemo(
-    () => [{ type: "paragraph", children: [{ text }] }],
-    [text]
-  )
-
-  const [value, setValue] = useState(initialVal)
   const [popoverPos, setPopoverPos] = useState(null)
   const [selection, setSelection] = useState(null)
 
@@ -85,14 +79,14 @@ const SlateEditor = ({ text = "" }) => {
         </Button>
         <Button
           variant="outline"
-          onMouseDown={() => wrapWith("###")}
+          onMouseDown={() => wrapWith("##")}
           color="white"
         >
           #
         </Button>
         <Button
           variant="outline"
-          onMouseDown={() => wrapWith("&&&")}
+          onMouseDown={() => wrapWith("&&")}
           color="white"
         >
           &

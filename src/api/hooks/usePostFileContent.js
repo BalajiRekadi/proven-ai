@@ -7,10 +7,11 @@ import { getDomain } from "../../shared/utilities"
 import { useToast } from "../../shared/components/toast/useToast"
 
 const postFileContent = async (taskId, module, client, content) => {
+  const encoded = encodeURIComponent(content)
   const res = await axios({
     url: `${getDomain(
       client
-    )}/stp_content?TaskId=${taskId}&module=${module}&Client=${client}&content=${content}`,
+    )}/stp_content?TaskId=${taskId}&module=${module}&Client=${client}&content=${encoded}`,
     method: "POST",
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",
