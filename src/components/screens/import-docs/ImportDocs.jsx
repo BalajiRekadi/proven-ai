@@ -14,6 +14,8 @@ import {
   useGenerateWorksheets,
   useUploadFiles,
   useProcessFiles,
+  useFileContent,
+  usePostFileContent,
 } from "../../../api/hooks"
 import { useStore } from "../../../store/useStore"
 import { useState } from "react"
@@ -47,6 +49,10 @@ const ImportDocs = ({
 
   const [openAnnotationPopup, setOpenAnnotationPopup] = useState(false)
   const [methodFilePath, setMethodFilePath] = useState("")
+  const [isAnnotationDone, setIsAnnotationDone] = useState(false)
+
+  const methodFileContent = useFileContent(methodFilePath)
+  const { saveFileContent } = usePostFileContent()
 
   const handleUploadFiles = () => {
     const files = showOnlyMethodUpload ? [methodFile] : [specFile, methodFile]
@@ -65,12 +71,29 @@ const ImportDocs = ({
         setData(data.worksheetData)
       })
     } else {
-      processFile([specFile?.name, methodFile?.name]).then((data) => {
-        setShowTaskCard(true)
-        setTaskData(data.taskData)
-        setLimitsData(data.limits)
-        setAnnotationValidations(data.annotationValidation)
-      })
+      if (isAnnotationDone) {
+        processFile({
+          files: [specFile?.name, methodFile?.name],
+          taskId: taskData.taskId,
+        }).then((data) => {
+          setShowTaskCard(true)
+          setTaskData(data.taskData)
+          setLimitsData(data.limits)
+          setAnnotationValidations(data.annotationValidation)
+        })
+      } else {
+        saveFileContent(methodFileContent?.data?.content).then((res) => {
+          processFile({
+            files: [specFile?.name, methodFile?.name],
+            taskId: res.taskid,
+          }).then((data) => {
+            setShowTaskCard(true)
+            setTaskData(data.taskData)
+            setLimitsData(data.limits)
+            setAnnotationValidations(data.annotationValidation)
+          })
+        })
+      }
     }
   }
 
@@ -166,8 +189,12 @@ const ImportDocs = ({
       </Box>
       <AnnotationModal
         open={openAnnotationPopup}
+        setOpen={setOpenAnnotationPopup}
         methodFilePath={methodFilePath || methodFileName}
         handleClose={() => setOpenAnnotationPopup(false)}
+        setTaskData={setTaskData}
+        taskData={taskData}
+        setIsAnnotationDone={setIsAnnotationDone}
       />
     </>
   )

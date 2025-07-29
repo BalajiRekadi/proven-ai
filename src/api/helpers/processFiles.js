@@ -1,17 +1,25 @@
 import { convertObjDataToArray, getDomain } from "../../shared/utilities"
 import axios from "axios"
 
-const processFiles = async (files, module, client, user) => {
+const processFiles = async (taskId, files, module, client, user) => {
   const spec = files[0]
   const stp = files[1]
+
+  const payload = {
+    filenames: { spec, stp },
+    details: {
+      module,
+      client,
+      userId: user.userId,
+      password: user.password,
+      taskid: taskId,
+    },
+  }
 
   const res = await axios({
     url: `${getDomain(client)}/process`,
     method: "POST",
-    data: {
-      filenames: { spec, stp },
-      details: { module, client, userId: user.userId, password: user.password },
-    },
+    data: payload,
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",
       content: "application/json",

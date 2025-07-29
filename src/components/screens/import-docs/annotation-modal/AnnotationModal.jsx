@@ -5,8 +5,16 @@ import { Button, Flex, Modal, Title } from "@mantine/core"
 import SlateEditor from "./SlateEditor"
 import { useFileContent, usePostFileContent } from "../../../../api/hooks"
 
-function AnnotationModal({ open, handleClose, methodFilePath }) {
-  const methodFileContent = useFileContent(methodFilePath)
+function AnnotationModal({
+  open,
+  handleClose,
+  methodFilePath,
+  taskData,
+  setTaskData,
+  setOpen,
+  setIsAnnotationDone,
+}) {
+  const methodFileContent = useFileContent(methodFilePath, taskData.taskId)
   const { saveFileContent } = usePostFileContent()
   const text = methodFileContent?.data?.content || ""
   const initialVal = useMemo(
@@ -17,9 +25,10 @@ function AnnotationModal({ open, handleClose, methodFilePath }) {
   const [value, setValue] = useState(initialVal)
 
   const handleSaveAnnotations = () => {
-    saveFileContent({
-      taskId: methodFileContent?.data?.taskid,
-      content: value?.[0].children[0]?.text,
+    saveFileContent(value?.[0].children[0]?.text).then((res) => {
+      setTaskData({ taskId: res.taskid })
+      setIsAnnotationDone(true)
+      setOpen(false)
     })
   }
 
