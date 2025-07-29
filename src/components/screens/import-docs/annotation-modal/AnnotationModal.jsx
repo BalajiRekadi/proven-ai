@@ -32,6 +32,10 @@ function AnnotationModal({
     })
   }
 
+  const handleCancel = () => {
+    setOpen(false)
+  }
+
   return (
     <Modal
       opened={open}
@@ -41,7 +45,9 @@ function AnnotationModal({
     >
       <SlateEditor initialVal={initialVal} value={value} setValue={setValue} />
       <Flex gap={16} py={16} justify={"flex-end"} align={"center"}>
-        <Button variant="outline">Cancel</Button>
+        <Button variant="outline" onClick={handleCancel}>
+          Cancel
+        </Button>
         <Button variant="filled" onClick={handleSaveAnnotations}>
           Save
         </Button>
