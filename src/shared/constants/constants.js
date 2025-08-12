@@ -1,4 +1,4 @@
-import { IconDatabase } from "@tabler/icons-react"
+import { IconDatabase, IconDeviceIpadHorizontalCog } from "@tabler/icons-react"
 import GRADE_OPTIONS from "./grade"
 import SAMPLING_POINT_OPTIONS from "./samplingPoints"
 import STAGE_OPTIONS from "./stage"
@@ -37,6 +37,16 @@ const ROUTES = [
       {
         label: "Exported",
         name: "exported",
+      },
+    ],
+  },
+  {
+    label: "Configurations",
+    logo: IconDeviceIpadHorizontalCog,
+    children: [
+      {
+        label: "Rules",
+        name: "rules",
       },
     ],
   },
@@ -102,6 +112,37 @@ const CLIENTS = {
   },
 }
 
+const RULES_FOR = [
+  {
+    value: "Analysis",
+    label: "Analysis",
+  },
+  {
+    value: "Components",
+    label: "Components",
+  },
+  {
+    value: "Prod Gr",
+    label: "Product Grade",
+  },
+  {
+    value: "Prod Gr St",
+    label: "Product Grade Stage",
+  },
+  {
+    value: "Prod Spec",
+    label: "Product Specification",
+  },
+  {
+    value: "Product",
+    label: "Product",
+  },
+  {
+    value: "Rules Test",
+    label: "Rules Test",
+  },
+]
+
 const MODULES = {
   // CALIBER: { value: "Caliber", label: "Caliber" },
   LABWARE: { value: "Labware", label: "Labware" },
@@ -134,4 +175,5 @@ export {
   GLENMARK_DOMAIN,
   PIRAMAL_DOMAIN,
   STRIDES_DOMAIN,
+  RULES_FOR,
 }
