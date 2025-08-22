@@ -1,4 +1,12 @@
 .excel-table {
+  .mrt-table-paper {
+    max-height: 70vh;
+
+    .mrt-table-container {
+      height: 70vh;
+    }
+  }
+
   .mantine-Table-thead th {
     background-color: #d7d9ea !important;
     padding: 0 !important;

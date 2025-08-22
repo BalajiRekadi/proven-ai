@@ -12,6 +12,7 @@ import useAnalysisXMLData from "./useAnalysisXMLData"
 import useProductXMLData from "./useProductXMLData"
 import useFileContent from "./useFileContent"
 import usePostFileContent from "./usePostFileContent"
+import useRules from "./useRules"
 
 export {
   useUploadFiles,
@@ -28,4 +29,5 @@ export {
   useProductXMLData,
   useFileContent,
   usePostFileContent,
+  useRules,
 }
