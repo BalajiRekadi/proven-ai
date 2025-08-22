@@ -39,7 +39,7 @@ function Login() {
     initialValues: {
       userId: "",
       password: "",
-      module,
+      module: "Labware",
       client,
     },
 
