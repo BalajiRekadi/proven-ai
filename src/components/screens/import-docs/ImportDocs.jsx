@@ -82,7 +82,10 @@ const ImportDocs = ({
           setAnnotationValidations(data.annotationValidation)
         })
       } else {
-        saveFileContent(methodFileContent?.data?.content).then((res) => {
+        saveFileContent({
+          content: methodFileContent?.data?.content,
+          taskid: taskData.taskId,
+        }).then((res) => {
           processFile({
             files: [specFile?.name, methodFile?.name],
             taskId: res.taskid,

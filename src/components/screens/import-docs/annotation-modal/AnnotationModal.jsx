@@ -25,7 +25,10 @@ function AnnotationModal({
   const [value, setValue] = useState(initialVal)
 
   const handleSaveAnnotations = () => {
-    saveFileContent(value?.[0].children[0]?.text).then((res) => {
+    saveFileContent({
+      content: value?.[0].children[0]?.text,
+      taskid: taskData.taskId,
+    }).then((res) => {
       setTaskData({ taskId: res.taskid })
       setIsAnnotationDone(true)
       setOpen(false)

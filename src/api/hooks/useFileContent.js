@@ -30,7 +30,7 @@ const fetchFileContent = async (client, module, path, taskid) => {
 const useFileContent = (filepath, taskid) => {
   const { client, module } = useStore()
   const { data = null } = useQuery({
-    queryKey: [client, filepath],
+    queryKey: [client, taskid],
     queryFn: () => fetchFileContent(client, module, filepath, taskid),
     retry: 0,
     refetchOnWindowFocus: false,
