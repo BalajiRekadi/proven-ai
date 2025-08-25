@@ -7,11 +7,12 @@ import { getDomain } from "../../shared/utilities"
 import { useToast } from "../../shared/components/toast/useToast"
 
 const postFileContent = async (module, client, content, taskid) => {
-  // const encoded = encodeURIComponent(content)
+  // TODO: Properly fix this line
+  const taskId = taskid || ""
   const res = await axios({
     url: `${getDomain(
       client
-    )}/stp_content?&module=${module}&Client=${client}&taskid=${taskid}`,
+    )}/stp_content?&module=${module}&Client=${client}&taskid=${taskId}`,
     method: "POST",
     data: { content: content },
     headers: new Headers({
