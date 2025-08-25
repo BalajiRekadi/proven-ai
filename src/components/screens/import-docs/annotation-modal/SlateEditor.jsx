@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react"
-import { createEditor, Editor, Transforms, Range } from "slate"
+import { createEditor, Editor, Transforms, Range, Node } from "slate"
 import { Slate, Editable, withReact, ReactEditor } from "slate-react"
 import PopoverPortal from "./PopoverPortal"
 import { withHistory } from "slate-history"
@@ -47,16 +47,24 @@ const SlateEditor = ({ initialVal = [], value = "", setValue }) => {
     }
   }
 
+  const handleChange = (nodes) => {
+    const text = [
+      {
+        type: "paragraph",
+        children: [{ text: nodes.map((n) => Node.string(n)).join("\n") }],
+      },
+    ]
+    setValue(text)
+    // Delay to allow selection update
+    setTimeout(updatePopover, 0)
+  }
+
   return (
     <Slate
       editor={editor}
       value={value}
       initialValue={initialVal}
-      onChange={(val) => {
-        setValue(val)
-        // Delay to allow selection update
-        setTimeout(updatePopover, 0)
-      }}
+      onChange={(val) => handleChange(val)}
     >
       <Editable
         placeholder="Select some text..."

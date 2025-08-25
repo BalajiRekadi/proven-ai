@@ -48,7 +48,8 @@ const ExcelTable = ({
 
   const columns = useMemo(() => {
     if (content.length < 1) return []
-    const keys = Object.keys(content[0])
+    let keys = Object.keys(content[0])
+    keys = keys.filter((k) => k !== "_rowId")
     const cols = keys.filter(Boolean).map((key) => {
       return {
         header: key,

@@ -6,12 +6,14 @@ import axios from "axios"
 import { getDomain } from "../../shared/utilities"
 import { useToast } from "../../shared/components/toast/useToast"
 
-const postFileContent = async (module, client, content) => {
-  const encoded = encodeURIComponent(content)
+const postFileContent = async (module, client, content, taskid) => {
+  // const encoded = encodeURIComponent(content)
   const res = await axios({
-    url: `${getDomain(client)}/stp_content?&module=${module}&Client=${client}`,
+    url: `${getDomain(
+      client
+    )}/stp_content?&module=${module}&Client=${client}&taskid=${taskid}`,
     method: "POST",
-    data: { content: encoded },
+    data: { content: content },
     headers: new Headers({
       "ngrok-skip-browser-warning": "69420",
       content: "application/json",
@@ -32,11 +34,12 @@ const usePostFileContent = () => {
     isError,
     isSuccess,
   } = useMutation({
-    mutationFn: ({ content }) => postFileContent(module, client, content),
+    mutationFn: ({ content, taskid }) =>
+      postFileContent(module, client, content, taskid),
     onSuccess: (e, variables) => {
-      // queryClient.invalidateQueries({
-      //   queryKey: [client, variables.taskid],
-      // })
+      queryClient.invalidateQueries({
+        queryKey: [client, variables.taskid],
+      })
       toast.success("Annotations updated successfully.")
     },
     onError: (e) => {

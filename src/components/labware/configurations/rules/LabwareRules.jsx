@@ -1,10 +1,11 @@
 // @ts-ignore
 import React, { useRef, useState } from "react"
-import { Box, Button, Flex, Select, Text } from "@mantine/core"
+import { Box, Button, Flex, Group, Select, Text, Title } from "@mantine/core"
 import { RULES_FOR } from "../../../../shared/constants/constants"
 import { useRules } from "../../../../api/hooks"
 import { ExcelTable } from "../../../../shared/components"
 import useSaveRules from "../../../../api/hooks/useSaveRules"
+import { IconDeviceIpadHorizontalCog } from "@tabler/icons-react"
 
 function LabwareRules() {
   const [type, setType] = useState("")
@@ -41,6 +42,10 @@ function LabwareRules() {
 
   return (
     <Box>
+      <Group align="center">
+        <IconDeviceIpadHorizontalCog stroke={3} size={32} />
+        <Title order={2}>Configure Rules</Title>
+      </Group>
       <Flex gap={16} justify={"flex-start"} align={"center"} my={24}>
         <Text size="md" fw={500}>
           Rules for:{" "}
