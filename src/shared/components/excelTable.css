@@ -11,6 +11,7 @@
     background-color: #d7d9ea !important;
     padding: 0 !important;
     margin: 0 !important;
+    font-size: 13px;
   }
 
   .mantine-Table-thead th[data-index='0'] {
@@ -23,12 +24,17 @@
     td {
       padding-top: 0;
       padding-bottom: 0;
+      font-size: 13px;
     }
 
     td:hover {
       box-sizing: border-box;
       box-shadow: 0 0 0 2px var(--cell-border) inset !important;
       border-radius: 2px !important;
+    }
+
+    td input {
+      font-size: 13px;
     }
   }
 
