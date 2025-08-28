@@ -1,6 +1,5 @@
 import {
   AppShell,
-  Burger,
   Flex,
   Image,
   Text,
@@ -81,7 +80,7 @@ const User = () => {
             pr={32}
           >
             <ModuleSelect />
-            <Flex justify={"space-around"}>
+            <Flex justify={"space-around"} align={"center"}>
               <Text pr={32} c={"white"}>
                 {user.userId || "-"} | Super Admin
               </Text>
