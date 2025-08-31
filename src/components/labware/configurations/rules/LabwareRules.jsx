@@ -19,7 +19,7 @@ function LabwareRules() {
     if (data) {
       const freshData = data.map((row, index) => ({
         ...row,
-        _rowId: `${type}-${index}`, // unique per type
+        _rowId: new Date().getTime(), // unique per type
       }))
       setTableData(freshData)
     }
@@ -34,6 +34,36 @@ function LabwareRules() {
       }
       return updated
     })
+  }
+
+  const handleRowAction = (row, action) => {
+    const cols = Object.keys(tableData?.[0]) || []
+    const item = {}
+    cols.forEach((c) => {
+      item[c] = ""
+    })
+    item._rowId = new Date().getTime()
+    if (action === "above") {
+      setTableData((prev) => {
+        const rows = structuredClone(prev)
+        rows.splice(row.index, 0, item)
+        return rows
+      })
+    }
+    if (action === "below") {
+      setTableData((prev) => {
+        const rows = structuredClone(prev)
+        rows.splice(row.index + 1, 0, item)
+        return rows
+      })
+    }
+    if (action === "delete") {
+      setTableData((prev) => {
+        const rows = structuredClone(prev)
+        rows.splice(row.index, 1)
+        return rows
+      })
+    }
   }
 
   const handleSave = () => {
@@ -63,8 +93,10 @@ function LabwareRules() {
         key={type}
         label={"Rules"}
         content={tableData}
-        enableRowNumbers={true}
+        enableRowNumbers={false}
+        enableRowActions={true}
         handleCellEdit={handleCellEdit}
+        handleRowAction={handleRowAction}
       />
       <Flex justify={"flex-end"}>
         <Button m={16} onClick={handleSave}>
