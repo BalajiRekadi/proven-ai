@@ -14,7 +14,7 @@
     font-size: 13px;
   }
 
-  .mantine-Table-thead th[data-index='0'] {
+  .mantine-Table-thead th[data-index="0"] {
     padding: 10px !important;
   }
 
@@ -45,7 +45,6 @@
   .mantine-TextInput-root {
     width: 100%;
   }
-
 
   .mantine-Modal-title {
     width: 100%;
