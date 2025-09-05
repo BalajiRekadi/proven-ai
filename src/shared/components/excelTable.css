@@ -1,10 +1,6 @@
 .excel-table {
   .mrt-table-paper {
     max-height: 70vh;
-
-    .mrt-table-container {
-      /* height: 70vh; */
-    }
   }
 
   .mantine-Table-thead th {
