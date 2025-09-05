@@ -54,6 +54,20 @@ const ROUTES = [
 
 const THEME = {
   primaryColor: "proven",
+  fontSizes: {
+    xs: "10px",
+    sm: "12px",
+    md: "14px",
+    lg: "16px",
+    xl: "18px",
+  },
+  spacing: {
+    xs: "8px",
+    sm: "10px",
+    md: "12px",
+    lg: "14px",
+    xl: "16px",
+  },
   colors: {
     proven: [
       "#f0f1f9",

@@ -96,7 +96,7 @@ const Dashboard = () => {
     columns,
     data: data || [],
     enableColumnResizing: true,
-    defaultColumn: { minSize: 200, maxSize: 1000, size: 500 },
+    defaultColumn: { minSize: 175, maxSize: 1000, size: 500 },
     columnResizeMode: "onChange",
     ...DEFAULT_TABLE_CONFIG,
     enablePagination: true,

@@ -12,6 +12,7 @@ import { useStore } from "../../../../store/useStore"
 import { useTaskDetails } from "../../../../api/hooks"
 import { generateProductDetails } from "../../../../api/helpers"
 import AnnotationValidations from "./AnnotationValidations"
+import classes from "./Create.module.css"
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0)
@@ -142,7 +143,7 @@ const CreateFlow = () => {
   }
 
   return (
-    <Stack>
+    <Stack className={classes.create}>
       <Group align="center">
         <IconDatabase stroke={3} size={32} />
         <Title order={2}>Create Master Data</Title>
@@ -156,7 +157,7 @@ const CreateFlow = () => {
         </Group>
       )}
 
-      <Stack justify="space-between" h={"85vh"}>
+      <Stack justify="space-between">
         <Stepper
           active={active}
           onStepClick={setActive}
@@ -217,7 +218,13 @@ const CreateFlow = () => {
           </Stepper.Step>
         </Stepper>
 
-        <Flex justify="space-between" py="xl" mx="32">
+        <Flex
+          className={classes["create__buttons"]}
+          justify="space-between"
+          py="md"
+          px="sm"
+          mx="32"
+        >
           <Button variant="filled" onClick={handleSave}>
             Save
           </Button>

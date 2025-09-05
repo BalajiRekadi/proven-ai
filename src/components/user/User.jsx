@@ -1,36 +1,35 @@
 import {
   AppShell,
-  Burger,
   Flex,
   Image,
   Text,
   Popover,
   ActionIcon,
   Button,
-} from "@mantine/core";
-import { useState } from "react";
-import headerLogo from "./../../assets/headerLogo.png";
-import { Outlet } from "react-router-dom";
-import Routes from "../routes/Routes";
-import { ModuleSelect } from "../../shared/components";
-import { useStore } from "../../store/useStore";
+} from "@mantine/core"
+import { useState } from "react"
+import headerLogo from "./../../assets/headerLogo.png"
+import { Outlet } from "react-router-dom"
+import Routes from "../routes/Routes"
+import { ModuleSelect } from "../../shared/components"
+import { useStore } from "../../store/useStore"
 import {
   IconArrowBarRight,
   IconMenu2,
   IconUserCircle,
-} from "@tabler/icons-react";
-import { useNavigate } from "react-router-dom";
-import "./user.css";
+} from "@tabler/icons-react"
+import { useNavigate } from "react-router-dom"
+import "./user.css"
 
 const User = () => {
-  const [closed, setOpened] = useState(false);
-  const { user } = useStore();
-  const navigate = useNavigate();
+  const [closed, setOpened] = useState(false)
+  const { user } = useStore()
+  const navigate = useNavigate()
 
   const handleLogout = () => {
-    localStorage.clear();
-    navigate("/");
-  };
+    localStorage.clear()
+    navigate("/")
+  }
 
   return (
     <AppShell
@@ -81,7 +80,7 @@ const User = () => {
             pr={32}
           >
             <ModuleSelect />
-            <Flex justify={"space-around"}>
+            <Flex justify={"space-around"} align={"center"}>
               <Text pr={32} c={"white"}>
                 {user.userId || "-"} | Super Admin
               </Text>
@@ -113,7 +112,7 @@ const User = () => {
         <Outlet></Outlet>
       </AppShell.Main>
     </AppShell>
-  );
-};
+  )
+}
 
-export default User;
+export default User
