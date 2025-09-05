@@ -3,7 +3,7 @@ import "./excelTable.css"
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table"
 import { useMemo } from "react"
 
-import { Box } from "@mantine/core"
+import { Box, Menu } from "@mantine/core"
 
 import {
   COMPONENT_DEFAULTS,
@@ -19,7 +19,9 @@ const ExcelTable = ({
   label,
   content = [],
   enableRowNumbers = true,
+  enableRowActions = false,
   handleCellEdit,
+  handleRowAction,
 }: any) => {
   const getClassName = (header) => {
     if (label == "Components") {
@@ -85,6 +87,23 @@ const ExcelTable = ({
       },
       enableEditing: true,
       editDisplayMode: "table",
+      enableRowActions: enableRowActions,
+      renderRowActionMenuItems: ({ row }) => (
+        <>
+          <Menu.Item onClick={() => handleRowAction(row, "above")}>
+            Add row above
+          </Menu.Item>
+          <Menu.Item onClick={() => handleRowAction(row, "below")}>
+            Add row below
+          </Menu.Item>
+          <Menu.Item
+            onClick={() => handleRowAction(row, "delete")}
+            color="var(--error)"
+          >
+            Delete
+          </Menu.Item>
+        </>
+      ),
       mantineEditTextInputProps: ({ table, column, row }) => ({
         //onBlur is more efficient, but could use onChange instead
         onBlur: (event) =>
