@@ -59,7 +59,7 @@
   .common {
     padding: 10px;
     height: 42px;
-    /* min-width: 220px; */
+    min-width: 220px;
   }
 
   .default-header {
