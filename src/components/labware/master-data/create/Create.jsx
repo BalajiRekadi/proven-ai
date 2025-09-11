@@ -12,7 +12,7 @@ import { useStore } from "../../../../store/useStore"
 import { useTaskDetails } from "../../../../api/hooks"
 import { generateProductDetails } from "../../../../api/helpers"
 import AnnotationValidations from "./AnnotationValidations"
-import classes from "./Create.module.css"
+import "./Create.css";
 
 const CreateFlow = () => {
   const [active, setActive] = useState(0)
@@ -143,7 +143,7 @@ const CreateFlow = () => {
   }
 
   return (
-    <Stack className={classes.create}>
+    <Stack className="create">
       <Group align="center">
         <IconDatabase stroke={3} size={32} />
         <Title order={2}>Create Master Data</Title>
@@ -219,7 +219,7 @@ const CreateFlow = () => {
         </Stepper>
 
         <Flex
-          className={classes["create__buttons"]}
+          className="create__buttons"
           justify="space-between"
           py="md"
           px="sm"
