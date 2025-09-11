@@ -1,12 +1,12 @@
-import './tableViewModal.css'
+import "./tableViewModal.css"
 
-import { useState } from 'react'
+import { useState } from "react"
 
-import { ActionIcon, Button, Flex, Modal, Title } from '@mantine/core'
-import { IconZoomScan } from '@tabler/icons-react'
+import { ActionIcon, Button, Flex, Modal, Title } from "@mantine/core"
+import { IconZoomScan } from "@tabler/icons-react"
 
-import { ExcelTable } from './'
-import DataTable from './DataTable'
+import { ExcelTable } from "./"
+import DataTable from "./DataTable"
 
 const TableViewModal = ({
   open,
@@ -19,15 +19,15 @@ const TableViewModal = ({
   updateData,
   commitUpdatedRunResults,
 }) => {
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false)
 
   const handleSave = () => {
-    commitUpdatedRunResults();
-  };
+    commitUpdatedRunResults()
+  }
 
   const handleCellEdit = (row, table, column, value) => {
-    updateData(row, table, column, value);
-  };
+    updateData(row, table, column, value)
+  }
 
   return (
     <Modal
@@ -42,11 +42,6 @@ const TableViewModal = ({
         <Flex justify={"space-between"}>
           <Title order={3}>{label}</Title>
           <Flex w={showAsExcel ? 130 : 50} align={"center"}>
-            {showAsExcel && (
-              <Button variant="filled" onClick={handleSave}>
-                Save
-              </Button>
-            )}
             <ActionIcon
               ml="md"
               variant="subtle"
@@ -75,8 +70,15 @@ const TableViewModal = ({
           handleCellEdit={handleCellEdit}
         />
       )}
+      {showAsExcel && (
+        <Flex justify="end">
+          <Button variant="filled" onClick={handleSave}>
+            Save
+          </Button>
+        </Flex>
+      )}
     </Modal>
-  );
-};
+  )
+}
 
-export default TableViewModal;
+export default TableViewModal
