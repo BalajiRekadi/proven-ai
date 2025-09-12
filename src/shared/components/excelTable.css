@@ -1,19 +1,16 @@
 .excel-table {
   .mrt-table-paper {
     max-height: 70vh;
-
-    .mrt-table-container {
-      height: 70vh;
-    }
   }
 
   .mantine-Table-thead th {
     background-color: #d7d9ea !important;
     padding: 0 !important;
     margin: 0 !important;
+    font-size: 13px;
   }
 
-  .mantine-Table-thead th[data-index='0'] {
+  .mantine-Table-thead th[data-index="0"] {
     padding: 10px !important;
   }
 
@@ -23,6 +20,7 @@
     td {
       padding-top: 0;
       padding-bottom: 0;
+      font-size: 13px;
     }
 
     td:hover {
@@ -37,6 +35,9 @@
       }
     }
 
+    td input {
+      font-size: 13px;
+    }
   }
 
   .mantine-Table-tr:hover {
@@ -46,7 +47,6 @@
   .mantine-TextInput-root {
     width: 100%;
   }
-
 
   .mantine-Modal-title {
     width: 100%;
