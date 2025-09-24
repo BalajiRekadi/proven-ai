@@ -6,6 +6,7 @@ import { useRules } from "../../../../api/hooks"
 import { ExcelTable } from "../../../../shared/components"
 import useSaveRules from "../../../../api/hooks/useSaveRules"
 import { IconDeviceIpadHorizontalCog } from "@tabler/icons-react"
+import { v4 as uuidv4 } from "uuid"
 
 function LabwareRules() {
   const [type, setType] = useState("")
@@ -19,7 +20,7 @@ function LabwareRules() {
     if (data) {
       const freshData = data.map((row, index) => ({
         ...row,
-        _rowId: new Date().getTime(), // unique per type
+        _rowId: uuidv4(), // unique per type
       }))
       setTableData(freshData)
     }
@@ -42,7 +43,7 @@ function LabwareRules() {
     cols.forEach((c) => {
       item[c] = ""
     })
-    item._rowId = new Date().getTime()
+    item._rowId = uuidv4()
     if (action === "above") {
       setTableData((prev) => {
         const rows = structuredClone(prev)

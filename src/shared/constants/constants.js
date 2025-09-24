@@ -68,6 +68,21 @@ const THEME = {
       "#31397d",
     ],
   },
+  spacing: {
+    xs: "8px",
+    sm: "12px",
+    md: "16px",
+    lg: "24px",
+    xl: "32px",
+  },
+  // fontSizes: {
+  //   xs: "9px",
+  //   sm: "13px",
+  //   md: "16px",
+  //   lg: "18px",
+  //   xl: "20px",
+  //   xxl: "24px", // you can extend beyond Mantine defaults
+  // },
 }
 
 const DEFAULT_TABLE_CONFIG = {
